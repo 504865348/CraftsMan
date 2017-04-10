@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 首页顶部导航栏 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/home_page_rg_guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home_page_rb_recommend"
+            style="@style/Main_RadioButton"
+            android:drawableTop="@drawable/home_page_rb_recommend_selector"/>
+        <RadioButton
+            android:id="@+id/home_page_rb_hot"
+            style="@style/Main_RadioButton"
+            android:drawableTop="@drawable/home_page_rb_hot_selector"/>
+        <RadioButton
+            android:id="@+id/home_page_rb_classification"
+            style="@style/Main_RadioButton"
+            android:drawableTop="@drawable/home_page_rb_classification_selector"/>
+        <RadioButton
+            android:id="@+id/home_page_rb_crafts"
+            style="@style/Main_RadioButton"
+            android:drawableTop="@drawable/home_page_rb_crafts_selector"/>
+    </RadioGroup>
+
+    <!-- 首页内容 -->
+    <FrameLayout
+        android:id="@+id/home_page_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</LinearLayout>
