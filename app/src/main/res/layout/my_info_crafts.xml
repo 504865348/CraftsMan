@@ -11,4 +11,6 @@
 
     <include layout="@layout/my_info_crafts_upload"/>
 
+    <include layout="@layout/my_info_crafts_personal"/>
+
 </LinearLayout>
