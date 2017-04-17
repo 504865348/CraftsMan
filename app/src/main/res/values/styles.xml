@@ -78,4 +78,28 @@
         <item name="android:background">@android:color/darker_gray</item>
     </style>
 
+    <!-- 水平宽分割线样式 -->
+    <style name="horizontal_split_wide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">5dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+    <!-- 问答->分类中线性布局的样式 -->
+    <style name="q_a_linear_layout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 问答->分类中字体的样式 -->
+    <style name="q_a_classify_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 </resources>
