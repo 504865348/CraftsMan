@@ -29,7 +29,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/home_crafts_item_intro"
+        android:id="@+id/home_crafts_item_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="学科类别及简介"
