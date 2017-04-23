@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <!-- 轮播图片 -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
     </RelativeLayout>
 
     <!-- 中部导航 -->
-    <include layout="@layout/home_page_hot_middle"/>
+    <include layout="@layout/home_page_hot_middle" />
 
     <View
         android:layout_width="match_parent"
@@ -91,6 +92,6 @@
         android:layout_height="1dp"
         android:background="#000000"/>
 
-    <include layout="@layout/home_page_hot_skills"/>
+    <include layout="@layout/home_page_hot_skills" />
 
 </LinearLayout>
