@@ -10,57 +10,68 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/friends_moments_back"
+            android:id="@+id/crafts_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/friends_back"/>
 
         <TextView
+            android:id="@+id/crafts_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="匠友圈"
+            android:text="姓名"
             android:textSize="24sp"
             android:textColor="@android:color/black"/>
     </RelativeLayout>
 
     <View style="@style/horizontal_split"/>
 
-    <LinearLayout
-        android:id="@+id/friends_moments_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/friends_search"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="找匠友"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
-            android:layout_gravity="center_vertical"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/friends_next"/>
-
-    </LinearLayout>
+    <!-- 工匠信息 -->
+    <include layout="@layout/crafts_info"/>
 
     <View style="@style/horizontal_split"/>
 
-    <ListView
-        android:id="@+id/friends_moments_list"
+    <RadioGroup
+        android:id="@+id/crafts_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/crafts_rb_album"
+            android:textSize="24sp"
+            android:text="专辑"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@android:color/transparent"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/crafts_rb_q_a"
+            android:textSize="24sp"
+            android:text="问答"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:button="@android:color/transparent"/>
+
+    </RadioGroup>
+
+    <View style="@style/horizontal_split"/>
+
+    <FrameLayout
+        android:id="@+id/crafts_section_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+    </FrameLayout>
 
 </LinearLayout>

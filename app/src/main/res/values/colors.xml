@@ -3,4 +3,17 @@
     <color name="colorPrimary">#b01417</color>
     <color name="colorPrimaryDark">#9f1e22</color>
     <color name="colorAccent">#b22229</color>
+
+    <!-- 背景淡灰色 -->
+    <color name="light_gray">#dedede</color>
+
+    <!-- 字体淡灰色 -->
+    <color name="light_gray_text">#c5c5c5</color>
+
+    <!-- 淡蓝色 -->
+    <color name="light_blue">#7fe0ff</color>
+
+    <!-- 正红色 -->
+    <color name="red">#ff3333</color>
+
 </resources>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/recharge_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/friends_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="匠币充值"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择匠币数额进行充值"
+        android:textSize="16sp"
+        android:padding="10dp"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:text="600     匠币"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:textColor="@android:color/holo_red_light"
+                android:text="     6    "/>
+
+            <RadioButton
+                android:id="@+id/recharge_radio_6"
+                style="@style/recharge_radio_button"
+                android:checked="true"
+                android:text="元"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontal_split"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:text="1200   匠币"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:textColor="@android:color/holo_red_light"
+                android:text="    12   "/>
+
+            <RadioButton
+                android:id="@+id/recharge_radio_12"
+                style="@style/recharge_radio_button"
+                android:text="元"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontal_split"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:text="5000   匠币"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:textColor="@android:color/holo_red_light"
+                android:text="    50   "/>
+
+            <RadioButton
+                android:id="@+id/recharge_radio_50"
+                style="@style/recharge_radio_button"
+                android:text="元"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontal_split"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:text="10000 匠币"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                style="@style/recharge_radio_button_pre"
+                android:textColor="@android:color/holo_red_light"
+                android:text="   100   "/>
+
+            <RadioButton
+                android:id="@+id/recharge_radio_100"
+                style="@style/recharge_radio_button"
+                android:text="元"/>
+
+        </LinearLayout>
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择支付方式"
+        android:textSize="16sp"
+        android:padding="10dp"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/recharge_alipay"/>
+
+            <RadioButton
+                android:id="@+id/recharge_alipay"
+                style="@style/recharge_radio_button"
+                android:checked="true"
+                android:text="支付宝支付"/>
+        </LinearLayout>
+
+        <View style="@style/horizontal_split"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/recharge_wechat"/>
+
+            <RadioButton
+                android:id="@+id/recharge_wechat"
+                style="@style/recharge_radio_button"
+                android:text="微信支付"/>
+        </LinearLayout>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/recharge_btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="立即支付"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/red_button"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"/>
+
+
+</LinearLayout>

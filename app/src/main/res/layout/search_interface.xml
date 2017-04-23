@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 上方搜索框 -->
+    <include layout="@layout/search_interface_top"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/search_interface_rb_all"
+            android:checked="true"
+            style="@style/search_interface_radio_button"
+            android:drawableBottom="@drawable/search_interface_all_selector"/>
+        <RadioButton
+            android:id="@+id/search_interface_rb_album"
+            style="@style/search_interface_radio_button"
+            android:drawableBottom="@drawable/search_interface_album_selector"/>
+        <RadioButton
+            android:id="@+id/search_interface_rb_q_a"
+            style="@style/search_interface_radio_button"
+            android:drawableBottom="@drawable/search_interface_q_a_selector"/>
+        <RadioButton
+            android:id="@+id/search_interface_rb_crafts"
+            style="@style/search_interface_radio_button"
+            android:drawableBottom="@drawable/search_interface_crafts_selector"/>
+    </RadioGroup>
+
+    <View style="@style/horizontal_split"/>
+
+    <FrameLayout
+        android:id="@+id/search_interface_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</LinearLayout>
