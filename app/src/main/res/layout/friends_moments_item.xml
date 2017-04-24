@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/friends_moments_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/friends_icon"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:id="@+id/friends_moments_name"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_marginTop="3dp"
+        android:textColor="@android:color/black"
+        android:text="工匠名"
+        android:layout_toRightOf="@id/friends_moments_icon"/>
+
+    <TextView
+        android:id="@+id/friends_moments_introduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小内容小内容小内容小内容小内容"
+        android:layout_below="@id/friends_moments_icon"
+        android:layout_alignLeft="@id/friends_moments_name"/>
+
+    <RelativeLayout
+        android:id="@+id/friends_moments_content"
+        android:layout_width="240dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@id/friends_moments_introduction"
+        android:layout_below="@id/friends_moments_introduction"
+        android:layout_marginTop="10dp"
+        android:background="#DDEEFF">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/friends_cover"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/friends_moments_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/friends_play"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="21dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

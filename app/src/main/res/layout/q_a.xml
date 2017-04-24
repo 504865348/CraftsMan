@@ -18,6 +18,24 @@
             android:textColor="@android:color/black"/>
 
         <LinearLayout
+            android:id="@+id/q_a_download"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下载"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/q_a_history"
             android:layout_toLeftOf="@id/q_a_download"
             android:layout_width="wrap_content"
@@ -36,23 +54,7 @@
                 android:textSize="10sp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/q_a_download"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/download"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="下载"
-                android:textSize="10sp"/>
-        </LinearLayout>
+
 
     </RelativeLayout>
 
