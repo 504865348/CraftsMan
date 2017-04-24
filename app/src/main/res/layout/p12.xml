@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+<ImageButton
+    android:layout_width="56dp"
+    android:layout_height="match_parent"
+    android:src="@drawable/search_icon"/>
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:text="发现"
+            android:paddingLeft="110dp"
+            android:gravity="center_vertical"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:src="@drawable/history"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="历史"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:src="@drawable/download"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:text="下载"/>
+        </LinearLayout>
+
+    </LinearLayout>
+<include layout="@layout/p12_1"/>
+</LinearLayout>
