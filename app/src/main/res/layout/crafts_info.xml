@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:orientation="vertical"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/crafts_image_icon">
 
             <TextView
@@ -31,10 +32,9 @@
 
             <TextView
                 android:id="@+id/crafts_text_info"
-                android:layout_width="240dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingLeft="15dp"
+                android:textSize="14sp"
                 android:paddingTop="5dp"
                 android:textColor="@android:color/black"
                 android:text="介绍介绍介绍介绍"/>
