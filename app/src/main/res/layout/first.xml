@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_weight="0.36"
-            android:background="#"
+
             android:gravity="center"
             android:text="登录"
             android:textColor="#FFFF" />
@@ -27,7 +27,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#"
+
             android:text="注册"
             android:textColor="#000" />
     </LinearLayout>
@@ -39,18 +39,17 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:background="@drawable/round">
+       >
 
         <ImageView
 
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/custom" />
+            />
 
         <EditText
 
-            android:background="@drawable/none"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -64,18 +63,18 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:background="@drawable/round">
+        >
 
         <ImageView
 
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/pass" />
+             />
 
         <EditText
 
-            android:background="@drawable/none"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -148,7 +147,7 @@
                 android:layout_height="50sp"
                 android:layout_gravity="center"
 
-                android:src="@mipmap/wechat" />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -168,8 +167,7 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_gravity="center"
-
-                android:src="@mipmap/qq" />
+              />
 
             <TextView
 
@@ -181,4 +179,4 @@
 
 
     </LinearLayout>
-</>
+    </LinearLayout>

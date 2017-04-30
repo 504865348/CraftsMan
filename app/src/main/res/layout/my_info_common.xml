@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/my_info_common_name"/>
+    <include layout="@layout/my_info_common_name" />
 
     <include layout="@layout/my_info_subscribe_collect"/>
 
