@@ -22,7 +22,8 @@
             style="@style/my_info_personal"
             android:text="我的订单"
             />
-        <ImageView
+        <ImageButton
+            android:id="@+id/orderform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -57,7 +58,8 @@
             android:textSize="16sp"
             android:layout_marginRight="10dp"
             android:text="xx.xx"/>
-        <ImageView
+        <ImageButton
+            android:id="@+id/money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -89,7 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/my_info_one"/>
-        <ImageView
+        <ImageButton
+            android:id="@+id/question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -116,7 +119,8 @@
             style="@style/my_info_personal"
             android:text="我的专辑"
             />
-        <ImageView
+        <ImageButton
+            android:id="@+id/album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -143,7 +147,8 @@
             style="@style/my_info_personal"
             android:text="我的榜单"
             />
-        <ImageView
+        <ImageButton
+            android:id="@+id/list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -171,7 +176,8 @@
             style="@style/my_info_personal"
             android:text="我的录制"
             />
-        <ImageView
+        <ImageButton
+            android:id="@+id/recorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -198,11 +204,14 @@
             style="@style/my_info_personal"
             android:text="意见反馈"
             />
-        <ImageView
+
+        <ImageButton
+
+            android:id="@+id/opinion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:src="@drawable/next_more" />
     </LinearLayout>
 
 </LinearLayout>
