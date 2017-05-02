@@ -4,7 +4,6 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/4/29.
  * 搜索结果
  */
-
 public class SearchResult {
     /* 专辑 */
     private String albumImage; //专辑图片

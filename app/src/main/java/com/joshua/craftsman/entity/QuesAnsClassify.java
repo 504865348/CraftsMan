@@ -4,7 +4,6 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 分类--问答，工匠
  */
-
 public class QuesAnsClassify {
     /* 问答 */
     private String craftsImage; //工匠头像

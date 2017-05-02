@@ -1,198 +1,198 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style craftsQuesAns="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item craftsQuesAns="colorPrimary">@color/colorPrimary</item>
-        <item craftsQuesAns="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item craftsQuesAns="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <!-- APP 背景色 -->
-        <item craftsQuesAns="android:windowBackground">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
 
     <!-- ctr -->
     <!-- RadioButton 的样式 -->
-    <style craftsQuesAns="Main_RadioButton">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:button">@android:color/transparent</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
+    <style name="Main_RadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
     <!-- 首页->热门->中间按钮 中的字体 -->
-    <style craftsQuesAns="home_page_hot_middle_text">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textColor">#000000</item>
-        <item craftsQuesAns="android:textSize">14sp</item>
-        <item craftsQuesAns="android:paddingTop">8dp</item>
+    <style name="home_page_hot_middle_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">8dp</item>
     </style>
 
     <!-- 首页->热门->ScrollView 标题字体 -->
-    <style craftsQuesAns="home_page_hot_title_text">
-        <item craftsQuesAns="android:textColor">#000000</item>
-        <item craftsQuesAns="android:textSize">18sp</item>
-        <item craftsQuesAns="android:layout_marginLeft">5dp</item>
-        <item craftsQuesAns="android:layout_width">0dp</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
+    <style name="home_page_hot_title_text">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
     <!-- 首页->热门->ScrollView 中“更多”的字体 -->
-    <style craftsQuesAns="home_page_hot_more_text">
-        <item craftsQuesAns="android:textColor">#000000</item>
-        <item craftsQuesAns="android:textSize">18sp</item>
-        <item craftsQuesAns="android:layout_marginLeft">5dp</item>
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:drawableRight">@drawable/more_icon</item>
-        <item craftsQuesAns="android:gravity">center_vertical</item>
-        <item craftsQuesAns="android:text">更多</item>
+    <style name="home_page_hot_more_text">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableRight">@drawable/more_icon</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:text">更多</item>
     </style>
 
     <!-- 首页->热门->底部 中的字体 -->
-    <style craftsQuesAns="home_page_hot_bottom_text">
-        <item craftsQuesAns="android:textColor">#000000</item>
-        <item craftsQuesAns="android:textSize">18sp</item>
-        <item craftsQuesAns="android:layout_marginLeft">5dp</item>
-        <item craftsQuesAns="android:layout_width">match_parent</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:gravity">center_horizontal</item>
+    <style name="home_page_hot_bottom_text">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <!-- 首页->热门->分类 中的 LinearLayout -->
-    <style craftsQuesAns="home_page_classify_linear_layout">
-        <item craftsQuesAns="android:orientation">horizontal</item>
-        <item craftsQuesAns="android:layout_width">0dp</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
-        <item craftsQuesAns="android:gravity">center_vertical</item>
-        <item craftsQuesAns="android:paddingLeft">10dp</item>
-        <item craftsQuesAns="android:paddingTop">5dp</item>
-        <item craftsQuesAns="android:paddingBottom">5dp</item>
+    <style name="home_page_classify_linear_layout">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
     </style>
 
     <!-- 首页->热门->分类 中的字体 -->
-    <style craftsQuesAns="home_page_classify_text">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textColor">#000000</item>
-        <item craftsQuesAns="android:textSize">16sp</item>
-        <item craftsQuesAns="android:layout_marginLeft">5dp</item>
+    <style name="home_page_classify_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
     </style>
 
     <!-- 首页->我的信息 中的字体1 -->
-    <style craftsQuesAns="my_info">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textColor">#000000</item>
-        <item craftsQuesAns="android:textSize">12sp</item>
+    <style name="my_info">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <!-- 首页->我的信息 中的字体1 -->
-    <style craftsQuesAns="my_info_personal">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
-        <item craftsQuesAns="android:textColor">@android:color/black</item>
-        <item craftsQuesAns="android:textSize">16sp</item>
+    <style name="my_info_personal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- 水平灰色分割线样式 -->
-    <style craftsQuesAns="horizontal_split">
-        <item craftsQuesAns="android:layout_width">match_parent</item>
-        <item craftsQuesAns="android:layout_height">1dp</item>
-        <item craftsQuesAns="android:background">@android:color/darker_gray</item>
+    <style name="horizontal_split">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
     </style>
 
     <!-- 水平灰色宽分割线样式 -->
-    <style craftsQuesAns="horizontal_split_wide">
-        <item craftsQuesAns="android:layout_width">match_parent</item>
-        <item craftsQuesAns="android:layout_height">5dp</item>
-        <item craftsQuesAns="android:background">@android:color/darker_gray</item>
+    <style name="horizontal_split_wide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">5dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
     </style>
 
     <!-- 水平灰色超宽分割线样式 -->
-    <style craftsQuesAns="horizontal_split_wider">
-        <item craftsQuesAns="android:layout_width">match_parent</item>
-        <item craftsQuesAns="android:layout_height">10dp</item>
-        <item craftsQuesAns="android:background">@android:color/darker_gray</item>
+    <style name="horizontal_split_wider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
     </style>
 
     <!-- 水平黑色分割线样式 -->
-    <style craftsQuesAns="horizontal_split_black">
-        <item craftsQuesAns="android:layout_width">match_parent</item>
-        <item craftsQuesAns="android:layout_height">1dp</item>
-        <item craftsQuesAns="android:background">@android:color/black</item>
+    <style name="horizontal_split_black">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@android:color/black</item>
     </style>
 
     <!-- 问答->分类中线性布局的样式 -->
-    <style craftsQuesAns="q_a_linear_layout">
-        <item craftsQuesAns="android:layout_width">0dp</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
-        <item craftsQuesAns="android:orientation">vertical</item>
-        <item craftsQuesAns="android:gravity">center</item>
+    <style name="q_a_linear_layout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!-- 问答->分类中字体的样式 -->
-    <style craftsQuesAns="q_a_classify_text">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textSize">12sp</item>
-        <item craftsQuesAns="android:textColor">@android:color/black</item>
+    <style name="q_a_classify_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <!-- 充值-> RadioButton 中字体的样式 -->
-    <style craftsQuesAns="recharge_radio_button">
-        <item craftsQuesAns="android:layout_width">match_parent</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textSize">16sp</item>
-        <item craftsQuesAns="android:button">@null</item>
-        <item craftsQuesAns="android:drawableRight">@drawable/recharge_radio_btn_selector</item>
-        <item craftsQuesAns="android:paddingLeft">0dp</item>
+    <style name="recharge_radio_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawableRight">@drawable/recharge_radio_btn_selector</item>
+        <item name="android:paddingLeft">0dp</item>
     </style>
 
     <!-- 充值-> RadioButton 前字体的样式 -->
-    <style craftsQuesAns="recharge_radio_button_pre">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textSize">16sp</item>
-        <item craftsQuesAns="android:textColor">@android:color/black</item>
+    <style name="recharge_radio_button_pre">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <!-- 播放界面专辑信息字体的样式 -->
-    <style craftsQuesAns="video_player_info_text">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textSize">14sp</item>
-        <item craftsQuesAns="android:textColor">#c5c5c5</item>
+    <style name="video_player_info_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#c5c5c5</item>
     </style>
 
     <!-- 搜索界面 RadioButton 样式 -->
-    <style craftsQuesAns="search_interface_radio_button">
-        <item craftsQuesAns="android:layout_width">0dp</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
-        <item craftsQuesAns="android:button">@null</item>
+    <style name="search_interface_radio_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
     </style>
 
     <!-- 搜索界面 大标题 样式 -->
-    <style craftsQuesAns="search_interface_title">
-        <item craftsQuesAns="android:layout_width">0dp</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:layout_weight">1</item>
-        <item craftsQuesAns="android:textColor">@android:color/black</item>
-        <item craftsQuesAns="android:textSize">24sp</item>
-        <item craftsQuesAns="android:paddingLeft">10dp</item>
+    <style name="search_interface_title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:paddingLeft">10dp</item>
     </style>
 
     <!-- 搜索界面 结果 样式 -->
-    <style craftsQuesAns="search_interface_sub_title">
-        <item craftsQuesAns="android:layout_width">wrap_content</item>
-        <item craftsQuesAns="android:layout_height">wrap_content</item>
-        <item craftsQuesAns="android:textColor">@android:color/black</item>
-        <item craftsQuesAns="android:textSize">16sp</item>
+    <style name="search_interface_sub_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

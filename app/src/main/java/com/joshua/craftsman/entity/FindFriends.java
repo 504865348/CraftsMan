@@ -4,7 +4,6 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 找匠友--推荐关注
  */
-
 public class FindFriends {
     private String craftsImage; //工匠头像
     private String craftsName; //工匠名

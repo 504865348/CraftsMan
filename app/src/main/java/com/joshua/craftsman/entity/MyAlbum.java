@@ -4,7 +4,6 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 工匠用户--我的专辑
  */
-
 public class MyAlbum {
     private String albumImage; //专辑图片
     private String albumTitle; //专辑标题

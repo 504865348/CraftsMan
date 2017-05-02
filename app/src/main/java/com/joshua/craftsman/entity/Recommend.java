@@ -5,7 +5,6 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/4/28.
  * 首页--推荐
  */
-
 public class Recommend {
     private String programImage; //节目图片
     private String title; //标题

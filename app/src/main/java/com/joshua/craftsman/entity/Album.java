@@ -6,7 +6,6 @@ import java.util.List;
  * Created by nzz on 2017/4/28.
  * 专辑
  */
-
 public class Album {
     private String albumImage; //图片
     private String title; //标题

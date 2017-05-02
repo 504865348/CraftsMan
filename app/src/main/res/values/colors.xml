@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color craftsQuesAns="colorPrimary">#b01417</color>
-    <color craftsQuesAns="colorPrimaryDark">#9f1e22</color>
-    <color craftsQuesAns="colorAccent">#b22229</color>
+    <color name="colorPrimary">#b01417</color>
+    <color name="colorPrimaryDark">#9f1e22</color>
+    <color name="colorAccent">#b22229</color>
 
-    <color craftsQuesAns="black">#000000</color>
-    <color craftsQuesAns="red">#ff0000</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
 
-    <color craftsQuesAns="light_gray">#dedede</color>
-    <color craftsQuesAns="light_gray_text">#c5c5c5</color>
+    <color name="light_gray">#dedede</color>
+    <color name="light_gray_text">#c5c5c5</color>
 
-    <color craftsQuesAns="light_blue">#7fe0ff</color>
+    <color name="light_blue">#7fe0ff</color>
 
 
 
-    <color craftsQuesAns="lightgray">#c5c5c5</color>
+    <color name="lightgray">#c5c5c5</color>
 
 </resources>

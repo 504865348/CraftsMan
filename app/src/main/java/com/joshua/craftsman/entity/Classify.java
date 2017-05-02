@@ -4,7 +4,6 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/4/29.
  * 首页--分类
  */
-
 public class Classify {
     private String houses; //房屋建筑
     private String municipal; //市政公用
