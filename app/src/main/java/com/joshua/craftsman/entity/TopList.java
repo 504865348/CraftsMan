@@ -6,6 +6,7 @@ import java.util.List;
  * Created by nzz on 2017/4/29.
  * 底部按钮--榜单
  */
+
 public class TopList {
     private List<String> hottestProgram; //最火节目飙升榜
     private List<String> mostSubscription; //最多订阅经典版

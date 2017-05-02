@@ -4,6 +4,7 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 榜单详情
  */
+
 public class TopListDetails {
     private String topRank; //排序序号
     private String programImage; //节目图片

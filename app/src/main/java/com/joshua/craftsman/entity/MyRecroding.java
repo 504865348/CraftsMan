@@ -4,6 +4,7 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 工匠用户--我的录制
  */
+
 public class MyRecroding {
     private String recrodingImage; //录制视频或音频的图片
     private String name; //录制人名字

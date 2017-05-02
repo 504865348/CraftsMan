@@ -4,6 +4,7 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 工匠用户--我的问答
  */
+
 public class CraftsQuesAns {
     /* 未处理回答 */
     private String questionerName; //提问者名字

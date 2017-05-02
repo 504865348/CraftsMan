@@ -6,6 +6,7 @@ import java.util.List;
  * Created by nzz on 2017/4/28.
  * 首页--热门
  */
+
 public class Hot {
     private List<String> craftsman; //大国工匠
     private List<String> skills; //匠心独运

@@ -4,6 +4,7 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 工匠用户--我的榜单
  */
+
 public class MyTopList {
     /* 工匠榜单 */
     private int craftsRank; //工匠名次

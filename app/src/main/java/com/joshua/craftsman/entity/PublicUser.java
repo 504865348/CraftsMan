@@ -4,6 +4,7 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/4/28.
  * 普通用户
  */
+
 import java.util.List;
 
 public class PublicUser {

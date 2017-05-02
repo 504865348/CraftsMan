@@ -2,34 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.joshua.craftsman">
 
-    <uses-permission android:craftsQuesAns="android.permission.INTERNET" />
-    <uses-permission android:craftsQuesAns="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:craftsQuesAns="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:craftsQuesAns=".application.BaseApplication"
+        android:name=".application.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:craftsQuesAns=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:craftsQuesAns="android.intent.action.MAIN" />
-
-                <category android:craftsQuesAns="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:craftsQuesAns=".activity.core.BaseActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.HomeHotActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.BaseActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.CraftsActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.SkillsActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.PolicyActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.ListenActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.LookActivity" />
-        <activity android:craftsQuesAns=".activity.fuctions.HomeCommon.HomeCommon"></activity>
+
     </application>
 
 </manifest>

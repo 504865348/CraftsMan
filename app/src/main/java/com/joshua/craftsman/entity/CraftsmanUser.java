@@ -6,6 +6,7 @@ import java.util.List;
  * Created by nzz on 2017/4/28.
  * 工匠用户
  */
+
 public class CraftsmanUser {
     private String headImage; //头像
     private String phoneNumber; //手机号

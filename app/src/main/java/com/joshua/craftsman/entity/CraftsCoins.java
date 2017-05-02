@@ -6,6 +6,7 @@ import java.util.List;
  * Created by nzz on 2017/5/1.
  * 工匠用户--我的匠币
  */
+
 public class CraftsCoins {
     private int coinsNumber; //匠币数
     private List<String> recharge; //充值记录

@@ -4,6 +4,7 @@ package com.joshua.craftsman.entity;
  * Created by nzz on 2017/5/1.
  * 普通用户--我的问答
  */
+
 public class PublicQuesAns {
     /* 未处理提问 */
     private String questionedName; //被提问者名字
