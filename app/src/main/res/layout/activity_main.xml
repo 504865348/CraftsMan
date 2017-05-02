@@ -17,5 +17,4 @@
     </FrameLayout>
 
     <include layout="@layout/main_radio_group" />
-
 </LinearLayout>
