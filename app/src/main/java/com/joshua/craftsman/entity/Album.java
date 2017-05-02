@@ -1,47 +1,21 @@
 package com.joshua.craftsman.entity;
 
-import android.graphics.Bitmap;
-
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by nzz on 2017/4/28.
+ * 专辑
  */
-//专辑：图片 标题 工匠名 播放量 分类名 节目数组 节目数量
-public class AlbumInfo {
 
-    private String albumImage;
-    private String title;
-    private String craftsmanName;
-    private int playTimes;
-    private String classifyName;
-    private List<String> arrayProgram;
-    private int programNumber;
-
-    @Override
-    public String toString() {
-        return "AlbumInfo{" +
-                "albumImage='" + albumImage + '\'' +
-                ", title='" + title + '\'' +
-                ", craftsmanName='" + craftsmanName + '\'' +
-                ", playTimes=" + playTimes +
-                ", classifyName='" + classifyName + '\'' +
-                ", arrayProgram=" + arrayProgram +
-                ", programNumber=" + programNumber +
-                '}';
-    }
-
-
-    public AlbumInfo(String albumImage, String title, String craftsmanName, int playTimes, String classifyName, List<String> arrayProgram, int programNumber) {
-        this.albumImage = albumImage;
-        this.title = title;
-        this.craftsmanName = craftsmanName;
-        this.playTimes = playTimes;
-        this.classifyName = classifyName;
-        this.arrayProgram = arrayProgram;
-        this.programNumber = programNumber;
-    }
+public class Album {
+    private String albumImage; //图片
+    private String title; //标题
+    private String craftsmanName; //工匠名
+    private int playTimes; //播放量
+    private String classifyName; //分类名
+    private String introduction; //专辑简介
+    private List<String> arrayProgram; //节目列表(参见Program类)
+    private int programNumber; //节目总数
 
     public String getAlbumImage() {
         return albumImage;
@@ -83,6 +57,14 @@ public class AlbumInfo {
         this.classifyName = classifyName;
     }
 
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
     public List<String> getArrayProgram() {
         return arrayProgram;
     }
@@ -99,6 +81,28 @@ public class AlbumInfo {
         this.programNumber = programNumber;
     }
 
+    public Album(String albumImage, String title, String craftsmanName, int playTimes, String classifyName, String introduction, List<String> arrayProgram, int programNumber) {
+        this.albumImage = albumImage;
+        this.title = title;
+        this.craftsmanName = craftsmanName;
+        this.playTimes = playTimes;
+        this.classifyName = classifyName;
+        this.introduction = introduction;
+        this.arrayProgram = arrayProgram;
+        this.programNumber = programNumber;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Album{" +
+                "albumImage='" + albumImage + '\'' +
+                ", title='" + title + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
+                ", playTimes=" + playTimes +
+                ", classifyName='" + classifyName + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", arrayProgram=" + arrayProgram +
+                ", programNumber=" + programNumber +
+                '}';
+    }
 }

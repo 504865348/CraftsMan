@@ -18,32 +18,27 @@
         <RadioButton
             android:id="@+id/main_rb_home_page"
             style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/main_rb_home_page_selector"
-            />
+            android:drawableTop="@drawable/main_rb_home_page_selector" />
 
         <RadioButton
             android:id="@+id/main_rb_billboard"
             style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/main_rb_billboard_selector"
-            />
+            android:drawableTop="@drawable/main_rb_billboard_selector" />
 
         <RadioButton
             android:id="@+id/main_rb_question"
             style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/main_rb_question_selector"
-            />
+            android:drawableTop="@drawable/main_rb_question_selector" />
 
         <RadioButton
             android:id="@+id/main_rb_discover"
             style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/main_rb_discover_selector"
-            />
+            android:drawableTop="@drawable/main_rb_discover_selector" />
 
         <RadioButton
             android:id="@+id/main_rb_my_info"
             style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/main_rb_my_info_selector"
-            />
+            android:drawableTop="@drawable/main_rb_my_info_selector" />
     </RadioGroup>
 
 </LinearLayout>

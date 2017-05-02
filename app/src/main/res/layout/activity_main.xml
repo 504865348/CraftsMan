@@ -16,6 +16,6 @@
         android:layout_weight="1">
     </FrameLayout>
 
-    <include layout="@layout/main_radio_group"/>
+    <include layout="@layout/main_radio_group" />
 
 </LinearLayout>

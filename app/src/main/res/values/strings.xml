@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CraftsMan</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string craftsQuesAns="app_name">CraftsMan</string>
+    <string craftsQuesAns="title_activity_home">HomeActivity</string>
 </resources>
