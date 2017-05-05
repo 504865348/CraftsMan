@@ -35,9 +35,11 @@
             android:layout_marginLeft="10dp">
 
             <ImageButton
+                android:id="@+id/imageButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/column_cover"/>
+                android:src="@drawable/column_cover" />
+
             <TextView
                 android:id="@+id/hot_crafts_text_1"
                 style="@style/home_page_hot_bottom_text"
@@ -89,9 +91,10 @@
             android:layout_marginLeft="10dp">
 
             <ImageButton
+                android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/column_cover"/>
+                android:src="@drawable/column_cover" />
 
             <TextView
                 android:id="@+id/hot_crafts_text_4"
