@@ -8,14 +8,14 @@ import com.joshua.craftsman.R;
 import butterknife.ButterKnife;
 
 /**
- * Created by 18012 on 2017/4/29.
+ * Created by 18012 on 2017/4/30.
  */
 
-public class p28_2 extends AppCompatActivity{
+public class change extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.p28_1);
+        setContentView(R.layout.alter);
         ButterKnife.bind(this);
     }
 }

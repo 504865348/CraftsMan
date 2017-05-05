@@ -44,5 +44,5 @@
         </LinearLayout>
 
     </LinearLayout>
-<include layout="@layout/p12_1"/>
+<include layout="@layout/find_1"/>
 </LinearLayout>

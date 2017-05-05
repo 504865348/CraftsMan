@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.wang.common.p40;
-import com.joshua.craftsman.wang.common.p43;
+import com.joshua.craftsman.wang.common.common_change;
+import com.joshua.craftsman.wang.common.common_count;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +18,7 @@ import butterknife.OnClick;
  * Created by 18012 on 2017/4/29.
  */
 
-public class p26 extends AppCompatActivity {
+public class set extends AppCompatActivity {
     @BindView(R.id.count)
     ImageButton count;//账号绑定跳转
     @BindView(R.id.password)
@@ -27,7 +27,7 @@ public class p26 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.p26);
+        setContentView(R.layout.set);
         ButterKnife.bind(this);
     }
 
@@ -37,12 +37,12 @@ public class p26 extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.count:
                 Intent intent=new Intent();
-                intent.setClass(p26.this,p40.class);
+                intent.setClass(set.this, common_count.class);
                 startActivity(intent);
                 break;
             case R.id.password:
                 Intent intent1=new Intent();
-                intent1.setClass(p26.this,p43.class);
+                intent1.setClass(set.this,common_change.class);
                 startActivity(intent1);
                 break;
         }

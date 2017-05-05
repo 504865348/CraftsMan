@@ -1,4 +1,4 @@
-package com.joshua.craftsman.wang.common;
+package com.joshua.craftsman.wang.common.craft;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +8,14 @@ import com.joshua.craftsman.R;
 import butterknife.ButterKnife;
 
 /**
- * Created by 18012 on 2017/4/30.
+ * Created by 18012 on 2017/4/29.
  */
 
-public class p43 extends AppCompatActivity{
+public class question extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.p43);
+        setContentView(R.layout.question);
         ButterKnife.bind(this);
     }
 }

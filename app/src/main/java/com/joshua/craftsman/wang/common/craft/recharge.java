@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
  * Created by 18012 on 2017/4/29.
  */
 
-public class p38 extends AppCompatActivity {
+public class recharge extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

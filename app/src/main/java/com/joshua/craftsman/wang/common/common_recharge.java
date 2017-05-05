@@ -11,11 +11,11 @@ import butterknife.ButterKnife;
  * Created by 18012 on 2017/4/29.
  */
 
-public class p28_2  extends AppCompatActivity{
+public class common_recharge extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.p28_1);
+        setContentView(R.layout.recharge);
         ButterKnife.bind(this);
     }
 }
