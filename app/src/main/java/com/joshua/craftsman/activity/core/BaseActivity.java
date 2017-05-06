@@ -12,13 +12,15 @@ import android.widget.TextView;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.receiver.ExitReceiver;
 
+import butterknife.ButterKnife;
+
 import static android.R.attr.x;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected Activity mBaseActivity;
     private ExitReceiver exitReceiver;
     public static String EXIT_APP_ACTION = "com.joshua.exit";
-
+    public static String TAG = "LOG";
     public BaseActivity(){
         mBaseActivity=this;
     }
