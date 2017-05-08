@@ -8,11 +8,11 @@ import java.util.List;
  */
 
 public class Hot {
-    private List<String> craftsman; //大国工匠
-    private List<String> skills; //匠心独运
-    private List<String> policy; //讲政策
-    private List<String> listen; //听专题
-    private List<String> look; //看利器
+    private List<String> craftsman; //大国工匠(参见HotCraftsman类)
+    private List<String> skills; //匠心独运(参见HotSkills类)
+    private List<String> policy; //讲政策(参见HotPolicy类)
+    private List<String> listen; //听专题(参见HotListen类)
+    private List<String> look; //看利器(参见HotLook类)
 
     public List<String> getCraftsman() {
         return craftsman;

@@ -1,94 +1,96 @@
 package com.joshua.craftsman.entity;
 
+import java.util.List;
+
 /**
  * Created by nzz on 2017/4/29.
  * 首页--分类
  */
 
 public class Classify {
-    private String houses; //房屋建筑
-    private String municipal; //市政公用
-    private String mechanical; //机电工程
-    private String highWays; //公路
-    private String waterConservancy; //水利水电
-    private String railWay; //铁路工程
-    private String mining; //矿业工程
-    private String airport; //民航机场工程
-    private String communications; //通信广电工程
+    private List<String> houses; //房屋建筑
+    private List<String> municipal; //市政公用
+    private List<String> mechanical; //机电工程
+    private List<String> highWays; //公路
+    private List<String> waterConservancy; //水利水电
+    private List<String> railWay; //铁路工程
+    private List<String> mining; //矿业工程
+    private List<String> airport; //民航机场工程
+    private List<String> communications; //通信广电工程
 
-    public String getHouses() {
+    public List<String> getHouses() {
         return houses;
     }
 
-    public void setHouses(String houses) {
+    public void setHouses(List<String> houses) {
         this.houses = houses;
     }
 
-    public String getMunicipal() {
+    public List<String> getMunicipal() {
         return municipal;
     }
 
-    public void setMunicipal(String municipal) {
+    public void setMunicipal(List<String> municipal) {
         this.municipal = municipal;
     }
 
-    public String getMechanical() {
+    public List<String> getMechanical() {
         return mechanical;
     }
 
-    public void setMechanical(String mechanical) {
+    public void setMechanical(List<String> mechanical) {
         this.mechanical = mechanical;
     }
 
-    public String getHighWays() {
+    public List<String> getHighWays() {
         return highWays;
     }
 
-    public void setHighWays(String highWays) {
+    public void setHighWays(List<String> highWays) {
         this.highWays = highWays;
     }
 
-    public String getWaterConservancy() {
+    public List<String> getWaterConservancy() {
         return waterConservancy;
     }
 
-    public void setWaterConservancy(String waterConservancy) {
+    public void setWaterConservancy(List<String> waterConservancy) {
         this.waterConservancy = waterConservancy;
     }
 
-    public String getRailWay() {
+    public List<String> getRailWay() {
         return railWay;
     }
 
-    public void setRailWay(String railWay) {
+    public void setRailWay(List<String> railWay) {
         this.railWay = railWay;
     }
 
-    public String getMining() {
+    public List<String> getMining() {
         return mining;
     }
 
-    public void setMining(String mining) {
+    public void setMining(List<String> mining) {
         this.mining = mining;
     }
 
-    public String getAirport() {
+    public List<String> getAirport() {
         return airport;
     }
 
-    public void setAirport(String airport) {
+    public void setAirport(List<String> airport) {
         this.airport = airport;
     }
 
-    public String getCommunications() {
+    public List<String> getCommunications() {
         return communications;
     }
 
-    public void setCommunications(String communications) {
+    public void setCommunications(List<String> communications) {
         this.communications = communications;
     }
 
-    public Classify(String houses, String municipal, String mechanical, String highWays, String waterConservancy, String railWay, String mining, String airport, String communications) {
+    public Classify(List<String> houses, List<String> municipal, List<String> mechanical, List<String> highWays, List<String> waterConservancy, List<String> railWay, List<String> mining, List<String> airport, List<String> communications) {
         this.houses = houses;
         this.municipal = municipal;
         this.mechanical = mechanical;
@@ -103,15 +105,15 @@ public class Classify {
     @Override
     public String toString() {
         return "Classify{" +
-                "houses='" + houses + '\'' +
-                ", municipal='" + municipal + '\'' +
-                ", mechanical='" + mechanical + '\'' +
-                ", highWays='" + highWays + '\'' +
-                ", waterConservancy='" + waterConservancy + '\'' +
-                ", railWay='" + railWay + '\'' +
-                ", mining='" + mining + '\'' +
-                ", airport='" + airport + '\'' +
-                ", communications='" + communications + '\'' +
+                "houses=" + houses +
+                ", municipal=" + municipal +
+                ", mechanical=" + mechanical +
+                ", highWays=" + highWays +
+                ", waterConservancy=" + waterConservancy +
+                ", railWay=" + railWay +
+                ", mining=" + mining +
+                ", airport=" + airport +
+                ", communications=" + communications +
                 '}';
     }
 }

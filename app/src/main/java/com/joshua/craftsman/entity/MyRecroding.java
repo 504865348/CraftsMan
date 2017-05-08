@@ -6,11 +6,20 @@ package com.joshua.craftsman.entity;
  */
 
 public class MyRecroding {
+    private String myRecrodingID; //我的录制对应的工匠ID
     private String recrodingImage; //录制视频或音频的图片
     private String name; //录制人名字
     private String time; //录制时间(xx年xx月xx日 xx时xx分)
     private String duration; //视频/音频时长
     private String storageUrl; //存储地址
+
+    public String getMyRecrodingID() {
+        return myRecrodingID;
+    }
+
+    public void setMyRecrodingID(String myRecrodingID) {
+        this.myRecrodingID = myRecrodingID;
+    }
 
     public String getRecrodingImage() {
         return recrodingImage;
@@ -52,7 +61,8 @@ public class MyRecroding {
         this.storageUrl = storageUrl;
     }
 
-    public MyRecroding(String recrodingImage, String name, String time, String duration, String storageUrl) {
+    public MyRecroding(String myRecrodingID, String recrodingImage, String name, String time, String duration, String storageUrl) {
+        this.myRecrodingID = myRecrodingID;
         this.recrodingImage = recrodingImage;
         this.name = name;
         this.time = time;
@@ -63,7 +73,8 @@ public class MyRecroding {
     @Override
     public String toString() {
         return "MyRecroding{" +
-                "recrodingImage='" + recrodingImage + '\'' +
+                "myRecrodingID='" + myRecrodingID + '\'' +
+                ", recrodingImage='" + recrodingImage + '\'' +
                 ", name='" + name + '\'' +
                 ", time='" + time + '\'' +
                 ", duration='" + duration + '\'' +

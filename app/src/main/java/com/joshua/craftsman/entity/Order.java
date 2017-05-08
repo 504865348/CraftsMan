@@ -6,6 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class Order {
+    private String OderID; //对应的工匠ID
     /* 专辑订单 */
     private String albumImage; //专辑图片
     private String albumTitle; //专辑标题

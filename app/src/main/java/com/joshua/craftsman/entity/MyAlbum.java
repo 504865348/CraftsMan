@@ -6,11 +6,20 @@ package com.joshua.craftsman.entity;
  */
 
 public class MyAlbum {
+    private String myAlbumID; //我的专辑对应的工匠ID
     private String albumImage; //专辑图片
     private String albumTitle; //专辑标题
     private String introduction; //简介
     private int programNumber; //分集数量
     private String storage; //存储容量
+
+    public String getMyAlbumID() {
+        return myAlbumID;
+    }
+
+    public void setMyAlbumID(String myAlbumID) {
+        this.myAlbumID = myAlbumID;
+    }
 
     public String getAlbumImage() {
         return albumImage;
@@ -52,7 +61,8 @@ public class MyAlbum {
         this.storage = storage;
     }
 
-    public MyAlbum(String albumImage, String albumTitle, String introduction, int programNumber, String storage) {
+    public MyAlbum(String myAlbumID, String albumImage, String albumTitle, String introduction, int programNumber, String storage) {
+        this.myAlbumID = myAlbumID;
         this.albumImage = albumImage;
         this.albumTitle = albumTitle;
         this.introduction = introduction;
@@ -63,7 +73,8 @@ public class MyAlbum {
     @Override
     public String toString() {
         return "MyAlbum{" +
-                "albumImage='" + albumImage + '\'' +
+                "myAlbumID='" + myAlbumID + '\'' +
+                ", albumImage='" + albumImage + '\'' +
                 ", albumTitle='" + albumTitle + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", programNumber=" + programNumber +

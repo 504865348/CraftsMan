@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 public class Album {
+    private String albumID; //专辑ID
     private String albumImage; //图片
     private String title; //标题
     private String craftsmanName; //工匠名
@@ -16,6 +17,14 @@ public class Album {
     private String introduction; //专辑简介
     private List<String> arrayProgram; //节目列表(参见Program类)
     private int programNumber; //节目总数
+
+    public String getAlbumID() {
+        return albumID;
+    }
+
+    public void setAlbumID(String albumID) {
+        this.albumID = albumID;
+    }
 
     public String getAlbumImage() {
         return albumImage;
@@ -81,7 +90,8 @@ public class Album {
         this.programNumber = programNumber;
     }
 
-    public Album(String albumImage, String title, String craftsmanName, int playTimes, String classifyName, String introduction, List<String> arrayProgram, int programNumber) {
+    public Album(String albumID, String albumImage, String title, String craftsmanName, int playTimes, String classifyName, String introduction, List<String> arrayProgram, int programNumber) {
+        this.albumID = albumID;
         this.albumImage = albumImage;
         this.title = title;
         this.craftsmanName = craftsmanName;
@@ -95,7 +105,8 @@ public class Album {
     @Override
     public String toString() {
         return "Album{" +
-                "albumImage='" + albumImage + '\'' +
+                "albumID='" + albumID + '\'' +
+                ", albumImage='" + albumImage + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
                 ", playTimes=" + playTimes +

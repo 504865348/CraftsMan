@@ -6,6 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class CraftsQuesAns {
+    private String craftsQuesAnsID; //我的问答对应的工匠ID
     /* 未处理回答 */
     private String questionerName; //提问者名字
     private String content; //提问内容
@@ -19,6 +20,14 @@ public class CraftsQuesAns {
     前3个属性同“未处理回答”,
     后2个属性同“我的回答”后2个属性
     */
+
+    public String getCraftsQuesAnsID() {
+        return craftsQuesAnsID;
+    }
+
+    public void setCraftsQuesAnsID(String craftsQuesAnsID) {
+        this.craftsQuesAnsID = craftsQuesAnsID;
+    }
 
     public String getQuestionerName() {
         return questionerName;
@@ -76,7 +85,8 @@ public class CraftsQuesAns {
         this.listenNumber = listenNumber;
     }
 
-    public CraftsQuesAns(String questionerName, String content, long quesTime, String answerContent, long ansTime, String answerTime, int listenNumber) {
+    public CraftsQuesAns(String craftsQuesAnsID, String questionerName, String content, long quesTime, String answerContent, long ansTime, String answerTime, int listenNumber) {
+        this.craftsQuesAnsID = craftsQuesAnsID;
         this.questionerName = questionerName;
         this.content = content;
         this.quesTime = quesTime;
@@ -89,7 +99,8 @@ public class CraftsQuesAns {
     @Override
     public String toString() {
         return "CraftsQuesAns{" +
-                "questionerName='" + questionerName + '\'' +
+                "craftsQuesAnsID='" + craftsQuesAnsID + '\'' +
+                ", questionerName='" + questionerName + '\'' +
                 ", content='" + content + '\'' +
                 ", quesTime=" + quesTime +
                 ", answerContent='" + answerContent + '\'' +
