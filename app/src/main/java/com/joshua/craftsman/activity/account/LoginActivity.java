@@ -55,6 +55,7 @@ public class LoginActivity extends BaseActivity {
                 .add("method", Server.SERVER_LOGIN)
                 .add("username", username)
                 .add("password", pwd)
+                .add("type", "normal")
                 .build();
 
         final Request request = new Request.Builder()
