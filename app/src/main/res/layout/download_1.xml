@@ -4,23 +4,36 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/im_face"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.22" />
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_title"
+                android:textSize="24dp"
+                android:textColor="@color/black"
+
+                android:layout_width="50dp"
                 android:layout_height="wrap_content" />
             <TextView
+                android:text="作者名"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/jishu"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -33,6 +46,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="集"/>
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wenjian"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,6 +65,13 @@
                     android:text="M"/>
             </LinearLayout>
         </LinearLayout>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delect"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/whit"/>
     </LinearLayout>
 
 </LinearLayout>

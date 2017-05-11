@@ -4,32 +4,43 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
         <ImageButton
+            android:background="@color/whit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/last"/>
 <TextView
+    android:textSize="30dp"
+    android:textColor="@color/black"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:text="录制专辑"
     android:gravity="center"
     android:layout_marginLeft="120dp"/>
         <ImageButton
-            android:layout_width="30dp"
+            android:background="@color/whit"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/search_icon"
-            android:layout_marginLeft="100dp"/>
+            android:layout_marginLeft="100dp" />
     </LinearLayout>
 <LinearLayout
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Button
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:background="@color/whit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="录音"/>
     <Button
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:background="@color/whit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="录视频"/>

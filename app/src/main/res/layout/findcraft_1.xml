@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
+        android:src="@drawable/user_look"
         android:layout_width="50dp"
         android:layout_height="50dp" />
     <LinearLayout
@@ -13,15 +14,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:textColor="@color/black"
+            android:text="工匠名"
             android:layout_width="50dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:text="简介简介简介简介简介简介简介简介"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <Button
+    <ImageButton
+        android:background="@color/whit"
+        android:src="@drawable/guanzhu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="加关注"/>
 </LinearLayout>
 </LinearLayout>

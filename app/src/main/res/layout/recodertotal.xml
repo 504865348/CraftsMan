@@ -7,6 +7,15 @@
         android:layout_height="wrap_content">
         <include layout="@layout/recoder"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/recoder_2"/>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <include layout="@layout/recoder_1"/>
+</LinearLayout>
+
 </LinearLayout>

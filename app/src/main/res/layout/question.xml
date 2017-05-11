@@ -8,24 +8,30 @@
         android:layout_height="wrap_content">
 
         <ImageButton
+            android:background="@color/whit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@drawable/last" />
 
         <TextView
+            android:textSize="30dp"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:paddingLeft="115dp"
+            android:paddingLeft="110dp"
             android:text="意见反馈" />
 
     </LinearLayout>
 
     <TextView
+        android:textColor="@color/black"
+        android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="问题和意见"/>
     <EditText
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minLines="7"
@@ -35,17 +41,31 @@
         android:gravity="top"
         android:background="@drawable/whit"
         />
+
     <TextView
+
+        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="联系方式"/>
+        android:text="联系方式"
+        android:textColor="@color/black"
+        android:textSize="24dp" />
+
     <EditText
+        android:layout_margin="20dp"
+        android:id="@+id/editText3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/whit"
         android:hint="选填，方便我们联系"
-        />
-<Button
+        android:textColor="@color/black"
+        android:textSize="24dp" />
+
+    <Button
+        android:background="@color/pink"
+        android:textSize="30dp"
+        android:textColor="@color/whit"
+        android:layout_margin="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="提交"/>

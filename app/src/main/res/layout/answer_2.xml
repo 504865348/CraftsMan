@@ -3,6 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:textColor="@color/black"
+        android:textSize="30dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="我的问答"
@@ -15,14 +17,28 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_margin="5dp"
+            android:textSize="24dp"
+            android:background="@color/whit"
+            android:textColor="@color/black"
+            android:id="@+id/button8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未处理回答" />
+
         <Button
+            android:layout_margin="5dp"
+            android:textSize="24dp"
+            android:background="@color/whit"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的回答"/>
         <Button
+            android:layout_margin="5dp"
+            android:textSize="24dp"
+            android:background="@color/whit"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的提问" />

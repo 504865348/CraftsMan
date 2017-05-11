@@ -3,6 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:textColor="@color/black"
+        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="账号绑定"
@@ -11,6 +13,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Button
+         android:background="@color/whit"
+       android:textSize="24dp"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="手机号绑定"/>
@@ -22,6 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:background="@color/whit"
+            android:textSize="24dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="QQ绑定"/>
@@ -33,6 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:background="@color/whit"
+            android:textSize="24dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="微信绑定"/>

@@ -3,15 +3,19 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:background="@color/pink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1">
         <ImageButton
+            android:background="@color/pink"
             android:layout_width="23dp"
             android:layout_height="44dp"
 
-            android:layout_weight="0.38" />
+            android:layout_weight="0.38"
+            android:src="@drawable/las"/>
         <TextView
+            android:textColor="@color/snow"
             android:layout_width="284dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -19,11 +23,13 @@
     </LinearLayout>
     <LinearLayout
 
-        android:layout_marginRight="20dp"
+       android:background="@drawable/round"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
        >
 
 
@@ -35,7 +41,8 @@
             android:layout_height="40dp"
             android:gravity="center_vertical"
             android:hint="手机号" />
-        <ImageView
+        <Button
+            android:text="发送验证码"
             android:layout_width="99dp"
             android:layout_height="wrap_content"
              />
@@ -43,6 +50,9 @@
 </LinearLayout>
 
     <EditText
+        android:background="@drawable/round"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:hint="验证码"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -50,6 +60,9 @@
 
         />
     <EditText
+        android:background="@drawable/round"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -57,18 +70,27 @@
        />
 
     <EditText
+        android:background="@drawable/round"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
        android:hint="确认密码(6-16为有效数字)"
        />
 <Button
+
+    android:background="@drawable/button"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="30dp"
     android:text="注册"/>
 
     <LinearLayout
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -90,8 +112,7 @@
             android:id="@+id/imageButton4"
             android:layout_width="130dp"
             android:layout_height="35dp"
-
-            android:layout_weight="0.50"
-            />
+             android:src="@drawable/xieyi"
+            android:layout_weight="0.50" />
     </LinearLayout>
 </LinearLayout>

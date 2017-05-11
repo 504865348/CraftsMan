@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/ll_find"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-<ImageButton
-    android:layout_width="56dp"
-    android:layout_height="match_parent"
-    android:src="@drawable/search_icon"/>
+        android:weightSum="1">
+
         <TextView
-            android:layout_width="160dp"
-            android:layout_height="55dp"
-            android:text="发现"
-            android:paddingLeft="110dp"
-            android:gravity="center_vertical"/>
-        <LinearLayout
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:src="@drawable/history"/>
-            <Button
+            android:layout_height="match_parent"
+
+            android:gravity="center_vertical"
+           android:layout_marginLeft="160dp"
+            android:text="发现"
+            android:textSize="30dp"
+            android:textColor="@color/black"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp">
+
+            <ImageButton
+                android:id="@+id/ib_history"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@color/whit"
+                android:src="@drawable/history" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="历史"/>
-        </LinearLayout>
-        <LinearLayout
+                android:layout_below="@id/ib_history"
+                android:text="历史"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="22dp"
-                android:src="@drawable/download"/>
-            <Button
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/ib_down"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@color/whit"
+                android:src="@drawable/download" />
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:text="下载"/>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_down"
+                android:text="下载"
+                android:textSize="18dp" />
+        </RelativeLayout>
 
     </LinearLayout>
-<include layout="@layout/find_1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_find">
+        <include layout="@layout/find_1"
+            />
+    </LinearLayout>
+<LinearLayout
+   android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<include layout="@layout/main_radio_group"/>
 </LinearLayout>
+</RelativeLayout>

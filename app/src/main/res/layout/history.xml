@@ -9,8 +9,10 @@
         android:weightSum="1">
 
         <ImageButton
+            android:background="@drawable/whit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:src="@drawable/last"
              />
 
         <TextView
@@ -20,12 +22,14 @@
             android:gravity="center"
             android:text="播放历史"
             android:textColor="@color/black"
-            android:textSize="30px" />
+            android:textSize="30dp" />
 
         <ImageButton
+            android:background="@drawable/whit"
             android:id="@+id/imageButton5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:src="@drawable/delect"
              />
     </LinearLayout>
 
@@ -35,24 +39,26 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:background="@drawable/whit"
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="选择删除"
-            android:textSize="24px"
+            android:textSize="24dp"
             android:textColor="@color/black"
 
             />
 
         <Button
+            android:background="@drawable/whit"
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="一键清空"
             android:textColor="@color/black"
-            android:textSize="24px"
+            android:textSize="24dp"
            />
     </LinearLayout>
 

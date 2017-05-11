@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <ImageView
+        android:background="@drawable/photo_two"
         android:layout_width="70dp"
         android:layout_height="70dp" />
     <LinearLayout
@@ -14,21 +15,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:layout_width="50dp"
+            android:text="标题"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30px"
+            android:textSize="30dp"
             android:textColor="@color/black"
            />
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24px"
+            android:textSize="24dp"
+            android:text="简介简介简介简介"
             android:textColor="@color/lightgray"
            />
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:background="@color/whit"
+        android:id="@+id/ib_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/downblue"
