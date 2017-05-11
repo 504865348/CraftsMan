@@ -6,7 +6,6 @@ package com.joshua.craftsman.entity;
  */
 
 public class MyTopList {
-    private String myTopListID; //我的榜单对应的工匠ID
     /* 工匠榜单 */
     private int craftsRank; //工匠名次
     private String craftsImage; //工匠头像
@@ -21,14 +20,6 @@ public class MyTopList {
     private int programRank; //节目名次
     private String getCraftsName; //工匠名
     private String programName; //节目名
-
-    public String getMyTopListID() {
-        return myTopListID;
-    }
-
-    public void setMyTopListID(String myTopListID) {
-        this.myTopListID = myTopListID;
-    }
 
     public int getCraftsRank() {
         return craftsRank;
@@ -94,8 +85,7 @@ public class MyTopList {
         this.programName = programName;
     }
 
-    public MyTopList(String myTopListID, int craftsRank, String craftsImage, String craftsName, String hotDegree, String fansNumber, int programRank, String getCraftsName, String programName) {
-        this.myTopListID = myTopListID;
+    public MyTopList(int craftsRank, String craftsImage, String craftsName, String hotDegree, String fansNumber, int programRank, String getCraftsName, String programName) {
         this.craftsRank = craftsRank;
         this.craftsImage = craftsImage;
         this.craftsName = craftsName;
@@ -109,8 +99,7 @@ public class MyTopList {
     @Override
     public String toString() {
         return "MyTopList{" +
-                "myTopListID='" + myTopListID + '\'' +
-                ", craftsRank=" + craftsRank +
+                "craftsRank=" + craftsRank +
                 ", craftsImage='" + craftsImage + '\'' +
                 ", craftsName='" + craftsName + '\'' +
                 ", hotDegree='" + hotDegree + '\'' +

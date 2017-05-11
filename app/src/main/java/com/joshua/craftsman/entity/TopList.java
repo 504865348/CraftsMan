@@ -11,7 +11,7 @@ public class TopList {
     private List<String> hottestProgram; //最火节目飙升榜
     private List<String> mostSubscription; //最多订阅经典版
     private List<String> payFine; //付费精品飙升榜
-    private List<String> topCraftsman; //最大国工匠榜\
+    private List<String> topCraftsman; //最大国工匠榜
 
     public List<String> getHottestProgram() {
         return hottestProgram;

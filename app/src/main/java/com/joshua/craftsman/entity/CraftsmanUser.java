@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CraftsmanUser {
     private String headImage; //头像
-    private String phoneNumber; //手机号(工匠ID)
+    private String phoneNumber; //手机号
     private String password; //密码
     private String CraftsmanName; //工匠名
     private int concernNumber; //关注数量
@@ -22,6 +22,7 @@ public class CraftsmanUser {
     private List<String> myAlbum; //我的专辑(参见MyAlbum类)
     private List<String> myTopList; //我的榜单(参见MyTopList类)
     private List<String> myRecroding; //我的录制(参见MyRecroding类)
+    
 
     public String getHeadImage() {
         return headImage;

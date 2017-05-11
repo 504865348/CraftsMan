@@ -6,19 +6,28 @@ package com.joshua.craftsman.entity;
  */
 
 public class Order {
-    private String OderID; //对应的工匠ID
     /* 专辑订单 */
+    private String albumOrderID; //专辑订单ID
     private String albumImage; //专辑图片
     private String albumTitle; //专辑标题
     private String craftsmanName; //工匠名
     private int programNumber; //分集数量
     private String albumPrice; //专辑价格
     /* 节目订单 */
+    private String programOrderID; //节目订单ID
     private String programImage; //节目图片
     private String programTitle; //节目标题
     private int playTimes; //播放量
     private long releaseTime; //发布时间
     private String programPrice; //节目价格
+
+    public String getAlbumOrderID() {
+        return albumOrderID;
+    }
+
+    public void setAlbumOrderID(String albumOrderID) {
+        this.albumOrderID = albumOrderID;
+    }
 
     public String getAlbumImage() {
         return albumImage;
@@ -58,6 +67,14 @@ public class Order {
 
     public void setAlbumPrice(String albumPrice) {
         this.albumPrice = albumPrice;
+    }
+
+    public String getProgramOrderID() {
+        return programOrderID;
+    }
+
+    public void setProgramOrderID(String programOrderID) {
+        this.programOrderID = programOrderID;
     }
 
     public String getProgramImage() {
@@ -100,12 +117,14 @@ public class Order {
         this.programPrice = programPrice;
     }
 
-    public Order(String albumImage, String albumTitle, String craftsmanName, int programNumber, String albumPrice, String programImage, String programTitle, int playTimes, long releaseTime, String programPrice) {
+    public Order(String albumOrderID, String albumImage, String albumTitle, String craftsmanName, int programNumber, String albumPrice, String programOrderID, String programImage, String programTitle, int playTimes, long releaseTime, String programPrice) {
+        this.albumOrderID = albumOrderID;
         this.albumImage = albumImage;
         this.albumTitle = albumTitle;
         this.craftsmanName = craftsmanName;
         this.programNumber = programNumber;
         this.albumPrice = albumPrice;
+        this.programOrderID = programOrderID;
         this.programImage = programImage;
         this.programTitle = programTitle;
         this.playTimes = playTimes;
@@ -116,11 +135,13 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "albumImage='" + albumImage + '\'' +
+                "albumOrderID='" + albumOrderID + '\'' +
+                ", albumImage='" + albumImage + '\'' +
                 ", albumTitle='" + albumTitle + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
                 ", programNumber=" + programNumber +
                 ", albumPrice='" + albumPrice + '\'' +
+                ", programOrderID='" + programOrderID + '\'' +
                 ", programImage='" + programImage + '\'' +
                 ", programTitle='" + programTitle + '\'' +
                 ", playTimes=" + playTimes +

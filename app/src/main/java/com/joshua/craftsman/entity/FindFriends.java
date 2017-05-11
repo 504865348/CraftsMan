@@ -6,18 +6,9 @@ package com.joshua.craftsman.entity;
  */
 
 public class FindFriends {
-    private String friendsID; //推荐关注对应的工匠ID
     private String craftsImage; //工匠头像
     private String craftsName; //工匠名
     private String introduction; //工匠简介
-
-    public String getFriendsID() {
-        return friendsID;
-    }
-
-    public void setFriendsID(String friendsID) {
-        this.friendsID = friendsID;
-    }
 
     public String getCraftsImage() {
         return craftsImage;
@@ -43,8 +34,7 @@ public class FindFriends {
         this.introduction = introduction;
     }
 
-    public FindFriends(String friendsID, String craftsImage, String craftsName, String introduction) {
-        this.friendsID = friendsID;
+    public FindFriends(String craftsImage, String craftsName, String introduction) {
         this.craftsImage = craftsImage;
         this.craftsName = craftsName;
         this.introduction = introduction;
@@ -53,8 +43,7 @@ public class FindFriends {
     @Override
     public String toString() {
         return "FindFriends{" +
-                "friendsID='" + friendsID + '\'' +
-                ", craftsImage='" + craftsImage + '\'' +
+                "craftsImage='" + craftsImage + '\'' +
                 ", craftsName='" + craftsName + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

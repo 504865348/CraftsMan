@@ -6,7 +6,9 @@ package com.joshua.craftsman.entity;
  */
 
 public class CraftsQuesAns {
-    private String craftsQuesAnsID; //我的问答对应的工匠ID
+    private String waitAnsID; //未处理回答ID
+    private String ansID; //我的回答ID
+    private String questionID; //我的提问ID
     /* 未处理回答 */
     private String questionerName; //提问者名字
     private String content; //提问内容
@@ -21,12 +23,28 @@ public class CraftsQuesAns {
     后2个属性同“我的回答”后2个属性
     */
 
-    public String getCraftsQuesAnsID() {
-        return craftsQuesAnsID;
+    public String getWaitAnsID() {
+        return waitAnsID;
     }
 
-    public void setCraftsQuesAnsID(String craftsQuesAnsID) {
-        this.craftsQuesAnsID = craftsQuesAnsID;
+    public void setWaitAnsID(String waitAnsID) {
+        this.waitAnsID = waitAnsID;
+    }
+
+    public String getAnsID() {
+        return ansID;
+    }
+
+    public void setAnsID(String ansID) {
+        this.ansID = ansID;
+    }
+
+    public String getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
     }
 
     public String getQuestionerName() {
@@ -85,8 +103,10 @@ public class CraftsQuesAns {
         this.listenNumber = listenNumber;
     }
 
-    public CraftsQuesAns(String craftsQuesAnsID, String questionerName, String content, long quesTime, String answerContent, long ansTime, String answerTime, int listenNumber) {
-        this.craftsQuesAnsID = craftsQuesAnsID;
+    public CraftsQuesAns(String waitAnsID, String ansID, String questionID, String questionerName, String content, long quesTime, String answerContent, long ansTime, String answerTime, int listenNumber) {
+        this.waitAnsID = waitAnsID;
+        this.ansID = ansID;
+        this.questionID = questionID;
         this.questionerName = questionerName;
         this.content = content;
         this.quesTime = quesTime;
@@ -99,7 +119,9 @@ public class CraftsQuesAns {
     @Override
     public String toString() {
         return "CraftsQuesAns{" +
-                "craftsQuesAnsID='" + craftsQuesAnsID + '\'' +
+                "waitAnsID='" + waitAnsID + '\'' +
+                ", ansID='" + ansID + '\'' +
+                ", questionID='" + questionID + '\'' +
                 ", questionerName='" + questionerName + '\'' +
                 ", content='" + content + '\'' +
                 ", quesTime=" + quesTime +

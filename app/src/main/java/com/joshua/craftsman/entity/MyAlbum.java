@@ -6,7 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class MyAlbum {
-    private String myAlbumID; //我的专辑对应的工匠ID
+    private String myAlbumID; //专辑ID
     private String albumImage; //专辑图片
     private String albumTitle; //专辑标题
     private String introduction; //简介

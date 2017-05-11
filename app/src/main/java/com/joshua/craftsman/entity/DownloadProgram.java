@@ -6,7 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class DownloadProgram {
-    private String dowmloadProgramID; //下载节目对应的工匠ID
+    private String downloadProgramID; //下载专辑的ID
     private String image; //图片
     private String title; //标题
     private String craftsmanName; //工匠名
@@ -14,12 +14,12 @@ public class DownloadProgram {
     private String time; //时长
     private String storage; //存储容量
 
-    public String getDowmloadProgramID() {
-        return dowmloadProgramID;
+    public String getDownloadProgramID() {
+        return downloadProgramID;
     }
 
-    public void setDowmloadProgramID(String dowmloadProgramID) {
-        this.dowmloadProgramID = dowmloadProgramID;
+    public void setDownloadProgramID(String downloadProgramID) {
+        this.downloadProgramID = downloadProgramID;
     }
 
     public String getImage() {
@@ -70,8 +70,8 @@ public class DownloadProgram {
         this.storage = storage;
     }
 
-    public DownloadProgram(String dowmloadProgramID, String image, String title, String craftsmanName, int playTimes, String time, String storage) {
-        this.dowmloadProgramID = dowmloadProgramID;
+    public DownloadProgram(String downloadProgramID, String image, String title, String craftsmanName, int playTimes, String time, String storage) {
+        this.downloadProgramID = downloadProgramID;
         this.image = image;
         this.title = title;
         this.craftsmanName = craftsmanName;
@@ -83,7 +83,7 @@ public class DownloadProgram {
     @Override
     public String toString() {
         return "DownloadProgram{" +
-                "dowmloadProgramID='" + dowmloadProgramID + '\'' +
+                "downloadProgramID='" + downloadProgramID + '\'' +
                 ", image='" + image + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +

@@ -6,6 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class Program {
+    private String programID; //节目ID
     private String programImage; //图片
     private String title; //标题
     private int playTimes; //播放量
@@ -14,6 +15,14 @@ public class Program {
     private long releaseTime; //发布时间
     private String playUrl; //播放地址
     private String downloadUrl; //下载地址
+
+    public String getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(String programID) {
+        this.programID = programID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -79,7 +88,8 @@ public class Program {
         this.downloadUrl = downloadUrl;
     }
 
-    public Program(String programImage, String title, int playTimes, String time, int commentTimes, long releaseTime, String playUrl, String downloadUrl) {
+    public Program(String programID, String programImage, String title, int playTimes, String time, int commentTimes, long releaseTime, String playUrl, String downloadUrl) {
+        this.programID = programID;
         this.programImage = programImage;
         this.title = title;
         this.playTimes = playTimes;
@@ -93,7 +103,8 @@ public class Program {
     @Override
     public String toString() {
         return "Program{" +
-                "programImage='" + programImage + '\'' +
+                "programID='" + programID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", playTimes=" + playTimes +
                 ", time='" + time + '\'' +

@@ -5,6 +5,7 @@ package com.joshua.craftsman.entity;
  * 普通用户--我的问答
  */
 public class PublicQuesAns {
+    private String questionID; //问题ID
     /* 未处理提问 */
     private String questionedName; //被提问者名字
     private String content; //提问内容
@@ -12,6 +13,14 @@ public class PublicQuesAns {
     /* 我的提问--前3个属性同“未处理提问” */
     private String answerTime; //语音回答时长
     private int listenNumber; //收听人数
+
+    public String getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
+    }
 
     public String getQuestionedName() {
         return questionedName;
@@ -53,7 +62,8 @@ public class PublicQuesAns {
         this.listenNumber = listenNumber;
     }
 
-    public PublicQuesAns(String questionedName, String content, long quesTime, String answerTime, int listenNumber) {
+    public PublicQuesAns(String questionID, String questionedName, String content, long quesTime, String answerTime, int listenNumber) {
+        this.questionID = questionID;
         this.questionedName = questionedName;
         this.content = content;
         this.quesTime = quesTime;
@@ -64,7 +74,8 @@ public class PublicQuesAns {
     @Override
     public String toString() {
         return "PublicQuesAns{" +
-                "questionedName='" + questionedName + '\'' +
+                "questionID='" + questionID + '\'' +
+                ", questionedName='" + questionedName + '\'' +
                 ", content='" + content + '\'' +
                 ", quesTime=" + quesTime +
                 ", answerTime='" + answerTime + '\'' +

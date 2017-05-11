@@ -6,7 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class MyRecroding {
-    private String myRecrodingID; //我的录制对应的工匠ID
+    private String myRecrodingID; //我的录制ID
     private String recrodingImage; //录制视频或音频的图片
     private String name; //录制人名字
     private String time; //录制时间(xx年xx月xx日 xx时xx分)
