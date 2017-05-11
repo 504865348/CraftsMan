@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    android:background="@color/light_gray">
 
     <LinearLayout
         android:id="@+id/my_info_my_orders"
@@ -183,10 +183,11 @@
             android:layout_marginRight="15dp"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@color/light_gray"/>
 
     <LinearLayout
         android:id="@+id/my_info_feedback"

@@ -53,6 +53,7 @@
             android:id="@+id/q_a_item_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textSize="14sp"
             android:textColor="@android:color/black"
             android:text="问题问题问题问题"/>

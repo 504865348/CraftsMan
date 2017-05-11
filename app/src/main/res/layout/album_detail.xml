@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/album_detail_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:text="专辑详情"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <View style="@style/horizontal_split"/>
+
+    <!-- 专辑信息 -->
+    <include layout="@layout/album_detail_album_info" />
+
+    <View style="@style/horizontal_split"/>
+
+    <LinearLayout
+        android:id="@+id/album_detail_ll_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/album_detail_ll_particulars"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/album_detail_tv_particulars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:text="详情"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/album_detail_ll_program"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/album_detail_tv_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:text="节目"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/horizontal_split"/>
+
+    <!-- 向 ViewPager 中添加 album_detail_particulars 或 album_detail_program -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/album_detail_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

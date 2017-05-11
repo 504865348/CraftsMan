@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/album_detail_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/video_player_share"/>
+
+    <!-- 专辑信息 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/album_detail_share">
+
+        <ImageView
+            android:id="@+id/album_detail_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/album_detail_cover"
+            android:layout_marginLeft="60dp"/>
+
+        <LinearLayout
+            android:id="@+id/album_detail_ll_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/album_detail_cover"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:id="@+id/album_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:text="专辑名字"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:text="工匠："/>
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:id="@+id/album_detail_crafts_name"
+                    android:text="XXX"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:text="播放："/>
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:id="@+id/album_detail_play_num"
+                    android:text="XXX"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:text="分类："/>
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:id="@+id/album_detail_classification"
+                    android:text="XXX"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/album_detail_ll_information"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/album_detail_subscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_album_detail_subscribe"/>
+
+            <ImageView
+                android:id="@+id/album_detail_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/btn_album_detail_buy"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

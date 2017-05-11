@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/album_program_cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/recommend_item_cover"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/album_program_cover"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/album_program_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分集标题"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/black"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/album_program_pv"
+                style="@style/album_program_small"
+                android:drawableLeft="@drawable/album_program_pv_img"
+                android:text="播放量"/>
+
+            <TextView
+                android:id="@+id/album_program_duration"
+                style="@style/album_program_small"
+                android:drawableLeft="@drawable/album_program_duration_img"
+                android:text="时长"/>
+
+            <TextView
+                android:id="@+id/album_program_comments"
+                style="@style/album_program_small"
+                android:drawableLeft="@drawable/album_program_comments_img"
+                android:text="6"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/album_program_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/recommend_item_download"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/album_program_publish_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:textColor="@color/light_gray_text"
+        android:text="发布时间"/>
+
+</RelativeLayout>
