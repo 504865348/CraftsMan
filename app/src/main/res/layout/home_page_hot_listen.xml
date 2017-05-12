@@ -21,87 +21,11 @@
 
     <View style="@style/horizontal_split_black"/>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hot_listen_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
-
-        <LinearLayout
-            android:id="@+id/hot_listen_linear_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/column_cover"/>
-
-            <TextView
-                android:id="@+id/hot_listen_text_1"
-                style="@style/home_page_hot_bottom_text"
-                android:text="标题"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hot_listen_linear_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/column_cover"/>
-
-            <TextView
-                android:id="@+id/hot_listen_text_2"
-                style="@style/home_page_hot_bottom_text"
-                android:text="标题"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hot_listen_linear_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/column_cover"/>
-
-            <TextView
-                android:id="@+id/hot_listen_text_3"
-                style="@style/home_page_hot_bottom_text"
-                android:text="标题"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hot_listen_linear_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/column_cover"/>
-
-            <TextView
-                android:id="@+id/hot_listen_text_4"
-                style="@style/home_page_hot_bottom_text"
-                android:text="标题"/>
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
     <View style="@style/horizontal_split_wider"/>
 

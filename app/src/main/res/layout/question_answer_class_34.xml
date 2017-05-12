@@ -13,7 +13,7 @@
         app:navigationIcon="@drawable/friends_back">
 
         <TextView
-            android:id="@+id/crafts_text_name"
+            android:id="@+id/q_a_tv_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
