@@ -17,14 +17,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:layout_marginRight="20dp"
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
             android:background="@color/whit"
             android:text="未处理提问"
             android:textColor="@color/black"
-            android:textSize="24dp" />
+            android:textSize="24dp"/>
 
         <Button
             android:id="@+id/button7"
@@ -33,10 +33,11 @@
             android:background="@color/whit"
             android:text="我的提问"
             android:textColor="@color/black"
-            android:textSize="24dp" />
+            android:textSize="24dp"/>
 
     </LinearLayout>
-<ListView
+
+    <ListView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 </ListView>
