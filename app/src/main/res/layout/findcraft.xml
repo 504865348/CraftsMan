@@ -15,7 +15,7 @@
 
         <TextView
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="125dp"
@@ -36,14 +36,14 @@
         <Button
             android:layout_marginRight="20dp"
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:background="@color/whit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="推荐关注"/>
         <Button
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:background="@color/whit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
