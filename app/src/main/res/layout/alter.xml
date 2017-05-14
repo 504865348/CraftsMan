@@ -17,7 +17,7 @@
             android:layout_marginLeft="130dp"
             android:text="修改密码"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <Button
             android:textColor="@color/pink"
@@ -27,7 +27,7 @@
             android:background="@color/whit"
             android:text="完成"
             android:layout_marginLeft="50dp"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,12 +37,12 @@
         <TextView
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="旧密码"/>
         <EditText
-
+            android:layout_marginLeft="20dp"
             android:gravity="center"
             android:hint="请输入当前密码"
             android:layout_width="match_parent"
@@ -63,9 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="新密码"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
         <EditText
-
+            android:layout_marginLeft="20dp"
             android:gravity="center"
             android:hint="（6-16位数字或字母）"
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
         <TextView
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="确认密码"/>

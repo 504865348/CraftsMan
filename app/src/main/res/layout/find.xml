@@ -16,7 +16,7 @@
             android:gravity="center_vertical"
            android:layout_marginLeft="160dp"
             android:text="发现"
-            android:textSize="30dp"
+            android:textSize="24sp"
             android:textColor="@color/black"/>
 
         <RelativeLayout
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ib_history"
                 android:text="历史"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ib_down"
                 android:text="下载"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </RelativeLayout>
 
     </LinearLayout>

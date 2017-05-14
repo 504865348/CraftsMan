@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/last"/>
 <TextView
-    android:textSize="30dp"
+    android:textSize="30sp"
     android:textColor="@color/black"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -29,17 +29,20 @@
 <LinearLayout
     android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
     <Button
+        android:layout_weight="1"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:background="@color/whit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="录音"/>
     <Button
+        android:layout_weight="1"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:background="@color/whit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

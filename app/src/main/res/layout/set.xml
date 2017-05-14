@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/last"/>
     <TextView
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,33 +19,63 @@
         android:gravity="center_vertical"
         android:paddingLeft="135dp"/>
 </LinearLayout>
-
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+    <LinearLayout
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <TextView
-            android:textSize="24dp"
-            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="账号绑定" />
+            android:text="账号绑定"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
 
-        <ImageButton
-            android:background="@color/whit"
-            android:id="@+id/count"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/phone" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chat" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/q" />
+
+        <ImageButton
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.07"
+            android:background="@color/whit"
             android:src="@drawable/next_more" />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+
+            android:layout_marginLeft="20dp"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:layout_weight="1"
@@ -60,10 +90,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginLeft="20dp"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
@@ -80,10 +118,18 @@
         android:layout_marginTop="8dip"
         />  
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginLeft="20dp"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:gravity="center_vertical"
@@ -100,10 +146,18 @@
         android:layout_marginTop="8dip"
         />  
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginLeft="20dp"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:layout_weight="1"
@@ -117,27 +171,46 @@
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_weight="1"
+            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:text="帮助中心"
-            android:gravity="center_vertical"/>
+            android:textColor="@color/black"
+            android:textSize="24dp" />
+
         <ImageButton
             android:background="@color/whit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginLeft="20dp"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:layout_weight="1"

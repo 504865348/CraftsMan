@@ -18,13 +18,13 @@
             android:text="标题"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="@color/black"
            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:text="简介简介简介简介"
             android:textColor="@color/lightgray"
            />
