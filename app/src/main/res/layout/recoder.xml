@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/last"/>
 <TextView
-    android:textSize="30sp"
+    android:textSize="24sp"
     android:textColor="@color/black"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -26,27 +26,30 @@
             android:src="@drawable/search_icon"
             android:layout_marginLeft="100dp" />
     </LinearLayout>
-<LinearLayout
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp">
-    <Button
-        android:layout_weight="1"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:background="@color/whit"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="录音"/>
-    <Button
-        android:layout_weight="1"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:background="@color/whit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="录视频"/>
-</LinearLayout>
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/whit"
+            android:text="录音"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/whit"
+            android:text="录视频"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </LinearLayout>

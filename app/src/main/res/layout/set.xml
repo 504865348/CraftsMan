@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageButton
-        android:background="@color/whit"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@drawable/last"/>
+    android:layout_height="match_parent">
+<android.support.v7.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:navigationIcon="@drawable/last">
     <TextView
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="设置"
-        android:gravity="center_vertical"
-        android:paddingLeft="135dp"/>
-</LinearLayout>
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:layout_gravity="center"/>
+</android.support.v7.widget.Toolbar>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
