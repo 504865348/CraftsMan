@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ToolBar（含返回按钮） -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_billboard_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/friends_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:text="我的榜单"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <View style="@style/horizontal_split"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:text="工匠榜单"/>
+
+    <View style="@style/horizontal_split"/>
+
+    <RelativeLayout
+        android:id="@+id/my_billboard_crafts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/my_billboard_crafts_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="XX"/>
+
+        <ImageView
+            android:id="@+id/my_billboard_crafts_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/my_billboard_cover_img"
+            android:layout_toRightOf="@+id/my_billboard_crafts_rank"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_toRightOf="@+id/my_billboard_crafts_cover"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/my_billboard_crafts_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="账号名"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/my_billboard_crafts"
+                    android:text="热度："/>
+                <TextView
+                    android:id="@+id/my_billboard_crafts_trend"
+                    style="@style/my_billboard_crafts"
+                    android:text="XX"/>
+                <TextView
+                    style="@style/my_billboard_crafts"
+                    android:layout_marginLeft="20dp"
+                    android:text="粉丝："/>
+                <TextView
+                    android:id="@+id/my_billboard_crafts_fans"
+                    style="@style/my_billboard_crafts"
+                    android:text="XX"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/my_billboard_img_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/my_billboard_more"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <View style="@style/horizontal_split"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:text="节目榜单"/>
+
+    <View style="@style/horizontal_split" />
+
+    <include layout="@layout/my_billboard_boards"/>
+
+    <View style="@style/horizontal_split"/>
+
+</LinearLayout>

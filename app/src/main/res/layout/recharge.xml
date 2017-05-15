@@ -44,13 +44,13 @@
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:text="600     匠币"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="600     匠币"/>
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:textColor="@android:color/holo_red_light"
-                android:text="     6    "/>
+                android:text="     6    "
+                android:textColor="@android:color/holo_red_light"/>
 
             <RadioButton
                 android:id="@+id/recharge_radio_6"
@@ -69,13 +69,13 @@
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:text="1200   匠币"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="1200   匠币"/>
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:textColor="@android:color/holo_red_light"
-                android:text="    12   "/>
+                android:text="    12   "
+                android:textColor="@android:color/holo_red_light"/>
 
             <RadioButton
                 android:id="@+id/recharge_radio_12"
@@ -93,13 +93,13 @@
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:text="5000   匠币"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="5000   匠币"/>
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:textColor="@android:color/holo_red_light"
-                android:text="    50   "/>
+                android:text="    50   "
+                android:textColor="@android:color/holo_red_light"/>
 
             <RadioButton
                 android:id="@+id/recharge_radio_50"
@@ -117,13 +117,13 @@
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:text="10000 匠币"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="10000 匠币"/>
 
             <TextView
                 style="@style/recharge_radio_button_pre"
-                android:textColor="@android:color/holo_red_light"
-                android:text="   100   "/>
+                android:text="   100   "
+                android:textColor="@android:color/holo_red_light"/>
 
             <RadioButton
                 android:id="@+id/recharge_radio_100"
@@ -191,10 +191,8 @@
         android:text="立即支付"
         android:textSize="16sp"
         android:textColor="@android:color/white"
-        android:background="@drawable/red_button"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"/>
+        android:background="@drawable/button_light_red_shape"
+        android:layout_margin="40dp"/>
 
 
 </LinearLayout>

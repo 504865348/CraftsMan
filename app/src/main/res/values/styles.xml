@@ -238,4 +238,31 @@
         <item name="android:layout_marginLeft">10dp</item>
     </style>
 
+    <!-- 我的榜单工匠介绍中的字体 -->
+    <style name="my_billboard_crafts">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/light_gray_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- 我的榜单中三个榜单标题的字体 -->
+    <style name="my_billboard_board_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- 我的榜单中榜单项的字体 -->
+    <style name="my_billboard_board_item">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

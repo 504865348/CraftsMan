@@ -12,8 +12,8 @@
 
     <color name="light_blue">#7fe0ff</color>
 
-<color name="black1">#0c0c0c</color>
-<color name="gray">#c8d3de</color>
+    <color name="black1">#0c0c0c</color>
+    <color name="gray">#c8d3de</color>
     <color name="lightgray">#c5c5c5</color>
     <color name="pink">#ff5265</color>
     <color name="blue">#298ff6</color>
