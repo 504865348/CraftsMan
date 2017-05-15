@@ -8,32 +8,95 @@
     <!-- 上方搜索框 -->
     <include layout="@layout/search_interface_top"/>
 
-    <RadioGroup
+    <LinearLayout
+        android:id="@+id/search_switch_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/search_interface_rb_all"
-            android:checked="true"
-            style="@style/search_interface_radio_button"
-            android:drawableBottom="@drawable/search_interface_all_selector"/>
-        <RadioButton
-            android:id="@+id/search_interface_rb_album"
-            style="@style/search_interface_radio_button"
-            android:drawableBottom="@drawable/search_interface_album_selector"/>
-        <RadioButton
-            android:id="@+id/search_interface_rb_q_a"
-            style="@style/search_interface_radio_button"
-            android:drawableBottom="@drawable/search_interface_q_a_selector"/>
-        <RadioButton
-            android:id="@+id/search_interface_rb_crafts"
-            style="@style/search_interface_radio_button"
-            android:drawableBottom="@drawable/search_interface_crafts_selector"/>
-    </RadioGroup>
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/search_ll_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="全部"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_ll_album"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_tv_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="专辑"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_ll_q_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_tv_q_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="问答"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_ll_crafts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_tv_crafts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="工匠"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/search_tab_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/checked_red_1"/>
+
     <View style="@style/horizontal_split"/>
-    <FrameLayout
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/search_interface_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

@@ -32,8 +32,8 @@
             android:id="@+id/search_interface_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="搜索"
             android:textSize="18sp"
             android:textColor="@color/red"/>
@@ -60,8 +60,7 @@
             android:id="@+id/search_interface_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="15dp"
             android:text="清空"
             android:textSize="18sp"
             android:textColor="@color/red"/>
