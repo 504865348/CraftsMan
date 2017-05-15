@@ -6,10 +6,10 @@
 
     <ImageView
         android:id="@+id/my_info_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/my_info_picture"/>
 
     <LinearLayout
@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/my_info_following"
                 style="@style/my_info"
-                android:text="X"/>
+                android:text="0"/>
 
             <TextView
                 style="@style/my_info"
@@ -52,7 +52,7 @@
             <TextView
                 android:id="@+id/my_info_followers"
                 style="@style/my_info"
-                android:text="X"/>
+                android:text="0"/>
 
         </LinearLayout>
 
@@ -65,7 +65,6 @@
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/next_more"
-        />
+        android:background="@drawable/next_more" />
 
 </RelativeLayout>

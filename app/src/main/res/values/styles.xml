@@ -102,21 +102,21 @@
     <style name="horizontal_split">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:background">@color/light_gray</item>
     </style>
 
     <!-- 水平灰色宽分割线样式 -->
     <style name="horizontal_split_wide">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">5dp</item>
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:background">@color/light_gray</item>
     </style>
 
     <!-- 水平灰色超宽分割线样式 -->
     <style name="horizontal_split_wider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">10dp</item>
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:background">@color/light_gray</item>
     </style>
 
     <!-- 水平黑色分割线样式 -->

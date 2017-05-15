@@ -9,37 +9,96 @@
 
     <include layout="@layout/main_title_bar"/>
 
-    <RadioGroup
-        android:id="@+id/home_page_rg_guide"
+    <LinearLayout
+        android:id="@+id/home_page_switch_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <RadioButton
-            android:id="@+id/home_page_rb_recommend"
-            style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/home_page_rb_recommend_selector"/>
-        <RadioButton
-            android:id="@+id/home_page_rb_hot"
-            style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/home_page_rb_hot_selector"/>
+        <LinearLayout
+            android:id="@+id/home_ll_recommend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/home_page_rb_classification"
-            style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/home_page_rb_classification_selector" />
+            <TextView
+                android:id="@+id/home_tv_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="推荐"/>
+        </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/home_page_rb_crafts"
-            style="@style/Main_RadioButton"
-            android:drawableTop="@drawable/home_page_rb_crafts_selector"/>
-    </RadioGroup>
+        <LinearLayout
+            android:id="@+id/home_ll_hot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_tv_hot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="热门"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_ll_classify"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_tv_classify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="分类"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_ll_crafts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_tv_crafts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="工匠"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/home_tab_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/checked_red_1"/>
+
+    <View style="@style/horizontal_split"/>
 
     <!-- 首页内容 -->
-    <FrameLayout
+    <android.support.v4.view.ViewPager
         android:id="@+id/home_page_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

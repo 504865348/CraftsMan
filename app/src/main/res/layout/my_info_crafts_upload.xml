@@ -12,8 +12,11 @@
         android:id="@+id/my_info_crafts_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal"
-        android:background="@drawable/my_info_record_btn">
+        android:background="@drawable/red_btn_selector">
 
         <TextView
             android:id="@+id/text_start_record"
@@ -30,14 +33,17 @@
             android:layout_height="wrap_content"
             android:src="@drawable/my_info_record"/>
 
-
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/my_info_crafts_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/my_info_upload_btn"
+        android:background="@drawable/white_btn_selector"
+        android:clickable="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal">
 
         <TextView

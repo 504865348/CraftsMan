@@ -25,10 +25,7 @@ public class BillBoardFragment extends BaseFragment {
     @Override
     public View initView() {
         Log.e("TAG", "BillBoard-->initView()");
-        /**
-         * layout 文件？？？
-         */
-        view = View.inflate(mContext, R.layout.home_page, null);
+        view = View.inflate(mContext, R.layout.list_ten, null);
         return view;
     }
 
