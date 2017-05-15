@@ -23,19 +23,19 @@
             android:orientation="vertical">
 
             <!-- 大国工匠标题栏 -->
-            <include layout="@layout/home_page_hot_crafts"/>
+            <include layout="@layout/home_page_hot_crafts" />
 
             <!-- 匠心独运标题栏 -->
-            <include layout="@layout/home_page_hot_skills"/>
+            <include layout="@layout/home_page_hot_skills" />
 
             <!-- 讲政策标题栏 -->
-            <include layout="@layout/home_page_hot_policy"/>
+            <include layout="@layout/home_page_hot_policy" />
 
             <!-- 听专题标题栏 -->
-            <include layout="@layout/home_page_hot_listen"/>
+            <include layout="@layout/home_page_hot_listen" />
 
             <!-- 看利器标题栏 -->
-            <include layout="@layout/home_page_hot_look"/>
+            <include layout="@layout/home_page_hot_look" />
 
         </LinearLayout>
 
