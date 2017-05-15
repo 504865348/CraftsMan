@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:background="@drawable/next_more"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:background="@drawable/next_more"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:background="@drawable/next_more"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -124,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:background="@drawable/next_more"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -145,15 +145,13 @@
             android:src="@drawable/my_info_billboard"/>
         <TextView
             style="@style/my_info_personal"
-            android:text="我的榜单"
-            />
+            android:text="我的榜单"/>
         <ImageButton
             android:id="@+id/list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:background="@drawable/next_more"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -181,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more"/>
+            android:background="@drawable/next_more"/>
     </LinearLayout>
 
     <View
@@ -212,7 +210,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:src="@drawable/next_more" />
+            android:background="@drawable/next_more" />
     </LinearLayout>
 
 </LinearLayout>

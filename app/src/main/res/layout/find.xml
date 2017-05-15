@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/ll_find"
         android:layout_width="match_parent"
@@ -12,9 +15,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
             android:gravity="center_vertical"
-           android:layout_marginLeft="160dp"
+            android:layout_marginLeft="160dp"
             android:text="发现"
             android:textSize="24sp"
             android:textColor="@color/black"/>
@@ -59,17 +61,18 @@
         </RelativeLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_find">
-        <include layout="@layout/find_1"
-            />
+        <include layout="@layout/find_1" />
     </LinearLayout>
-<LinearLayout
-   android:layout_alignParentBottom="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<include layout="@layout/main_radio_group"/>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+
 </RelativeLayout>

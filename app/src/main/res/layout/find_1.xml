@@ -27,10 +27,12 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/next_more" />
     </LinearLayout>
-    <view
+
+    <View
         android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
