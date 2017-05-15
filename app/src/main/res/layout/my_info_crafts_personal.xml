@@ -6,211 +6,237 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
-    <LinearLayout
-        android:id="@+id/my_info_my_orders"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_orders"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="我的订单"
-            />
-        <ImageButton
-            android:id="@+id/orderform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/my_info_my_coins"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_coins"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="我的匠币"
-            />
-        <TextView
-            android:id="@+id/my_info_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginRight="10dp"
-            android:text="xx.xx"/>
-        <ImageButton
-            android:id="@+id/money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/my_info_my_q_a"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_q_a"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="我的问答"
-            />
-        <ImageView
-            android:id="@+id/my_info_q_a_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/my_info_one"/>
-        <ImageButton
-            android:id="@+id/question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+            <LinearLayout
+                android:id="@+id/my_info_my_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
 
-    <LinearLayout
-        android:id="@+id/my_info_my_albums"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_albums"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="我的专辑"
-            />
-        <ImageButton
-            android:id="@+id/album"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_orders"/>
 
-    <LinearLayout
-        android:id="@+id/my_info_my_billboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_billboard"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="我的榜单"/>
-        <ImageButton
-            android:id="@+id/list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="我的订单"/>
 
-    <LinearLayout
-        android:id="@+id/my_info_my_records"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_records"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="我的录制"
-            />
-        <ImageButton
-            android:id="@+id/recorder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more"/>
-    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/orderform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more"/>
+            </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/light_gray"/>
+            <View style="@style/horizontal_split"/>
 
-    <LinearLayout
-        android:id="@+id/my_info_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center_vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/my_info_feedback"/>
-        <TextView
-            style="@style/my_info_personal"
-            android:text="意见反馈"
-            />
+            <LinearLayout
+                android:id="@+id/my_info_my_coins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
 
-        <ImageButton
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_coins"/>
 
-            android:id="@+id/opinion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/next_more" />
-    </LinearLayout>
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="我的匠币"/>
+
+                <TextView
+                    android:id="@+id/my_info_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:layout_marginRight="10dp"
+                    android:text="00.00"/>
+
+                <ImageButton
+                    android:id="@+id/money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more"/>
+            </LinearLayout>
+
+            <View style="@style/horizontal_split"/>
+
+            <LinearLayout
+                android:id="@+id/my_info_my_q_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_q_a"/>
+
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="我的问答"/>
+
+                <ImageView
+                    android:id="@+id/my_info_q_a_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/my_info_one"/>
+
+                <ImageButton
+                    android:id="@+id/question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more"/>
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_split"/>
+
+            <LinearLayout
+                android:id="@+id/my_info_my_albums"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_albums"/>
+
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="我的专辑"/>
+
+                <ImageButton
+                    android:id="@+id/album"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more"/>
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_split"/>
+
+            <LinearLayout
+                android:id="@+id/my_info_my_billboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_billboard"/>
+
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="我的榜单"/>
+
+                <ImageButton
+                    android:id="@+id/list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more"/>
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_split"/>
+
+            <LinearLayout
+                android:id="@+id/my_info_my_records"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_records"/>
+
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="我的录制"/>
+
+                <ImageButton
+                    android:id="@+id/recorder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more"/>
+
+            </LinearLayout>
+
+            <View style="@style/horizontal_split_wider"/>
+
+            <LinearLayout
+                android:id="@+id/my_info_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ll_click_selector"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/my_info_feedback"/>
+
+                <TextView
+                    style="@style/my_info_personal"
+                    android:text="意见反馈"/>
+
+                <ImageButton
+                    android:id="@+id/opinion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/next_more" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
