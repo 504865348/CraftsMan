@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/record_item_cover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/my_records_audio_img"/>
 
     <LinearLayout
@@ -45,12 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/my_records_duration_img"/>
+                android:layout_marginRight="10dp"
+                android:src="@drawable/my_records_duration_img_1"/>
 
             <TextView
                 android:id="@+id/record_item_duration"

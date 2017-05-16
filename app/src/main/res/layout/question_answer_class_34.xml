@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:text="问答"/>
         </LinearLayout>
 
@@ -57,11 +57,17 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:text="工匠"/>
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_tab_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/checked_red_1"/>
 
     <View style="@style/horizontal_split"/>
 

@@ -1,65 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_width="385dp"
-        android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:titleTextColor="@color/black"
+        app:navigationIcon="@drawable/friends_back">
 
-        <RadioGroup
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="专辑"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
-            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:text="节目"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
-            <ImageButton
-                android:layout_width="35dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/whit"
-                android:src="@drawable/last"/>
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:background="@drawable/whit"
-                android:text="专栏"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:background="@drawable/whit"
-
-
-                android:text="节目"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/whit"
-
-                android:text="下载中"
-                android:textSize="30sp" />
-        </RadioGroup>
-
-
-    </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:text="下载中"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/gray"/>
     <LinearLayout
+
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已占用"
@@ -70,17 +56,69 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="可用"/>
         <TextView
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/blue"
             android:layout_width="50dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <LinearLayout
+android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn"
+                android:src="@drawable/pause" />
+
+            <TextView
+
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部暂停" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn"
+                android:src="@drawable/delect" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="一键清空" />
+        </LinearLayout>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 </LinearLayout>

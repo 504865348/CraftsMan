@@ -9,7 +9,7 @@
         android:weightSum="1">
 
         <ImageButton
-            android:background="@drawable/whit"
+            android:background="@color/whit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/last"
@@ -22,10 +22,10 @@
             android:gravity="center"
             android:text="播放历史"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="24sp" />
 
         <ImageButton
-            android:background="@drawable/whit"
+            android:background="@color/whit"
             android:id="@+id/imageButton5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,34 +34,37 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="-10dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
-            android:background="@drawable/whit"
+            android:background="@color/whit"
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="选择删除"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
 
             />
 
         <Button
-            android:background="@drawable/whit"
+            android:background="@color/whit"
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="一键清空"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
            />
     </LinearLayout>
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/gray"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

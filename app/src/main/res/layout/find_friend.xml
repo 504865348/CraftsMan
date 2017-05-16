@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,7 +15,7 @@
 
         <TextView
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="125dp"
@@ -28,24 +29,102 @@
             android:layout_height="match_parent"
             android:src="@drawable/search_icon" />
     </LinearLayout>
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:layout_weight="1"
             android:layout_marginRight="20dp"
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="20sp"
             android:background="@color/whit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="推荐关注"/>
         <Button
+            android:layout_weight="1"
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="20sp"
             android:background="@color/whit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="我的朋友"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/select"
+        android:layout_weight="0.04" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/telephone"/>
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="找手机通讯录朋友"/>
+        <ImageButton
+            android:layout_marginLeft="190dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/next_more"
+            android:background="@color/whit"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/w"/>
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="找微信朋友"/>
+        <ImageButton
+            android:layout_marginLeft="230dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/next_more"
+            android:background="@color/whit"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/q"/>
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="找QQ朋友"/>
+        <ImageButton
+            android:layout_marginLeft="240dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/next_more"
+            android:background="@color/whit"/>
     </LinearLayout>
 </LinearLayout>

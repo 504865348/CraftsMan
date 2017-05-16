@@ -15,48 +15,51 @@
         android:layout_height="30dp"
         android:layout_weight="1"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/search_frame"
+        android:background="@drawable/title_background_selector"
+        android:clickable="true"
         android:drawableLeft="@drawable/search_icon"
         android:gravity="center_vertical"
         android:text="搜索"
         android:textSize="12sp" />
 
     <LinearLayout
+        android:id="@+id/main_ll_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/ll_click_selector"
         android:gravity="center">
         <ImageView
-            android:id="@+id/main_image_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/history1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:text="历史"
             android:textSize="10sp"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/main_ll_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/ll_click_selector"
         android:gravity="center">
-
         <ImageView
-            android:id="@+id/main_image_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/download1"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:text="下载"
             android:textSize="10sp"/>
     </LinearLayout>

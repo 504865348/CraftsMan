@@ -37,7 +37,7 @@
                 android:id="@+id/album_detail_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/black"
                 android:text="专辑名字"/>
 
@@ -86,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@+id/album_detail_ll_information"
             android:gravity="center">
 
