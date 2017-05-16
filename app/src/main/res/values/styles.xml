@@ -70,6 +70,8 @@
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
     </style>
 
     <!-- 首页->热门->分类 中的字体 -->
@@ -142,6 +144,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
     </style>
 
     <!-- 问答->分类中字体的样式 -->
@@ -150,6 +154,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- 首页->热门->底部 中的字体 -->
+    <style name="q_a_famous_name_text">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <!-- 充值-> RadioButton 中字体的样式 -->
@@ -192,7 +205,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:paddingLeft">10dp</item>
     </style>
 
@@ -209,7 +222,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/light_gray_text</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- 专辑详情中的小字体 -->

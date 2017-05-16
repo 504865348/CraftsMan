@@ -15,7 +15,8 @@
         android:layout_height="30dp"
         android:layout_weight="1"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/search_frame"
+        android:background="@drawable/title_background_selector"
+        android:clickable="true"
         android:drawableLeft="@drawable/search_icon"
         android:gravity="center_vertical"
         android:text="搜索"
@@ -35,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:text="历史"
             android:textSize="10sp"/>
     </LinearLayout>
@@ -56,7 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:text="下载"
             android:textSize="10sp"/>
     </LinearLayout>

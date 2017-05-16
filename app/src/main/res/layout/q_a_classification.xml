@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,7 +113,7 @@
                 android:src="@drawable/icon_airport"/>
             <TextView
                 style="@style/q_a_classify_text"
-                android:text="民航机场工程"/>
+                android:text="民航机场"/>
         </LinearLayout>
 
         <LinearLayout
@@ -123,7 +125,7 @@
                 android:src="@drawable/icon_communication"/>
             <TextView
                 style="@style/q_a_classify_text"
-                android:text="通信广电工程"/>
+                android:text="通信广电"/>
         </LinearLayout>
 
         <LinearLayout

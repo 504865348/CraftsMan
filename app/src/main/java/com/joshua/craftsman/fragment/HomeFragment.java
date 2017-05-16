@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
  * 首页 Fragment
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.main_text_search) TextView mTextSearch;
     @BindView(R.id.main_image_history) ImageView mImageHistory;
@@ -61,7 +61,6 @@ public class HomeFragment extends BaseFragment {
      */
     @Override
     public View initView() {
-        Log.e("TAG", "Home-->initView()");
         view = View.inflate(mContext, R.layout.home_page, null);
         return view;
     }
@@ -72,8 +71,15 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        /**
+         * 滑动页面设置
+         */
         initPager();
         initTabLineWidth();
+        mTvRecommend.setOnClickListener(this);
+        mTvHot.setOnClickListener(this);
+        mTvClassify.setOnClickListener(this);
+        mTvCrafts.setOnClickListener(this);
     }
 
     @Override
@@ -100,18 +106,20 @@ public class HomeFragment extends BaseFragment {
         mFragmentList.add(hotPager);
         mFragmentList.add(classifyPager);
         mFragmentList.add(craftsPager);
-
+        /**
+         * 设置适配器和初始选中项
+         */
         adapter = new com.joshua.craftsman.fragment.homepage
                 .PagerAdapter(getFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
-
+        mTvRecommend.setTextColor(Color.RED);
         /**
          * 添加滑动适配器
          */
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             /**
-             * position :当前页面，及你点击滑动的页面
+             * position :当前页面，及点击滑动的页面
              * offset:当前页面偏移的百分比
              * positionOffsetPixels:当前页面偏移的像素位置
              */
@@ -150,14 +158,14 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void resetTextView() {
-        mTvRecommend.setTextColor(0xff8c8c8c);
-        mTvHot.setTextColor(0xff8c8c8c);
-        mTvClassify.setTextColor(0xff8c8c8c);
-        mTvCrafts.setTextColor(0xff8c8c8c);
+        mTvRecommend.setTextColor(Color.BLACK);
+        mTvHot.setTextColor(Color.BLACK);
+        mTvClassify.setTextColor(Color.BLACK);
+        mTvCrafts.setTextColor(Color.BLACK);
     }
 
     /**
-     * 设置滑动条的宽度为屏幕的1/3(根据Tab的个数而定)
+     * 设置滑动条的宽度为屏幕的 1/4 (根据Tab的个数而定)
      */
     private void initTabLineWidth() {
         DisplayMetrics dpMetrics = new DisplayMetrics();
@@ -168,4 +176,22 @@ public class HomeFragment extends BaseFragment {
         mTabLine.setLayoutParams(lp);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.home_tv_recommend:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.home_tv_hot:
+                mViewPager.setCurrentItem(1);
+                break;
+            case R.id.home_tv_classify:
+                mViewPager.setCurrentItem(2);
+                break;
+            case R.id.home_tv_crafts:
+                mViewPager.setCurrentItem(3);
+                break;
+
+        }
+    }
 }

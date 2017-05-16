@@ -30,46 +30,58 @@
 
     <View style="@style/horizontal_split"/>
 
-    <RadioGroup
-        android:id="@+id/crafts_radio_group"
+    <LinearLayout
+        android:id="@+id/crafts_ll_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/crafts_rb_album"
-            android:textSize="24sp"
-            android:text="专辑"
-            android:textColor="@android:color/black"
-            android:gravity="center_horizontal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:checked="true"/>
-
-        <RadioButton
-            android:id="@+id/crafts_rb_q_a"
+        <LinearLayout
+            android:id="@+id/crafts_ll_album"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:button="@android:color/transparent"
-            android:gravity="center_horizontal"
-            android:text="问答"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:gravity="center">
+            <TextView
+                android:id="@+id/crafts_tv_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:text="专辑"/>
+        </LinearLayout>
 
-    </RadioGroup>
+        <LinearLayout
+            android:id="@+id/crafts_ll_q_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/crafts_tv_q_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:text="问答"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_tab_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/checked_red_1"/>
 
     <View style="@style/horizontal_split"/>
 
-    <FrameLayout
-        android:id="@+id/crafts_section_content"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/crafts_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

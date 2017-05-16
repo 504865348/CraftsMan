@@ -12,8 +12,7 @@
         android:id="@+id/search_switch_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/search_ll_all"
@@ -21,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:padding="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -37,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -54,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -72,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:padding="10dp"
             android:orientation="horizontal">
 
             <TextView

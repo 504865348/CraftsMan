@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/friends_back"/>
 
-    <TextView
+    <EditText
         android:id="@+id/search_interface_text"
         android:layout_width="0dp"
         android:layout_height="30dp"
@@ -20,7 +20,7 @@
         android:layout_marginRight="10dp"
         android:drawableLeft="@drawable/search_interface_icon"
         android:background="@drawable/search_interface_background"
-        android:text="搜索"
+        android:hint="搜索"
         android:textSize="14sp"
         android:gravity="center_vertical"/>
 
