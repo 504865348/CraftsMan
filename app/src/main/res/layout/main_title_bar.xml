@@ -23,13 +23,15 @@
         android:textSize="12sp" />
 
     <LinearLayout
+        android:id="@+id/main_ll_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/ll_click_selector"
         android:gravity="center">
         <ImageView
-            android:id="@+id/main_image_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/history1"/>
@@ -42,18 +44,18 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/main_ll_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
+        android:clickable="true"
+        android:background="@drawable/ll_click_selector"
         android:gravity="center">
-
         <ImageView
-            android:id="@+id/main_image_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/download1"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

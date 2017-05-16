@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -14,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.download.DownloadActivity;
+import com.joshua.craftsman.activity.search.SearchActivity;
+import com.joshua.craftsman.activity.search.SearchHistoryActivity;
 import com.joshua.craftsman.fragment.homepage.HomeClassifyPager;
 import com.joshua.craftsman.fragment.homepage.HomeCraftsPager;
 import com.joshua.craftsman.fragment.homepage.HomeHotPager;
@@ -33,8 +37,8 @@ import butterknife.ButterKnife;
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.main_text_search) TextView mTextSearch;
-    @BindView(R.id.main_image_history) ImageView mImageHistory;
-    @BindView(R.id.main_image_download) ImageView mImageDownload;
+    @BindView(R.id.main_ll_history) LinearLayout mLinearHistory;
+    @BindView(R.id.main_ll_download) LinearLayout mLinearDownload;
     /**
      * Pager 相关的视图对象
      */
@@ -71,6 +75,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initData() {
         super.initData();
+        /**
+         * 点击事件
+         */
+        mTextSearch.setOnClickListener(this);
+        mLinearHistory.setOnClickListener(this);
+        mLinearDownload.setOnClickListener(this);
         /**
          * 滑动页面设置
          */
@@ -191,7 +201,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.home_tv_crafts:
                 mViewPager.setCurrentItem(3);
                 break;
-
+            case R.id.main_text_search:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+                break;
+            case R.id.main_ll_history:
+                startActivity(new Intent(getActivity(), SearchHistoryActivity.class));
+                break;
+            case R.id.main_ll_download:
+                startActivity(new Intent(getActivity(), DownloadActivity.class));
+                break;
         }
     }
 }
