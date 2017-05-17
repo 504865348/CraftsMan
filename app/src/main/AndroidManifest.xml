@@ -30,11 +30,13 @@
         </activity>
         <activity android:name=".activity.account.LoginActivity">
         </activity>
+        <activity android:name=".activity.search.SearchResultActivity">
+        </activity>
         <activity android:name=".activity.search.SearchActivity">
         </activity>
-        <activity android:name=".activity.search.SearchHistoryActivity">
-        </activity>
         <activity android:name=".activity.download.DownloadActivity">
+        </activity>
+        <activity android:name=".activity.history.HistoryActivity">
         </activity>
     </application>
 

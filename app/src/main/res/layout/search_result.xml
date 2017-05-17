@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <!-- 上方搜索框 -->
-    <include layout="@layout/search_interface_top"/>
+    <include layout="@layout/search_result_top"/>
 
     <LinearLayout
         android:id="@+id/search_switch_tab"
