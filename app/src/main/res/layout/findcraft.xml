@@ -44,6 +44,11 @@
             android:layout_height="wrap_content"
             android:text="我的朋友"/>
     </LinearLayout>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
