@@ -1,13 +1,18 @@
 package com.joshua.craftsman.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.download.DownloadActivity;
+import com.joshua.craftsman.activity.history.HistoryActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -15,7 +20,10 @@ import butterknife.ButterKnife;
  * 问答 Fragment
  */
 
-public class QAFragment extends BaseFragment {
+public class QAFragment extends BaseFragment implements View.OnClickListener {
+
+    @BindView(R.id.q_a_download) LinearLayout mLinear_download;
+    @BindView(R.id.q_a_history) LinearLayout mLinear_history;
 
     private View view;
 
@@ -24,7 +32,6 @@ public class QAFragment extends BaseFragment {
      */
     @Override
     public View initView() {
-        Log.e("TAG", "QA-->initView()");
         view = View.inflate(mContext, R.layout.q_a, null);
         return view;
     }
@@ -35,6 +42,8 @@ public class QAFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        mLinear_download.setOnClickListener(this);
+        mLinear_history.setOnClickListener(this);
     }
 
     @Override
@@ -49,4 +58,15 @@ public class QAFragment extends BaseFragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.q_a_download:
+                startActivity(new Intent(getActivity(), DownloadActivity.class));
+                break;
+            case R.id.q_a_history:
+                startActivity(new Intent(getActivity(), HistoryActivity.class));
+                break;
+        }
+    }
 }
