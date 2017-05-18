@@ -208,7 +208,8 @@
     </LinearLayout>
     <View
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"style="@style/horizontal_split"/>
+        android:layout_marginBottom="10dp"
+        style="@style/horizontal_split"/>
     <TextView
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
