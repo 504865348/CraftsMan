@@ -9,11 +9,6 @@ import com.joshua.craftsman.fragment.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 陈天然 on 2017-05-16.
- * 首页滑动的 Pager 的适配器
- */
-
 public class PagerAdapter extends FragmentPagerAdapter {
 
     List<BaseFragment> listFragment = new ArrayList<>();

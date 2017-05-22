@@ -10,11 +10,6 @@ import com.joshua.craftsman.R;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by 陈天然 on 2017-05-15.
- * 榜单 Fragment
- */
-
 public class BillBoardFragment extends BaseFragment {
 
     private View view;

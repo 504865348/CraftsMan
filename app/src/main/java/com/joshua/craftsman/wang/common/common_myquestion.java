@@ -7,9 +7,7 @@ import com.joshua.craftsman.R;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by 18012 on 2017/4/29.
- */
+
 
 public class common_myquestion extends AppCompatActivity{
     @Override

@@ -29,11 +29,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by 陈天然 on 2017-05-15.
- * 首页 Fragment
- */
-
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.main_text_search) TextView mTextSearch;

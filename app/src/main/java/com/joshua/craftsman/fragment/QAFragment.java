@@ -15,11 +15,6 @@ import com.joshua.craftsman.activity.history.HistoryActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by 陈天然 on 2017-05-15.
- * 问答 Fragment
- */
-
 public class QAFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.q_a_download) LinearLayout mLinear_download;

@@ -12,9 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by 18012 on 2017/4/29.
- */
+
 
 public class money extends AppCompatActivity {
     @BindView(R.id.pay)

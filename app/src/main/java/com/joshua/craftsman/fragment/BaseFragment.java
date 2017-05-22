@@ -8,11 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by 陈天然 on 2017-05-15.
- * 主页面所有 Fragment 的基类
- */
-
 public abstract class BaseFragment extends Fragment {
 
     protected Context mContext;

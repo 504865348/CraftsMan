@@ -10,11 +10,6 @@ import com.joshua.craftsman.fragment.BaseFragment;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by 陈天然 on 2017-05-16.
- * 首页 --> 推荐页面
- */
-
 public class HomeRecommendPager extends BaseFragment {
 
     @Override

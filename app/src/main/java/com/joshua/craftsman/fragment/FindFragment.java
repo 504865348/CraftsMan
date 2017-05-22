@@ -10,11 +10,6 @@ import com.joshua.craftsman.R;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by 陈天然 on 2017-05-15.
- * 发现页面的 Fragment
- */
-
 public class FindFragment extends BaseFragment {
 
     private View view;
