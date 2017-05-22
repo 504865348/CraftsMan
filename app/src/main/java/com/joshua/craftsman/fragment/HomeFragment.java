@@ -34,18 +34,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.main_text_search) TextView mTextSearch;
     @BindView(R.id.main_ll_history) LinearLayout mLinearHistory;
     @BindView(R.id.main_ll_download) LinearLayout mLinearDownload;
-    /**
-     * Pager 相关的视图对象
-     */
+
     @BindView(R.id.home_tv_recommend) TextView mTvRecommend;
     @BindView(R.id.home_tv_hot) TextView mTvHot;
     @BindView(R.id.home_tv_classify) TextView mTvClassify;
     @BindView(R.id.home_tv_crafts) TextView mTvCrafts;
     @BindView(R.id.home_page_pager) ViewPager mViewPager;
     @BindView(R.id.home_tab_line) ImageView mTabLine;
-    /**
-     * 私有成员变量
-     */
+
     private View view;
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private HomeRecommendPager recommendPager;
@@ -55,30 +51,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private PagerAdapter adapter;
     private int screenWidth;
 
-    /**
-     * 初始化视图
-     */
+
     @Override
     public View initView() {
         view = View.inflate(mContext, R.layout.home_page, null);
         return view;
     }
 
-    /**
-     * 初始化数据
-     */
     @Override
     public void initData() {
         super.initData();
-        /**
-         * 点击事件
-         */
+
         mTextSearch.setOnClickListener(this);
         mLinearHistory.setOnClickListener(this);
         mLinearDownload.setOnClickListener(this);
-        /**
-         * 滑动页面设置
-         */
+
         initPager();
         initTabLineWidth();
         mTvRecommend.setOnClickListener(this);

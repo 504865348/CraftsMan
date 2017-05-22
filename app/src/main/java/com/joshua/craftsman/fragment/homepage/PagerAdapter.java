@@ -18,6 +18,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
         this.listFragment = listFragment;
     }
 
+
     @Override
     public Fragment getItem(int position) {
         return listFragment.get(position);

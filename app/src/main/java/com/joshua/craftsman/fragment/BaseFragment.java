@@ -29,14 +29,6 @@ public abstract class BaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initData();
     }
-
-    /**
-     * 继承此类的子类必须重写此方法加载布局
-     */
     public abstract View initView();
-
-    /**
-     * 加载数据的方法
-     */
     public void initData() { }
 }

@@ -13,10 +13,6 @@ import butterknife.ButterKnife;
 public class BillBoardFragment extends BaseFragment {
 
     private View view;
-
-    /**
-     * 初始化视图
-     */
     @Override
     public View initView() {
         Log.e("TAG", "BillBoard-->initView()");
@@ -24,9 +20,6 @@ public class BillBoardFragment extends BaseFragment {
         return view;
     }
 
-    /**
-     * 初始化数据
-     */
     @Override
     public void initData() {
         super.initData();

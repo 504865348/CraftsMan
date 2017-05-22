@@ -18,9 +18,6 @@ public class HomeRecommendPager extends BaseFragment {
         return view;
     }
 
-    /**
-     * 初始化数据
-     */
     @Override
     public void initData() {
         super.initData();
