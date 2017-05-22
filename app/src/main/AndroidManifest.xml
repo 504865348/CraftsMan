@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".activity.download.DownloadActivity">
         </activity>
+        <activity android:name=".activity.home.HotActivity">
+        </activity>
     </application>
 
 </manifest>

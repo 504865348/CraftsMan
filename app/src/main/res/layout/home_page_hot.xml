@@ -12,7 +12,7 @@
         android:layout_height="150dp">
     </com.youth.banner.Banner>
 
-    <include layout="@layout/home_page_hot_middle"/>
+    <include layout="@layout/home_page_hot_middle" />
 
     <View style="@style/horizontal_split_black"/>
 
