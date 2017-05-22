@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,6 +57,7 @@
                 android:textSize="18dp" />
         </RelativeLayout>
     </LinearLayout>
+    <View style="@style/horizontal_split"/>
     <TextView
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
@@ -109,16 +111,20 @@
             android:layout_marginLeft="100dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" style="@style/horizontal_split"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/surface"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/surface" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -130,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:text="最多订阅经典榜"
                 android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,11 +154,14 @@
             android:id="@+id/ib_next1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/whit"
-            android:src="@drawable/next_more"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="100dp"
-            android:layout_gravity="center_vertical"/>
+            android:background="@color/whit"
+            android:src="@drawable/next_more" />
     </LinearLayout>
+
+    <View android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" style="@style/horizontal_split"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -197,7 +206,10 @@
             android:layout_marginLeft="100dp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
-
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        style="@style/horizontal_split"/>
     <TextView
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -212,7 +224,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="190dp">
+        android:layout_marginBottom="190dp"
+        android:layout_weight="0.07">
 
         <ImageView
             android:layout_marginLeft="20dp"
@@ -223,7 +236,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="79dp"
             android:orientation="vertical">
 
             <TextView

@@ -17,6 +17,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:button">@android:color/transparent</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/radio_button_text_selector</item>
     </style>
 
     <!-- 首页->热门->中间按钮 中的字体 -->
@@ -91,7 +94,16 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <!-- 首页->我的信息 中的字体1 -->
+    <!-- 首页->我的信息 中的线性布局 -->
+    <style name="my_info_linear">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
     <style name="my_info_personal">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -104,21 +116,28 @@
     <style name="horizontal_split">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/light_gray</item>
+        <item name="android:background">@color/background_gray</item>
     </style>
 
     <!-- 水平灰色宽分割线样式 -->
     <style name="horizontal_split_wide">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">5dp</item>
-        <item name="android:background">@color/light_gray</item>
+        <item name="android:background">@color/background_gray</item>
     </style>
 
     <!-- 水平灰色超宽分割线样式 -->
     <style name="horizontal_split_wider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">10dp</item>
-        <item name="android:background">@color/light_gray</item>
+        <item name="android:background">@color/background_gray</item>
+    </style>
+
+    <!-- 水平灰色20dp分割线样式 -->
+    <style name="horizontal_split_20">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">@color/background_gray</item>
     </style>
 
     <!-- 水平黑色分割线样式 -->

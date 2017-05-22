@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,9 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.download.DownloadActivity;
+import com.joshua.craftsman.activity.history.HistoryActivity;
 import com.joshua.craftsman.activity.search.SearchActivity;
-import com.joshua.craftsman.activity.search.SearchHistoryActivity;
+import com.joshua.craftsman.activity.search.SearchResultActivity;
 import com.joshua.craftsman.fragment.homepage.HomeClassifyPager;
 import com.joshua.craftsman.fragment.homepage.HomeCraftsPager;
 import com.joshua.craftsman.fragment.homepage.HomeHotPager;
@@ -205,7 +205,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             case R.id.main_ll_history:
-                startActivity(new Intent(getActivity(), SearchHistoryActivity.class));
+                startActivity(new Intent(getActivity(), HistoryActivity.class));
                 break;
             case R.id.main_ll_download:
                 startActivity(new Intent(getActivity(), DownloadActivity.class));

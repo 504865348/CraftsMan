@@ -4,15 +4,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray">
+    android:background="@color/background_gray">
 
     <LinearLayout
         android:id="@+id/my_info_my_orders"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@drawable/ll_click_selector"
-        android:gravity="center_vertical">
+        style="@style/my_info_linear">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -37,11 +33,7 @@
 
     <LinearLayout
         android:id="@+id/my_info_my_coins"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@drawable/ll_click_selector"
-        android:gravity="center_vertical">
+        style="@style/my_info_linear">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -75,11 +67,7 @@
 
     <LinearLayout
         android:id="@+id/my_info_my_q_a"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@drawable/ll_click_selector"
-        android:gravity="center_vertical">
+        style="@style/my_info_linear">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -109,16 +97,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/light_gray"/>
+        android:layout_height="30dp" />
 
     <LinearLayout
         android:id="@+id/my_info_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@drawable/ll_click_selector"
-        android:gravity="center_vertical">
+        style="@style/my_info_linear">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -143,11 +126,7 @@
 
     <LinearLayout
         android:id="@+id/my_info_sets"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@drawable/ll_click_selector"
-        android:gravity="center_vertical">
+        style="@style/my_info_linear">
 
         <ImageView
             android:layout_width="wrap_content"

@@ -1,60 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/my_info_picture"
-        android:layout_width="wrap_content"
+    <View style="@style/horizontal_split_20"/>
+
+    <RelativeLayout
+        android:id="@+id/my_info_more"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/my_info_picture"/>
+        android:clickable="true"
+        android:background="@drawable/ll_click_selector">
 
-    <LinearLayout
-        android:layout_marginLeft="12dp"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/my_info_picture">
-
-        <TextView
-            android:id="@+id/my_info_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#000000"
-            android:text="用户名"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/my_info_picture"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/my_info_picture"/>
+
+        <LinearLayout
+            android:layout_marginLeft="12dp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/my_info_picture">
 
             <TextView
-                style="@style/my_info"
-                android:text="关注："/>
+                android:id="@+id/my_info_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="用户名"/>
 
-            <TextView
-                android:id="@+id/my_info_following"
-                style="@style/my_info"
-                android:text="X"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/my_info"
+                    android:text="关注："/>
+
+                <TextView
+                    android:id="@+id/my_info_following"
+                    style="@style/my_info"
+                    android:text="X"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/next_more" />
 
-    <ImageButton
-        android:id="@+id/next"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/next_more" />
+    </RelativeLayout>
 
-</RelativeLayout>
+    <View style="@style/horizontal_split_20"/>
+
+</LinearLayout>

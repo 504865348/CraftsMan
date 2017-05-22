@@ -24,6 +24,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerVertical="true"
+            android:clickable="true"
+            android:background="@drawable/ll_click_selector"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
             android:gravity="center">
@@ -46,6 +48,8 @@
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:orientation="vertical"
+            android:clickable="true"
+            android:background="@drawable/ll_click_selector"
             android:gravity="center">
             <ImageView
                 android:id="@+id/main_image_history"
