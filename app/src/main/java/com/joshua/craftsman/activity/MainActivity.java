@@ -1,32 +1,46 @@
 package com.joshua.craftsman.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.CarouselPic;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.BillBoardFragment;
 import com.joshua.craftsman.fragment.CraftsInfoFragment;
 import com.joshua.craftsman.fragment.FindFragment;
 import com.joshua.craftsman.fragment.HomeFragment;
 import com.joshua.craftsman.fragment.QAFragment;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class MainActivity extends BaseActivity {
 
     private int position = 0;
     private List<BaseFragment> mFragments;
     private BaseFragment tempFragment = null;
+    private List<CarouselPic> list_pic;
 
     /**
      * 初始化视图对象
@@ -41,6 +55,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        getDataFromServer();
+        list_pic = new ArrayList<>();
         /**
          * 将主页面的 Fragment 添加到集合中
          */
@@ -131,4 +147,45 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    private void getDataFromServer() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getApplicationContext()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.CAROUSEL_PIC)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(this) {
+            @Override
+            protected void success(String result) {
+                Log.d(TAG, "success: " + result);
+                parseData(result);
+
+            }
+
+            @Override
+            protected void error() {
+
+            }
+        });
+    }
+
+
+    /**
+     * 解析JSON数据
+     *
+     * @param result
+     */
+    private void parseData(String result) {
+        Gson gson = new Gson();
+        list_pic = gson.fromJson(result, new TypeToken<List<CarouselPic>>() {
+        }.getType());
+
+    }
 }

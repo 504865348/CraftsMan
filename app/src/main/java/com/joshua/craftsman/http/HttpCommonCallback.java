@@ -1,8 +1,11 @@
 package com.joshua.craftsman.http;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.joshua.craftsman.activity.account.LoginActivity;
 
 import java.io.IOException;
 
@@ -27,24 +30,30 @@ import okhttp3.Response;
  **/
 
 public abstract class HttpCommonCallback implements Callback {
-    private static final String TAG="LOG";
+    private static final String TAG = "LOG";
+    private Activity mActivity;
+
+    protected HttpCommonCallback(Activity context) {
+        mActivity = context;
+    }
+
     @Override
     public void onResponse(Call call, Response response) throws IOException {
-        String responseJson=response.body().string();
-        Log.d(TAG, "onResponse: "+responseJson);
-        Gson gson=new Gson();
-        ResponseInfo responseInfo=gson.fromJson(responseJson,ResponseInfo.class);
-        if(!responseInfo.isAlive()){
-            //// TODO: 2017/5/6
+        String responseJson = response.body().string();
+        Log.d(TAG, "onResponse: " + responseJson);
+        Gson gson = new Gson();
+        ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
+        if (!responseInfo.isAlive()) {
             Log.d(TAG, "onResponse: cookie过期");
+            mActivity.startActivity(new Intent(mActivity, LoginActivity.class));
             return;
         }
-        if(responseInfo.isError()){
+        if (responseInfo.isError()) {
             Log.d(TAG, "onResponse: 出现异常");
             error();
-        }else {
-            String result=responseInfo.getResult();
-            Log.d(TAG, "onResponse: "+result);
+        } else {
+            String result = responseInfo.getResult();
+            Log.d(TAG, "onResponse: " + result);
             success(result);
         }
     }

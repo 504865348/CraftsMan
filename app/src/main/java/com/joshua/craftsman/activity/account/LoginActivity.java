@@ -1,5 +1,6 @@
 package com.joshua.craftsman.activity.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
@@ -63,10 +65,11 @@ public class LoginActivity extends BaseActivity {
                 .post(params)
                 .build();
         Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback() {
+        call.enqueue(new HttpCommonCallback(this) {
             @Override
             protected void success(String result) {
                 Log.d(TAG, "success: "+result);
+                startActivity(new Intent(mBaseActivity, MainActivity.class));
             }
 
             @Override

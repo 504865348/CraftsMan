@@ -36,7 +36,7 @@ public class ResponseInfo {
     }
 
     public boolean isError() {
-        return !isError;
+        return isError;
     }
 
     public void setError(boolean error) {
