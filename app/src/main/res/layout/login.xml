@@ -147,10 +147,10 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="52dp"
-                android:layout_height="50sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-  android:src="@drawable/wechat"
+  android:background="@drawable/wechat"
                 />
 
             <TextView
@@ -169,10 +169,10 @@
 
             <ImageButton
                 android:id="@+id/imageButton2"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/qq"
+                android:background="@drawable/qq"
               />
 
             <TextView

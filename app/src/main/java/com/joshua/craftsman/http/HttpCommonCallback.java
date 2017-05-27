@@ -40,7 +40,6 @@ public abstract class HttpCommonCallback implements Callback {
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         String responseJson = response.body().string();
-        Log.d(TAG, "onResponse: " + responseJson);
         Gson gson = new Gson();
         ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
         if (!responseInfo.isAlive()) {

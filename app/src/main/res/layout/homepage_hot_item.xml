@@ -6,15 +6,17 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/hot_item_image"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/column_cover"/>
+        android:scaleType="centerCrop"
+        />
 
     <TextView
         android:id="@+id/hot_item_text"
         style="@style/home_page_hot_bottom_text"
+        android:textSize="12sp"
         android:text="标题"/>
 
 </LinearLayout>

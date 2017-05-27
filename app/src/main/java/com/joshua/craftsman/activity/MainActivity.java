@@ -40,7 +40,6 @@ public class MainActivity extends BaseActivity {
     private int position = 0;
     private List<BaseFragment> mFragments;
     private BaseFragment tempFragment = null;
-    private List<CarouselPic> list_pic;
 
     /**
      * 初始化视图对象
@@ -55,8 +54,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getDataFromServer();
-        list_pic = new ArrayList<>();
+
         /**
          * 将主页面的 Fragment 添加到集合中
          */
@@ -148,44 +146,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private void getDataFromServer() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getApplicationContext()))
-                .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.CAROUSEL_PIC)
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(Server.SERVER_REMOTE)
-                .post(params)
-                .build();
-        Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(this) {
-            @Override
-            protected void success(String result) {
-                Log.d(TAG, "success: " + result);
-                parseData(result);
-
-            }
-
-            @Override
-            protected void error() {
-
-            }
-        });
-    }
 
 
-    /**
-     * 解析JSON数据
-     *
-     * @param result
-     */
-    private void parseData(String result) {
-        Gson gson = new Gson();
-        list_pic = gson.fromJson(result, new TypeToken<List<CarouselPic>>() {
-        }.getType());
 
-    }
 }
