@@ -53,7 +53,7 @@ public class HotSkillsAdapter extends RecyclerView.Adapter<HotSkillsAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_name.setText(data.get(position).getProgramName());
-        Glide.with(mContext).load(data.get(position).getImageUrl()).into(holder.iv_pic);
+        Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
 

@@ -56,7 +56,7 @@ public class HotCraftsAdapter extends android.support.v7.widget.RecyclerView.Ada
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_name.setText(data.get(position).getCraftsmanName());
-        Glide.with(mContext).load(data.get(position).getImageUrl()).into(holder.iv_pic);
+        Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
 

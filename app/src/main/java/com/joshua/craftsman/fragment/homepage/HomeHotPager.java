@@ -26,7 +26,7 @@ import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
-import com.joshua.craftsman.utils.GildeImageLoader;
+import com.joshua.craftsman.http.glide.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -64,6 +64,7 @@ public class HomeHotPager extends BaseFragment {
     private List<HotPolicy> list_JZC;
     private List<HotListen> list_TZT;
     private List<HotLook> list_KLQ;
+    private OkHttpClient mClient;
 
 
     @Override
@@ -79,6 +80,7 @@ public class HomeHotPager extends BaseFragment {
         list_JZC = new ArrayList<>();
         list_TZT = new ArrayList<>();
         list_KLQ = new ArrayList<>();
+
         getDataFromServer();
     }
 
@@ -87,6 +89,7 @@ public class HomeHotPager extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
+
 
         return rootView;
     }
@@ -98,6 +101,9 @@ public class HomeHotPager extends BaseFragment {
 
 
     private void getDataFromServer() {
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getActivity()))
+                .build();
         getBanner();//轮播图
         getDGGJ();//大国工匠
         getJXDY();//匠心独运
@@ -111,9 +117,9 @@ public class HomeHotPager extends BaseFragment {
      * --------------------------------数据获取---------------------------------
      */
     private void getDGGJ() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
+//        mClient = new OkHttpClient.Builder()
+//                .cookieJar(new HttpCookieJar(getActivity()))
+//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_CRAFTSMAN)
                 .build();
@@ -136,9 +142,9 @@ public class HomeHotPager extends BaseFragment {
         });
     }
     private void getJXDY() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
+//        mClient = new OkHttpClient.Builder()
+//                .cookieJar(new HttpCookieJar(getActivity()))
+//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_SKILLS)
                 .build();
@@ -162,12 +168,13 @@ public class HomeHotPager extends BaseFragment {
     }
 
     private void getJZC() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
+//        mClient = new OkHttpClient.Builder()
+//                .cookieJar(new HttpCookieJar(getActivity()))
+//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_POLICY)
                 .build();
+        Log.d(TAG, "getJZC: "+Server.HOME_HOT_POLICY);
 
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
@@ -188,13 +195,13 @@ public class HomeHotPager extends BaseFragment {
     }
 
     private void getTZT() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
+//        OkHttpClient mClient = new OkHttpClient.Builder()
+//                .cookieJar(new HttpCookieJar(getActivity()))
+//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_LISTEN)
                 .build();
-
+        Log.d(TAG, "getTZT: "+ Server.HOME_HOT_LISTEN);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -214,13 +221,13 @@ public class HomeHotPager extends BaseFragment {
     }
 
     private void getKLQ() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
+//        OkHttpClient mClient = new OkHttpClient.Builder()
+//                .cookieJar(new HttpCookieJar(getActivity()))
+//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_LOOK)
                 .build();
-
+        Log.d(TAG, "getKLQ: "+Server.HOME_HOT_LOOK);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -229,6 +236,7 @@ public class HomeHotPager extends BaseFragment {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
+
                 parseKLQ(result);
             }
 
@@ -343,9 +351,9 @@ public class HomeHotPager extends BaseFragment {
      * --------------------------------轮播图---------------------------------
      */
     private void getBanner() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
+//        OkHttpClient mClient = new OkHttpClient.Builder()
+//                .cookieJar(new HttpCookieJar(getActivity()))
+//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.CAROUSEL_PIC)
                 .build();
@@ -399,7 +407,7 @@ public class HomeHotPager extends BaseFragment {
                         .setBannerTitles(imageNames)
                         .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                         .setBannerAnimation(Transformer.Tablet)
-                        .setImageLoader(new GildeImageLoader())
+                        .setImageLoader(new GlideImageLoader())
                         .setDelayTime(5000)
                         .start();
             }

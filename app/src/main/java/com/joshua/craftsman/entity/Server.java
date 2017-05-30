@@ -6,16 +6,16 @@ package com.joshua.craftsman.entity;
  */
 
 public class Server {
-    //public static final String SERVER_REMOTE = "http://10.10.7.96:8080/MainServlet";
+//    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
     public static final String SERVER_REMOTE = "http://114.55.148.222:8080/GJ/MainServlet";
     public static final String SERVER_SIGN = "Sign"; //注册
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片
     public static final String HOME_HOT_CRAFTSMAN = "HotCraftsman"; //首页-热门-大国工匠
-    public static final String HOME_HOT_SKILLS = "Skills"; //首页-热门-匠心独运
-    public static final String HOME_HOT_POLICY = "Policy"; //首页-热门-讲政策
-    public static final String HOME_HOT_LISTEN = "Listen"; //首页-热门-听专题
-    public static final String HOME_HOT_LOOK = "Look"; //首页-热门-看利器
+    public static final String HOME_HOT_SKILLS = "SkillsInfo"; //首页-热门-匠心独运
+    public static final String HOME_HOT_POLICY = "PolicyInfo"; //首页-热门-讲政策
+    public static final String HOME_HOT_LISTEN = "ListenInfo"; //首页-热门-听专题
+    public static final String HOME_HOT_LOOK = "LookInfo"; //首页-热门-看利器
     public static final String HOME_RECOMMEND = "Recommend"; //首页-推荐
     public static final String HOME_CLASSIFY = "Classify"; //首页-分类
     public static final String HOME_CRAFTSMAN = "Craftsman"; //首页-工匠

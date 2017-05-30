@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.core.TestActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -70,6 +71,8 @@ public class LoginActivity extends BaseActivity {
             protected void success(String result) {
                 Log.d(TAG, "success: "+result);
                 startActivity(new Intent(mBaseActivity, MainActivity.class));
+//                startActivity(new Intent(mBaseActivity, TestActivity.class));
+
             }
 
             @Override
