@@ -48,8 +48,10 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.btn_login)
     public void login() {
         Log.d(TAG, "login: " + "connecting");
-        String username = et_username.getText().toString();
-        String pwd = et_pwd.getText().toString();
+//        String username = et_username.getText().toString();
+//        String pwd = et_pwd.getText().toString();
+        String username = "yuan";
+        String pwd = "111";
 
         OkHttpClient mClient= new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getApplicationContext()))

@@ -82,14 +82,14 @@
 
     <View style="@style/horizontal_split_wide"/>
 
-    <include layout="@layout/q_a_super_famous"/>
+    <include layout="@layout/q_a_super_famous_latest"/>
 
     <View style="@style/horizontal_split_wide"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/q_a_list_view_examples"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
