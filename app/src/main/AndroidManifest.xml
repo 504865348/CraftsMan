@@ -45,6 +45,8 @@
 
         <activity android:name=".activity.core.TestActivity">
         </activity>
+        <activity android:name=".activity.account.AskQuestionActivity">
+        </activity>
     </application>
 
 </manifest>

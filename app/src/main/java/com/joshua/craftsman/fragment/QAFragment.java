@@ -16,7 +16,9 @@ import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.download.DownloadActivity;
 import com.joshua.craftsman.activity.history.HistoryActivity;
 import com.joshua.craftsman.adapter.HotCraftsAdapter;
+import com.joshua.craftsman.adapter.QuesAnsClassifyAdapter;
 import com.joshua.craftsman.entity.HotCraftsman;
+import com.joshua.craftsman.entity.QuesAnsClassify;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -48,6 +50,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
     private View view;
     private OkHttpClient mClient;
     private List<HotCraftsman> list_CJHR;
+    private List<QuesAnsClassify> list_ques_ans;
     @Override
     public View initView() {
         view = View.inflate(mContext, R.layout.q_a, null);
@@ -67,8 +70,10 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         getCJHR();//超级红人
+        getQuesAns();//问答
 
     }
+
 
     private void getCJHR() {
         RequestBody params = new FormBody.Builder()
@@ -92,6 +97,30 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+    private void getQuesAns() {
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.QUESANS_CLASSIFY)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(getActivity()) {
+            @Override
+            protected void success(String result) {
+                parseQuesAns(result);
+            }
+
+            @Override
+            protected void error() {
+
+            }
+        });
+    }
+
+
 
     private void parseCJHR(String result) {
         Gson gson = new Gson();
@@ -104,6 +133,19 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+    private void parseQuesAns(String result) {
+        Gson gson = new Gson();
+        list_ques_ans = gson.fromJson(result, new TypeToken<List<QuesAnsClassify>>() {
+        }.getType());
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                initRecycleQuesAns();
+            }
+        });
+    }
+
+
 
     private void initRecycleCJHR() {
         //设置布局管理器
@@ -112,7 +154,13 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         hot_crafts_rv.setLayoutManager(linearLayoutManager);
         hot_crafts_rv.setAdapter(new HotCraftsAdapter(getActivity(),list_CJHR));
     }
-
+    private void initRecycleQuesAns() {
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        q_a_list_view_examples.setLayoutManager(linearLayoutManager);
+        q_a_list_view_examples.setAdapter(new QuesAnsClassifyAdapter(getActivity(),list_ques_ans));
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);

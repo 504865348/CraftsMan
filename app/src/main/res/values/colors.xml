@@ -22,5 +22,6 @@
     <color name="whit">#ffffff</color>
     <color name="so_red">#ff0101</color>
     <color name="so_gray">#686868</color>
+    <color name="bg_gray">#9a9696</color>
     <color name="light_red">#ff3333</color>
 </resources>

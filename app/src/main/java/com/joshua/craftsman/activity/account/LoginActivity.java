@@ -15,6 +15,7 @@ import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.http.ResponseInfo;
+import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +51,7 @@ public class LoginActivity extends BaseActivity {
         Log.d(TAG, "login: " + "connecting");
 //        String username = et_username.getText().toString();
 //        String pwd = et_pwd.getText().toString();
-        String username = "yuan";
+        final String username = "yuan";
         String pwd = "111";
 
         OkHttpClient mClient= new OkHttpClient.Builder()
@@ -72,6 +73,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             protected void success(String result) {
                 Log.d(TAG, "success: "+result);
+                PrefUtils.setString(mBaseActivity, "phone", username);
                 startActivity(new Intent(mBaseActivity, MainActivity.class));
 //                startActivity(new Intent(mBaseActivity, TestActivity.class));
 
