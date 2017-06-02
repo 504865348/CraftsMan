@@ -5,7 +5,7 @@ package com.joshua.craftsman.entity;
  * 工匠用户--我的录制
  */
 
-public class MyRecroding {
+public class MyRecording {
     private String myRecrodingID; //我的录制ID
     private String recrodingImage; //录制视频或音频的图片
     private String name; //录制人名字
@@ -61,7 +61,7 @@ public class MyRecroding {
         this.storageUrl = storageUrl;
     }
 
-    public MyRecroding(String myRecrodingID, String recrodingImage, String name, String time, String duration, String storageUrl) {
+    public MyRecording(String myRecrodingID, String recrodingImage, String name, String time, String duration, String storageUrl) {
         this.myRecrodingID = myRecrodingID;
         this.recrodingImage = recrodingImage;
         this.name = name;
@@ -70,9 +70,12 @@ public class MyRecroding {
         this.storageUrl = storageUrl;
     }
 
+    public MyRecording() {
+    }
+
     @Override
     public String toString() {
-        return "MyRecroding{" +
+        return "MyRecording{" +
                 "myRecrodingID='" + myRecrodingID + '\'' +
                 ", recrodingImage='" + recrodingImage + '\'' +
                 ", name='" + name + '\'' +
