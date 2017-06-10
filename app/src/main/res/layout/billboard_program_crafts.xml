@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+    <TextView
+        android:id="@+id/tv_program_billboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:text="节目榜单"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <View style="@style/horizontal_split"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/billboard_hot_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/billboard_hot" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/billboard_hot_img"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/billboard_hot_name"
+                style="@style/search_interface_sub_title"
+                android:text="最火节目飙升榜" />
+
+            <TextView
+                android:id="@+id/billboard_hot_program1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="1 节目a"
+                android:textColor="@color/light_gray_text"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/billboard_hot_program2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="2 节目b"
+                android:textColor="@color/light_gray_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/billboard_hot_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/next_big" />
+    </RelativeLayout>
+
+    <View style="@style/horizontal_split"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/billboard_more_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/billboard_more" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/billboard_more_img"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_more_name"
+                style="@style/search_interface_sub_title"
+                android:text="最多订阅经典榜" />
+
+            <TextView
+                android:id="@+id/billboard_more_program1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="1 节目a"
+                android:textColor="@color/light_gray_text"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/billboard_more_program2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="2 节目b"
+                android:textColor="@color/light_gray_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/billboard_more_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/next_big" />
+    </RelativeLayout>
+
+    <View style="@style/horizontal_split"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <ImageView
+            android:id="@+id/billboard_pay_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/billboard_pay" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/billboard_pay_img"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_pay_name"
+                style="@style/search_interface_sub_title"
+                android:text="付费精品畅销榜" />
+
+            <TextView
+                android:id="@+id/billboard_pay_program1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="1 节目a"
+                android:textColor="@color/light_gray_text"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/billboard_pay_program2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="2 节目b"
+                android:textColor="@color/light_gray_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/billboard_pay_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/next_big" />
+    </RelativeLayout>
+
+    <View style="@style/horizontal_split_wider"/>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tv_craftsman_billboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:text="工匠榜单"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <View style="@style/horizontal_split"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <ImageView
+                android:id="@+id/billboard_crafts_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/billboard_crafts" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/billboard_crafts_img"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/billboard_crafts_name"
+                    style="@style/search_interface_sub_title"
+                    android:text="最大国工匠榜" />
+
+                <TextView
+                    android:id="@+id/billboard_crafts1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="1 工匠a"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/billboard_crafts2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="2 工匠b"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/billboard_crafts_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/next_big" />
+        </RelativeLayout>
+        <View style="@style/horizontal_split"/>
+    </LinearLayout>
+</LinearLayout>
+
+
+
