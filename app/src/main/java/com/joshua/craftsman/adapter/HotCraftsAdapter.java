@@ -15,9 +15,6 @@ import com.joshua.craftsman.entity.HotCraftsman;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.path;
-import static com.joshua.craftsman.R.id.imageView;
-import static java.lang.System.load;
 
 /**
  * ============================================================

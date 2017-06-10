@@ -7,7 +7,7 @@ import java.util.List;
  * 底部按钮--榜单
  */
 
-public class TopList {
+public class Billboard {
     private List<String> hottestProgram; //最火节目飙升榜
     private List<String> mostSubscription; //最多订阅经典版
     private List<String> payFine; //付费精品飙升榜

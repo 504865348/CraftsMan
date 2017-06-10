@@ -74,7 +74,6 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         initToolBar();
         initView();
         initListener();
-
     }
 
     private void initListener() {

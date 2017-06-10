@@ -57,7 +57,6 @@ public class MyRecordActivity extends AppCompatActivity {
                 myRecording.setName(files[i].getName());
                 String publish_time = new SimpleDateFormat("yyyy年MM月dd日").format(files[i].lastModified());
                 myRecording.setTime(publish_time);
-
                 mMyRecordings.add(myRecording);
             }
         }

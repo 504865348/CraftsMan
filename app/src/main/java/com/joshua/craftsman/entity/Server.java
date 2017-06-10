@@ -22,10 +22,10 @@ public class Server {
     public static final String HOME_SEARCH_ALBUM = "SearchAlbum"; //首页-搜索-专辑
     public static final String HOME_SEARCH_QUESANS = "SearchQuesAns"; //首页-搜索-问答
     public static final String HOME_SEARCH_CRAFTSMAN = "SearchCraftsman"; //首页-搜索-工匠
-    public static final String TOPLIST_HOT = "TopListHot"; //榜单-最火节目飙升榜
-    public static final String TOPLIST_MORE = "TopListMore"; //榜单-最多订阅经典榜
-    public static final String TOPLIST_PAY= "TopListPay"; //榜单-付费精品飙升榜
-    public static final String TOPLIST_CRAFTSMAN = "TopListCraftsman"; //榜单-最大国工匠榜
+    public static final String BILLBOARD_HOT = "BillboardHot"; //榜单-最火节目飙升榜
+    public static final String BILLBOARD_MORE = "BillboardMore"; //榜单-最多订阅经典榜
+    public static final String BILLBOARD_PAY= "BillboardPay"; //榜单-付费精品飙升榜
+    public static final String BILLBOARD_CRAFTSMAN = "BillboardCraftsman"; //榜单-最大国工匠榜
     public static final String QUESANS_CLASSIFY = "QuesAnsClassify"; //问答-分类
     public static final String QUESANS_HOTMAN = "QuesAnsHotMan"; //问答-超级红人
     public static final String QUESANS_LIST = "QuesAnsList"; //问答-列表

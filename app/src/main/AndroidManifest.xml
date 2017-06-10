@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.joshua.craftsman">
+    package="com.joshua.craftsman">
 
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.BaseApplication"
@@ -28,30 +29,30 @@
         </activity>
         <activity android:name=".activity.account.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.search.SearchActivity">
-        </activity>
-        <activity android:name=".activity.search.SearchResultActivity">
-        </activity>
-        <activity android:name=".activity.download.DownloadActivity">
-        </activity>
-        <activity android:name=".activity.home.HotActivity">
-        </activity>
+        <activity android:name=".activity.search.SearchActivity" />
+        <activity android:name=".activity.search.SearchResultActivity" />
+        <activity android:name=".activity.download.DownloadActivity" />
+        <activity android:name=".activity.home.HotActivity" />
 
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
-            android:value="GlideModule"/>
+            android:value="GlideModule" />
 
-        <activity android:name=".activity.core.TestActivity">
-        </activity>
-        <activity android:name=".activity.account.AskQuestionActivity">
-        </activity>
-        <activity android:name=".activity.record.MyRecordActivity">
-        </activity>
+        <activity android:name=".activity.core.TestActivity" />
+        <activity android:name=".activity.account.AskQuestionActivity" />
+        <activity android:name=".activity.record.MyRecordActivity" />
+        <activity android:name=".activity.billboard.BillboardHotActivity" />
+        <activity android:name=".activity.billboard.BillboardMoreActivity" />
+        <activity android:name=".activity.billboard.BillboardPayActivity" />
+        <activity android:name=".activity.billboard.BillboardCraftsmanActivity" />
+        <activity android:name=".activity.find.FriendCircleActivity" />
+        <activity android:name=".activity.find.FindActivityActivity" />
+        <activity android:name=".activity.find.FindFriendsActivity"></activity>
     </application>
 
 </manifest>

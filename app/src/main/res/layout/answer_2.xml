@@ -87,7 +87,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:contentDescription="tab"
-        android:background="@drawable/select" >
+        android:background="@drawable/checked_red_long" >
     </ImageView>
 
     <ListView

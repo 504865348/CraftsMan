@@ -6,27 +6,27 @@ package com.joshua.craftsman.entity;
  */
 
 public class MyRecording {
-    private String myRecrodingID; //我的录制ID
-    private String recrodingImage; //录制视频或音频的图片
+    private String myRecordingID; //我的录制ID
+    private String recordingImage; //录制视频的图片
     private String name; //录制人名字
     private String time; //录制时间(xx年xx月xx日 xx时xx分)
     private String duration; //视频/音频时长
     private String storageUrl; //存储地址
 
-    public String getMyRecrodingID() {
-        return myRecrodingID;
+    public String getMyRecordingID() {
+        return myRecordingID;
     }
 
-    public void setMyRecrodingID(String myRecrodingID) {
-        this.myRecrodingID = myRecrodingID;
+    public void setMyRecordingID(String myRecordingID) {
+        this.myRecordingID = myRecordingID;
     }
 
-    public String getRecrodingImage() {
-        return recrodingImage;
+    public String getRecordingImage() {
+        return recordingImage;
     }
 
-    public void setRecrodingImage(String recrodingImage) {
-        this.recrodingImage = recrodingImage;
+    public void setRecordingImage(String recordingImage) {
+        this.recordingImage = recordingImage;
     }
 
     public String getName() {
@@ -61,14 +61,14 @@ public class MyRecording {
         this.storageUrl = storageUrl;
     }
 
-    public MyRecording(String myRecrodingID, String recrodingImage, String name, String time, String duration, String storageUrl) {
-        this.myRecrodingID = myRecrodingID;
-        this.recrodingImage = recrodingImage;
+    /*public MyRecording(String myRecordingID, String recordingImage, String name, String time, String duration, String storageUrl) {
+        this.myRecordingID = myRecordingID;
+        this.recordingImage = recordingImage;
         this.name = name;
         this.time = time;
         this.duration = duration;
         this.storageUrl = storageUrl;
-    }
+    }*/
 
     public MyRecording() {
     }
@@ -76,8 +76,8 @@ public class MyRecording {
     @Override
     public String toString() {
         return "MyRecording{" +
-                "myRecrodingID='" + myRecrodingID + '\'' +
-                ", recrodingImage='" + recrodingImage + '\'' +
+                "myRecordingID='" + myRecordingID + '\'' +
+                ", recordingImage='" + recordingImage + '\'' +
                 ", name='" + name + '\'' +
                 ", time='" + time + '\'' +
                 ", duration='" + duration + '\'' +

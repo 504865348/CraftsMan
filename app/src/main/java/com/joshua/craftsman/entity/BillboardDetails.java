@@ -5,7 +5,7 @@ package com.joshua.craftsman.entity;
  * 榜单详情
  */
 
-public class TopListDetails {
+public class BillboardDetails {
     private String topRank; //排序序号
     private String programImage; //节目图片
     private String title; //节目标题
@@ -61,7 +61,7 @@ public class TopListDetails {
         this.downloadUrl = downloadUrl;
     }
 
-    public TopListDetails(String topRank, String programImage, String title, String name, String playUrl, String downloadUrl) {
+    public BillboardDetails(String topRank, String programImage, String title, String name, String playUrl, String downloadUrl) {
         this.topRank = topRank;
         this.programImage = programImage;
         this.title = title;
@@ -72,7 +72,7 @@ public class TopListDetails {
 
     @Override
     public String toString() {
-        return "TopListDetails{" +
+        return "BillboardDetails{" +
                 "topRank='" + topRank + '\'' +
                 ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +

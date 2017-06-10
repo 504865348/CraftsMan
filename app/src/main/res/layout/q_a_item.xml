@@ -8,8 +8,10 @@
         android:id="@+id/q_a_item_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/q_a_item_icon"/>
+        android:src="@drawable/q_a_item_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
