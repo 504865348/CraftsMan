@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 
 import java.io.File;
@@ -36,6 +37,8 @@ public class CraftsInfoFragment extends BaseFragment {
     RelativeLayout btn_record;
     @BindView(R.id.my_info_my_records)
     LinearLayout btn_my_record;
+    @BindView(R.id.my_info_my_q_a)
+    LinearLayout my_info_my_q_a;
 
     @Override
     public View initView() {
@@ -81,6 +84,11 @@ public class CraftsInfoFragment extends BaseFragment {
     @OnClick(R.id.my_info_my_records)
     public void myRecord() {
         startActivity(new Intent(getActivity(), MyRecordActivity.class));
+    }
+
+    @OnClick(R.id.my_info_my_q_a)
+    public void my_q_a() {
+        startActivity(new Intent(getActivity(), MyAskAnswerActivity.class));
     }
 
     /**
