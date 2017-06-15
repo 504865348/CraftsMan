@@ -146,21 +146,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/home_page_classify_communication"
-                style="@style/home_page_classify_linear_layout">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_communication"/>
-                <TextView
-                    style="@style/home_page_classify_text"
-                    android:text="通信广电工程"/>
-            </LinearLayout>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/light_gray"/>
+
+            <LinearLayout
+                android:id="@+id/home_page_classify_communication"
+                style="@style/home_page_classify_linear_layout">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_communication" />
+
+                <TextView
+                    style="@style/home_page_classify_text"
+                    android:text="通信广电工程" />
+            </LinearLayout>
+
             <LinearLayout
                 style="@style/home_page_classify_linear_layout">
             </LinearLayout>

@@ -17,7 +17,15 @@ public class Server {
     public static final String HOME_HOT_LISTEN = "ListenInfo"; //首页-热门-听专题
     public static final String HOME_HOT_LOOK = "LookInfo"; //首页-热门-看利器
     public static final String HOME_RECOMMEND = "Recommend"; //首页-推荐
-    public static final String HOME_CLASSIFY = "Classify"; //首页-分类
+    public static final String HOME_CLASSIFY_HOUSES = "ClassifyHouse"; //首页-分类-房屋建筑
+    public static final String HOME_CLASSIFY_MUNICIPAL = "ClassifyMunicipal"; //首页-分类-市政公用
+    public static final String HOME_CLASSIFY_MECHANICAL = "ClassifyMechanical"; //首页-分类-机电工程
+    public static final String HOME_CLASSIFY_HIGHWAYS = "ClassifyHighWays"; //首页-分类-公路
+    public static final String HOME_CLASSIFY_WATERCONSERVANCY = "ClassifyWaterConservancy"; //首页-分类-水利水电
+    public static final String HOME_CLASSIFY_RAILWAY = "ClassifyRailWay"; //首页-分类-铁路工程
+    public static final String HOME_CLASSIFY_MINING = "ClassifyMining"; //首页-分类-矿业工程
+    public static final String HOME_CLASSIFY_AIRPORT = "ClassifyAirport"; //首页-分类-民航机场工程
+    public static final String HOME_CLASSIFY_COMMUNICATIONS = "ClassifyCommunications"; //首页-分类-通信广电工程
     public static final String HOME_CRAFTSMAN = "Craftsman"; //首页-工匠
     public static final String HOME_SEARCH_ALBUM = "SearchAlbum"; //首页-搜索-专辑
     public static final String HOME_SEARCH_QUESANS = "SearchQuesAns"; //首页-搜索-问答
@@ -33,6 +41,7 @@ public class Server {
     public static final String FIND_CIRCLE_FRIENDS = "FindFriends"; //发现-匠友圈-找匠友
     public static final String MY_CRAFTSMAN = "MyCraftsman"; //我的(工匠用户)
     public static final String MY_PUBLIC = "MyPublic"; //我的(普通用户)
+    public static final String CRAFTS_UNDEAL_ANS= "CraftsUnDealAns"; //工匠-我的问答-未处理回答
 
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册

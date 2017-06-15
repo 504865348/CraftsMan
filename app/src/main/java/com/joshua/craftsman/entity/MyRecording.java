@@ -9,7 +9,7 @@ public class MyRecording {
     private String myRecordingID; //我的录制ID
     private String recordingImage; //录制视频的图片
     private String name; //录制人名字
-    private String time; //录制时间(xx年xx月xx日 xx时xx分)
+    private String time; //录制时间(xx年xx月xxo日 xx时xx分)
     private String duration; //视频/音频时长
     private String storageUrl; //存储地址
 
