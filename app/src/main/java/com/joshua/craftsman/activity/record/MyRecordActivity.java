@@ -3,7 +3,9 @@ package com.joshua.craftsman.activity.record;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.joshua.craftsman.R;
@@ -25,6 +27,8 @@ public class MyRecordActivity extends AppCompatActivity {
 
     @BindView(R.id.my_records_lv)
     ListView records_list;
+    @BindView(R.id.my_records_tool_bar)
+    Toolbar my_records_tool_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +36,27 @@ public class MyRecordActivity extends AppCompatActivity {
         setContentView(R.layout.my_records);
         ButterKnife.bind(this);
 
+        my_records_tool_bar.setTitle("");
+        setSupportActionBar(my_records_tool_bar);
+
         GetVideoFiles(); // 获取所有文件，转化为 MyRecording 对象
 
         mAdapter = new MyRecordAdapter(MyRecordActivity.this, mMyRecordings);
         records_list.setAdapter(mAdapter);
     }
+
+    /**
+     * 监听返回按钮
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     /**
      * 获取文件列表

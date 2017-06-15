@@ -20,9 +20,11 @@ import com.joshua.craftsman.fragment.BillBoardFragment;
 import com.joshua.craftsman.fragment.CraftsInfoFragment;
 import com.joshua.craftsman.fragment.FindFragment;
 import com.joshua.craftsman.fragment.HomeFragment;
+import com.joshua.craftsman.fragment.PublicInfoFragment;
 import com.joshua.craftsman.fragment.QAFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +65,12 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new BillBoardFragment());
         mFragments.add(new QAFragment());
         mFragments.add(new FindFragment());
-        mFragments.add(new CraftsInfoFragment());
+        String type=PrefUtils.getString(mBaseActivity,"type","normal");
+        if(type.equals("normal")){
+            mFragments.add(new PublicInfoFragment());
+        }else {
+            mFragments.add(new CraftsInfoFragment());
+        }
         /**
          * 设置 RadioGroup 点击监听事件
          */

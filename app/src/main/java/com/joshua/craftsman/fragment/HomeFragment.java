@@ -107,7 +107,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mViewPager.setCurrentItem(0);
         mTvRecommend.setTextColor(Color.RED);
         /**
-         * 添加滑动适配器
+         * 添加滑动监听器
          */
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             /**
