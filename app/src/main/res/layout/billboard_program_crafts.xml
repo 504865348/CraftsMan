@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/next_big" />
+            android:background="@drawable/next_big" />
     </RelativeLayout>
 
     <View style="@style/horizontal_split"/>
@@ -87,7 +87,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/billboard_more_img"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
             <TextView
                 android:id="@+id/billboard_more_name"
                 style="@style/search_interface_sub_title"
@@ -112,9 +113,10 @@
             android:id="@+id/billboard_more_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/next_big"
+            android:layout_alignBottom="@+id/linearLayout"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/next_big" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <View style="@style/horizontal_split"/>
@@ -135,7 +137,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/billboard_pay_img"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout2">
             <TextView
                 android:id="@+id/billboard_pay_name"
                 style="@style/search_interface_sub_title"
@@ -160,9 +163,10 @@
             android:id="@+id/billboard_pay_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/next_big"
+            android:layout_alignBottom="@+id/linearLayout2"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/next_big" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <View style="@style/horizontal_split_wider"/>
@@ -231,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/next_big" />
+                android:background="@drawable/next_big" />
         </RelativeLayout>
         <View style="@style/horizontal_split"/>
     </LinearLayout>

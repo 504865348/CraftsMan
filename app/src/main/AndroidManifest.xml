@@ -37,7 +37,6 @@
         <activity android:name=".activity.search.SearchActivity" />
         <activity android:name=".activity.search.SearchResultActivity" />
         <activity android:name=".activity.download.DownloadActivity" />
-        <activity android:name=".activity.home.HotActivity" />
 
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"

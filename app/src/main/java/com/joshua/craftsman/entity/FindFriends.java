@@ -42,7 +42,7 @@ public class FindFriends {
 
     @Override
     public String toString() {
-        return "FindFriends{" +
+        return "FindFriendsFragment{" +
                 "craftsImage='" + craftsImage + '\'' +
                 ", craftsName='" + craftsName + '\'' +
                 ", introduction='" + introduction + '\'' +

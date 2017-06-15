@@ -6,8 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class Server {
-//    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
-    public static final String SERVER_REMOTE = "http://114.55.148.222:8080/GJ/MainServlet";
+    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
     public static final String SERVER_SIGN = "Sign"; //注册
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片
@@ -30,7 +29,7 @@ public class Server {
     public static final String QUESANS_HOTMAN = "QuesAnsHotMan"; //问答-超级红人
     public static final String QUESANS_LIST = "QuesAnsList"; //问答-列表
     public static final String FIND_CIRCLE = "FindCircle"; //发现-匠友圈动态
-    public static final String FIND_CIRCLE_FRIENDS = "FindFriends"; //发现-匠友圈-找匠友
+    public static final String FIND_CIRCLE_FRIENDS = "FindFriendsFragment"; //发现-匠友圈-找匠友
     public static final String MY_CRAFTSMAN = "MyCraftsman"; //我的(工匠用户)
     public static final String MY_PUBLIC = "MyPublic"; //我的(普通用户)
 
