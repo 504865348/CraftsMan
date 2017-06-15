@@ -110,6 +110,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
+                Log.d(TAG, "getQuesAns: "+result);
                 parseQuesAns(result);
             }
 
@@ -183,5 +184,11 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), HistoryActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 }

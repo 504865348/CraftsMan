@@ -18,12 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.utils.MyUtils;
 import com.joshua.craftsman.utils.PrefUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -123,32 +127,62 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void postToServer() {
+        String user = PrefUtils.getString(mBaseActivity, "phone", "");
         String question = et_question.getText().toString();
-        String picName = IMAGE_FILE_NAME + ".JPEG";
         String cost = 100 + "";
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
 
-        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("image", "question.JPEG", fileBody)
+                .addFormDataPart("craftsman",mAnswer)
+                .addFormDataPart("questionWord",question)
+                .addFormDataPart("money",cost)
+                .addFormDataPart("user",user)
                 .build();
         Request request = new Request.Builder()
-                .url("http://139.224.35.126:8080/GJ/UploadServlet" +
-                        "?craftsman=" + mAnswer + "&questionWord=" + question +
-                        "&money=" + cost)
+                .url("http://139.224.35.126:8080/GJ/UploadServlet")
+//                .url("http://139.224.35.126:8080/GJ/UploadServlet" +
+//                        "?craftsman=" + mAnswer + "&questionWord=" + question +
+//                        "&money=" + cost + "&user=" + user)
                 .post(requestBody)
                 .build();
         Call call = new OkHttpClient().newCall(request);
-        call.enqueue(new HttpCommonCallback(this) {
+        call.enqueue(new Callback() {
             @Override
-            protected void success(String result) {
-                Log.d(TAG, "success: " + result);
+            public void onFailure(Call call, IOException e) {
+
             }
 
             @Override
-            protected void error() {
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                JSONObject jo = null;
+                try {
+                    jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    if(result.equals("true")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "提问成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    }else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         });

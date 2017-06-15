@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -35,6 +36,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:id="@+id/tv_question"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:text="问题内容：你好啊"
+            android:background="@color/blue"
             android:layout_weight="2"/>
 
         <LinearLayout
@@ -44,11 +53,11 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <Button
                 android:id="@+id/answer_question_recording"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/img_answer_question_record"/>
+                android:background="@drawable/img_answer_question_record"/>
 
             <TextView
                 android:layout_width="wrap_content"
