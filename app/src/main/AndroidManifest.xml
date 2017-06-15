@@ -55,6 +55,8 @@
         <activity android:name=".activity.find.FindFriendsActivity"/>
         <activity android:name=".activity.account.RegisterActivity">
         </activity>
+        <activity android:name=".activity.ask.CraftsAnswerQuestionActivity">
+        </activity>
     </application>
 
 </manifest>

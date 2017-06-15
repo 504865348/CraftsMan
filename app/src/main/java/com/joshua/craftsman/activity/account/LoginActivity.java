@@ -60,15 +60,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @OnClick(R.id.btn_login)
     public void login() {
         Log.d(TAG, "login: " + "connecting");
-        final String username = et_username.getText().toString();
-        String pwd = et_pwd.getText().toString();
-        //        final String username = "18761996926";
+//        final String username = et_username.getText().toString();
+//        String pwd = et_pwd.getText().toString();
+//        final String username = "18761996926";
 //        String pwd = "123456";
-        if(username.isEmpty()){
+
+        final String username = "gj1";
+        String pwd = "111";
+        if (username.isEmpty()) {
             Toast.makeText(mBaseActivity, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(pwd.isEmpty()){
+        if (pwd.isEmpty()) {
             Toast.makeText(mBaseActivity, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -108,7 +111,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 public void run() {
                                     PrefUtils.setString(mBaseActivity, "type", "normal");
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(mBaseActivity,MainActivity.class));
+                                    startActivity(new Intent(mBaseActivity, MainActivity.class));
                                     finish();
                                 }
                             });
@@ -120,7 +123,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 public void run() {
                                     PrefUtils.setString(mBaseActivity, "type", "craftsman");
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(mBaseActivity,MainActivity.class));
+                                    startActivity(new Intent(mBaseActivity, MainActivity.class));
                                     finish();
                                 }
                             });
