@@ -31,7 +31,7 @@ public class AudioRecoderUtils {
     public AudioRecoderUtils(){
 
         //默认保存路径为/sdcard/record/下
-        this(Environment.getExternalStorageDirectory()+"/record/");
+        this(Environment.getExternalStorageDirectory()+"/craftsman/record/");
     }
 
     public AudioRecoderUtils(String filePath) {
@@ -46,7 +46,9 @@ public class AudioRecoderUtils {
     private long startTime;
     private long endTime;
 
-
+    public String getFilePath() {
+        return filePath;
+    }
 
     /**
      * 开始录音 使用amr格式

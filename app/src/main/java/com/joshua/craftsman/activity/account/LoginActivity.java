@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.MainActivity;
+import com.joshua.craftsman.activity.ask.CraftsAnswerQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.activity.core.TestActivity;
 import com.joshua.craftsman.entity.Server;
@@ -57,16 +58,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_register.setOnClickListener(this);
     }
 
+    @OnClick(R.id.imageButton)
+    public void test() {
+        startActivity(new Intent(mBaseActivity, CraftsAnswerQuestionActivity.class));
+    }
+
     @OnClick(R.id.btn_login)
     public void login() {
         Log.d(TAG, "login: " + "connecting");
 //        final String username = et_username.getText().toString();
 //        String pwd = et_pwd.getText().toString();
-//        final String username = "18761996926";
-//        String pwd = "123456";
+        final String username = "18761996926";
+        String pwd = "123456";
 
-        final String username = "gj1";
-        String pwd = "111";
+//        final String username = "gj1";
+//        String pwd = "111";
         if (username.isEmpty()) {
             Toast.makeText(mBaseActivity, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return;
