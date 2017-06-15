@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -275,4 +276,21 @@ public class MyUtils extends Activity {
         BitmapDrawable bd = (BitmapDrawable) drawable;
         return bd.getBitmap();
     }
+
+    /**
+     * 生成验证码
+     * @return
+     */
+    public static String generifyCode(){
+        Random random=new Random();
+        StringBuilder sRand=new StringBuilder();
+        for (int i=0;i<4;i++)
+        {
+            int itmp = random.nextInt(9);
+            String stmp=itmp+"";
+            sRand.append(stmp);
+        }
+        return sRand.toString();
+    }
 }
+

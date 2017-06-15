@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.account.AskQuestionActivity;
+import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.entity.QuesAnsClassify;
 
 import java.util.ArrayList;

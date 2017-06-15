@@ -38,7 +38,7 @@ public class TestActivity extends BaseActivity {
 
     public void downLoad() {
         Request request = new Request.Builder()
-                .url("http://114.55.148.222:8080/GJ/WEB-INF/upload/10/1/318a9cbc-c326-4776-a9fb-88661f453681_portrait.JPEG")
+                .url("http://139.224.35.126:8080/GJ/WEB-INF/upload/10/1/318a9cbc-c326-4776-a9fb-88661f453681_portrait.JPEG")
                 .build();
         Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -103,7 +103,7 @@ public class TestActivity extends BaseActivity {
                 .addFormDataPart("image", "portrait.JPEG", fileBody)
                 .build();
         Request request = new Request.Builder()
-                .url("http://114.55.148.222:8080/GJ/UploadServlet")
+                .url("http://139.224.35.126:8080/GJ/UploadServlet")
                 .post(requestBody)
                 .build();
         Call call = mOkHttpClient.newCall(request);

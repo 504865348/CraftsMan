@@ -1,4 +1,4 @@
-package com.joshua.craftsman.activity.account;
+package com.joshua.craftsman.activity.ask;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -135,7 +135,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 .addFormDataPart("image", "question.JPEG", fileBody)
                 .build();
         Request request = new Request.Builder()
-                .url("http://114.55.148.222:8080/GJ/UploadServlet" +
+                .url("http://139.224.35.126:8080/GJ/UploadServlet" +
                         "?craftsman=" + mAnswer + "&questionWord=" + question +
                         "&money=" + cost)
                 .post(requestBody)
