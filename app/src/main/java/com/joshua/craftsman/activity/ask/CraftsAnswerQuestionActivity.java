@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,8 +49,9 @@ public class CraftsAnswerQuestionActivity extends BaseActivity {
     @BindView(R.id.answer_question_recording)
     Button mButton;
 
-    private String mFilePath;
+    private String mFilePath="";
     private static MediaPlayer music;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity {
         context = this;
         ll = (LinearLayout) findViewById(R.id.ll);
         mAudioRecoderUtils = new AudioRecoderUtils();
-
+        music = new MediaPlayer();
         //录音回调
         mAudioRecoderUtils.setOnAudioStatusUpdateListener(new AudioRecoderUtils.OnAudioStatusUpdateListener() {
 
@@ -101,7 +103,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         mPop.showAtLocation(ll, Gravity.CENTER, 0, 0);
-                        mButton.setText("松开保存");
+//                        mButton.setText("松开保存");
                         mAudioRecoderUtils.startRecord();
                         mFilePath = mAudioRecoderUtils.getFilePath();
                         break;
@@ -110,7 +112,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity {
                         mAudioRecoderUtils.stopRecord();        //结束录音（保存录音文件）
 //                        mAudioRecoderUtils.cancelRecord();    //取消录音（不保存录音文件）
                         mPop.dismiss();
-                        mButton.setText("按住说话");
+//                        mButton.setText("按住说话");
 
                         break;
                 }
@@ -121,14 +123,25 @@ public class CraftsAnswerQuestionActivity extends BaseActivity {
 
     @OnClick(R.id.answer_question_listen)
     public void listener() {
-        music = new MediaPlayer();
-        try {
-            music.setDataSource(mFilePath);
-            music.prepare();
-            music.start();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+        if(!mFilePath.isEmpty()){
+            try {
+                music.setDataSource(mFilePath);
+                if (music.isPlaying()) {
+                    music.pause();
+                } else {
+                    music.prepare();
+                    music.start();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            Toast.makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
         }
+
+
 
     }
 

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AudioRecoderUtils {
 
     //文件路径
-    private String filePath;
+    private String filePath="";
     //文件夹路径
     private String FolderPath;
 
