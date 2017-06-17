@@ -7,13 +7,13 @@
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/friends_back">
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/back">
         <TextView
             android:layout_gravity="center"
             android:text="意见反馈"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
@@ -21,7 +21,7 @@
     <TextView
         android:layout_marginLeft="15dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="问题和意见"/>
@@ -34,8 +34,7 @@
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
         android:gravity="top"
-        android:background="@drawable/whit"
-        />
+        android:background="@drawable/whit"/>
 
     <TextView
         android:layout_marginLeft="15dp"
@@ -44,24 +43,25 @@
         android:layout_height="wrap_content"
         android:text="联系方式"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <EditText
         android:layout_margin="20dp"
         android:id="@+id/editText3"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:background="@drawable/whit"
         android:hint="选填，方便我们联系"
         android:textColor="@color/black"
-        android:textSize="24dp" />
+        android:textSize="14dp" />
 
     <Button
         android:background="@color/pink"
-        android:textSize="30dp"
+        android:textSize="14dp"
         android:textColor="@color/whit"
         android:layout_margin="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="提交"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交"/>
+
 </LinearLayout>

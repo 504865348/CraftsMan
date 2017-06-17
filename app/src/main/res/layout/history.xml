@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:weightSum="1">
 
-        <ImageButton
-            android:background="@color/whit"
+        <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/last"
-             />
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"/>
 
         <TextView
-            android:layout_width="336dp"
-            android:layout_height="match_parent"
-
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="播放历史"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
         <ImageButton
             android:background="@color/whit"
             android:id="@+id/imageButton5"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/delect"
-             />
-    </LinearLayout>
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/delect"/>
+
+    </RelativeLayout>
+
     <View style="@style/horizontal_split"/>
     <LinearLayout
 
@@ -45,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="选择删除"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
 
             />
@@ -58,13 +61,13 @@
             android:layout_weight="1"
             android:text="一键清空"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
            />
     </LinearLayout>
-    <View
-        android:layout_marginTop="5dp" style="@style/horizontal_split"/>
+    <View android:layout_marginTop="5dp" style="@style/horizontal_split"/>
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"></ListView>
+        android:layout_height="wrap_content"
+        android:clickable="true">
+    </ListView>
 </LinearLayout>

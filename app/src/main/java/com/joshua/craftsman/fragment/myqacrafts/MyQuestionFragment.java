@@ -1,4 +1,4 @@
-package com.joshua.craftsman.fragment.myaskanswer;
+package com.joshua.craftsman.fragment.myqacrafts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

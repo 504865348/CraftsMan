@@ -11,15 +11,15 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         android:background="@android:color/white"
-        app:navigationIcon="@drawable/friends_back">
+        app:navigationIcon="@drawable/back">
         <TextView
             android:id="@+id/crafts_text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:text="充值"/>
     </android.support.v7.widget.Toolbar>

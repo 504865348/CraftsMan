@@ -4,14 +4,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
         <ImageView
             android:id="@+id/find_friends_back_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             android:src="@drawable/back" />
         <TextView
@@ -21,7 +22,7 @@
             android:padding="10dp"
             android:text="找匠友"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -45,7 +46,7 @@
                 android:clickable="true"
                 android:text="推荐关注"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +64,7 @@
                 android:clickable="true"
                 android:text="我的朋友"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -75,14 +76,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="26dp"
-        android:src="@drawable/checked_red_long" />
+        android:src="@drawable/checked_red_1" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/find_friends_page_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>
-
-    <View style="@style/horizontal_split"/>
 
 </LinearLayout>

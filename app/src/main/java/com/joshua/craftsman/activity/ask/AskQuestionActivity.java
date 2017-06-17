@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,8 +47,7 @@ import okhttp3.Response;
 import static android.R.attr.path;
 
 public class AskQuestionActivity extends BaseActivity implements View.OnClickListener {
-    @BindView(R.id.iv_left)
-    ImageView iv_left;
+
     @BindView(R.id.tv_middle)
     TextView tv_middle;
     @BindView(R.id.iv_right)
@@ -81,7 +81,6 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initListener() {
-        iv_left.setOnClickListener(this);
         iv_right.setOnClickListener(this);
         iv_add_pic.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
@@ -98,7 +97,6 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initToolBar() {
-        iv_left.setOnClickListener(this);
         iv_right.setOnClickListener(this);
     }
 
@@ -106,9 +104,6 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_left:
-                onBackPressed();
-                break;
             case R.id.iv_right:
                 //// TODO: 2017/6/1
                 break;
@@ -275,4 +270,16 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
+    // 监听返回按钮
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }
