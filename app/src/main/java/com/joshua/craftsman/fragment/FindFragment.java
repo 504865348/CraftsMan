@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.find.FindActivityActivity;
@@ -17,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class FindFragment extends BaseFragment implements View.OnClickListener{
 
-    @BindView(R.id.find_friend_circle_next) ImageView findFriendCircleNext;
-    @BindView(R.id.find_activity_next) ImageView findActivityNext;
+    @BindView(R.id.find_ll_friend_circle) LinearLayout findFriend;
+    @BindView(R.id.find_ll_activity) LinearLayout findActivity;
 
     private View view;
 
@@ -32,8 +33,8 @@ public class FindFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void initData() {
         super.initData();
-        findFriendCircleNext.setOnClickListener(this);
-        findActivityNext.setOnClickListener(this);
+        findFriend.setOnClickListener(this);
+        findActivity.setOnClickListener(this);
     }
 
     @Override
@@ -51,11 +52,11 @@ public class FindFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.find_friend_circle_next:
-                startActivity(new Intent(getActivity(),FriendCircleActivity.class));
+            case R.id.find_ll_friend_circle:
+                startActivity(new Intent(getActivity(), FriendCircleActivity.class));
                 break;
-            case R.id.find_activity_next:
-                startActivity(new Intent(getActivity(),FindActivityActivity.class));
+            case R.id.find_ll_activity:
+                startActivity(new Intent(getActivity(), FindActivityActivity.class));
                 break;
         }
     }

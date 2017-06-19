@@ -9,14 +9,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_records_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         app:navigationIcon="@drawable/back">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:text="我的录制"/>
 

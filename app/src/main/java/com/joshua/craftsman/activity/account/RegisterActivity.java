@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +41,6 @@ import okhttp3.Response;
 import static android.R.attr.x;
 import static com.joshua.craftsman.R.id.cancel_action;
 import static com.joshua.craftsman.R.id.et_username;
-import static com.joshua.craftsman.R.id.iv_left;
 import static com.joshua.craftsman.R.id.iv_right;
 import static okhttp3.Protocol.get;
 
@@ -59,8 +59,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     TextView tv_err;
     @BindView(R.id.cb_agree)
     CheckBox cb_agree;
-
-    @BindView(R.id.iv_left)
     ImageView iv_left;
     @BindView(R.id.tv_middle)
     TextView tv_middle;
@@ -94,9 +92,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_left:
-                onBackPressed();
-                break;
             case R.id.btn_send_sms:
                 username = et_username.getText().toString();
                 if (MyUtils.isMobileNO(username)) {
@@ -255,5 +250,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         tv_err.setVisibility(View.VISIBLE);
         tv_err.setText(err);
     }
+
+    // 监听返回按钮
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

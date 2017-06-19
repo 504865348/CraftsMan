@@ -14,24 +14,20 @@ import android.widget.TextView;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.homepage.PagerAdapter;
-import com.joshua.craftsman.fragment.myqacrafts.MyAnswerFragment;
-import com.joshua.craftsman.fragment.myqacrafts.MyQuestionFragment;
-import com.joshua.craftsman.fragment.myqacrafts.NotAnswerFragment;
+import com.joshua.craftsman.fragment.myqacommon.MyQuestionFragment;
+import com.joshua.craftsman.fragment.myqacommon.NotHandleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MyAskAnswerActivity extends AppCompatActivity {
+public class MyAskAnswerCommonActivity extends AppCompatActivity {
 
-    @BindView(R.id.my_records_tool_bar) Toolbar mMyRecordsToolBar;
-    @BindView(R.id.not_answer_tv) TextView mNotAnswerTv;
-    @BindView(R.id.not_answer_ll) LinearLayout mNotAnswerLl;
-    @BindView(R.id.my_answer_tv) TextView mMyAnswerTv;
-    @BindView(R.id.my_answer_ll) LinearLayout mMyAnswerLl;
+    @BindView(R.id.my_qa_common_tool_bar) Toolbar mMyQaCommonToolBar;
+    @BindView(R.id.not_handle_tv) TextView mNotHandleTv;
+    @BindView(R.id.not_handle_ll) LinearLayout mNotHandleLl;
     @BindView(R.id.my_question_tv) TextView mMyQuestionTv;
     @BindView(R.id.my_question_ll) LinearLayout mMyQuestionLl;
     @BindView(R.id.id_switch_tab_ll) LinearLayout mIdSwitchTabLl;
@@ -39,8 +35,7 @@ public class MyAskAnswerActivity extends AppCompatActivity {
     @BindView(R.id.my_q_a_page_pager) ViewPager mViewPager;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
-    private NotAnswerFragment mNotAnswerFragment;
-    private MyAnswerFragment mMyAnswerFragment;
+    private NotHandleFragment mNotHandleFragment;
     private MyQuestionFragment mMyQuestionFragment;
     private PagerAdapter mPagerAdapter;
     private int screenWidth;
@@ -48,43 +43,35 @@ public class MyAskAnswerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_ask_answer_crafts);
+        setContentView(R.layout.my_ask_answer_common);
         ButterKnife.bind(this);
         /**
          * ToolBar
          */
-        mMyRecordsToolBar.setTitle("");
-        setSupportActionBar(mMyRecordsToolBar);
+        mMyQaCommonToolBar.setTitle("");
+        setSupportActionBar(mMyQaCommonToolBar);
         /**
-         * 设置页面和滑动条
+         * Pager
          */
         initPager();
         initTabLineWidth();
     }
 
-    /**
-     * 初始化数据
-     */
     private void initPager() {
-        mNotAnswerFragment = new NotAnswerFragment();
-        mMyAnswerFragment = new MyAnswerFragment();
+        mNotHandleFragment = new NotHandleFragment();
         mMyQuestionFragment = new MyQuestionFragment();
-        mFragmentList.add(mNotAnswerFragment);
-        mFragmentList.add(mMyAnswerFragment);
+        mFragmentList.add(mNotHandleFragment);
         mFragmentList.add(mMyQuestionFragment);
-        /**
-         * 适配器
-         */
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setCurrentItem(0);
-        mNotAnswerTv.setTextColor(Color.RED);
+        mNotHandleTv.setTextColor(Color.RED);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv.getLayoutParams();
-                lp.leftMargin = screenWidth/3*position + positionOffsetPixels/3;
+                lp.leftMargin = screenWidth/2*position + positionOffsetPixels/2;
                 mTabLineIv.setLayoutParams(lp);
             }
 
@@ -93,12 +80,9 @@ public class MyAskAnswerActivity extends AppCompatActivity {
                 resetTextColor();
                 switch (position) {
                     case 0:
-                        mNotAnswerTv.setTextColor(Color.RED);
+                        mNotHandleTv.setTextColor(Color.RED);
                         break;
                     case 1:
-                        mMyAnswerTv.setTextColor(Color.RED);
-                        break;
-                    case 2:
                         mMyQuestionTv.setTextColor(Color.RED);
                         break;
                 }
@@ -109,45 +93,23 @@ public class MyAskAnswerActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * 重置文字颜色
-     */
     private void resetTextColor() {
-        mNotAnswerTv.setTextColor(Color.BLACK);
-        mMyAnswerTv.setTextColor(Color.BLACK);
+        mNotHandleTv.setTextColor(Color.BLACK);
         mMyQuestionTv.setTextColor(Color.BLACK);
     }
 
-    @OnClick({ R.id.not_answer_ll, R.id.my_answer_ll, R.id.my_question_ll })
-    public void clickLinear(LinearLayout linearLayout) {
-        switch (linearLayout.getId()) {
-            case R.id.not_answer_ll:
-                mViewPager.setCurrentItem(0);
-                break;
-            case R.id.my_answer_ll:
-                mViewPager.setCurrentItem(1);
-                break;
-            case R.id.my_question_ll:
-                mViewPager.setCurrentItem(2);
-                break;
-        }
-    }
-
     /**
-     * 设置滑动条的宽度为屏幕的 1/3 (根据Tab的个数而定)
+     * 设置滑动条的宽度为屏幕的 1/2 (根据Tab的个数而定)
      */
     private void initTabLineWidth() {
         DisplayMetrics dpMetrics = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
         screenWidth = dpMetrics.widthPixels;
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv.getLayoutParams();
-        lp.width = screenWidth / 3;
+        lp.width = screenWidth / 2;
         mTabLineIv.setLayoutParams(lp);
     }
 
-    /**
-     * 监听 toolbar 返回按键
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -156,5 +118,4 @@ public class MyAskAnswerActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
