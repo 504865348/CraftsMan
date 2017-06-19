@@ -66,11 +66,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @OnClick(R.id.btn_login)
     public void login() {
         Log.d(TAG, "login: " + "connecting");
-//        final String username = et_username.getText().toString();
-//        String pwd = et_pwd.getText().toString();
-        final String username = "18761996926";
-        String pwd = "123456";
-
+        final String username = et_username.getText().toString();
+        String pwd = et_pwd.getText().toString();
+//        final String username = "18761996926";
+//        String pwd = "123456";
 //        final String username = "gj1";
 //        String pwd = "111";
         if (username.isEmpty()) {

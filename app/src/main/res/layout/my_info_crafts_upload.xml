@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始录音录像"
+            android:text="开始录制视频"
             android:textSize="16sp"
             android:textColor="#ffffff"/>
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="上传音频视频"
+            android:text="上传录制视频"
             android:textColor="#000000"
             android:textSize="16sp"/>
 

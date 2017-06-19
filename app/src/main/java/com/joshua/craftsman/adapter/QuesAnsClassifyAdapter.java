@@ -70,8 +70,6 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         });
         holder.itemView.setTag(position + "");
     }
-
-
     @Override
     public int getItemCount() {
         return data.size();

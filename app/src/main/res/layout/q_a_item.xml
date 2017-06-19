@@ -70,7 +70,10 @@
                 android:id="@+id/q_a_audio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/q_a_audio_icon"/>
+                android:src="@drawable/q_a_audio_icon"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/q_a_audio_duration"

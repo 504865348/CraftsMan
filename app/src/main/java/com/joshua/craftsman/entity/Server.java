@@ -42,9 +42,9 @@ public class Server {
     public static final String MY_CRAFTSMAN = "MyCraftsman"; //我的(工匠用户)
     public static final String MY_PUBLIC = "MyPublic"; //我的(普通用户)
     public static final String CRAFTS_UNDEAL_ANS= "CraftsUnDealAns"; //工匠-我的问答-未处理回答
-
+    public static final String CRAFTS_MY_ANS= "CraftsMyAns"; //工匠-我的问答-我的回答
+    public static final String CRAFTS_MY_QUES= "CraftsMyQues"; //工匠-我的问答-我的提问
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册
-
 
 }
