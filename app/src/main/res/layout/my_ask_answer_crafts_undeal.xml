@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- item 的布局为 item_not_answer -->
-    <ListView
-        android:id="@+id/crafts_not_answer_lv"
+    <View style="@style/horizontal_split_wide"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/crafts_not_answer_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
+    <View style="@style/horizontal_split_wide"/>
 
 </LinearLayout>
