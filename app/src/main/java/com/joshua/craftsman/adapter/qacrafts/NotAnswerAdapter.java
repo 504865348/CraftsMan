@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nzz on 2017/6/7.
+ * Created by nzz on 2017/6/9.
  * 工匠-我的问答-未处理回答-适配器
  */
 
