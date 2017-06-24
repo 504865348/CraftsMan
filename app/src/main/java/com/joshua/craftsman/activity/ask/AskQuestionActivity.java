@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.utils.MyUtils;
 import com.joshua.craftsman.utils.PrefUtils;
@@ -138,10 +139,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 .addFormDataPart("user",user)
                 .build();
         Request request = new Request.Builder()
-                .url("http://139.224.35.126:8080/GJ/UploadServlet")
-//                .url("http://139.224.35.126:8080/GJ/UploadServlet" +
-//                        "?craftsman=" + mAnswer + "&questionWord=" + question +
-//                        "&money=" + cost + "&user=" + user)
+                .url(Server.SERVER_UPLOAD)
                 .post(requestBody)
                 .build();
         Call call = new OkHttpClient().newCall(request);

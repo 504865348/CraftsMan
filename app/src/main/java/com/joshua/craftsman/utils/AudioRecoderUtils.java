@@ -117,7 +117,7 @@ public class AudioRecoderUtils {
             if (file.exists())
                 file.delete();
 
-            filePath = "";
+//            filePath = "";
 
         }
 

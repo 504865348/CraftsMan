@@ -6,18 +6,20 @@ package com.joshua.craftsman.entity;
  */
 
 public class CraftsUnDealAns {
-    private String askId; //未处理问题ID
+
+    private String Id; //未处理问题ID
     private String askName; //提问者
     private String price; //问题价格
     private String content; //问题内容
     private String time; //提问时间
 
-    public String getAskId() {
-        return askId;
+
+    public String getId() {
+        return Id;
     }
 
-    public void setAskId(String askId) {
-        this.askId = askId;
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getAskName() {
@@ -52,8 +54,8 @@ public class CraftsUnDealAns {
         this.time = time;
     }
 
-    public CraftsUnDealAns(String askId, String askName, String price, String content, String time) {
-        this.askId = askId;
+    public CraftsUnDealAns(String Id, String askName, String price, String content, String time) {
+        this.Id = Id;
         this.askName = askName;
         this.price = price;
         this.content = content;
@@ -63,7 +65,7 @@ public class CraftsUnDealAns {
     @Override
     public String toString() {
         return "CraftsUnDealAns{" +
-                "askId='" + askId + '\'' +
+                "askId='" + Id + '\'' +
                 ", askName='" + askName + '\'' +
                 ", price='" + price + '\'' +
                 ", content='" + content + '\'' +

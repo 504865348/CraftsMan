@@ -1,8 +1,10 @@
 package com.joshua.craftsman.fragment.myqacrafts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +12,14 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.ask.CraftsAnswerQuestionActivity;
 import com.joshua.craftsman.adapter.qacrafts.NotAnswerAdapter;
 import com.joshua.craftsman.entity.CraftsUnDealAns;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +116,19 @@ public class NotAnswerFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftsNotAnswerRv.setLayoutManager(linearLayoutManager);
-        craftsNotAnswerRv.setAdapter(new NotAnswerAdapter(getActivity(),list_WCL));
+        NotAnswerAdapter notAnswerAdapter=new NotAnswerAdapter(getActivity(),list_WCL);
+        notAnswerAdapter.setOnRecyclerViewItemClickListener(new NotAnswerAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                Intent intent=new Intent(getActivity(),CraftsAnswerQuestionActivity.class);
+                intent.putExtra("Id",list_WCL.get(Integer.parseInt(position)).getId());
+                intent.putExtra("question",list_WCL.get(Integer.parseInt(position)).getContent());
+                Log.d(TAG, "onItemClick: "+position);
+                Log.d(TAG, "onItemClick: "+list_WCL.get(Integer.parseInt(position)).getId());
+                startActivity(intent);
+            }
+        });
+        craftsNotAnswerRv.setAdapter(notAnswerAdapter);
+
     }
 }

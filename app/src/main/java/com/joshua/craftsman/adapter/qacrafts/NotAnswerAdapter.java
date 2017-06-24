@@ -72,7 +72,7 @@ public class NotAnswerAdapter extends RecyclerView.Adapter<NotAnswerAdapter.MyVi
 
     private NotAnswerAdapter.onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

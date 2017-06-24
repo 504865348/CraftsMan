@@ -5,27 +5,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
+import com.joshua.craftsman.wang.common.common_money;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.joshua.craftsman.R.id.my_info_my_coins;
 
 public class CraftsInfoFragment extends BaseFragment {
 
@@ -43,6 +43,7 @@ public class CraftsInfoFragment extends BaseFragment {
     @Override
     public View initView() {
         view = View.inflate(mContext, R.layout.my_info_crafts, null);
+
         return view;
     }
 
@@ -91,6 +92,11 @@ public class CraftsInfoFragment extends BaseFragment {
         startActivity(new Intent(getActivity(), MyAskAnswerActivity.class));
     }
 
+    @OnClick(my_info_my_coins)
+    public void my_coins() {
+        startActivity(new Intent(getActivity(), MoneyActivity.class));
+    }
+
     /**
      * 创建一个媒体对象
      */
@@ -122,5 +128,6 @@ public class CraftsInfoFragment extends BaseFragment {
         }
         return null;
     }
+
 
 }
