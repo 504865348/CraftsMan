@@ -44,13 +44,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private View view;
     private List<BaseFragment> mFragmentList = new ArrayList<>();
+    private PagerAdapter adapter;
+    private int screenWidth;
     private HomeRecommendPager recommendPager;
     private HomeHotPager hotPager;
     private HomeClassifyPager classifyPager;
     private HomeCraftsPager craftsPager;
-    private PagerAdapter adapter;
-    private int screenWidth;
-
 
     @Override
     public View initView() {

@@ -44,6 +44,7 @@
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
             android:value="GlideModule"/>
 
+        <activity android:name=".activity.history.HistoryActivity"/>
         <activity android:name=".activity.core.TestActivity"/>
         <activity android:name=".activity.ask.AskQuestionActivity"/>
         <activity android:name=".activity.record.MyRecordActivity"/>
@@ -74,6 +75,8 @@
         <activity android:name=".activity.account.MoneyActivity">
         </activity>
         <activity android:name=".activity.account.RechargeActivity">
+        </activity>
+        <activity android:name=".activity.craft.CraftActivity">
         </activity>
     </application>
 

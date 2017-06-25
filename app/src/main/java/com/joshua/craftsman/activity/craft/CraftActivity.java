@@ -1,4 +1,4 @@
-package com.joshua.craftsman.activity.download;
+package com.joshua.craftsman.activity.craft;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.fragment.BaseFragment;
+import com.joshua.craftsman.fragment.craft.CraftAlbumFragment;
+import com.joshua.craftsman.fragment.craft.CraftQAFragment;
 import com.joshua.craftsman.fragment.download.AlbumFragment;
 import com.joshua.craftsman.fragment.download.DownloadingFragment;
 import com.joshua.craftsman.fragment.download.ProgramFragment;
@@ -25,32 +26,34 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DownloadActivity extends AppCompatActivity implements View.OnClickListener {
+public class CraftActivity extends AppCompatActivity {
 
-    @BindView(R.id.download_toolbar) Toolbar mToolbar;
-    @BindView(R.id.download_tv_album) TextView mDownloadTvAlbum;
-    @BindView(R.id.download_ll_album) LinearLayout mDownloadLlAlbum;
-    @BindView(R.id.download_tv_program) TextView mDownloadTvProgram;
-    @BindView(R.id.download_ll_program) LinearLayout mDownloadLlProgram;
-    @BindView(R.id.download_tv_downloading) TextView mDownloadTvDownloading;
-    @BindView(R.id.download_ll_downloading) LinearLayout mDownloadLlDownloading;
-    @BindView(R.id.download_switch_tab) LinearLayout mDownloadSwitchTab;
-    @BindView(R.id.download_bar) ImageView mTabLine;
-    @BindView(R.id.download_text_used) TextView mDownloadTextUsed;
-    @BindView(R.id.download_text_useful) TextView mDownloadTextUseful;
-    @BindView(R.id.download_page_pager) ViewPager mViewPager;
+    @BindView(R.id.crafts_name) TextView mCraftsName;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.crafts_image_icon) ImageView mCraftsImageIcon;
+    @BindView(R.id.crafts_text_name) TextView mCraftsTextName;
+    @BindView(R.id.crafts_text_info) TextView mCraftsTextInfo;
+    @BindView(R.id.crafts_text_introduction) TextView mCraftsTextIntroduction;
+    @BindView(R.id.crafts_image_follow) ImageView mCraftsImageFollow;
+    @BindView(R.id.crafts_image_ask) ImageView mCraftsImageAsk;
+    @BindView(R.id.crafts_tv_album) TextView mCraftsTvAlbum;
+    @BindView(R.id.crafts_ll_album) LinearLayout mCraftsLlAlbum;
+    @BindView(R.id.crafts_tv_q_a) TextView mCraftsTvQA;
+    @BindView(R.id.crafts_ll_q_a) LinearLayout mCraftsLlQA;
+    @BindView(R.id.crafts_ll_switch) LinearLayout mCraftsLlSwitch;
+    @BindView(R.id.img_tab_line) ImageView mTabLine;
+    @BindView(R.id.crafts_view_pager) ViewPager mViewPager;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
     private int screenWidth;
-    private AlbumFragment mAlbumFragment;
-    private ProgramFragment mProgramFragment;
-    private DownloadingFragment mDownloadingFragment;
+    private CraftAlbumFragment mCraftAlbumFragment;
+    private CraftQAFragment mCraftQAFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.download);
+        setContentView(R.layout.crafts);
         ButterKnife.bind(this);
 
         mToolbar.setTitle("");
@@ -58,21 +61,16 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
 
         initPager();
         initTabLineWidth();
-        mDownloadLlAlbum.setOnClickListener(this);
-        mDownloadLlProgram.setOnClickListener(this);
-        mDownloadLlDownloading.setOnClickListener(this);
     }
 
     /**
      * 初始化滑动 Pager 数据
      */
     private void initPager() {
-        mAlbumFragment = new AlbumFragment();
-        mProgramFragment = new ProgramFragment();
-        mDownloadingFragment = new DownloadingFragment();
-        mFragmentList.add(mAlbumFragment);
-        mFragmentList.add(mProgramFragment);
-        mFragmentList.add(mDownloadingFragment);
+        mCraftAlbumFragment = new CraftAlbumFragment();
+        mCraftQAFragment = new CraftQAFragment();
+        mFragmentList.add(mCraftAlbumFragment);
+        mFragmentList.add(mCraftQAFragment);
         /**
          * 设置适配器和初始选中项
          */
@@ -80,7 +78,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
                 .PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
-        mDownloadTvAlbum.setTextColor(Color.RED);
+        mCraftsTvAlbum.setTextColor(Color.RED);
         /**
          * 添加滑动监听器
          */
@@ -93,7 +91,7 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-                lp.leftMargin = screenWidth/3*position + positionOffsetPixels/3;
+                lp.leftMargin = screenWidth/2*position + positionOffsetPixels/2;
                 mTabLine.setLayoutParams(lp);
             }
 
@@ -102,13 +100,10 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
                 resetTextView();
                 switch (position) {
                     case 0:
-                        mDownloadTvAlbum.setTextColor(Color.RED);
+                        mCraftsTvAlbum.setTextColor(Color.RED);
                         break;
                     case 1:
-                        mDownloadTvProgram.setTextColor(Color.RED);
-                        break;
-                    case 2:
-                        mDownloadTvDownloading.setTextColor(Color.RED);
+                        mCraftsTvQA.setTextColor(Color.RED);
                         break;
                 }
             }
@@ -122,36 +117,20 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void resetTextView() {
-        mDownloadTvAlbum.setTextColor(Color.BLACK);
-        mDownloadTvProgram.setTextColor(Color.BLACK);
-        mDownloadTvDownloading.setTextColor(Color.BLACK);
+        mCraftsTvAlbum.setTextColor(Color.BLACK);
+        mCraftsTvQA.setTextColor(Color.BLACK);
     }
 
     /**
-     * 设置滑动条的宽度为屏幕的 1/3 (根据Tab的个数而定)
+     * 设置滑动条的宽度为屏幕的 1/2 (根据Tab的个数而定)
      */
     private void initTabLineWidth() {
         DisplayMetrics dpMetrics = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
         screenWidth = dpMetrics.widthPixels;
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-        lp.width = screenWidth / 3;
+        lp.width = screenWidth / 2;
         mTabLine.setLayoutParams(lp);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.download_ll_album:
-                mViewPager.setCurrentItem(0);
-                break;
-            case R.id.download_ll_program:
-                mViewPager.setCurrentItem(1);
-                break;
-            case R.id.download_ll_downloading:
-                mViewPager.setCurrentItem(2);
-                break;
-        }
     }
 
     /**
@@ -165,5 +144,4 @@ public class DownloadActivity extends AppCompatActivity implements View.OnClickL
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

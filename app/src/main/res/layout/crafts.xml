@@ -10,23 +10,24 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         app:navigationIcon="@drawable/friends_back">
         <TextView
-            android:id="@+id/crafts_text_name"
+            android:id="@+id/crafts_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:text="姓名"/>
     </android.support.v7.widget.Toolbar>
 
 
+    <include layout="@layout/crafts_info"/>
+
     <View style="@style/horizontal_split"/>
 
     <!-- 工匠信息 -->
-    <include layout="@layout/crafts_info"/>
 
     <View style="@style/horizontal_split"/>
 
@@ -34,6 +35,7 @@
         android:id="@+id/crafts_ll_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -41,14 +43,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="10dp"
             android:gravity="center">
             <TextView
                 android:id="@+id/crafts_tv_album"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:padding="10dp"
                 android:text="专辑"/>
         </LinearLayout>
 
@@ -57,14 +59,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="10dp"
             android:gravity="center">
             <TextView
                 android:id="@+id/crafts_tv_q_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
-                android:padding="10dp"
                 android:text="问答"/>
         </LinearLayout>
 
@@ -74,7 +76,7 @@
         android:id="@+id/img_tab_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/checked_red_1"/>
+        android:src="@drawable/checked_red"/>
 
     <View style="@style/horizontal_split"/>
 

@@ -9,14 +9,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/album_detail_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/friends_back">
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/back">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:text="专辑详情"/>
 
@@ -45,7 +45,7 @@
                 android:id="@+id/album_detail_tv_particulars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 android:padding="10dp"
                 android:text="详情"/>
@@ -61,7 +61,7 @@
                 android:id="@+id/album_detail_tv_program"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 android:padding="10dp"
                 android:text="节目"/>
