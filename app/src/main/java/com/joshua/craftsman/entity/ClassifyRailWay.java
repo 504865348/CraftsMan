@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyRailWay {
+    private String railWayID; //铁路工程ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getRailWayID() {
+        return railWayID;
+    }
+
+    public void setRailWayID(String railWayID) {
+        this.railWayID = railWayID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyRailWay {
         this.introduction = introduction;
     }
 
-    public ClassifyRailWay(String programImage, String title, String introduction) {
+    public ClassifyRailWay(String railWayID, String programImage, String title, String introduction) {
+        this.railWayID = railWayID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyRailWay {
     @Override
     public String toString() {
         return "ClassifyRailWay{" +
-                "programImage='" + programImage + '\'' +
+                "railWayID='" + railWayID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

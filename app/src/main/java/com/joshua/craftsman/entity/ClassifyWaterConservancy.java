@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyWaterConservancy {
+    private String conservancyID; //水利水电ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getConservancyID() {
+        return conservancyID;
+    }
+
+    public void setConservancyID(String conservancyID) {
+        this.conservancyID = conservancyID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyWaterConservancy {
         this.introduction = introduction;
     }
 
-    public ClassifyWaterConservancy(String programImage, String title, String introduction) {
+    public ClassifyWaterConservancy(String conservancyID, String programImage, String title, String introduction) {
+        this.conservancyID = conservancyID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyWaterConservancy {
     @Override
     public String toString() {
         return "ClassifyWaterConservancy{" +
-                "programImage='" + programImage + '\'' +
+                "conservancyID='" + conservancyID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

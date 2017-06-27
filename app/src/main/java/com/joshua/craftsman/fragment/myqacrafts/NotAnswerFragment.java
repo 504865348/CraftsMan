@@ -45,6 +45,7 @@ public class NotAnswerFragment extends BaseFragment {
     private List<CraftsUnDealAns> list_WCL;
 
     @Override
+
     public View initView() {
         mView = View.inflate(mContext, R.layout.my_ask_answer_crafts_undeal, null);
         return mView;

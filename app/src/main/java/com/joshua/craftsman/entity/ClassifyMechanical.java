@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyMechanical {
+    private String mechanicalID; //机电工程ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getMechanicalID() {
+        return mechanicalID;
+    }
+
+    public void setMechanicalID(String mechanicalID) {
+        this.mechanicalID = mechanicalID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyMechanical {
         this.introduction = introduction;
     }
 
-    public ClassifyMechanical(String programImage, String title, String introduction) {
+    public ClassifyMechanical(String mechanicalID, String programImage, String title, String introduction) {
+        this.mechanicalID = mechanicalID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyMechanical {
     @Override
     public String toString() {
         return "ClassifyMechanical{" +
-                "programImage='" + programImage + '\'' +
+                "mechanicalID='" + mechanicalID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

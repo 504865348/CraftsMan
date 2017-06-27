@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyMining {
+    private String miningID; //矿业工程ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getMiningID() {
+        return miningID;
+    }
+
+    public void setMiningID(String miningID) {
+        this.miningID = miningID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyMining {
         this.introduction = introduction;
     }
 
-    public ClassifyMining(String programImage, String title, String introduction) {
+    public ClassifyMining(String miningID, String programImage, String title, String introduction) {
+        this.miningID = miningID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyMining {
     @Override
     public String toString() {
         return "ClassifyMining{" +
-                "programImage='" + programImage + '\'' +
+                "miningID='" + miningID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

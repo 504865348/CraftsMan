@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.homepage.PagerAdapter;
-import com.joshua.craftsman.fragment.myqacommon.MyQuestionFragment;
-import com.joshua.craftsman.fragment.myqacommon.NotHandleFragment;
+import com.joshua.craftsman.fragment.myqapublic.MyQuestionFragment;
+import com.joshua.craftsman.fragment.myqapublic.NotHandleFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyAirport {
+    private String airportID; //民航机场工程ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getAirportID() {
+        return airportID;
+    }
+
+    public void setAirportID(String airportID) {
+        this.airportID = airportID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyAirport {
         this.introduction = introduction;
     }
 
-    public ClassifyAirport(String programImage, String title, String introduction) {
+    public ClassifyAirport(String airportID, String programImage, String title, String introduction) {
+        this.airportID = airportID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyAirport {
     @Override
     public String toString() {
         return "ClassifyAirport{" +
-                "programImage='" + programImage + '\'' +
+                "airportID='" + airportID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

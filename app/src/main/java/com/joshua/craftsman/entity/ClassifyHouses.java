@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyHouses {
+    private String housesID; //房屋建筑ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getHousesID() {
+        return housesID;
+    }
+
+    public void setHousesID(String housesID) {
+        this.housesID = housesID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyHouses {
         this.introduction = introduction;
     }
 
-    public ClassifyHouses(String programImage, String title, String introduction) {
+    public ClassifyHouses(String housesID, String programImage, String title, String introduction) {
+        this.housesID = housesID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyHouses {
     @Override
     public String toString() {
         return "ClassifyHouses{" +
-                "programImage='" + programImage + '\'' +
+                "housesID='" + housesID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

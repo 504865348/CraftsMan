@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyHighWays {
+    private String highWaysID; //公路ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getHighWaysID() {
+        return highWaysID;
+    }
+
+    public void setHighWaysID(String highWaysID) {
+        this.highWaysID = highWaysID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyHighWays {
         this.introduction = introduction;
     }
 
-    public ClassifyHighWays(String programImage, String title, String introduction) {
+    public ClassifyHighWays(String highWaysID, String programImage, String title, String introduction) {
+        this.highWaysID = highWaysID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyHighWays {
     @Override
     public String toString() {
         return "ClassifyHighWays{" +
-                "programImage='" + programImage + '\'' +
+                "highWaysID='" + highWaysID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

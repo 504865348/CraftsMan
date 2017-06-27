@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Album {
     private String albumID; //专辑ID
+    private String idClassify; //所属分类编号----根据该编号可得所属分类信息
     private String albumImage; //图片
     private String title; //标题
     private String craftsmanName; //工匠名
@@ -24,6 +25,14 @@ public class Album {
 
     public void setAlbumID(String albumID) {
         this.albumID = albumID;
+    }
+
+    public String getIdClassify() {
+        return idClassify;
+    }
+
+    public void setIdClassify(String idClassify) {
+        this.idClassify = idClassify;
     }
 
     public String getAlbumImage() {
@@ -90,8 +99,9 @@ public class Album {
         this.programNumber = programNumber;
     }
 
-    public Album(String albumID, String albumImage, String title, String craftsmanName, int playTimes, String classifyName, String introduction, List<String> arrayProgram, int programNumber) {
+    public Album(String albumID, String idClassify, String albumImage, String title, String craftsmanName, int playTimes, String classifyName, String introduction, List<String> arrayProgram, int programNumber) {
         this.albumID = albumID;
+        this.idClassify = idClassify;
         this.albumImage = albumImage;
         this.title = title;
         this.craftsmanName = craftsmanName;
@@ -106,6 +116,7 @@ public class Album {
     public String toString() {
         return "Album{" +
                 "albumID='" + albumID + '\'' +
+                ", idClassify='" + idClassify + '\'' +
                 ", albumImage='" + albumImage + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +

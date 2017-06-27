@@ -6,10 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassifyCommunications {
+    private String communicationsID; //通信广电工程ID
     private String programImage; //节目图片
     private String title; //标题
     private String introduction; //简介
     //private String downloadUrl; //下载地址
+
+    public String getCommunicationsID() {
+        return communicationsID;
+    }
+
+    public void setCommunicationsID(String communicationsID) {
+        this.communicationsID = communicationsID;
+    }
 
     public String getProgramImage() {
         return programImage;
@@ -35,7 +44,8 @@ public class ClassifyCommunications {
         this.introduction = introduction;
     }
 
-    public ClassifyCommunications(String programImage, String title, String introduction) {
+    public ClassifyCommunications(String communicationsID, String programImage, String title, String introduction) {
+        this.communicationsID = communicationsID;
         this.programImage = programImage;
         this.title = title;
         this.introduction = introduction;
@@ -44,7 +54,8 @@ public class ClassifyCommunications {
     @Override
     public String toString() {
         return "ClassifyCommunications{" +
-                "programImage='" + programImage + '\'' +
+                "communicationsID='" + communicationsID + '\'' +
+                ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';

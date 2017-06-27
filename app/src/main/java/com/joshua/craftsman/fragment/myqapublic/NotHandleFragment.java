@@ -1,4 +1,4 @@
-package com.joshua.craftsman.fragment.myqacommon;
+package com.joshua.craftsman.fragment.myqapublic;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
