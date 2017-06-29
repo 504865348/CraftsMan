@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:text="选择专辑  |"/>
     <Button
-        android:background="@color/whit"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -67,7 +67,7 @@
             android:text="录制标价  |" />
 
         <Button
-            android:background="@color/whit"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -77,7 +77,7 @@
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/whit"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:text="上传"
         android:background="@color/pink"

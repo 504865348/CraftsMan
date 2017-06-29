@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:padding="5dp"
-        android:textSize="20sp"
+        android:padding="10dp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:text="节目详情"/>
 
@@ -79,9 +79,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginTop="20dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:text="工匠详情"/>
 

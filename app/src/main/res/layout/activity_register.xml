@@ -93,7 +93,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/pink"
         android:text="注册"
-        android:textColor="@color/whit"
+        android:textColor="@color/white"
         android:textSize="24sp"/>
 
     <LinearLayout

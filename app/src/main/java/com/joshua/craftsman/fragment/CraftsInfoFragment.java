@@ -9,14 +9,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
-import com.joshua.craftsman.wang.common.common_money;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,21 +32,44 @@ import static com.joshua.craftsman.R.id.my_info_my_coins;
 
 public class CraftsInfoFragment extends BaseFragment {
 
+    @BindView(R.id.my_info_crafts_record) RelativeLayout btn_record;
+    @BindView(R.id.my_info_my_records) LinearLayout btn_my_record;
+    @BindView(R.id.my_info_my_q_a) LinearLayout my_info_my_q_a;
+    @BindView(R.id.my_info_picture) ImageView mMyInfoPicture;
+    @BindView(R.id.my_info_user_name) TextView mMyInfoUserName;
+    @BindView(R.id.my_info_following) TextView mMyInfoFollowing;
+    @BindView(R.id.my_info_followers) TextView mMyInfoFollowers;
+    @BindView(R.id.next) ImageButton mNext;
+    @BindView(R.id.my_info_more) RelativeLayout mMyInfoMore;
+    @BindView(R.id.my_info_subscribe) LinearLayout mMyInfoSubscribe;
+    @BindView(R.id.my_info_collection) LinearLayout mMyInfoCollection;
+    @BindView(R.id.text_start_record) TextView mTextStartRecord;
+    @BindView(R.id.text_start_upload) TextView mTextStartUpload;
+    @BindView(R.id.my_info_crafts_upload) RelativeLayout mMyInfoCraftsUpload;
+    @BindView(R.id.orderform) ImageButton mOrderform;
+    @BindView(R.id.my_info_my_orders) LinearLayout mMyInfoMyOrders;
+    @BindView(R.id.my_info_money) TextView mMyInfoMoney;
+    @BindView(R.id.money) ImageButton mMoney;
+    @BindView(R.id.my_info_my_coins) LinearLayout mMyInfoMyCoins;
+    @BindView(R.id.my_info_q_a_one) ImageView mMyInfoQAOne;
+    @BindView(R.id.question) ImageButton mQuestion;
+    @BindView(R.id.album) ImageButton mAlbum;
+    @BindView(R.id.my_info_my_albums) LinearLayout mMyInfoMyAlbums;
+    @BindView(R.id.list) ImageButton mList;
+    @BindView(R.id.my_info_my_billboard) LinearLayout mMyInfoMyBillboard;
+    @BindView(R.id.recorder) ImageButton mRecorder;
+    @BindView(R.id.opinion) ImageButton mOpinion;
+    @BindView(R.id.my_info_feedback) LinearLayout mMyInfoFeedback;
+    @BindView(R.id.set) ImageButton mSet;
+    @BindView(R.id.my_info_sets) LinearLayout mMyInfoSets;
+
     private View view;
     private Uri fileUri;
     private int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 1;
 
-    @BindView(R.id.my_info_crafts_record)
-    RelativeLayout btn_record;
-    @BindView(R.id.my_info_my_records)
-    LinearLayout btn_my_record;
-    @BindView(R.id.my_info_my_q_a)
-    LinearLayout my_info_my_q_a;
-
     @Override
     public View initView() {
         view = View.inflate(mContext, R.layout.my_info_crafts, null);
-
         return view;
     }
 
@@ -57,11 +83,6 @@ public class CraftsInfoFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     @OnClick(R.id.my_info_crafts_record)
@@ -80,6 +101,11 @@ public class CraftsInfoFragment extends BaseFragment {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);  // 设置视频文件的名字
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // 设置视频质量为高
         startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
+    }
+
+    @OnClick(R.id.my_info_my_orders)
+    public void myOrders() {
+        startActivity(new Intent(getActivity(), MyOrderActivity.class));
     }
 
     @OnClick(R.id.my_info_my_records)

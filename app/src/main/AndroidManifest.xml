@@ -78,6 +78,8 @@
         </activity>
         <activity android:name=".activity.craft.CraftActivity">
         </activity>
+        <activity android:name=".activity.MyOrderActivity">
+        </activity>
     </application>
 
 </manifest>

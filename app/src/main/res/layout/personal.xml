@@ -19,7 +19,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/whit"
+            android:background="@color/white"
             android:text="保存"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"

@@ -58,7 +58,7 @@
     <Button
         android:background="@color/pink"
         android:textSize="14dp"
-        android:textColor="@color/whit"
+        android:textColor="@color/white"
         android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

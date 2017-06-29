@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="专辑标题  |"/>
         <EditText
-            android:background="@color/whit"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -62,7 +62,7 @@
     <Button
         android:layout_marginTop="50dp"
         android:background="@color/pink"
-      android:textColor="@color/whit"
+      android:textColor="@color/white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"

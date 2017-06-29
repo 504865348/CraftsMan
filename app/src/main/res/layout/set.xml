@@ -4,228 +4,183 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<android.support.v7.widget.Toolbar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:navigationIcon="@drawable/last">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="设置"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:layout_gravity="center"/>
-</android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/last">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
+
     <LinearLayout
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/set_ll_bind"
+        style="@style/set_linear"
         android:weightSum="1">
-
         <TextView
-            android:layout_marginLeft="20dp"
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
             android:text="账号绑定"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
+            style="@style/set_text"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/phone" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/chat" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/q" />
-
         <ImageButton
             android:id="@+id/count"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.07"
-            android:background="@color/whit"
+            android:background="@color/white"
             android:src="@drawable/next_more" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
 
+    <LinearLayout
+        android:id="@+id/set_ll_change_pwd"
+        style="@style/set_linear">
+        <TextView
             android:layout_marginLeft="20dp"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="修改密码"
-            android:gravity="center_vertical"/>
+            style="@style/set_text"
+            android:text="修改密码"/>
         <ImageButton
-            android:background="@color/whit"
+            android:background="@color/white"
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
+
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/set_ll_continue"
+        style="@style/set_linear">
         <TextView
             android:layout_marginLeft="20dp"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="断点续听"
-            />
-         <com.example.widget.SlipButton android:id="@+id/on"
-        android:layout_width="60dip"
-        android:layout_height="25dip"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="8dip"
-        android:layout_marginTop="8dip"
-        />  
+            style="@style/set_text"
+            android:text="断点续听"/>
+         <com.example.widget.SlipButton
+            android:id="@+id/on"
+            android:layout_width="60dip"
+            android:layout_height="25dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dip"
+            android:layout_marginTop="8dip"/>  
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
+
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/set_ll_mobile"
+        style="@style/set_linear">
         <TextView
             android:layout_marginLeft="20dp"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="2G/3G/4G播放和下载"
-            />
-         <com.example.widget.SlipButton android:id="@+id/on1"
-        android:layout_width="60dip"
-        android:layout_height="25dip"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="8dip"
-        android:layout_marginTop="8dip"
-        />  
+            style="@style/set_text"
+            android:text="2G/3G/4G播放和下载"/>
+        <com.example.widget.SlipButton
+            android:id="@+id/on1"
+            android:layout_width="60dip"
+            android:layout_height="25dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dip"
+            android:layout_marginTop="8dip"/>  
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
+
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/set_ll_recommend"
+        style="@style/set_linear">
         <TextView
             android:layout_marginLeft="20dp"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="推送设置"
-            android:gravity="center_vertical"/>
+            style="@style/set_text"
+            android:text="推送设置"/>
         <ImageButton
-            android:background="@color/whit"
+            android:background="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"/>
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp"
+        android:background="@color/background_gray"/>
 
+    <LinearLayout
+        android:id="@+id/set_ll_help"
+        style="@style/set_linear">
         <TextView
             android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="帮助中心"
-            android:textColor="@color/black"
-            android:textSize="24dp" />
-
+            style="@style/set_text"
+            android:text="帮助中心"/>
         <ImageButton
-            android:background="@color/whit"
+            android:background="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"/>
+
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/set_ll_about"
+        style="@style/set_linear">
         <TextView
-            android:layout_marginLeft="20dp"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关于"
-            android:gravity="center_vertical"/>
+            style="@style/set_text"
+            android:text="关于"/>
         <ImageButton
-            android:background="@color/whit"
+            android:background="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/next_more"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+
     <Button
-        android:background="@color/pink"
-        android:textColor="@color/whit"
-        android:textSize="30dp"
-        android:layout_margin="20dp"
+        android:id="@+id/set_btn_exit"
+        android:background="@drawable/button_pink_shape"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="退出登录"/>

@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:background="@color/whit"
+            android:background="@color/white"
             android:text="充值"
             android:onClick="pay"
             android:textColor="@color/pink"/>

@@ -9,7 +9,7 @@
         android:weightSum="1">
 
         <ImageButton
-            android:background="@color/whit"
+            android:background="@color/white"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/whit"
+            android:background="@color/white"
             android:text="录音"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/whit"
+            android:background="@color/white"
             android:text="录视频"
             android:textColor="@color/black"
             android:textSize="20sp" />

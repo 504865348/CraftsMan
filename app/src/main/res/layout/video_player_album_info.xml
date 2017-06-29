@@ -38,13 +38,14 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:text="专辑分集标题"/>
         <ImageView
             android:id="@+id/video_player_btn_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:src="@drawable/btn_buy"/>
     </LinearLayout>
 

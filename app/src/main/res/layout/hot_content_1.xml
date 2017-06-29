@@ -31,7 +31,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:background="@color/whit"
+        android:background="@color/white"
         android:id="@+id/ib_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
