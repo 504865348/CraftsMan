@@ -19,7 +19,9 @@ import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
+import com.joshua.craftsman.activity.feedback.FeedbackActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
+import com.joshua.craftsman.activity.set.SetActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +32,7 @@ import butterknife.OnClick;
 
 import static com.joshua.craftsman.R.id.my_info_my_coins;
 
-public class CraftsInfoFragment extends BaseFragment {
+public class CraftsInfoFragment extends BaseFragment implements View.OnClickListener{
 
     @BindView(R.id.my_info_crafts_record) RelativeLayout btn_record;
     @BindView(R.id.my_info_my_records) LinearLayout btn_my_record;
@@ -76,6 +78,8 @@ public class CraftsInfoFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        mMyInfoFeedback.setOnClickListener(this);
+        mMyInfoSets.setOnClickListener(this);
     }
 
     @Override
@@ -155,5 +159,16 @@ public class CraftsInfoFragment extends BaseFragment {
         return null;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.my_info_feedback:
+                startActivity(new Intent(getActivity(), FeedbackActivity.class));
+                break;
+            case R.id.my_info_sets:
+                startActivity(new Intent(getActivity(), SetActivity.class));
+                break;
+        }
+    }
 
 }

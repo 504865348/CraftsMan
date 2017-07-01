@@ -6,16 +6,18 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/set_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:navigationIcon="@drawable/last">
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/back">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="设置"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_gravity="center"/>
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
     </android.support.v7.widget.Toolbar>
 
     <View
@@ -83,13 +85,11 @@
             android:layout_marginLeft="20dp"
             style="@style/set_text"
             android:text="断点续听"/>
-         <com.example.widget.SlipButton
-            android:id="@+id/on"
-            android:layout_width="60dip"
-            android:layout_height="25dip"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="8dip"
-            android:layout_marginTop="8dip"/>  
+        <ImageButton
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/switch_close"/> 
     </LinearLayout>
 
     <View
@@ -104,13 +104,11 @@
             android:layout_marginLeft="20dp"
             style="@style/set_text"
             android:text="2G/3G/4G播放和下载"/>
-        <com.example.widget.SlipButton
-            android:id="@+id/on1"
-            android:layout_width="60dip"
-            android:layout_height="25dip"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="8dip"
-            android:layout_marginTop="8dip"/>  
+        <ImageButton
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/switch_close"/>  
     </LinearLayout>
 
     <View
@@ -121,10 +119,13 @@
     <LinearLayout
         android:id="@+id/set_ll_recommend"
         style="@style/set_linear">
+
         <TextView
-            android:layout_marginLeft="20dp"
+            android:id="@+id/textView3"
             style="@style/set_text"
-            android:text="推送设置"/>
+            android:layout_marginLeft="20dp"
+            android:text="推送设置" />
+
         <ImageButton
             android:background="@color/white"
             android:layout_width="wrap_content"
@@ -134,8 +135,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/background_gray"/>
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
 
     <LinearLayout
         android:id="@+id/set_ll_help"
@@ -176,12 +177,12 @@
 
     <Button
         android:id="@+id/set_btn_exit"
-        android:background="@drawable/button_pink_shape"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="退出登录"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
+        android:background="@drawable/button_pink_shape"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 </LinearLayout>

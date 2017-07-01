@@ -50,5 +50,6 @@ public class Server {
     public static final String CRAFTS_MY_QUES= "CraftsMyQues"; //工匠-我的问答-我的提问
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册
+    public static final String SERVER_FEEDBACK = "Feedback"; //意见反馈
 
 }
