@@ -112,6 +112,7 @@
         android:background="@color/light_gray">
 
         <Button
+            android:onClick="postToServer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="45dp"

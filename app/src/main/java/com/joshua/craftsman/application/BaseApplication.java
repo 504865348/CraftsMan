@@ -3,8 +3,7 @@ package com.joshua.craftsman.application;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
-
-
+import android.os.StrictMode;
 
 
 /**
@@ -32,6 +31,9 @@ public class BaseApplication extends Application {
         application=this;
         mainTid = android.os.Process.myTid();
         handler=new Handler();
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
     }
     public static Context getApplication() {
         return application;

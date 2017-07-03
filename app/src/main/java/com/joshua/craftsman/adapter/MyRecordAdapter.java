@@ -1,13 +1,17 @@
 package com.joshua.craftsman.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.record.PostRecordActivity;
 import com.joshua.craftsman.entity.MyRecording;
 
 import java.util.List;
@@ -49,12 +53,29 @@ public class MyRecordAdapter extends BaseAdapter {
         }
 
         ImageView record_item_cover = (ImageView) convertView.findViewById(R.id.record_item_cover);
-        TextView record_item_name = (TextView) convertView.findViewById(R.id.record_item_name);
-        TextView record_item_time = (TextView) convertView.findViewById(R.id.record_item_time);
+        final TextView record_item_name = (TextView) convertView.findViewById(R.id.record_item_name);
+        final TextView record_item_time = (TextView) convertView.findViewById(R.id.record_item_time);
+        ImageButton record_item_release = (ImageButton) convertView.findViewById(R.id.record_item_release);
+        ImageButton record_item_delete = (ImageButton) convertView.findViewById(R.id.record_item_delete);
 
-        MyRecording myRecording = mMyRecordings.get(position);
+        final MyRecording myRecording = mMyRecordings.get(position);
         record_item_name.setText(myRecording.getName());
         record_item_time.setText(myRecording.getTime());
+        record_item_release.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PostRecordActivity.class);
+//                intent.putExtra("")
+                mContext.startActivity(intent);
+            }
+        });
+        record_item_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("1", "onClick: " + record_item_time.getText());
+            }
+        });
+
 
         return convertView;
     }
