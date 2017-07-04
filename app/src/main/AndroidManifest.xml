@@ -78,7 +78,12 @@
         <activity android:name=".activity.set.EditPswActivity" />
         <activity android:name=".activity.feedback.FeedbackActivity" />
         <activity android:name=".activity.info.CraftsInfoActivity" />
-        <activity android:name=".activity.set.AboutActivity"></activity>
+        <activity android:name=".activity.set.AboutActivity" />
+        <activity android:name=".activity.hot.CraftsActivity" />
+        <activity android:name=".activity.hot.SkillsActivity" />
+        <activity android:name=".activity.hot.PolicyActivity" />
+        <activity android:name=".activity.hot.ListenActivity" />
+        <activity android:name=".activity.hot.LookActivity"></activity>
     </application>
 
 </manifest>

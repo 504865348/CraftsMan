@@ -1,21 +1,18 @@
-package com.joshua.craftsman.fragment.homepage;
+package com.joshua.craftsman.activity.hot;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.adapter.HomeCraftsAdapter;
+import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.adapter.HotCraftsAdapter;
-import com.joshua.craftsman.entity.Craftsman;
 import com.joshua.craftsman.entity.HotCraftsman;
 import com.joshua.craftsman.entity.Server;
-import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 
@@ -30,36 +27,28 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class HomeCraftsPager extends BaseFragment {
+public class CraftsActivity extends BaseActivity {
 
-    @BindView(R.id.home_page_crafts_gv)
-    RecyclerView home_page_crafts_gv;
+    @BindView(R.id.hot_crafts_tool_bar)
+    Toolbar hotCraftsToolBar;
+    @BindView(R.id.hot_crafts_rv)
+    RecyclerView hotCraftsRv;
 
-    private List<HotCraftsman> list_GJ;
+    private List<HotCraftsman> list_DGGJ;
 
     @Override
-    public View initView() {
-        View view = View.inflate(mContext, R.layout.home_page_crafts, null);
-        return view;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.hot_crafts);
+        ButterKnife.bind(this);
+        initData();
+        hotCraftsToolBar.setTitle("");
+        setSupportActionBar(hotCraftsToolBar);
     }
 
-
-    @Override
     public void initData() {
-        list_GJ = new ArrayList<>();
+        list_DGGJ = new ArrayList<>();
         getDataFromServer();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     private void getDataFromServer() {
@@ -68,10 +57,9 @@ public class HomeCraftsPager extends BaseFragment {
 
     private void getGJ() {
         OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
+                .cookieJar(new HttpCookieJar(this))
                 .build();
         RequestBody params = new FormBody.Builder()
-                //.add("method", Server.HOME_CRAFTSMAN)
                 .add("method", Server.HOME_HOT_CRAFTSMAN)
                 .build();
 
@@ -80,7 +68,7 @@ public class HomeCraftsPager extends BaseFragment {
                 .post(params)
                 .build();
         Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(getActivity()) {
+        call.enqueue(new HttpCommonCallback(this) {
             @Override
             protected void success(String result) {
                 parseGJ(result);
@@ -93,11 +81,12 @@ public class HomeCraftsPager extends BaseFragment {
         });
     }
 
+
     private void parseGJ(String result) {
         Gson gson = new Gson();
-        list_GJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
+        list_DGGJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
+        this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 initRecycleGJ();
@@ -107,9 +96,18 @@ public class HomeCraftsPager extends BaseFragment {
 
     private void initRecycleGJ() {
         //设置网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),4);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,4);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        home_page_crafts_gv.setLayoutManager(gridLayoutManager);
-        home_page_crafts_gv.setAdapter(new HotCraftsAdapter(getActivity(),list_GJ));
+        hotCraftsRv.setLayoutManager(gridLayoutManager);
+        hotCraftsRv.setAdapter(new HotCraftsAdapter(this,list_DGGJ));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

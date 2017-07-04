@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/classify_mining_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/back">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="矿业工程"
-            android:layout_centerInParent="true"
-            android:textSize="20sp"
+            android:layout_gravity="center"
             android:padding="10dp"
-            android:textColor="@android:color/black"/>
-    </RelativeLayout>
+            android:text="矿业工程"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
 
-    <View style="@style/horizontal_split_wide"/>
+    <View style="@style/horizontal_split"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/classify_mining_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
-
-    <View style="@style/horizontal_split_wide"/>
 
 </LinearLayout>

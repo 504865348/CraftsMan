@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.homepage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,10 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.hot.CraftsActivity;
+import com.joshua.craftsman.activity.hot.ListenActivity;
+import com.joshua.craftsman.activity.hot.LookActivity;
+import com.joshua.craftsman.activity.hot.PolicyActivity;
+import com.joshua.craftsman.activity.hot.SkillsActivity;
 import com.joshua.craftsman.adapter.HotCraftsAdapter;
 import com.joshua.craftsman.adapter.HotListenAdapter;
 import com.joshua.craftsman.adapter.HotLookAdapter;
@@ -43,7 +51,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 
-public class HomeHotPager extends BaseFragment {
+public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     @BindView(R.id.home_page_hot_banner)
     Banner home_page_hot_banner;
     @BindView(R.id.hot_crafts_rv)
@@ -56,7 +64,26 @@ public class HomeHotPager extends BaseFragment {
     RecyclerView hot_listen_rv;
     @BindView(R.id.hot_look_rv)
     RecyclerView hot_look_rv;
-
+    @BindView(R.id.hot_middle_image_crafts)
+    ImageView hotMiddleImageCrafts;
+    @BindView(R.id.hot_middle_image_skills)
+    ImageView hotMiddleImageSkills;
+    @BindView(R.id.hot_middle_image_policy)
+    ImageView hotMiddleImagePolicy;
+    @BindView(R.id.hot_middle_image_listen)
+    ImageView hotMiddleImageListen;
+    @BindView(R.id.hot_middle_image_look)
+    ImageView hotMiddleImageLook;
+    @BindView(R.id.home_page_hot_more_crafts)
+    TextView homePageHotMoreCrafts;
+    @BindView(R.id.home_page_hot_more_skills)
+    TextView homePageHotMoreSkills;
+    @BindView(R.id.home_page_hot_more_policy)
+    TextView homePageHotMorePolicy;
+    @BindView(R.id.home_page_hot_more_listen)
+    TextView homePageHotMoreListen;
+    @BindView(R.id.home_page_hot_more_look)
+    TextView homePageHotMoreLook;
 
     private List<CarouselPic> list_pic;
     private List<HotCraftsman> list_DGGJ;
@@ -65,7 +92,6 @@ public class HomeHotPager extends BaseFragment {
     private List<HotListen> list_TZT;
     private List<HotLook> list_KLQ;
     private OkHttpClient mClient;
-
 
     @Override
     public View initView() {
@@ -80,17 +106,63 @@ public class HomeHotPager extends BaseFragment {
         list_JZC = new ArrayList<>();
         list_TZT = new ArrayList<>();
         list_KLQ = new ArrayList<>();
-
+        initListener();
         getDataFromServer();
     }
 
+    private void initListener() {
+        hotMiddleImageCrafts.setOnClickListener(this);
+        hotMiddleImageSkills.setOnClickListener(this);
+        hotMiddleImagePolicy.setOnClickListener(this);
+        hotMiddleImageListen.setOnClickListener(this);
+        hotMiddleImageLook.setOnClickListener(this);
+        homePageHotMoreCrafts.setOnClickListener(this);
+        homePageHotMoreSkills.setOnClickListener(this);
+        homePageHotMorePolicy.setOnClickListener(this);
+        homePageHotMoreListen.setOnClickListener(this);
+        homePageHotMoreLook.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.hot_middle_image_crafts:
+                startActivity(new Intent(getActivity(), CraftsActivity.class));
+                break;
+            case R.id.home_page_hot_more_crafts:
+                startActivity(new Intent(getActivity(), CraftsActivity.class));
+                break;
+            case R.id.hot_middle_image_skills:
+                startActivity(new Intent(getActivity(), SkillsActivity.class));
+                break;
+            case R.id.home_page_hot_more_skills:
+                startActivity(new Intent(getActivity(), SkillsActivity.class));
+                break;
+            case R.id.hot_middle_image_policy:
+                startActivity(new Intent(getActivity(), PolicyActivity.class));
+                break;
+            case R.id.home_page_hot_more_policy:
+                startActivity(new Intent(getActivity(), PolicyActivity.class));
+                break;
+            case R.id.hot_middle_image_listen:
+                startActivity(new Intent(getActivity(), ListenActivity.class));
+                break;
+            case R.id.home_page_hot_more_listen:
+                startActivity(new Intent(getActivity(), ListenActivity.class));
+                break;
+            case R.id.hot_middle_image_look:
+                startActivity(new Intent(getActivity(), LookActivity.class));
+                break;
+            case R.id.home_page_hot_more_look:
+                startActivity(new Intent(getActivity(), LookActivity.class));
+                break;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
-
-
         return rootView;
     }
 
@@ -98,7 +170,6 @@ public class HomeHotPager extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 
     private void getDataFromServer() {
         mClient = new OkHttpClient.Builder()
@@ -141,6 +212,7 @@ public class HomeHotPager extends BaseFragment {
             }
         });
     }
+
     private void getJXDY() {
 //        mClient = new OkHttpClient.Builder()
 //                .cookieJar(new HttpCookieJar(getActivity()))
@@ -174,7 +246,7 @@ public class HomeHotPager extends BaseFragment {
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_POLICY)
                 .build();
-        Log.d(TAG, "getJZC: "+Server.HOME_HOT_POLICY);
+        Log.d(TAG, "getJZC: " + Server.HOME_HOT_POLICY);
 
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
@@ -201,7 +273,7 @@ public class HomeHotPager extends BaseFragment {
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_LISTEN)
                 .build();
-        Log.d(TAG, "getTZT: "+ Server.HOME_HOT_LISTEN);
+        Log.d(TAG, "getTZT: " + Server.HOME_HOT_LISTEN);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -227,7 +299,7 @@ public class HomeHotPager extends BaseFragment {
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_LOOK)
                 .build();
-        Log.d(TAG, "getKLQ: "+Server.HOME_HOT_LOOK);
+        Log.d(TAG, "getKLQ: " + Server.HOME_HOT_LOOK);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -297,6 +369,7 @@ public class HomeHotPager extends BaseFragment {
             }
         });
     }
+
     private void parseKLQ(String result) {
         Gson gson = new Gson();
         list_KLQ = gson.fromJson(result, new TypeToken<List<HotLook>>() {
@@ -308,6 +381,7 @@ public class HomeHotPager extends BaseFragment {
             }
         });
     }
+
     /**
      * --------------------------------数据展示---------------------------------
      */
@@ -316,35 +390,39 @@ public class HomeHotPager extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         hot_crafts_rv.setLayoutManager(linearLayoutManager);
-        hot_crafts_rv.setAdapter(new HotCraftsAdapter(getActivity(),list_DGGJ));
+        hot_crafts_rv.setAdapter(new HotCraftsAdapter(getActivity(), list_DGGJ));
     }
+
     private void initRecycleJXDY() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         hot_skills_rv.setLayoutManager(linearLayoutManager);
-        hot_skills_rv.setAdapter(new HotSkillsAdapter(getActivity(),list_JXDY));
+        hot_skills_rv.setAdapter(new HotSkillsAdapter(getActivity(), list_JXDY));
     }
+
     private void initRecycleJZC() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         hot_policy_rv.setLayoutManager(linearLayoutManager);
-        hot_policy_rv.setAdapter(new HotPolicyAdapter(getActivity(),list_JZC));
+        hot_policy_rv.setAdapter(new HotPolicyAdapter(getActivity(), list_JZC));
     }
+
     private void initRecycleTZT() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         hot_listen_rv.setLayoutManager(linearLayoutManager);
-        hot_listen_rv.setAdapter(new HotListenAdapter(getActivity(),list_TZT));
+        hot_listen_rv.setAdapter(new HotListenAdapter(getActivity(), list_TZT));
     }
+
     private void initRecycleKLQ() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         hot_look_rv.setLayoutManager(linearLayoutManager);
-        hot_look_rv.setAdapter(new HotLookAdapter(getActivity(),list_KLQ));
+        hot_look_rv.setAdapter(new HotLookAdapter(getActivity(), list_KLQ));
     }
 
     /**
