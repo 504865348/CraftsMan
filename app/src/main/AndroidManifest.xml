@@ -76,7 +76,9 @@
         <activity android:name=".activity.set.BindActivity" />
         <activity android:name=".activity.set.HelpActivity" />
         <activity android:name=".activity.set.EditPswActivity" />
-        <activity android:name=".activity.feedback.FeedbackActivity"></activity>
+        <activity android:name=".activity.feedback.FeedbackActivity" />
+        <activity android:name=".activity.info.CraftsInfoActivity" />
+        <activity android:name=".activity.set.AboutActivity"></activity>
     </application>
 
 </manifest>

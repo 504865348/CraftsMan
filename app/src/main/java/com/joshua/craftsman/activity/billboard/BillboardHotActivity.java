@@ -3,6 +3,8 @@ package com.joshua.craftsman.activity.billboard;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +31,8 @@ public class BillboardHotActivity extends BaseActivity {
 
     @BindView(R.id.billboard_hot_program_rv)
     RecyclerView billboard_hot_program_rv;
+    @BindView(R.id.billboard_hot_tool_bar)
+    Toolbar billboardHotToolBar;
 
     private List<BillboardHot> list_hot;
 
@@ -38,6 +42,8 @@ public class BillboardHotActivity extends BaseActivity {
         setContentView(R.layout.billboard_hot_program);
         ButterKnife.bind(this);
         initData();
+        billboardHotToolBar.setTitle("");
+        setSupportActionBar(billboardHotToolBar);
     }
 
     public void initData() {
@@ -48,12 +54,12 @@ public class BillboardHotActivity extends BaseActivity {
     private void getDataFromServer() {
         getHot();
     }
+
     private void getHot() {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(this))
                 .build();
         RequestBody params = new FormBody.Builder()
-                //.add("method", Server.HOME_CRAFTSMAN)
                 .add("method", Server.BILLBOARD_HOT)
                 .build();
 
@@ -92,7 +98,16 @@ public class BillboardHotActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         billboard_hot_program_rv.setLayoutManager(linearLayoutManager);
-        billboard_hot_program_rv.setAdapter(new BillboardHotAdapter(this,list_hot));
+        billboard_hot_program_rv.setAdapter(new BillboardHotAdapter(this, list_hot));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

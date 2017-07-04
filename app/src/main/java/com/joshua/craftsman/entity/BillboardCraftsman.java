@@ -8,57 +8,62 @@ package com.joshua.craftsman.entity;
 public class BillboardCraftsman {
     //private String craftsNameTop1;//排名第一工匠的名字
     //private String craftsNameTop2;//排名第二工匠的名字
-    private String rankNumber;//工匠排名的名次
-    private String craftsImg;//工匠头像
-    private String craftsName;//工匠名字
-    private String craftsIntroduction;//工匠简介
+    //private String rankNumber;//工匠排名的名次
+    //private String craftsImg;//工匠头像
+    //private String craftsName;//工匠名字
+    //private String craftsIntroduction;//工匠简介
 
-    public String getRankNumber() {
-        return rankNumber;
+    private String id;//工匠排名的名次
+    private String imageUrl;//工匠头像
+    private String craftsmanName;//工匠名字
+    private String introduction;//工匠简介
+
+    public String getId() {
+        return id;
     }
 
-    public void setRankNumber(String rankNumber) {
-        this.rankNumber = rankNumber;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCraftsImg() {
-        return craftsImg;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setCraftsImg(String craftsImg) {
-        this.craftsImg = craftsImg;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getCraftsName() {
-        return craftsName;
+    public String getCraftsmanName() {
+        return craftsmanName;
     }
 
-    public void setCraftsName(String craftsName) {
-        this.craftsName = craftsName;
+    public void setCraftsmanName(String craftsmanName) {
+        this.craftsmanName = craftsmanName;
     }
 
-    public String getCraftsIntroduction() {
-        return craftsIntroduction;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setCraftsIntroduction(String craftsIntroduction) {
-        this.craftsIntroduction = craftsIntroduction;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
-    public BillboardCraftsman(String rankNumber, String craftsImg, String craftsName, String craftsIntroduction) {
-        this.rankNumber = rankNumber;
-        this.craftsImg = craftsImg;
-        this.craftsName = craftsName;
-        this.craftsIntroduction = craftsIntroduction;
+    public BillboardCraftsman(String id, String imageUrl, String craftsmanName, String introduction) {
+        this.id = id;
+        this.imageUrl = imageUrl;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
     }
 
     @Override
     public String toString() {
         return "BillboardCraftsman{" +
-                "rankNumber='" + rankNumber + '\'' +
-                ", craftsImg='" + craftsImg + '\'' +
-                ", craftsName='" + craftsName + '\'' +
-                ", craftsIntroduction='" + craftsIntroduction + '\'' +
+                "id='" + id + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
+                ", introduction='" + introduction + '\'' +
                 '}';
     }
 }

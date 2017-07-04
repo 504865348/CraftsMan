@@ -40,10 +40,10 @@ public class BillboardHotAdapter extends RecyclerView.Adapter<BillboardHotAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.tv_rank.setText(data.get(position).getRankNumber());
-        holder.tv_title.setText(data.get(position).getProgramTitle());
-        holder.tv_author.setText(data.get(position).getAuthorName());
-        Glide.with(mContext).load(data.get(position).getProgramImg()).into(holder.iv_pic);
+        holder.tv_rank.setText(data.get(position).getId());
+        holder.tv_title.setText(data.get(position).getRecordTitle());
+        holder.tv_author.setText(data.get(position).getName());
+        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
     @Override

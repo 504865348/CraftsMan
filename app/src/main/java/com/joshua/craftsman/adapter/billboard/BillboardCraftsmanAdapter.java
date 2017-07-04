@@ -40,10 +40,10 @@ public class BillboardCraftsmanAdapter extends RecyclerView.Adapter<BillboardCra
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.tv_rank.setText(data.get(position).getRankNumber());
-        holder.tv_name.setText(data.get(position).getCraftsName());
-        holder.tv_introduction.setText(data.get(position).getCraftsIntroduction());
-        Glide.with(mContext).load(data.get(position).getCraftsImg()).into(holder.iv_pic);
+        holder.tv_rank.setText(data.get(position).getId());
+        holder.tv_name.setText(data.get(position).getCraftsmanName());
+        holder.tv_introduction.setText(data.get(position).getIntroduction());
+        Glide.with(mContext).load(data.get(position).getImageUrl()).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
     @Override

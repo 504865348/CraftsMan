@@ -19,7 +19,6 @@
 
     <View style="@style/horizontal_split"/>
 
-    <View style="@style/horizontal_split"/>
 
     <include layout="@layout/billboard_program_crafts" />
 

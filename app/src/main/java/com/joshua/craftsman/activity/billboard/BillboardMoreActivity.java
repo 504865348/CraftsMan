@@ -3,6 +3,8 @@ package com.joshua.craftsman.activity.billboard;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +31,8 @@ public class BillboardMoreActivity extends BaseActivity {
 
     @BindView(R.id.billboard_more_program_rv)
     RecyclerView billboard_more_program_rv;
+    @BindView(R.id.billboard_more_tool_bar)
+    Toolbar billboardMoreToolBar;
 
     private List<BillboardMore> list_more;
 
@@ -38,6 +42,8 @@ public class BillboardMoreActivity extends BaseActivity {
         setContentView(R.layout.billboard_more_program);
         ButterKnife.bind(this);
         initData();
+        billboardMoreToolBar.setTitle("");
+        setSupportActionBar(billboardMoreToolBar);
     }
 
     public void initData() {
@@ -48,6 +54,7 @@ public class BillboardMoreActivity extends BaseActivity {
     private void getDataFromServer() {
         getMore();
     }
+
     private void getMore() {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(this))
@@ -91,7 +98,16 @@ public class BillboardMoreActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         billboard_more_program_rv.setLayoutManager(linearLayoutManager);
-        billboard_more_program_rv.setAdapter(new BillboardMoreAdapter(this,list_more));
+        billboard_more_program_rv.setAdapter(new BillboardMoreAdapter(this, list_more));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

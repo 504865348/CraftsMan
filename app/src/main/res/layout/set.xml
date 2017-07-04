@@ -162,7 +162,7 @@
         style="@style/set_linear">
         <TextView
             style="@style/set_text"
-            android:text="关于"/>
+            android:text="关于我们"/>
         <ImageButton
             android:background="@color/white"
             android:layout_width="wrap_content"
