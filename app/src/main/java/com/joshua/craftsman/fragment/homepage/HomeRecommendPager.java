@@ -1,7 +1,7 @@
 package com.joshua.craftsman.fragment.homepage;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,10 +105,10 @@ public class HomeRecommendPager extends BaseFragment {
     }
 
     private void initRecycleTJ() {
-        //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        home_recommend_rv.setLayoutManager(linearLayoutManager);
+        //设置网格布局管理器
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),4);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        home_recommend_rv.setLayoutManager(gridLayoutManager);
         home_recommend_rv.setAdapter(new HotCraftsAdapter(getActivity(),list_TJ));
     }
 

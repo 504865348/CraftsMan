@@ -62,7 +62,6 @@ public class HomeCraftsPager extends BaseFragment {
         super.onDestroyView();
     }
 
-
     private void getDataFromServer() {
         getGJ();//工匠
     }
@@ -108,7 +107,7 @@ public class HomeCraftsPager extends BaseFragment {
 
     private void initRecycleGJ() {
         //设置网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),4);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         home_page_crafts_gv.setLayoutManager(gridLayoutManager);
         home_page_crafts_gv.setAdapter(new HotCraftsAdapter(getActivity(),list_GJ));

@@ -20,6 +20,7 @@ import com.joshua.craftsman.activity.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
+import com.joshua.craftsman.activity.info.CraftsInfoActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 
@@ -78,6 +79,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     @Override
     public void initData() {
         super.initData();
+        mMyInfoMore.setOnClickListener(this);
         mMyInfoFeedback.setOnClickListener(this);
         mMyInfoSets.setOnClickListener(this);
     }
@@ -162,6 +164,9 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.my_info_more:
+                startActivity(new Intent(getActivity(), CraftsInfoActivity.class));
+                break;
             case R.id.my_info_feedback:
                 startActivity(new Intent(getActivity(), FeedbackActivity.class));
                 break;

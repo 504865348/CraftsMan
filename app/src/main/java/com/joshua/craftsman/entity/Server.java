@@ -12,7 +12,6 @@ public class Server {
     public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
     public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
 
-    public static final String SERVER_SIGN = "Sign"; //注册
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片
     public static final String HOME_HOT_CRAFTSMAN = "HotCraftsman"; //首页-热门-大国工匠
@@ -50,6 +49,8 @@ public class Server {
     public static final String CRAFTS_MY_QUES= "CraftsMyQues"; //工匠-我的问答-我的提问
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册
-    public static final String SERVER_FEEDBACK = "Feedback"; //意见反馈
+    public static final String SERVER_FEEDBACK = "Feedback"; //意见反馈[
+    public static final String SERVER_EDITPSW = "EditPsw"; //修改密码
+    public static final String SERVER_EDITMYINFO = "EditMyInfo"; //我的--编辑个人资料
 
 }

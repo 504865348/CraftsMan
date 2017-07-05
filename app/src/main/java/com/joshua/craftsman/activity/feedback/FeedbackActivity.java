@@ -1,9 +1,9 @@
 package com.joshua.craftsman.activity.feedback;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
-import com.joshua.craftsman.fragment.CraftsInfoFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 
@@ -43,19 +42,17 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.feedback);
         ButterKnife.bind(this);
         initListener();
+        feedbackToolBar.setTitle("");
+        setSupportActionBar(feedbackToolBar);
     }
 
     private void initListener() {
-        feedbackToolBar.setOnClickListener(this);
         feedbackCommit.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.feedback_tool_bar:
-                startActivity(new Intent(mBaseActivity, CraftsInfoFragment.class));
-                break;
             case R.id.feedback_commit:
                 putDataToServer();
                 break;
@@ -94,18 +91,25 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                             Toast.makeText(mBaseActivity, "意见反馈成功", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    startActivity(new Intent(mBaseActivity, CraftsInfoFragment.class));
                     finish();
                 } else {
-                    Toast.makeText(mBaseActivity, "意见反馈失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mBaseActivity, "意见反馈失败,请检查网络连接", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             protected void error() {
-                Toast.makeText(mBaseActivity, "意见反馈失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mBaseActivity, "意见反馈失败,请检查网络连接", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

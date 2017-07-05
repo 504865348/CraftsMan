@@ -20,7 +20,7 @@
 
     <RelativeLayout
         android:id="@+id/billboard_hot"
-        style="@style/set_linear">
+        style="@style/billboard_linear">
 
         <ImageView
             android:id="@+id/billboard_hot_img"
@@ -64,8 +64,8 @@
             android:id="@+id/billboard_hot_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:background="@drawable/next_big" />
     </RelativeLayout>
 
@@ -73,7 +73,8 @@
 
     <RelativeLayout
         android:id="@+id/billboard_more"
-        style="@style/set_linear">
+        style="@style/billboard_linear">
+
         <ImageView
             android:id="@+id/billboard_more_img"
             android:layout_width="wrap_content"
@@ -81,14 +82,16 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/billboard_more" />
+
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/billboard_more_img"
-            android:orientation="vertical"
-            android:id="@+id/linearLayout">
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/billboard_more_name"
                 style="@style/search_interface_sub_title"
@@ -110,21 +113,22 @@
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
         </LinearLayout>
+
         <ImageView
             android:id="@+id/billboard_more_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/next_big"
             android:layout_alignBottom="@+id/linearLayout"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:background="@drawable/next_big" />
     </RelativeLayout>
 
     <View style="@style/horizontal_split"/>
 
     <RelativeLayout
         android:id="@+id/billboard_pay"
-        style="@style/set_linear">
+        style="@style/billboard_linear">
         <ImageView
             android:id="@+id/billboard_pay_img"
             android:layout_width="wrap_content"
@@ -194,7 +198,7 @@
 
         <RelativeLayout
             android:id="@+id/billboard_craftsman"
-            style="@style/set_linear">
+            style="@style/billboard_linear">
             <ImageView
                 android:id="@+id/billboard_crafts_img"
                 android:layout_width="wrap_content"

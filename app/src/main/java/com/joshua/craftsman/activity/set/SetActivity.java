@@ -76,6 +76,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(mBaseActivity, HelpActivity.class));
                 break;
             case R.id.set_ll_about:
+                startActivity(new Intent(mBaseActivity, AboutActivity.class));
                 break;
             case R.id.set_btn_exit:
                 startActivity(new Intent(mBaseActivity, LoginActivity.class));

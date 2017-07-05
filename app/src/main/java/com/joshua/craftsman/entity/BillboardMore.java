@@ -8,58 +8,62 @@ package com.joshua.craftsman.entity;
 public class BillboardMore {
     //private String programNameTop1;//排名第一节目的名字
     //private String programNameTop2;//排名第二节目的名字
-    private String rankNumber;//节目排名的名次
-    private String programImg;//节目的缩略图或图片
-    private String programTitle;//节目的标题
-    private String authorName;//节目所属的作者名字
+    //private String rankNumber;//节目排名的名次
+   // private String programImg;//节目的缩略图或图片
+    //private String programTitle;//节目的标题
+    //private String authorName;//节目所属的作者名字
     //private String downloadUrl;//节目下载的Url地址
+    private String id;//节目排名的名次
+    private String recordImage;//节目的缩略图或图片
+    private String recordTitle;//节目的标题
+    private String name;//节目所属的作者名字
 
-    public String getRankNumber() {
-        return rankNumber;
+    public String getId() {
+        return id;
     }
 
-    public void setRankNumber(String rankNumber) {
-        this.rankNumber = rankNumber;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getProgramImg() {
-        return programImg;
+    public String getRecordImage() {
+        return recordImage;
     }
 
-    public void setProgramImg(String programImg) {
-        this.programImg = programImg;
+    public void setRecordImage(String recordImage) {
+        this.recordImage = recordImage;
     }
 
-    public String getProgramTitle() {
-        return programTitle;
+    public String getRecordTitle() {
+        return recordTitle;
     }
 
-    public void setProgramTitle(String programTitle) {
-        this.programTitle = programTitle;
+    public void setRecordTitle(String recordTitle) {
+        this.recordTitle = recordTitle;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getName() {
+        return name;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public BillboardMore(String rankNumber, String programImg, String programTitle, String authorName) {
-        this.rankNumber = rankNumber;
-        this.programImg = programImg;
-        this.programTitle = programTitle;
-        this.authorName = authorName;
+    public BillboardMore(String id, String recordImage, String recordTitle, String name) {
+        this.id = id;
+        this.recordImage = recordImage;
+        this.recordTitle = recordTitle;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "BillboardMore{" +
-                "rankNumber='" + rankNumber + '\'' +
-                ", programImg='" + programImg + '\'' +
-                ", programTitle='" + programTitle + '\'' +
-                ", authorName='" + authorName + '\'' +
+                "id='" + id + '\'' +
+                ", recordImage='" + recordImage + '\'' +
+                ", recordTitle='" + recordTitle + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

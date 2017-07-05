@@ -51,6 +51,8 @@
         <item name="android:drawableRight">@drawable/next_more</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
         <item name="android:text">更多</item>
     </style>
 
@@ -74,6 +76,17 @@
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
+    </style>
+
+    <!-- 首页->热门->中部5个按钮 的 LinearLayout -->
+    <style name="home_page_hot_middle_linear_layout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
         <item name="android:background">@drawable/ll_click_selector</item>
     </style>
@@ -329,6 +342,16 @@
         <item name="android:layout_marginTop">7dp</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- 榜单 -> LinearLayout -->
+    <style name="billboard_linear">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
+        <item name="android:gravity">center_vertical</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

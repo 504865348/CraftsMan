@@ -3,6 +3,8 @@ package com.joshua.craftsman.activity.billboard;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +31,8 @@ public class BillboardPayActivity extends BaseActivity {
 
     @BindView(R.id.billboard_pay_program_rv)
     RecyclerView billboard_pay_program_rv;
+    @BindView(R.id.billboard_pay_tool_bar)
+    Toolbar billboardPayToolBar;
 
     private List<BillboardPay> list_pay;
 
@@ -38,6 +42,8 @@ public class BillboardPayActivity extends BaseActivity {
         setContentView(R.layout.billboard_pay_program);
         ButterKnife.bind(this);
         initData();
+        billboardPayToolBar.setTitle("");
+        setSupportActionBar(billboardPayToolBar);
     }
 
     public void initData() {
@@ -48,6 +54,7 @@ public class BillboardPayActivity extends BaseActivity {
     private void getDataFromServer() {
         getPay();
     }
+
     private void getPay() {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(this))
@@ -91,7 +98,16 @@ public class BillboardPayActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         billboard_pay_program_rv.setLayoutManager(linearLayoutManager);
-        billboard_pay_program_rv.setAdapter(new BillboardPayAdapter(this,list_pay));
+        billboard_pay_program_rv.setAdapter(new BillboardPayAdapter(this, list_pay));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
