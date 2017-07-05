@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/find_friend_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageView
-            android:id="@+id/find_friends_back_img"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="5dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/back" />
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/back">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:padding="10dp"
             android:text="找匠友"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View style="@style/horizontal_split"/>
 
     <LinearLayout
         android:id="@+id/find_page_switch_tab"

@@ -1,9 +1,12 @@
 package com.joshua.craftsman.activity.find;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,25 +17,27 @@ import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.findfriendpage.AttentionPager;
 import com.joshua.craftsman.fragment.findfriendpage.FriendPager;
 import com.joshua.craftsman.fragment.homepage.PagerAdapter;
-import com.joshua.craftsman.fragment.myqacrafts.MyAnswerFragment;
-import com.joshua.craftsman.fragment.myqacrafts.MyQuestionFragment;
-import com.joshua.craftsman.fragment.myqacrafts.NotAnswerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class FindFriendsActivity extends BaseActivity {
+public class FindFriendsActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.find_friends_back_img) ImageView findFriendsBackImg;
-    @BindView(R.id.recommend_attention) TextView mRecommendAttention;
-    @BindView(R.id.my_friend) TextView mMyFriend;
-    @BindView(R.id.find_page_switch_tab) LinearLayout mFindPageSwitchTab;
-    @BindView(R.id.find_friend_tab_line) ImageView mTabLineIv;
-    @BindView(R.id.find_friends_page_pager) ViewPager mViewPager;
+    @BindView(R.id.recommend_attention)
+    TextView mRecommendAttention;
+    @BindView(R.id.my_friend)
+    TextView mMyFriend;
+    @BindView(R.id.find_page_switch_tab)
+    LinearLayout mFindPageSwitchTab;
+    @BindView(R.id.find_friend_tab_line)
+    ImageView mTabLineIv;
+    @BindView(R.id.find_friends_page_pager)
+    ViewPager mViewPager;
+    @BindView(R.id.find_friend_tool_bar)
+    Toolbar findFriendToolBar;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private AttentionPager mAttentionPager;
@@ -45,9 +50,9 @@ public class FindFriendsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_friends);
         ButterKnife.bind(this);
-
         initPager();
         initTabLineWidth();
+        initListener();
     }
 
     private void initPager() {
@@ -64,7 +69,7 @@ public class FindFriendsActivity extends BaseActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv.getLayoutParams();
-                lp.leftMargin = screenWidth/3*position + positionOffsetPixels/3;
+                lp.leftMargin = screenWidth / 2 * position + positionOffsetPixels / 2;
                 mTabLineIv.setLayoutParams(lp);
             }
 
@@ -82,7 +87,8 @@ public class FindFriendsActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) { }
+            public void onPageScrollStateChanged(int state) {
+            }
         });
     }
 
@@ -103,8 +109,16 @@ public class FindFriendsActivity extends BaseActivity {
         mTabLineIv.setLayoutParams(lp);
     }
 
-    @OnClick(R.id.find_friends_back_img)
-    public void back() {
-        finish();
+    private void initListener() {
+        findFriendToolBar.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.find_friend_tool_bar:
+                startActivity(new Intent(mBaseActivity, FriendCircleActivity.class));
+                break;
+        }
     }
 }
