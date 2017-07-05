@@ -351,7 +351,15 @@
         <item name="android:clickable">true</item>
         <item name="android:background">@drawable/ll_click_selector</item>
         <item name="android:gravity">center_vertical</item>
+    </style>
 
+    <!-- 找匠友-我的朋友 -> LinearLayout -->
+    <style name="friend_linear">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ll_click_selector</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

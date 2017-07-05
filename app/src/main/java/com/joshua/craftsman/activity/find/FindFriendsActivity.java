@@ -111,6 +111,8 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
 
     private void initListener() {
         findFriendToolBar.setOnClickListener(this);
+        mRecommendAttention.setOnClickListener(this);
+        mMyFriend.setOnClickListener(this);
     }
 
     @Override
@@ -118,6 +120,12 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.find_friend_tool_bar:
                 startActivity(new Intent(mBaseActivity, FriendCircleActivity.class));
+                break;
+            case R.id.recommend_attention:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.my_friend:
+                mViewPager.setCurrentItem(1);
                 break;
         }
     }

@@ -34,7 +34,7 @@ public class Server {
     public static final String QUESANS_HOTMAN = "QuesAnsHotMan"; //问答-超级红人
     public static final String QUESANS_LIST = "QuesAnsList"; //问答-列表
     public static final String FIND_CIRCLE = "FindCircle"; //发现-匠友圈动态
-    public static final String FIND_CIRCLE_FRIENDS = "FindFriends"; //发现-匠友圈-找匠友
+    public static final String FIND_FRIENDS_ATTENTION = "FindFriendsAttention"; //发现-匠友圈-找匠友-推荐关注
     public static final String MY_CRAFTSMAN = "MyCraftsman"; //我的(工匠用户)
     public static final String MY_PUBLIC = "MyPublic"; //我的(普通用户)
     public static final String CRAFTS_UNDEAL_ANS= "CraftsUnDealAns"; //工匠-我的问答-未处理回答
