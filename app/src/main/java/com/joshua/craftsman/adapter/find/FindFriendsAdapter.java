@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.entity.FindFriends;
+import com.joshua.craftsman.entity.FindFriendsAttention;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,9 @@ import java.util.List;
 public class FindFriendsAdapter extends android.support.v7.widget.RecyclerView.Adapter<FindFriendsAdapter.MyViewHolder> implements View.OnClickListener{
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<FindFriends> data = new ArrayList<>();
+    private List<FindFriendsAttention> data = new ArrayList<>();
 
-    public FindFriendsAdapter(Context context,List<FindFriends> data) {
+    public FindFriendsAdapter(Context context,List<FindFriendsAttention> data) {
         mInflater = LayoutInflater.from(context);
         this.data=data;
         this.mContext=context;

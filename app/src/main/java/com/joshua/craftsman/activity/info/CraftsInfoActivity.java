@@ -75,7 +75,7 @@ public class CraftsInfoActivity extends BaseActivity implements View.OnClickList
                 .build();
 
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.SERVER_EDITMYINFO)
+                .add("method", Server.EDIT_MY_INFO)
                 .add("nickName", nickName)
                 .add("introduce", introduce)
                 .add("sex", sex)

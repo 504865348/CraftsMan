@@ -20,19 +20,12 @@ public class Server {
     public static final String HOME_HOT_LISTEN = "ListenInfo"; //首页-热门-听专题
     public static final String HOME_HOT_LOOK = "LookInfo"; //首页-热门-看利器
     public static final String HOME_RECOMMEND = "Recommend"; //首页-推荐
-    public static final String HOME_CLASSIFY_HOUSES = "ClassifyHouse"; //首页-分类-房屋建筑
-    public static final String HOME_CLASSIFY_MUNICIPAL = "ClassifyMunicipal"; //首页-分类-市政公用
-    public static final String HOME_CLASSIFY_MECHANICAL = "ClassifyMechanical"; //首页-分类-机电工程
-    public static final String HOME_CLASSIFY_HIGHWAYS = "ClassifyHighWays"; //首页-分类-公路
-    public static final String HOME_CLASSIFY_WATERCONSERVANCY = "ClassifyWaterConservancy"; //首页-分类-水利水电
-    public static final String HOME_CLASSIFY_RAILWAY = "ClassifyRailWay"; //首页-分类-铁路工程
-    public static final String HOME_CLASSIFY_MINING = "ClassifyMining"; //首页-分类-矿业工程
-    public static final String HOME_CLASSIFY_AIRPORT = "ClassifyAirport"; //首页-分类-民航机场工程
-    public static final String HOME_CLASSIFY_COMMUNICATIONS = "ClassifyCommunications"; //首页-分类-通信广电工程
+    public static final String HOME_CLASSIFY = "Classify"; //首页-分类
     public static final String HOME_CRAFTSMAN = "Craftsman"; //首页-工匠
     public static final String HOME_SEARCH_ALBUM = "SearchAlbum"; //首页-搜索-专辑
     public static final String HOME_SEARCH_QUESANS = "SearchQuesAns"; //首页-搜索-问答
     public static final String HOME_SEARCH_CRAFTSMAN = "SearchCraftsman"; //首页-搜索-工匠
+    public static final String BILLBOARD = "Billboard"; //榜单(每个具体榜单的前2名)
     public static final String BILLBOARD_HOT = "BillboardHot"; //榜单-最火节目飙升榜
     public static final String BILLBOARD_MORE = "BillboardMore"; //榜单-最多订阅经典榜
     public static final String BILLBOARD_PAY= "BillboardPay"; //榜单-付费精品飙升榜
@@ -41,7 +34,7 @@ public class Server {
     public static final String QUESANS_HOTMAN = "QuesAnsHotMan"; //问答-超级红人
     public static final String QUESANS_LIST = "QuesAnsList"; //问答-列表
     public static final String FIND_CIRCLE = "FindCircle"; //发现-匠友圈动态
-    public static final String FIND_CIRCLE_FRIENDS = "FindFriends"; //发现-匠友圈-找匠友
+    public static final String FIND_FRIENDS_ATTENTION = "FindFriendsAttention"; //发现-匠友圈-找匠友-推荐关注
     public static final String MY_CRAFTSMAN = "MyCraftsman"; //我的(工匠用户)
     public static final String MY_PUBLIC = "MyPublic"; //我的(普通用户)
     public static final String CRAFTS_UNDEAL_ANS= "CraftsUnDealAns"; //工匠-我的问答-未处理回答
@@ -49,8 +42,8 @@ public class Server {
     public static final String CRAFTS_MY_QUES= "CraftsMyQues"; //工匠-我的问答-我的提问
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册
-    public static final String SERVER_FEEDBACK = "Feedback"; //意见反馈[
-    public static final String SERVER_EDITPSW = "EditPsw"; //修改密码
-    public static final String SERVER_EDITMYINFO = "EditMyInfo"; //我的--编辑个人资料
+    public static final String FEEDBACK = "Feedback"; //意见反馈
+    public static final String EDIT_PSW = "EditPsw"; //修改密码
+    public static final String EDIT_MY_INFO = "EditMyInfo"; //我的--编辑个人资料
 
 }

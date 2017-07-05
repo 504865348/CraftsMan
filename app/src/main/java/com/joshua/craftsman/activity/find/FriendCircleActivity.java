@@ -27,7 +27,6 @@ public class FriendCircleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_content_circle);
         ButterKnife.bind(this);
-
         mFindCircleToolBar.setTitle("");
         setSupportActionBar(mFindCircleToolBar);
     }
@@ -37,9 +36,6 @@ public class FriendCircleActivity extends BaseActivity {
         startActivity(new Intent(FriendCircleActivity.this, FindFriendsActivity.class));
     }
 
-    /**
-     * 监听返回按钮
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

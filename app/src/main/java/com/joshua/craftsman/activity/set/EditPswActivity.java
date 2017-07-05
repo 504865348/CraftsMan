@@ -80,7 +80,7 @@ public class EditPswActivity extends BaseActivity implements View.OnClickListene
                     .cookieJar(new HttpCookieJar(getApplicationContext()))
                     .build();
             RequestBody params = new FormBody.Builder()
-                    .add("method", Server.SERVER_EDITPSW)
+                    .add("method", Server.EDIT_PSW)
                     .add("oldPsw", editOldPsw)
                     .add("newPsw", editNewPsw)
                     .build();

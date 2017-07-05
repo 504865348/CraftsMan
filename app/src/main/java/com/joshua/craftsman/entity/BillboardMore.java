@@ -6,8 +6,6 @@ package com.joshua.craftsman.entity;
  */
 
 public class BillboardMore {
-    //private String programNameTop1;//排名第一节目的名字
-    //private String programNameTop2;//排名第二节目的名字
     //private String rankNumber;//节目排名的名次
    // private String programImg;//节目的缩略图或图片
     //private String programTitle;//节目的标题

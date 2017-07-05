@@ -70,7 +70,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                 .cookieJar(new HttpCookieJar(getApplicationContext()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.SERVER_FEEDBACK)
+                .add("method", Server.FEEDBACK)
                 .add("content", editContent)
                 .add("tel", editTel)
                 .build();

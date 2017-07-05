@@ -28,6 +28,7 @@ public class BillBoardFragment extends BaseFragment implements View.OnClickListe
     RelativeLayout billboardPay;
     @BindView(R.id.billboard_craftsman)
     RelativeLayout billboardCraftsman;
+
     private View view;
 
     @Override

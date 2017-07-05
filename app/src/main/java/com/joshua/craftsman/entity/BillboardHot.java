@@ -6,8 +6,6 @@ package com.joshua.craftsman.entity;
  */
 
 public class BillboardHot {
-    //private String programNameTop1;//排名第一节目的名字
-    //private String programNameTop2;//排名第二节目的名字
     private String id;//节目排名的名次
     private String recordImage;//节目的缩略图或图片
     private String recordTitle;//节目的标题
