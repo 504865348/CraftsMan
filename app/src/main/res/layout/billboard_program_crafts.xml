@@ -21,7 +21,6 @@
     <RelativeLayout
         android:id="@+id/billboard_hot"
         style="@style/billboard_linear">
-
         <ImageView
             android:id="@+id/billboard_hot_img"
             android:layout_width="wrap_content"
@@ -29,7 +28,6 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/billboard_hot" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,28 +35,55 @@
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/billboard_hot_img"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/billboard_hot_name"
                 style="@style/search_interface_sub_title"
                 android:text="最火节目飙升榜" />
-
             <TextView
-                android:id="@+id/billboard_hot_program1"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1 节目a"
+                android:text="1"
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
-
             <TextView
-                android:id="@+id/billboard_hot_program2"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2 节目b"
+                android:text="2"
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
         </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_hot_program1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="节目a"
+                android:textColor="@color/light_gray_text"
+                android:textSize="10sp" />
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_hot_program2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:text="节目b"
+                android:textColor="@color/light_gray_text"
+                android:textSize="10sp" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/billboard_hot_more"
@@ -98,21 +123,52 @@
                 android:text="最多订阅经典榜" />
 
             <TextView
-                android:id="@+id/billboard_more_program1"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="1 节目a"
+                android:text="1"
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/billboard_more_program2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="2 节目b"
+                android:text="2"
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
         </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_more_program1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="节目a"
+                android:textColor="@color/light_gray_text"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_more_program2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:text="节目b"
+                android:textColor="@color/light_gray_text"
+                android:textSize="10sp" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/billboard_more_more"
@@ -150,20 +206,51 @@
                 android:text="付费精品畅销榜" />
 
             <TextView
-                android:id="@+id/billboard_pay_program1"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="1 节目a"
+                android:text="1"
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
             <TextView
-                android:id="@+id/billboard_pay_program2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="2 节目b"
+                android:text="2"
                 android:textColor="@color/light_gray_text"
                 android:textSize="10sp" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_pay_program1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="节目a"
+                android:textColor="@color/light_gray_text"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="82dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/billboard_pay_program2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:text="节目b"
+                android:textColor="@color/light_gray_text"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
         <ImageView
             android:id="@+id/billboard_pay_more"
             android:layout_width="wrap_content"
@@ -217,23 +304,52 @@
                     android:id="@+id/billboard_crafts_name"
                     style="@style/search_interface_sub_title"
                     android:text="最大国工匠榜" />
-
                 <TextView
-                    android:id="@+id/billboard_crafts1"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="1 工匠a"
+                    android:text="1"
                     android:textColor="@color/light_gray_text"
                     android:textSize="10sp" />
-
                 <TextView
-                    android:id="@+id/billboard_crafts2"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="2 工匠b"
+                    android:text="2"
                     android:textColor="@color/light_gray_text"
                     android:textSize="10sp" />
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="82dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/billboard_crafts1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="工匠a"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="82dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/billboard_crafts2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="31dp"
+                    android:text="工匠b"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
             <ImageView
                 android:id="@+id/billboard_crafts_more"
                 android:layout_width="wrap_content"
@@ -242,9 +358,8 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/next_big" />
         </RelativeLayout>
+
         <View style="@style/horizontal_split"/>
+
     </LinearLayout>
 </LinearLayout>
-
-
-

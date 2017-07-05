@@ -12,6 +12,4 @@
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
-    <View style="@style/horizontal_split_wide"/>
-
 </LinearLayout>

@@ -4,21 +4,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="榜单"
             android:layout_centerInParent="true"
-            android:textSize="18sp"
             android:padding="10dp"
-            android:textColor="@android:color/black"/>
+            android:text="榜单"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View style="@style/horizontal_split"/>
-
 
     <include layout="@layout/billboard_program_crafts" />
 
