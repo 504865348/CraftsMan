@@ -1,6 +1,7 @@
 package com.joshua.craftsman.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.entity.HotListen;
 import com.joshua.craftsman.entity.HotLook;
 
@@ -51,9 +53,18 @@ public class HotLookAdapter extends RecyclerView.Adapter<HotLookAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_name.setText(data.get(position).getProgramName());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
+        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumName", data.get(position).getProgramName());
+                intent.putExtra("albumPic", data.get(position).getImageUrl());
+                mContext.startActivity(intent);
+            }
+        });
         holder.itemView.setTag(position+"");
     }
 

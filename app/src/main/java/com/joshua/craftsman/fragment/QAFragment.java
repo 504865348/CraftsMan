@@ -1,6 +1,5 @@
 package com.joshua.craftsman.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,13 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.download.DownloadActivity;
-import com.joshua.craftsman.activity.history.HistoryActivity;
 import com.joshua.craftsman.adapter.HotCraftsAdapter;
 import com.joshua.craftsman.adapter.QuesAnsClassifyAdapter;
 import com.joshua.craftsman.entity.HotCraftsman;
@@ -36,12 +32,9 @@ import okhttp3.RequestBody;
 import static com.joshua.craftsman.R.id.hot_crafts_rv;
 import static com.joshua.craftsman.R.id.list;
 
-public class QAFragment extends BaseFragment implements View.OnClickListener {
+public class QAFragment extends BaseFragment {
 
-    @BindView(R.id.q_a_download)
-    LinearLayout mLinear_download;
-    @BindView(R.id.q_a_history)
-    LinearLayout mLinear_history;
+
     @BindView(R.id.hot_crafts_rv)
     RecyclerView hot_crafts_rv;
     @BindView(R.id.q_a_list_view_examples)
@@ -60,8 +53,6 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initData() {
         super.initData();
-        mLinear_download.setOnClickListener(this);
-        mLinear_history.setOnClickListener(this);
         getDataFromServer();
 
     }
@@ -121,8 +112,6 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         });
     }
 
-
-
     private void parseCJHR(String result) {
         Gson gson = new Gson();
         list_CJHR = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
@@ -172,18 +161,6 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.q_a_download:
-                startActivity(new Intent(getActivity(), DownloadActivity.class));
-                break;
-            case R.id.q_a_history:
-                startActivity(new Intent(getActivity(), HistoryActivity.class));
-                break;
-        }
     }
 
     @Override

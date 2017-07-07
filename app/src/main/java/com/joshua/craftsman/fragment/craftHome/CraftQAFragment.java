@@ -1,4 +1,4 @@
-package com.joshua.craftsman.fragment.craft;
+package com.joshua.craftsman.fragment.craftHome;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,11 +14,11 @@ import butterknife.ButterKnife;
  * Created by Lister on 2017/6/25.
  */
 
-public class CraftAlbumFragment extends BaseFragment {
+public class CraftQAFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.craft_album, null);
+        View view = View.inflate(mContext, R.layout.craft_q_a, null);
         return view;
     }
 

@@ -1,4 +1,4 @@
-package com.joshua.craftsman.activity.craftsHome;
+package com.joshua.craftsman.activity.albumHome;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
-import com.joshua.craftsman.fragment.craftHome.CraftAlbumFragment;
-import com.joshua.craftsman.fragment.craftHome.CraftQAFragment;
+import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
+import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,54 +24,63 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CraftsHomeActivity extends BaseActivity {
+public class AlbumHomeActivity extends BaseActivity {
 
-    @BindView(R.id.crafts_name) TextView mCraftsName;
-    @BindView(R.id.toolbar) Toolbar mToolbar;
-    @BindView(R.id.crafts_image_icon) ImageView mCraftsImageIcon;
-    @BindView(R.id.crafts_text_name) TextView mCraftsTextName;
-    @BindView(R.id.crafts_text_introduction) TextView mCraftsTextIntroduction;
-    @BindView(R.id.crafts_image_follow) ImageView mCraftsImageFollow;
-    @BindView(R.id.crafts_image_ask) ImageView mCraftsImageAsk;
-    @BindView(R.id.crafts_tv_album) TextView mCraftsTvAlbum;
-    @BindView(R.id.crafts_ll_album) LinearLayout mCraftsLlAlbum;
-    @BindView(R.id.crafts_tv_q_a) TextView mCraftsTvQA;
-    @BindView(R.id.crafts_ll_q_a) LinearLayout mCraftsLlQA;
-    @BindView(R.id.crafts_ll_switch) LinearLayout mCraftsLlSwitch;
-    @BindView(R.id.img_tab_line) ImageView mTabLine;
-    @BindView(R.id.crafts_view_pager) ViewPager mViewPager;
+    @BindView(R.id.album_detail_tool_bar)
+    Toolbar albumDetailToolBar;
+    @BindView(R.id.album_detail_cover)
+    ImageView albumDetailCover;
+    @BindView(R.id.album_detail_name)
+    TextView albumDetailName;
+    @BindView(R.id.album_detail_crafts_name)
+    TextView albumDetailCraftsName;
+    @BindView(R.id.album_detail_play_num)
+    TextView albumDetailPlayNum;
+    @BindView(R.id.album_detail_classification)
+    TextView albumDetailClassification;
+    @BindView(R.id.album_detail_subscribe)
+    ImageView albumDetailSubscribe;
+    @BindView(R.id.album_detail_buy)
+    ImageView albumDetailBuy;
+    @BindView(R.id.album_detail_pager)
+    ViewPager mViewPager;
+    @BindView(R.id.album_detail_tv_particulars)
+    TextView albumDetailTvParticulars;
+    @BindView(R.id.album_detail_tv_program)
+    TextView albumDetailTvProgram;
+    @BindView(R.id.img_tab_line)
+    ImageView mTabLine;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
     private int screenWidth;
-    private CraftAlbumFragment mCraftAlbumFragment;
-    private CraftQAFragment mCraftQAFragment;
-    private String itemCraftsName;
-    private String itemCraftsIntro;
-    private String itemCraftsPic;
+    private AlbumDetailsFragment mAlbumDetailsFragment;
+    private AlbumProgramFragment mAlbumProgramFragment;
+
+    private String itemAlbumName;
+    private String itemAlbumPic;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crafts_home);
+        setContentView(R.layout.album_home);
         ButterKnife.bind(this);
-        mToolbar.setTitle("");
-        setSupportActionBar(mToolbar);
+        albumDetailToolBar.setTitle("");
+        setSupportActionBar(albumDetailToolBar);
         initPager();
         initTabLineWidth();
         initView();
     }
 
-
     /**
      * 初始化滑动 Pager 数据
      */
     private void initPager() {
-        mCraftAlbumFragment = new CraftAlbumFragment();
-        mCraftQAFragment = new CraftQAFragment();
-        mFragmentList.add(mCraftAlbumFragment);
-        mFragmentList.add(mCraftQAFragment);
+        mAlbumDetailsFragment = new AlbumDetailsFragment();
+        mAlbumProgramFragment = new AlbumProgramFragment();
+        mFragmentList.add(mAlbumDetailsFragment);
+        mFragmentList.add(mAlbumProgramFragment);
         /**
          * 设置适配器和初始选中项
          */
@@ -79,7 +88,7 @@ public class CraftsHomeActivity extends BaseActivity {
                 .PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
-        mCraftsTvAlbum.setTextColor(Color.RED);
+        albumDetailTvParticulars.setTextColor(Color.RED);
         /**
          * 添加滑动监听器
          */
@@ -92,7 +101,7 @@ public class CraftsHomeActivity extends BaseActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-                lp.leftMargin = screenWidth/2*position + positionOffsetPixels/2;
+                lp.leftMargin = screenWidth / 2 * position + positionOffsetPixels / 2;
                 mTabLine.setLayoutParams(lp);
             }
 
@@ -101,13 +110,14 @@ public class CraftsHomeActivity extends BaseActivity {
                 resetTextView();
                 switch (position) {
                     case 0:
-                        mCraftsTvAlbum.setTextColor(Color.RED);
+                        albumDetailTvParticulars.setTextColor(Color.RED);
                         break;
                     case 1:
-                        mCraftsTvQA.setTextColor(Color.RED);
+                        albumDetailTvProgram.setTextColor(Color.RED);
                         break;
                 }
             }
+
             /**
              * 滑动中的状态 1: 正在滑动  2: 滑动完毕  3: 无操作
              */
@@ -118,8 +128,8 @@ public class CraftsHomeActivity extends BaseActivity {
     }
 
     private void resetTextView() {
-        mCraftsTvAlbum.setTextColor(Color.BLACK);
-        mCraftsTvQA.setTextColor(Color.BLACK);
+        albumDetailTvParticulars.setTextColor(Color.BLACK);
+        albumDetailTvProgram.setTextColor(Color.BLACK);
     }
 
     /**
@@ -135,12 +145,10 @@ public class CraftsHomeActivity extends BaseActivity {
     }
 
     private void initView() {
-        itemCraftsName = getIntent().getStringExtra("craftsName");
-        itemCraftsPic = getIntent().getStringExtra("craftsPic");
-        mCraftsName.setText(itemCraftsName);
-        mCraftsTextName.setText(itemCraftsName);
-        Glide.with(this).load(itemCraftsPic).into(mCraftsImageIcon);
-
+        itemAlbumName = getIntent().getStringExtra("albumName");
+        itemAlbumPic = getIntent().getStringExtra("albumPic");
+        albumDetailName.setText(itemAlbumName);
+        Glide.with(this).load(itemAlbumPic).into(albumDetailCover);
     }
 
     /**
