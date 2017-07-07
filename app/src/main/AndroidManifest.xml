@@ -83,7 +83,8 @@
         <activity android:name=".activity.hot.SkillsActivity" />
         <activity android:name=".activity.hot.PolicyActivity" />
         <activity android:name=".activity.hot.ListenActivity" />
-        <activity android:name=".activity.hot.LookActivity"></activity>
+        <activity android:name=".activity.hot.LookActivity" />
+        <activity android:name=".activity.albumHome.AlbumHomeActivity"></activity>
     </application>
 
 </manifest>

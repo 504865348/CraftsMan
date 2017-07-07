@@ -21,66 +21,20 @@
             android:padding="10dp"
             android:textColor="@android:color/black"/>
 
-        <LinearLayout
-            android:id="@+id/q_a_download"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            android:background="@drawable/ll_click_selector"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/download1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="下载"
-                android:textSize="10sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/q_a_history"
-            android:layout_toLeftOf="@id/q_a_download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="5dp"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:background="@drawable/ll_click_selector"
-            android:gravity="center">
-            <ImageView
-                android:id="@+id/main_image_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/history1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="历史"
-                android:textSize="10sp"/>
-        </LinearLayout>
-
     </RelativeLayout>
 
     <TextView
         android:id="@+id/main_text_search"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:gravity="center_vertical"
-        android:drawableLeft="@drawable/search_icon"
-        android:layout_marginRight="100dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/title_background_selector"
         android:clickable="true"
+        android:drawableLeft="@drawable/search_icon"
+        android:gravity="center_vertical"
         android:text="搜问题搜工匠"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <include layout="@layout/q_a_classification"/>
 

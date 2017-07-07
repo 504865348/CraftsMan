@@ -42,7 +42,7 @@
 
     <View style="@style/horizontal_split"/>
 
-    <!-- ListView 中的 item 为 album_detail_program_item -->
+    <!-- ListView 中的 item 为 album_home_program_item -->
     <ListView
         android:id="@+id/album_programs_lv"
         android:layout_width="match_parent"

@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/album_detail_tool_bar"
         android:layout_width="match_parent"
@@ -25,7 +24,7 @@
     <View style="@style/horizontal_split"/>
 
     <!-- 专辑信息 -->
-    <include layout="@layout/album_detail_album_info" />
+    <include layout="@layout/album_home_album_info" />
 
     <View style="@style/horizontal_split"/>
 
@@ -77,7 +76,7 @@
 
     <View style="@style/horizontal_split"/>
 
-    <!-- 向 ViewPager 中添加 album_detail_particulars 或 album_detail_program -->
+    <!-- 向 ViewPager 中添加 album_home_details 或 album_home_program -->
     <android.support.v4.view.ViewPager
         android:id="@+id/album_detail_pager"
         android:layout_width="match_parent"

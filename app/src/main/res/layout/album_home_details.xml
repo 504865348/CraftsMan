@@ -13,7 +13,7 @@
         android:padding="10dp"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:text="节目详情"/>
+        android:text="专辑详情"/>
 
     <View style="@style/horizontal_split"/>
 
@@ -22,53 +22,21 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white">
 
-        <ImageView
-            android:id="@+id/particulars_cover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/album_detail_small_cover"/>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_toRightOf="@+id/particulars_cover"
-            android:layout_alignTop="@+id/particulars_cover">
+            >
 
             <TextView
                 android:id="@+id/particulars_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
-                android:text="标题"/>
+                android:text="专辑简介专辑简介专辑简介专辑简介专辑简介"/>
 
-            <TextView
-                android:id="@+id/particulars_name"
-                style="@style/album_particulars_small"
-                android:text="作者名"
-                android:drawableLeft="@drawable/particulars_name_img"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/particulars_pv"
-                    style="@style/album_particulars_small"
-                    android:text="播放量"
-                    android:drawableLeft="@drawable/particulars_pv_img"/>
-
-                <TextView
-                    android:id="@+id/particulars_duration"
-                    style="@style/album_particulars_small"
-                    android:text="时长"
-                    android:layout_marginLeft="20dp"
-                    android:drawableLeft="@drawable/particulars_duration_img"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -80,7 +48,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:padding="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
         android:textColor="@color/black"
         android:text="工匠详情"/>
@@ -111,8 +79,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/black"
-                android:text="账号名"/>
+                android:text="工匠名"/>
 
             <TextView
                 android:id="@+id/particulars_crafts_info"
@@ -123,15 +92,6 @@
                 android:textColor="@color/light_gray_text"
                 android:text="简介"
                 />
-
-            <TextView
-                android:id="@+id/particulars_crafts_introduction"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:layout_marginTop="5dp"
-                android:text="详细介绍详细介绍"/>
 
         </LinearLayout>
 
