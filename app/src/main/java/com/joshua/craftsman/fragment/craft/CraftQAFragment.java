@@ -18,7 +18,7 @@ public class CraftQAFragment extends BaseFragment {
 
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.craft_album, null);
+        View view = View.inflate(mContext, R.layout.craft_q_a, null);
         return view;
     }
 

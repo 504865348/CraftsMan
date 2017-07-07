@@ -8,7 +8,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,6 +20,8 @@
 
     <View style="@style/horizontal_split"/>
 
-    <include layout="@layout/billboard_program_crafts" />
+    <include layout="@layout/billboard_rank_pro" />
+
+    <include layout="@layout/billboard_rank_crafts" />
 
 </LinearLayout>

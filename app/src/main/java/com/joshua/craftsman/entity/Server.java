@@ -25,7 +25,8 @@ public class Server {
     public static final String HOME_SEARCH_ALBUM = "SearchAlbum"; //首页-搜索-专辑
     public static final String HOME_SEARCH_QUESANS = "SearchQuesAns"; //首页-搜索-问答
     public static final String HOME_SEARCH_CRAFTSMAN = "SearchCraftsman"; //首页-搜索-工匠
-    public static final String BILLBOARD = "Billboard"; //榜单(每个具体榜单的前2名)
+    public static final String BILLBOARD_RANK_PRO = "BillboardRankPro"; //榜单-节目榜单排名(每个具体榜单的前2名)
+    public static final String BILLBOARD_RANK_CRAFTS = "BillboardRankCrafts"; //榜单-工匠榜单排名(前2名)
     public static final String BILLBOARD_HOT = "BillboardHot"; //榜单-最火节目飙升榜
     public static final String BILLBOARD_MORE = "BillboardMore"; //榜单-最多订阅经典榜
     public static final String BILLBOARD_PAY= "BillboardPay"; //榜单-付费精品飙升榜

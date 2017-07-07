@@ -1,6 +1,7 @@
 package com.joshua.craftsman.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
+import com.joshua.craftsman.entity.Craftsman;
 import com.joshua.craftsman.entity.HotCraftsman;
 
 import java.util.ArrayList;
@@ -51,9 +54,19 @@ public class HotCraftsAdapter extends android.support.v7.widget.RecyclerView.Ada
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_name.setText(data.get(position).getCraftsmanName());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
+        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
+                intent.putExtra("craftsName", data.get(position).getCraftsmanName());
+                //intent.putExtra("craftsIntro", data.get(position).getIntroduction());
+                intent.putExtra("craftsPic", data.get(position).getImageUrl());
+                mContext.startActivity(intent);
+            }
+        });
         holder.itemView.setTag(position+"");
     }
 
