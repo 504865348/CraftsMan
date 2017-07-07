@@ -65,11 +65,11 @@
         </LinearLayout>
 
         <!-- ListView 中添加 select_album_item -->
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/album_list_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </ListView>
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

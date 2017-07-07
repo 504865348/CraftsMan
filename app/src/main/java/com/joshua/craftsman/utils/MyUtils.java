@@ -228,9 +228,9 @@ public class MyUtils extends Activity {
      * @param path    SD卡下的子地址，为用户手机号
      * @param picName 文件名称
      */
-    public static void saveBitmap(Bitmap bitmap, String path, String picName) {
+    public static void saveBitmap(Bitmap bitmap, String path,String user, String picName) {
         //sd卡保存路径
-        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + path;
+        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" +user+"/"+ path;
         try {
             File category = new File(absPath);
             File file = new File(absPath, picName + ".JPEG");

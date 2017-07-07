@@ -14,6 +14,7 @@ import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.record.PostRecordActivity;
 import com.joshua.craftsman.entity.MyRecording;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class MyRecordAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.my_records_item, null);
@@ -65,14 +66,17 @@ public class MyRecordAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PostRecordActivity.class);
-//                intent.putExtra("")
+                intent.putExtra("name", mMyRecordings.get(position).getName());
                 mContext.startActivity(intent);
             }
         });
         record_item_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("1", "onClick: " + record_item_time.getText());
+                File file = new File(myRecording.getStorageUrl());
+                if (file.exists()) {
+                   file.delete();
+                }
             }
         });
 

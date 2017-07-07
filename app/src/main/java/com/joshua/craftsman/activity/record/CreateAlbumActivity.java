@@ -1,4 +1,4 @@
-package com.joshua.craftsman.activity.ask;
+package com.joshua.craftsman.activity.record;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,25 +6,27 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
-import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.utils.MyUtils;
 import com.joshua.craftsman.utils.PrefUtils;
 
@@ -45,140 +47,65 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.R.attr.path;
+import static com.joshua.craftsman.R.id.et_question;
+import static com.joshua.craftsman.R.id.iv_add_pic;
 
-public class AskQuestionActivity extends BaseActivity implements View.OnClickListener {
-
-    @BindView(R.id.tv_middle)
-    TextView tv_middle;
-    @BindView(R.id.iv_right)
-    ImageView iv_right;
-    @BindView(R.id.tv_answer)
-    TextView tv_answer;
-    @BindView(R.id.tv_cost)
-    TextView tv_cost;
-    @BindView(R.id.et_question)
-    EditText et_question;
+public class CreateAlbumActivity extends BaseActivity {
     @BindView(R.id.iv_add_pic)
-    ImageView iv_add_pic;
-    @BindView(R.id.btn_cancel)
-    Button btn_cancel;
-    @BindView(R.id.btn_commit)
-    Button btn_commit;
+    ImageView add;
+    @BindView(R.id.et_title)
+    EditText et_title;
+    @BindView(R.id.Spinner01)
+    Spinner spinner;
+    private String[] mTypes;
+    private String mType;
 
     private PopupWindow pop = null;
     private View parentView;
     private LinearLayout ll_popup;
-    private String mAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ask_question);
+        setContentView(R.layout.creat_new_album);
         ButterKnife.bind(this);
-        initToolBar();
         initView();
+        initData();
         initListener();
-    }
 
-    private void initListener() {
-        iv_right.setOnClickListener(this);
-        iv_add_pic.setOnClickListener(this);
-        btn_cancel.setOnClickListener(this);
-        btn_commit.setOnClickListener(this);
     }
 
     private void initView() {
-        mAnswer = getIntent().getStringExtra("answer");
-        tv_middle.setText(mAnswer);
-        tv_answer.setText("向" + mAnswer + "提问");
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                mType = mTypes[pos];
+                Log.d(TAG, "onItemSelected: " + mType);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         //加载父布局
         parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
         InitPopWindow();
     }
 
-    private void initToolBar() {
-        iv_right.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_right:
-                //// TODO: 2017/6/1
-                break;
-            case R.id.iv_add_pic:
+    private void initListener() {
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
-                break;
-            case R.id.btn_cancel:
-                onBackPressed();
-                break;
-            case R.id.btn_commit:
-                postToServer();
-                break;
-
-
-        }
-    }
-
-    private void postToServer() {
-        String user = PrefUtils.getString(mBaseActivity, "phone", "");
-        String question = et_question.getText().toString();
-        String cost = 100 + "";
-        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
-        File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
-
-        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("image", "question.JPEG", fileBody)
-                .addFormDataPart("craftsman",mAnswer)
-                .addFormDataPart("questionWord",question)
-                .addFormDataPart("money",cost)
-                .addFormDataPart("user",user)
-                .build();
-        Request request = new Request.Builder()
-                .url(Server.SERVER_UPLOAD)
-                .post(requestBody)
-                .build();
-        Call call = new OkHttpClient().newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseJson = response.body().string();
-                Log.d(TAG, "onResponse: " + responseJson);
-                JSONObject jo = null;
-                try {
-                    jo = new JSONObject(responseJson);
-                    String result = jo.getString("result");
-                    if(result.equals("true")){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(mBaseActivity, "提问成功", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        finish();
-                    }else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
             }
         });
+
+    }
+
+    private void initData() {
+        mTypes = getResources().getStringArray(R.array.albumTypes);
+        mType = mTypes[0];
     }
 
 
@@ -242,7 +169,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     /**
      * 返回图片
      */
-    private static final String IMAGE_FILE_NAME = "question";
+    private static final String IMAGE_FILE_NAME = "album";
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -251,8 +178,8 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "phone", ""),PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
-                    iv_add_pic.setImageBitmap(bitmap);
+                            , PrefUtils.getString(mBaseActivity, "album", ""), PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
+                    add.setImageBitmap(bitmap);
                 }
                 break;
             case CHOOSE_PICTURE:
@@ -262,8 +189,8 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                     Bitmap bitmap = MyUtils.getBitmapFromUri(this, uri);
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "phone", ""),PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
-                    iv_add_pic.setImageBitmap(bitmap);
+                            , PrefUtils.getString(mBaseActivity, "album", ""), PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
+                    add.setImageBitmap(bitmap);
                 }
                 break;
         }
@@ -280,4 +207,62 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     }
 
 
+    public void createAlbum(View view) {
+        String specialName = et_title.getText().toString();
+        String typeName = mType;
+        String creater = PrefUtils.getString(mBaseActivity, "phone", "");
+        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
+        File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
+
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("image", "album.JPEG", fileBody)
+                .addFormDataPart("specialName",specialName)
+                .addFormDataPart("typeName",typeName)
+                .addFormDataPart("creater",creater)
+                .build();
+        Request request = new Request.Builder()
+                .url(Server.SERVER_ALBUM)
+                .post(requestBody)
+                .build();
+        Call call = new OkHttpClient().newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "createAlbum:fail"+e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                JSONObject jo = null;
+                try {
+                    jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    if(result.equals("true")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "专辑添加成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    }else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "专辑添加失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
 }

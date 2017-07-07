@@ -11,6 +11,8 @@ public class Server {
 
     public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
     public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
+    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
+    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
 
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片
@@ -46,5 +48,7 @@ public class Server {
     public static final String FEEDBACK = "Feedback"; //意见反馈
     public static final String EDIT_PSW = "EditPsw"; //修改密码
     public static final String EDIT_MY_INFO = "EditMyInfo"; //我的--编辑个人资料
+    public static final String ALBUM_LIST = "queryMyAlbum"; //专辑列表
+
 
 }
