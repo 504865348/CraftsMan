@@ -2,7 +2,9 @@ package com.joshua.craftsman.adapter.find;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,9 +37,9 @@ public class FindFriendsAdapter extends android.support.v7.widget.RecyclerView.A
 
     @Override
     public void onBindViewHolder(FindFriendsAdapter.MyViewHolder holder, int position) {
-        holder.tv_name.setText(data.get(position).getCraftsName());
+        holder.tv_name.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
-        Glide.with(mContext).load(data.get(position).getCraftsImage()).placeholder(R.drawable.load_error).into(holder.iv_pic);
+        Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
 
@@ -54,7 +56,7 @@ public class FindFriendsAdapter extends android.support.v7.widget.RecyclerView.A
         }
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_pic;
         TextView tv_name;
         TextView tv_introduction;
@@ -74,5 +76,40 @@ public class FindFriendsAdapter extends android.support.v7.widget.RecyclerView.A
 
     public void setOnRecyclerViewItemClickListener(FindFriendsAdapter.onRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
         mOnRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
+    }
+
+    public static class RecyclerViewItemClickListener implements RecyclerView.OnItemTouchListener {
+        private FindFriendsAdapter.onRecyclerViewItemClickListener mItemClickListener;
+        private GestureDetector mGestureDetector;
+
+        public RecyclerViewItemClickListener(Context pContext, FindFriendsAdapter.onRecyclerViewItemClickListener pItemClickListener) {
+            mItemClickListener = pItemClickListener;
+            mGestureDetector = new GestureDetector(pContext, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View childView = rv.findChildViewUnder(e.getX(), e.getY());
+            int position = rv.getChildAdapterPosition(childView);
+            String pos = Integer.toString(position);
+            if (childView != null && position != RecyclerView.NO_POSITION && mItemClickListener != null
+                    && mGestureDetector.onTouchEvent(e)) {
+                mItemClickListener.onItemClick(childView, pos);
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
     }
 }

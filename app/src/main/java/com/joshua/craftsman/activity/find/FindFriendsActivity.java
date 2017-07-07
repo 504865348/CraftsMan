@@ -97,9 +97,6 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
         mMyFriend.setTextColor(Color.BLACK);
     }
 
-    /**
-     * 设置滑动条的宽度为屏幕的 1/2 (根据Tab的个数而定)
-     */
     private void initTabLineWidth() {
         DisplayMetrics dpMetrics = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);

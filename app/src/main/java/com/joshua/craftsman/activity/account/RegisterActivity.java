@@ -3,6 +3,7 @@ package com.joshua.craftsman.activity.account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,25 +46,15 @@ import static com.joshua.craftsman.R.id.iv_right;
 import static okhttp3.Protocol.get;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
-    @BindView(R.id.et_username)
-    EditText et_username;
-    @BindView(R.id.et_password)
-    EditText et_password;
-    @BindView(R.id.et_sms)
-    EditText et_sms;
-    @BindView(R.id.btn_send_sms)
-    Button btn_send_sms;
-    @BindView(R.id.btn_register)
-    Button btn_register;
-    @BindView(R.id.tv_err)
-    TextView tv_err;
-    @BindView(R.id.cb_agree)
-    CheckBox cb_agree;
-    ImageView iv_left;
-    @BindView(R.id.tv_middle)
-    TextView tv_middle;
-    @BindView(R.id.iv_right)
-    ImageView iv_right;
+
+    @BindView(R.id.et_username) EditText et_username;
+    @BindView(R.id.et_password) EditText et_password;
+    @BindView(R.id.et_sms) EditText et_sms;
+    @BindView(R.id.btn_send_sms) Button btn_send_sms;
+    @BindView(R.id.btn_register) Button btn_register;
+    @BindView(R.id.tv_err) TextView tv_err;
+    @BindView(R.id.cb_agree) CheckBox cb_agree;
+    @BindView(R.id.register_tool_bar) Toolbar mToolbar;
 
 
     private String username = "";
@@ -74,19 +65,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        initToolBar();
+
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
+
         initListener();
     }
 
     private void initListener() {
         btn_send_sms.setOnClickListener(this);
         btn_register.setOnClickListener(this);
-    }
-
-    private void initToolBar() {
-        iv_left.setOnClickListener(this);
-        iv_right.setVisibility(View.INVISIBLE);
-        tv_middle.setText("注册");
     }
 
     @Override
@@ -243,7 +231,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 显示错误
-     *
      * @param err 错误信息
      */
     private void showError(String err) {

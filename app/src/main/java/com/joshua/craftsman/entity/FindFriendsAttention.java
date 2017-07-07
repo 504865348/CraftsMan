@@ -6,24 +6,24 @@ package com.joshua.craftsman.entity;
  */
 
 public class FindFriendsAttention {
-    private String craftsImage; //工匠头像
-    private String craftsName; //工匠名
+    private String imageUrl; //工匠头像
+    private String craftsmanName; //工匠名
     private String introduction; //工匠简介
 
-    public String getCraftsImage() {
-        return craftsImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setCraftsImage(String craftsImage) {
-        this.craftsImage = craftsImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getCraftsName() {
-        return craftsName;
+    public String getCraftsmanName() {
+        return craftsmanName;
     }
 
-    public void setCraftsName(String craftsName) {
-        this.craftsName = craftsName;
+    public void setCraftsmanName(String craftsmanName) {
+        this.craftsmanName = craftsmanName;
     }
 
     public String getIntroduction() {
@@ -34,17 +34,17 @@ public class FindFriendsAttention {
         this.introduction = introduction;
     }
 
-    public FindFriendsAttention(String craftsImage, String craftsName, String introduction) {
-        this.craftsImage = craftsImage;
-        this.craftsName = craftsName;
+    public FindFriendsAttention(String imageUrl, String craftsmanName, String introduction) {
+        this.imageUrl = imageUrl;
+        this.craftsmanName = craftsmanName;
         this.introduction = introduction;
     }
 
     @Override
     public String toString() {
         return "FindFriendsAttention{" +
-                "craftsImage='" + craftsImage + '\'' +
-                ", craftsName='" + craftsName + '\'' +
+                "imageUrl='" + imageUrl + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
                 ", introduction='" + introduction + '\'' +
                 '}';
     }

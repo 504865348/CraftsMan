@@ -70,7 +70,7 @@
         <activity android:name=".activity.answer.MyAskAnswerCommonActivity" />
         <activity android:name=".activity.account.MoneyActivity" />
         <activity android:name=".activity.account.RechargeActivity" />
-        <activity android:name=".activity.craft.CraftActivity" />
+        <activity android:name=".activity.craftsHome.CraftsHomeActivity" />
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.set.SetActivity" />
         <activity android:name=".activity.set.BindActivity" />

@@ -1,10 +1,9 @@
-package com.joshua.craftsman.activity.craft;
+package com.joshua.craftsman.activity.craftsHome;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -12,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.craft.CraftAlbumFragment;
 import com.joshua.craftsman.fragment.craft.CraftQAFragment;
-import com.joshua.craftsman.fragment.download.AlbumFragment;
-import com.joshua.craftsman.fragment.download.DownloadingFragment;
-import com.joshua.craftsman.fragment.download.ProgramFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +24,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CraftActivity extends AppCompatActivity {
+public class CraftsHomeActivity extends BaseActivity {
 
     @BindView(R.id.crafts_name) TextView mCraftsName;
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.crafts_image_icon) ImageView mCraftsImageIcon;
     @BindView(R.id.crafts_text_name) TextView mCraftsTextName;
-    @BindView(R.id.crafts_text_info) TextView mCraftsTextInfo;
     @BindView(R.id.crafts_text_introduction) TextView mCraftsTextIntroduction;
     @BindView(R.id.crafts_image_follow) ImageView mCraftsImageFollow;
     @BindView(R.id.crafts_image_ask) ImageView mCraftsImageAsk;
@@ -49,19 +46,23 @@ public class CraftActivity extends AppCompatActivity {
     private int screenWidth;
     private CraftAlbumFragment mCraftAlbumFragment;
     private CraftQAFragment mCraftQAFragment;
+    private String itemCraftsName;
+    private String itemCraftsIntro;
+    private String itemCraftsPic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crafts);
+        setContentView(R.layout.crafts_home);
         ButterKnife.bind(this);
-
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-
         initPager();
         initTabLineWidth();
+        initView();
     }
+
 
     /**
      * 初始化滑动 Pager 数据
@@ -131,6 +132,15 @@ public class CraftActivity extends AppCompatActivity {
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
         lp.width = screenWidth / 2;
         mTabLine.setLayoutParams(lp);
+    }
+
+    private void initView() {
+        itemCraftsName = getIntent().getStringExtra("craftsName");
+        itemCraftsPic = getIntent().getStringExtra("craftsPic");
+        mCraftsName.setText(itemCraftsName);
+        mCraftsTextName.setText(itemCraftsName);
+        Glide.with(this).load(itemCraftsPic).into(mCraftsImageIcon);
+
     }
 
     /**

@@ -492,5 +492,4 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         });
 
     }
-
 }

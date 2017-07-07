@@ -22,6 +22,8 @@
             android:text="姓名"/>
     </android.support.v7.widget.Toolbar>
 
+    <View style="@style/horizontal_split"/>
+
 
     <include layout="@layout/crafts_info"/>
 
