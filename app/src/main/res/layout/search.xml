@@ -35,7 +35,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="搜索"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/red"/>
 
     </LinearLayout>
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="搜索历史"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@android:color/black"
             android:paddingLeft="10dp"/>
 
@@ -62,15 +62,26 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:text="清空"
-            android:textSize="18sp"
+            android:textSize="14sp"
+            android:clickable="true"
             android:textColor="@color/red"/>
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/search_no_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/light_gray_text"
+        android:text="无搜索记录"/>
+
     <!-- 搜索历史 -->
-    <ScrollView
+    <com.joshua.craftsman.view.FlowLayout
+        android:id="@+id/search_flow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ScrollView>
+        android:layout_height="wrap_content">
+    </com.joshua.craftsman.view.FlowLayout>
 
 </LinearLayout>
