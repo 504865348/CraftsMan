@@ -52,15 +52,7 @@
         <activity android:name=".activity.billboard.BillboardMoreActivity" />
         <activity android:name=".activity.billboard.BillboardPayActivity" />
         <activity android:name=".activity.billboard.BillboardCraftsmanActivity" />
-        <activity android:name=".activity.classify.ClassifyAirportActivity" />
-        <activity android:name=".activity.classify.ClassifyCommunicationsActivity" />
-        <activity android:name=".activity.classify.ClassifyHighWaysActivity" />
-        <activity android:name=".activity.classify.ClassifyHouseActivity" />
-        <activity android:name=".activity.classify.ClassifyMechanicalActivity" />
-        <activity android:name=".activity.classify.ClassifyMiningActivity" />
-        <activity android:name=".activity.classify.ClassifyMunicipalActivity" />
-        <activity android:name=".activity.classify.ClassifyRailWayActivity" />
-        <activity android:name=".activity.classify.ClassifyWaterConservancyActivity" />
+        <activity android:name=".activity.classify.ClassifyActivity"></activity>
         <activity android:name=".activity.find.FriendCircleActivity" />
         <activity android:name=".activity.find.FindActivityActivity" />
         <activity android:name=".activity.find.FindFriendsActivity" />
@@ -71,6 +63,7 @@
         <activity android:name=".activity.account.MoneyActivity" />
         <activity android:name=".activity.account.RechargeActivity" />
         <activity android:name=".activity.craftsHome.CraftsHomeActivity" />
+        <activity android:name=".activity.albumHome.AlbumHomeActivity" />
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.set.SetActivity" />
         <activity android:name=".activity.set.BindActivity" />
@@ -83,10 +76,10 @@
         <activity android:name=".activity.hot.SkillsActivity" />
         <activity android:name=".activity.hot.PolicyActivity" />
         <activity android:name=".activity.hot.ListenActivity" />
-        <activity android:name=".activity.hot.LookActivity"/>
-        <activity android:name=".activity.record.PostRecordActivity"/>
-        <activity android:name=".activity.record.AlbumListActivity"/>
-        <activity android:name=".activity.record.CreateAlbumActivity"/>
+        <activity android:name=".activity.hot.LookActivity" />
+        <activity android:name=".activity.record.PostRecordActivity" />
+        <activity android:name=".activity.record.AlbumListActivity" />
+        <activity android:name=".activity.record.CreateAlbumActivity" />
     </application>
 
 </manifest>

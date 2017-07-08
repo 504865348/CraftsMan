@@ -1,0 +1,120 @@
+package com.joshua.craftsman.activity.classify;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Window;
+
+import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
+import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.fragment.classify.AirportFragment;
+import com.joshua.craftsman.fragment.classify.CommunicationsFragment;
+import com.joshua.craftsman.fragment.classify.HighWaysFragment;
+import com.joshua.craftsman.fragment.classify.HousesFragment;
+import com.joshua.craftsman.fragment.classify.MechanicalFragment;
+import com.joshua.craftsman.fragment.classify.MiningFragment;
+import com.joshua.craftsman.fragment.classify.MunicipalFragment;
+import com.joshua.craftsman.fragment.classify.RailWayFragment;
+import com.joshua.craftsman.fragment.classify.WaterConservancyFragment;
+
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
+public class ClassifyActivity extends BaseActivity implements View.OnClickListener{
+
+    @BindView(R.id.tablayout)
+    TabLayout tabLayout;
+    @BindView(R.id.tab_viewpager)
+    ViewPager vp_pager;
+    @BindView(R.id.classify_tool_bar)
+    Toolbar classifyToolBar;
+
+    private String strTitle[] = new String[]{
+            "房屋建筑", "市政公用", "机电工程",
+            "公路", "水利水电", "铁路工程",
+            "矿业工程", "民航机场工程", "通信广电工程"};
+
+    private Fragment[] mFragmentArrays = new Fragment[9];
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.classify);
+        ButterKnife.bind(this);
+        //classifyToolBar.setTitle("");
+        //setSupportActionBar(classifyToolBar);
+        classifyToolBar.setOnClickListener(this);
+        initView();
+    }
+
+    private void initView() {
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mFragmentArrays[0] = HousesFragment.newInstance();
+        mFragmentArrays[1] = MunicipalFragment.newInstance();
+        mFragmentArrays[2] = MechanicalFragment.newInstance();
+        mFragmentArrays[3] = HighWaysFragment.newInstance();
+        mFragmentArrays[4] = WaterConservancyFragment.newInstance();
+        mFragmentArrays[5] = RailWayFragment.newInstance();
+        mFragmentArrays[6] = MiningFragment.newInstance();
+        mFragmentArrays[7] = AirportFragment.newInstance();
+        mFragmentArrays[8] = CommunicationsFragment.newInstance();
+        PagerAdapter pagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
+        vp_pager.setAdapter(pagerAdapter);
+
+        //vp_pager.setCurrentItem(5);
+
+        tabLayout.setupWithViewPager(vp_pager);
+    }
+
+    final class MyViewPagerAdapter extends FragmentPagerAdapter {
+        public MyViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentArrays[position];
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentArrays.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return strTitle[position];
+        }
+    }
+
+    /*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.classify_tool_bar:
+                startActivity(new Intent(mBaseActivity, MainActivity.class));
+                break;
+        }
+    }
+}

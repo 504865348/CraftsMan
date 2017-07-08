@@ -1,18 +1,21 @@
-package com.joshua.craftsman.activity.classify;
+package com.joshua.craftsman.fragment.classify;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.adapter.classify.ClassifyAdapter;
 import com.joshua.craftsman.entity.Classify;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 
@@ -27,26 +30,32 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class ClassifyWaterConservancyActivity extends BaseActivity {
+/**
+ * Created by nzz on 2017/6/24.
+ * 首页-分类-水利水电Fragment
+ */
 
-    @BindView(R.id.classify_waterConservancy_tool_bar)
-    Toolbar classifyWaterConservancyToolBar;
+public class WaterConservancyFragment extends BaseFragment {
+
     @BindView(R.id.classify_waterConservancy_rv)
     RecyclerView classifyWaterConservancyRv;
 
     private List<Classify> list_waterConservancy;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.classify_waterconservancy);
-        ButterKnife.bind(this);
-        initData();
-        classifyWaterConservancyToolBar.setTitle("");
-        setSupportActionBar(classifyWaterConservancyToolBar);
+    public static Fragment newInstance() {
+        WaterConservancyFragment fragment = new WaterConservancyFragment();
+        return fragment;
     }
 
+    @Override
+    public View initView() {
+        View view = View.inflate(mContext, R.layout.classify_waterconservancy, null);
+        return view;
+    }
+
+    @Override
     public void initData() {
+        super.initData();
         list_waterConservancy = new ArrayList<>();
         getDataFromServer();
     }
@@ -57,7 +66,7 @@ public class ClassifyWaterConservancyActivity extends BaseActivity {
 
     private void getWaterConservancy() {
         OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(this))
+                .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_CLASSIFY)
@@ -69,7 +78,7 @@ public class ClassifyWaterConservancyActivity extends BaseActivity {
                 .post(params)
                 .build();
         Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(this) {
+        call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
                 parseWaterConservancy(result);
@@ -86,7 +95,7 @@ public class ClassifyWaterConservancyActivity extends BaseActivity {
         Gson gson = new Gson();
         list_waterConservancy = gson.fromJson(result, new TypeToken<List<Classify>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
+        getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 initRecycleWaterConservancy();
@@ -96,18 +105,22 @@ public class ClassifyWaterConservancyActivity extends BaseActivity {
 
     private void initRecycleWaterConservancy() {
         //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         classifyWaterConservancyRv.setLayoutManager(linearLayoutManager);
-        classifyWaterConservancyRv.setAdapter(new ClassifyAdapter(this, list_waterConservancy));
+        classifyWaterConservancyRv.setAdapter(new ClassifyAdapter(getActivity(), list_waterConservancy));
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

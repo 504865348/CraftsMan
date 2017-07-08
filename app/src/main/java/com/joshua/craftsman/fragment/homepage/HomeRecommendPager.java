@@ -1,7 +1,7 @@
 package com.joshua.craftsman.fragment.homepage;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
-import com.joshua.craftsman.adapter.HotCraftsAdapter;
-import com.joshua.craftsman.entity.HomeRecommend;
-import com.joshua.craftsman.entity.HotCraftsman;
+import com.joshua.craftsman.entity.BillboardHot;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
@@ -35,7 +33,7 @@ public class HomeRecommendPager extends BaseFragment {
     @BindView(R.id.home_recommend_rv)
     RecyclerView home_recommend_rv;
 
-    private List<HotCraftsman> list_TJ;
+    private List<BillboardHot> list_TJ;
 
     @Override
     public View initView() {
@@ -70,8 +68,7 @@ public class HomeRecommendPager extends BaseFragment {
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                //.add("method", Server.HOME_RECOMMEND)
-                .add("method", Server.HOME_HOT_CRAFTSMAN)
+                .add("method", Server.BILLBOARD_HOT)
                 .build();
 
         final Request request = new Request.Builder()
@@ -94,7 +91,7 @@ public class HomeRecommendPager extends BaseFragment {
 
     private void parseTJ(String result) {
         Gson gson = new Gson();
-        list_TJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
+        list_TJ = gson.fromJson(result, new TypeToken<List<BillboardHot>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -105,11 +102,11 @@ public class HomeRecommendPager extends BaseFragment {
     }
 
     private void initRecycleTJ() {
-        //设置网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),4);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        home_recommend_rv.setLayoutManager(gridLayoutManager);
-        home_recommend_rv.setAdapter(new HotCraftsAdapter(getActivity(),list_TJ));
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        home_recommend_rv.setLayoutManager(linearLayoutManager);
+        home_recommend_rv.setAdapter(new HomeRecommendAdapter(getActivity(),list_TJ));
     }
 
 }

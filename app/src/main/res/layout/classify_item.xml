@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/classify_house_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/photo_two" />
@@ -51,6 +51,8 @@
             android:layout_centerVertical="true"
             android:src="@drawable/downblue" />
     </RelativeLayout>
+
+    <View style="@style/horizontal_split"/>
 
 </LinearLayout>
 

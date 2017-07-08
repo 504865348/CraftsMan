@@ -11,10 +11,8 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.adapter.billboard.BillboardRankCraftsAdapter;
-import com.joshua.craftsman.adapter.billboard.BillboardRankProAdapter;
-import com.joshua.craftsman.entity.BillboardRankCrafts;
-import com.joshua.craftsman.entity.BillboardRankPro;
+import com.joshua.craftsman.adapter.billboard.BillBoardAdapter;
+import com.joshua.craftsman.entity.Billboard;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -30,17 +28,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class BillBoardFragment extends BaseFragment  {
+public class BillBoardFragment extends BaseFragment {
 
 
-    @BindView(R.id.billboard_rank_pro_rv)
-    RecyclerView billboardRankProRv;
-    @BindView(R.id.billboard_rank_crafts_rv)
-    RecyclerView billboardRankCraftsRv;
+    @BindView(R.id.billboard_rv)
+    RecyclerView billboardRv;
 
     private View view;
-    private List<BillboardRankPro> list_rankPro;
-    private List<BillboardRankCrafts> list_rankCrafts;
+    private List<Billboard> list_billboard;
 
     @Override
     public View initView() {
@@ -52,24 +47,24 @@ public class BillBoardFragment extends BaseFragment  {
     @Override
     public void initData() {
         super.initData();
-        list_rankPro = new ArrayList<>();
-        list_rankCrafts = new ArrayList<>();
-        initRankPro();
+        //billboardHot.setOnClickListener(this);
+        //billboardMore.setOnClickListener(this);
+        //billboardPay.setOnClickListener(this);
+        //billboardCraftsman.setOnClickListener(this);
+        list_billboard = new ArrayList<>();
         getDataFromServer();
     }
 
-
     private void getDataFromServer() {
-        getRankPro();
-        getRankCrafts();
+        getBillboard();
     }
 
-    private void getRankPro() {
+    private void getBillboard() {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.BILLBOARD_RANK_PRO)
+                .add("method", Server.BILLBOARD)
                 .build();
 
         final Request request = new Request.Builder()
@@ -80,7 +75,7 @@ public class BillBoardFragment extends BaseFragment  {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
-                parseRankPro(result);
+                parseBillboard(result);
             }
 
             @Override
@@ -90,72 +85,25 @@ public class BillBoardFragment extends BaseFragment  {
         });
     }
 
-    private void getRankCrafts() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
-                .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.BILLBOARD_RANK_CRAFTS)
-                .build();
-
-        final Request request = new Request.Builder()
-                .url(Server.SERVER_REMOTE)
-                .post(params)
-                .build();
-        Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(getActivity()) {
-            @Override
-            protected void success(String result) {
-                parseRankCrafts(result);
-            }
-
-            @Override
-            protected void error() {
-
-            }
-        });
-    }
-
-    private void parseRankPro(String result) {
+    private void parseBillboard(String result) {
         Gson gson = new Gson();
-        list_rankPro = gson.fromJson(result, new TypeToken<List<BillboardRankPro>>() {
+        list_billboard = gson.fromJson(result, new TypeToken<List<Billboard>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                initRankPro();
+                initLayout();
             }
         });
     }
 
-    private void parseRankCrafts(String result) {
-        Gson gson = new Gson();
-        list_rankPro = gson.fromJson(result, new TypeToken<List<BillboardRankCrafts>>() {
-        }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRankCrafts();
-            }
-        });
-    }
-
-    private void initRankPro() {
+    private void initLayout() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        billboardRankProRv.setLayoutManager(linearLayoutManager);
-        billboardRankProRv.setAdapter(new BillboardRankProAdapter(getActivity(), list_rankPro));
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        billboardRv.setLayoutManager(linearLayoutManager);
+        billboardRv.setAdapter(new BillBoardAdapter(getActivity(), list_billboard));
     }
-
-    private void initRankCrafts() {
-        //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        billboardRankCraftsRv.setLayoutManager(linearLayoutManager);
-        billboardRankCraftsRv.setAdapter(new BillboardRankCraftsAdapter(getActivity(), list_rankCrafts));
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

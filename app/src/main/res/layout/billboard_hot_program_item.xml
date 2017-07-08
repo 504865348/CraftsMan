@@ -8,6 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="3dp"
         android:layout_height="80dp">
 
         <TextView
@@ -19,8 +20,8 @@
 
         <ImageView
             android:id="@+id/billboard_hot_program_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:src="@drawable/photo_two" />
@@ -57,6 +58,8 @@
             android:layout_centerVertical="true"
             android:src="@drawable/downblue" />
     </RelativeLayout>
+
+    <View style="@style/horizontal_split"/>
 
 </LinearLayout>
 

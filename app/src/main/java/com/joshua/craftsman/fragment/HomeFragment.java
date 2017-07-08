@@ -103,8 +103,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         adapter = new com.joshua.craftsman.fragment.homepage
                 .PagerAdapter(getFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
-        mViewPager.setCurrentItem(0);
-        mTvRecommend.setTextColor(Color.RED);
+        mViewPager.setCurrentItem(1);
+        mTvHot.setTextColor(Color.RED);
         /**
          * 添加滑动监听器
          */

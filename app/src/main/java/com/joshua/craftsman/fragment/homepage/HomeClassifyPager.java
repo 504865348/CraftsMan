@@ -8,23 +8,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.classify.ClassifyAirportActivity;
-import com.joshua.craftsman.activity.classify.ClassifyCommunicationsActivity;
-import com.joshua.craftsman.activity.classify.ClassifyHighWaysActivity;
-import com.joshua.craftsman.activity.classify.ClassifyHouseActivity;
-import com.joshua.craftsman.activity.classify.ClassifyMechanicalActivity;
-import com.joshua.craftsman.activity.classify.ClassifyMiningActivity;
-import com.joshua.craftsman.activity.classify.ClassifyMunicipalActivity;
-import com.joshua.craftsman.activity.classify.ClassifyRailWayActivity;
-import com.joshua.craftsman.activity.classify.ClassifyWaterConservancyActivity;
-import com.joshua.craftsman.activity.find.FindActivityActivity;
-import com.joshua.craftsman.activity.find.FriendCircleActivity;
+import com.joshua.craftsman.activity.classify.ClassifyActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeClassifyPager extends BaseFragment implements View.OnClickListener{
+public class HomeClassifyPager extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.home_page_classify_construction)
     LinearLayout homePageClassifyConstruction;
@@ -44,6 +34,14 @@ public class HomeClassifyPager extends BaseFragment implements View.OnClickListe
     LinearLayout homePageClassifyAirport;
     @BindView(R.id.home_page_classify_communication)
     LinearLayout homePageClassifyCommunication;
+
+    public int item;
+    public String id;
+    private int idArray[] = new int[]{R.id.home_page_classify_construction,
+            R.id.home_page_classify_civilization, R.id.home_page_classify_electric,
+            R.id.home_page_classify_road, R.id.home_page_classify_water_cons,
+            R.id.home_page_classify_railway, R.id.home_page_classify_mining,
+            R.id.home_page_classify_airport, R.id.home_page_classify_communication};
 
     @Override
     public View initView() {
@@ -79,35 +77,7 @@ public class HomeClassifyPager extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.home_page_classify_construction:
-                startActivity(new Intent(getActivity(),ClassifyHouseActivity.class));
-                break;
-            case R.id.home_page_classify_civilization:
-                startActivity(new Intent(getActivity(),ClassifyMunicipalActivity.class));
-                break;
-            case R.id.home_page_classify_electric:
-                startActivity(new Intent(getActivity(),ClassifyMechanicalActivity.class));
-                break;
-            case R.id.home_page_classify_road:
-                startActivity(new Intent(getActivity(),ClassifyHighWaysActivity.class));
-                break;
-            case R.id.home_page_classify_water_cons:
-                startActivity(new Intent(getActivity(),ClassifyWaterConservancyActivity.class));
-                break;
-            case R.id.home_page_classify_railway:
-                startActivity(new Intent(getActivity(),ClassifyRailWayActivity.class));
-                break;
-            case R.id.home_page_classify_mining:
-                startActivity(new Intent(getActivity(),ClassifyMiningActivity.class));
-                break;
-            case R.id.home_page_classify_airport:
-                startActivity(new Intent(getActivity(),ClassifyAirportActivity.class));
-                break;
-            case R.id.home_page_classify_communication:
-                startActivity(new Intent(getActivity(),ClassifyCommunicationsActivity.class));
-                break;
-        }
+        for(item=0; item<idArray.length; item++)
+            startActivity(new Intent(getActivity(), ClassifyActivity.class));
     }
-
 }
