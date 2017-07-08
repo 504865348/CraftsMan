@@ -9,15 +9,15 @@
     <View style="@style/horizontal_split"/>
 
     <RelativeLayout
+        android:id="@+id/find_friends_phone"
         style="@style/friend_linear">
         <ImageView
             android:id="@+id/find_friends_telephone_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/find_telephone"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/find_telephone"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,11 +41,13 @@
     <View style="@style/horizontal_split"/>
 
     <RelativeLayout
+        android:id="@+id/find_friends_wechat"
         style="@style/friend_linear">
         <ImageView
             android:id="@+id/find_friends_wechat_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:src="@drawable/find_wechat" />
         <LinearLayout
@@ -71,15 +73,15 @@
     <View style="@style/horizontal_split"/>
 
     <RelativeLayout
+        android:id="@+id/find_friends_qq"
         style="@style/friend_linear">
         <ImageView
             android:id="@+id/find_friends_qq_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/find_qq"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/find_qq"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

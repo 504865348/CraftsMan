@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="条"
             android:textSize="14dp"
+            android:layout_marginRight="20dp"
             android:textColor="@color/black"/>
     </LinearLayout>
 

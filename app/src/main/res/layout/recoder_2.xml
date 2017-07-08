@@ -11,28 +11,31 @@
            android:layout_height="262dp"
            android:layout_gravity="center" />
    </LinearLayout>
-   <LinearLayout
+
+   <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+       android:layout_height="60dp">
      <TextView
          android:layout_marginLeft="20dp"
-         android:textSize="24dp"
+         android:textSize="16sp"
+         android:layout_centerVertical="true"
          android:textColor="@color/black"
          android:gravity="center_vertical"
          android:layout_width="wrap_content"
-         android:layout_height="match_parent"
+         android:layout_height="wrap_content"
          android:text="00:00"/>
        <ImageButton
-            android:layout_marginLeft="85dp"
+           android:layout_centerInParent="true"
            android:background="@color/white"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
            android:src="@drawable/record"/>
        <ImageButton
-           android:layout_marginLeft="85dp"
+           android:layout_alignParentRight="true"
            android:background="@color/white"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:layout_centerVertical="true"
            android:src="@drawable/refresh"/>
-   </LinearLayout>
+   </RelativeLayout>
 </LinearLayout>
