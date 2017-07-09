@@ -1,6 +1,7 @@
 package com.joshua.craftsman.activity.ask;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.widget.Toast.makeText;
+import static com.joshua.craftsman.R.id.ll_container;
+import static com.joshua.craftsman.R.id.progressBar;
+
 
 public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaPlayer.OnCompletionListener {
     static final int VOICE_REQUEST_CODE = 66;
@@ -54,12 +60,17 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     Button mButton;
     @BindView(R.id.tv_question)
     TextView tv_question;
+    @BindView(R.id.message)
+    TextView message;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private String mFilePath = "";
     private static MediaPlayer music;
     private long mRecordTime;
     private String mId;
     private String mQuestion;
+    private Call mCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +101,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
             //录音结束，filePath为保存路径
             @Override
             public void onStop(String filePath) {
-                Toast.makeText(mBaseActivity, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
+                makeText(mBaseActivity, "录音保存在：" + filePath, Toast.LENGTH_SHORT).show();
                 mTextView.setText(TimeUtils.long2String(0));
             }
         });
@@ -103,17 +114,21 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     private void initData() {
         mId = getIntent().getStringExtra("Id");
         mQuestion = getIntent().getStringExtra("question");
-        tv_question.setText("问题内容："+mQuestion);
+        tv_question.setText("问题内容：" + mQuestion);
     }
 
     private boolean isFinishRecording = false;
 
     public void StartListener() {
         mButton.setOnTouchListener(new View.OnTouchListener() {
+
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (isFinishRecording) {
-                    Toast.makeText(mBaseActivity, "录制已完成，若需更改，请点击重录", Toast.LENGTH_SHORT).show();
+//                          Toast.makeText(mBaseActivity, "录制已完成，若需更改，请点击重录", Toast.LENGTH_SHORT).show();
+                    message.setTextColor(Color.RED);
+                    message.setText("录制已完成，若需更改，请点击重录");
 
                 } else {
                     switch (event.getAction()) {
@@ -125,7 +140,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
 
                         case MotionEvent.ACTION_UP:
                             //结束录音（保存录音文件）
-                            mRecordTime = mAudioRecoderUtils.stopRecord()/1000;
+                            mRecordTime = mAudioRecoderUtils.stopRecord() / 1000;
                             Log.d(TAG, "record time: " + mRecordTime);
                             mPop.dismiss();
                             isFinishRecording = true;
@@ -163,7 +178,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
             }
 
         } else {
-            Toast.makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
+            makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -178,14 +193,22 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     @OnClick(R.id.answer_question_rerecord)
     public void reRecord() {
         if (mFilePath.isEmpty()) {
-            Toast.makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
+            makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
         } else {
             File file = new File(mFilePath);
             file.delete();
-            Toast.makeText(mBaseActivity, "音频删除成功，请重新录制", Toast.LENGTH_SHORT).show();
+            message.setTextColor(Color.BLACK);
+            message.setText("最长两分钟录制");
+            makeText(mBaseActivity, "音频删除成功，请重新录制", Toast.LENGTH_SHORT).show();
             mFilePath = "";
             isFinishRecording = false;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mCall.cancel();
     }
 
     /**
@@ -194,8 +217,9 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     @OnClick(R.id.answer_question_send)
     public void sendRecord() {
         if (mFilePath.isEmpty()) {
-            Toast.makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
+            makeText(mBaseActivity, "请先录制", Toast.LENGTH_SHORT).show();
         } else {
+            showLoadingProgress();
             postToServer();
         }
     }
@@ -211,17 +235,23 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
                 .addFormDataPart("file", "answer.amr", fileBody)
                 .addFormDataPart("id", mId)
                 .addFormDataPart("user", user)
-                .addFormDataPart("time", mRecordTime+"")
+                .addFormDataPart("time", mRecordTime + "")
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_VIDEO)
                 .post(requestBody)
                 .build();
-        Call call = new OkHttpClient().newCall(request);
-        call.enqueue(new Callback() {
+        mCall = new OkHttpClient().newCall(request);
+        mCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismissLoadingProgress();
+                        makeText(mBaseActivity, "回答失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -236,7 +266,8 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(mBaseActivity, "提问成功", Toast.LENGTH_SHORT).show();
+                                dismissLoadingProgress();
+                                makeText(mBaseActivity, "回答成功", Toast.LENGTH_SHORT).show();
                             }
                         });
                         finish();
@@ -244,7 +275,8 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
+                                dismissLoadingProgress();
+                                makeText(mBaseActivity, "回答失败", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -255,6 +287,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {
@@ -297,4 +330,14 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
 //            }
 //        }
 //    }
+public void showLoadingProgress() {
+    progressBar.setVisibility(View.VISIBLE);
+    ll.setVisibility(View.INVISIBLE);
+
+}
+
+    public void dismissLoadingProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+        ll.setVisibility(View.VISIBLE);
+    }
 }

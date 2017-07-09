@@ -157,4 +157,5 @@ public class MyAskAnswerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
 }

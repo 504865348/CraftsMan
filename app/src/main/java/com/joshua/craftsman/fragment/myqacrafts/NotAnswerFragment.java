@@ -132,4 +132,11 @@ public class NotAnswerFragment extends BaseFragment {
         craftsNotAnswerRv.setAdapter(notAnswerAdapter);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+
+    }
 }

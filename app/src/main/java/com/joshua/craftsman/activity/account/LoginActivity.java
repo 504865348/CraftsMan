@@ -73,11 +73,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         Log.d(TAG, "login: " + "connecting");
 //        final String username = et_username.getText().toString();
 //        String pwd = et_pwd.getText().toString();
-          final String username = "18761996926";
-          String pwd = "123456";
+//          final String username = "18761996926";
+//          String pwd = "123456";
 
-  //      final String username = "gj1";
-    //    String pwd = "111111";
+        final String username = "gj1";
+        String pwd = "111111";
         if (username.isEmpty()) {
             Toast.makeText(mBaseActivity, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return;
