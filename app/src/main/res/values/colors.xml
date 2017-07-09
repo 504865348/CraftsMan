@@ -26,4 +26,5 @@
     <color name="little_gray">#d8d6d6</color>
     <color name="light_red">#ff3333</color>
     <color name="light_grey">#FAFAFA</color>
+    <color name="light_tiny_red">#FF6666</color>
 </resources>

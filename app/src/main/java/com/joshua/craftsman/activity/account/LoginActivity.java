@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     EditText et_pwd;
     @BindView(R.id.btn_register)
     TextView btn_register;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.ll_container)
+    LinearLayout ll_container;
 
 
     @Override
@@ -59,13 +66,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_register.setOnClickListener(this);
     }
 
-    @OnClick(R.id.imageButton)
-    public void test() {
-        startActivity(new Intent(mBaseActivity, CraftsAnswerQuestionActivity.class));
-    }
 
     @OnClick(R.id.btn_login)
     public void login() {
+        showLoadingProgress();
         Log.d(TAG, "login: " + "connecting");
 //        final String username = et_username.getText().toString();
 //        String pwd = et_pwd.getText().toString();
@@ -101,6 +105,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismissLoadingProgress();
+                        Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
             }
 
@@ -112,10 +124,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     JSONObject jo = new JSONObject(responseJson);
                     String result = jo.getString("result");
                     switch (result) {
+
                         case "normal":
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    dismissLoadingProgress();
                                     PrefUtils.setString(mBaseActivity, "type", "normal");
                                     PrefUtils.setString(mBaseActivity, "phone", username);
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
@@ -129,6 +143,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    dismissLoadingProgress();
                                     PrefUtils.setString(mBaseActivity, "type", "craftsman");
                                     PrefUtils.setString(mBaseActivity, "phone", username);
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
@@ -141,6 +156,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    dismissLoadingProgress();
                                     Toast.makeText(mBaseActivity, "用户名或密码错误，登录失败", Toast.LENGTH_SHORT).show();
 
                                 }
@@ -161,5 +177,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(new Intent(mBaseActivity, RegisterActivity.class));
                 break;
         }
+    }
+
+
+    public void showLoadingProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        ll_container.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void dismissLoadingProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+        ll_container.setVisibility(View.VISIBLE);
     }
 }

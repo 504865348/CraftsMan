@@ -12,6 +12,8 @@ import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +57,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.tv_err) TextView tv_err;
     @BindView(R.id.cb_agree) CheckBox cb_agree;
     @BindView(R.id.register_tool_bar) Toolbar mToolbar;
-
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.ll_container)
+    LinearLayout ll_container;
 
     private String username = "";
     private String mCode;
@@ -70,6 +75,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         setSupportActionBar(mToolbar);
 
         initListener();
+        mCode = MyUtils.generifyCode();
     }
 
     private void initListener() {
@@ -99,6 +105,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             if (mCode.equals(et_sms.getText().toString())) {
                 String password = et_password.getText().toString();
                 if (!password.isEmpty() && password.length() >= 6 && password.length() <= 20) {
+                    showLoadingProgress();
                     OkHttpClient mClient = new OkHttpClient.Builder()
                             .cookieJar(new HttpCookieJar(getApplicationContext()))
                             .build();
@@ -122,19 +129,33 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        dismissLoadingProgress();
                                         Toast.makeText(mBaseActivity, "注册成功，请登录", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                                 startActivity(new Intent(mBaseActivity, LoginActivity.class));
                                 finish();
                             } else {
-                                showError("注册失败");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dismissLoadingProgress();
+                                        showError("注册失败");
+                                    }
+                                });
+
                             }
                         }
 
                         @Override
                         protected void error() {
-                            showError("注册失败");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dismissLoadingProgress();
+                                    showError("注册失败");
+                                }
+                            });
                         }
                     });
                 } else {
@@ -154,7 +175,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      * 发送短信验证码
      */
     private void sendCheckCode() {
-        mCode = MyUtils.generifyCode();
+
         username = et_username.getText().toString();
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getApplicationContext()))
@@ -173,7 +194,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mBaseActivity, "验证码发送失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -186,6 +212,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
                             Toast.makeText(mBaseActivity, "验证码发送成功", Toast.LENGTH_SHORT).show();
                             TimeCount time = new TimeCount(60000, 1000);
                             time.start();
@@ -248,5 +275,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
+    public void showLoadingProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        ll_container.setVisibility(View.INVISIBLE);
 
+    }
+
+    public void dismissLoadingProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+        ll_container.setVisibility(View.VISIBLE);
+    }
 }

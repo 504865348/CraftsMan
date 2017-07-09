@@ -1,6 +1,7 @@
 package com.joshua.craftsman.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -292,5 +293,6 @@ public class MyUtils extends Activity {
         }
         return sRand.toString();
     }
+
 }
 
