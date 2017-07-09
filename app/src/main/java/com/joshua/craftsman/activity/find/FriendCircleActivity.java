@@ -18,17 +18,20 @@ import butterknife.OnClick;
 public class FriendCircleActivity extends BaseActivity {
 
 
-    @BindView(R.id.find_circle_tool_bar) Toolbar mFindCircleToolBar;
-    @BindView(R.id.find_ll_find_friends) LinearLayout mFindLlFindFriends;
-    @BindView(R.id.find_friend_circle_rv) RecyclerView mFindFriendCircleRv;
+    //@BindView(R.id.find_circle_tool_bar)
+   // Toolbar mFindCircleToolBar;
+    @BindView(R.id.find_ll_find_friends)
+    LinearLayout mFindLlFindFriends;
+    @BindView(R.id.find_friend_circle_rv)
+    RecyclerView mFindFriendCircleRv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_content_circle);
         ButterKnife.bind(this);
-        mFindCircleToolBar.setTitle("");
-        setSupportActionBar(mFindCircleToolBar);
+       //mFindCircleToolBar.setTitle("");
+        //setSupportActionBar(mFindCircleToolBar);
     }
 
     @OnClick(R.id.find_ll_find_friends)
@@ -36,6 +39,7 @@ public class FriendCircleActivity extends BaseActivity {
         startActivity(new Intent(FriendCircleActivity.this, FindFriendsActivity.class));
     }
 
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -43,5 +47,6 @@ public class FriendCircleActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
+
 }

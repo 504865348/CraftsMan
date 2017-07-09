@@ -8,8 +8,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/set_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/back">
+        android:layout_height="?attr/actionBarSize">
+        <!-- app:navigationIcon="@drawable/back" -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -182,7 +182,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="40dp"
+        android:background="@drawable/button_light_red_shape"
         android:text="退出登录"
-        android:textColor="#FFF"
-        android:background="#FF6666" />
+        android:textColor="#FFF"/>
 </LinearLayout>

@@ -13,13 +13,16 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.answer.MyAskAnswerCommonActivity;
+import com.joshua.craftsman.activity.feedback.FeedbackActivity;
+import com.joshua.craftsman.activity.info.EditInfoActivity;
+import com.joshua.craftsman.activity.set.SetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class PublicInfoFragment extends BaseFragment {
+public class PublicInfoFragment extends BaseFragment implements View.OnClickListener{
 
     @BindView(R.id.my_info_public_picture) ImageView mMyInfoPublicPicture;
     @BindView(R.id.my_info_public_name) TextView mMyInfoPublicName;
@@ -54,12 +57,22 @@ public class PublicInfoFragment extends BaseFragment {
                 mContext.startActivity(new Intent(getActivity(), MyAskAnswerCommonActivity.class));
                 break;
             case R.id.my_info_public_feedback:
+                startActivity(new Intent(getActivity(), FeedbackActivity.class));
                 break;
             case R.id.my_info_public_sets:
+                startActivity(new Intent(getActivity(), SetActivity.class));
                 break;
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.my_info_public_more:
+                startActivity(new Intent(getActivity(), EditInfoActivity.class));
+                break;
+        }
+    }
 
     @Override
     public View initView() {
@@ -70,6 +83,7 @@ public class PublicInfoFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
+        mMyInfoPublicMore.setOnClickListener(this);
     }
 
     @Override

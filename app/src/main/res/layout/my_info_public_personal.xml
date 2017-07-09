@@ -131,6 +131,8 @@
                 android:background="@drawable/next_more"/>
         </LinearLayout>
 
+        <View style="@style/horizontal_split" />
+
     </LinearLayout>
 
 </LinearLayout>

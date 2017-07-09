@@ -20,7 +20,7 @@ import com.joshua.craftsman.activity.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
-import com.joshua.craftsman.activity.info.CraftsInfoActivity;
+import com.joshua.craftsman.activity.info.EditInfoActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 
@@ -82,6 +82,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoMore.setOnClickListener(this);
         mMyInfoFeedback.setOnClickListener(this);
         mMyInfoSets.setOnClickListener(this);
+        mMyInfoCraftsUpload.setOnClickListener(this);
     }
 
     @Override
@@ -129,6 +130,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         startActivity(new Intent(getActivity(), MoneyActivity.class));
     }
 
+
     /**
      * 创建一个媒体对象
      */
@@ -165,7 +167,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.my_info_more:
-                startActivity(new Intent(getActivity(), CraftsInfoActivity.class));
+                startActivity(new Intent(getActivity(), EditInfoActivity.class));
                 break;
             case R.id.my_info_feedback:
                 startActivity(new Intent(getActivity(), FeedbackActivity.class));
@@ -173,7 +175,9 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
             case R.id.my_info_sets:
                 startActivity(new Intent(getActivity(), SetActivity.class));
                 break;
+            case R.id.my_info_crafts_upload:
+                startActivity(new Intent(getActivity(), MyRecordActivity.class));
+                break;
         }
     }
-
 }

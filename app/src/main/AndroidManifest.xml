@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".application.BaseApplication"
@@ -52,7 +53,7 @@
         <activity android:name=".activity.billboard.BillboardMoreActivity" />
         <activity android:name=".activity.billboard.BillboardPayActivity" />
         <activity android:name=".activity.billboard.BillboardCraftsmanActivity" />
-        <activity android:name=".activity.classify.ClassifyActivity"></activity>
+        <activity android:name=".activity.classify.ClassifyActivity" />
         <activity android:name=".activity.find.FriendCircleActivity" />
         <activity android:name=".activity.find.FindActivityActivity" />
         <activity android:name=".activity.find.FindFriendsActivity" />
@@ -70,7 +71,7 @@
         <activity android:name=".activity.set.HelpActivity" />
         <activity android:name=".activity.set.EditPswActivity" />
         <activity android:name=".activity.feedback.FeedbackActivity" />
-        <activity android:name=".activity.info.CraftsInfoActivity" />
+        <activity android:name=".activity.info.EditInfoActivity" />
         <activity android:name=".activity.set.AboutActivity" />
         <activity android:name=".activity.hot.CraftsActivity" />
         <activity android:name=".activity.hot.SkillsActivity" />
@@ -80,6 +81,7 @@
         <activity android:name=".activity.record.PostRecordActivity" />
         <activity android:name=".activity.record.AlbumListActivity" />
         <activity android:name=".activity.record.CreateAlbumActivity" />
+        <activity android:name=".activity.error.DataErrorActivity"></activity>
     </application>
 
 </manifest>

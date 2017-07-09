@@ -23,7 +23,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class CraftsInfoActivity extends BaseActivity implements View.OnClickListener{
+public class EditInfoActivity extends BaseActivity implements View.OnClickListener{
 
     @BindView(R.id.edit_my_info_tool_bar)
     Toolbar editMyInfoToolBar;

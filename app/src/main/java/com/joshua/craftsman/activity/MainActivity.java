@@ -1,11 +1,21 @@
 package com.joshua.craftsman.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
@@ -23,11 +33,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     private int position = 0;
     private List<BaseFragment> mFragments;
     private BaseFragment tempFragment = null;
+    private IntentFilter mFilter;
+    private String intentAction;
+    private ConnectivityManager mConnectivityManager;
+    private NetworkInfo netInfo;
+    private int netType;
 
     /**
      * 初始化视图对象
@@ -61,7 +76,48 @@ public class MainActivity extends BaseActivity {
          * 设置 RadioGroup 点击监听事件
          */
         setRadioGroupListener();
+
+        mFilter = new IntentFilter();
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(myNetReceiver, mFilter);
+
     }
+
+    /**
+     * 监听网络连接是否正常
+     */
+    private BroadcastReceiver myNetReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            intentAction = intent.getAction();
+            if (intentAction.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                mConnectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                netInfo = mConnectivityManager.getActiveNetworkInfo();
+                if (netInfo != null && netInfo.isAvailable()) {
+                    netType = netInfo.getType();
+                    if (netType == ConnectivityManager.TYPE_WIFI) {
+
+                    } else if (netType == ConnectivityManager.TYPE_ETHERNET) {
+
+                    } else if (netType == ConnectivityManager.TYPE_MOBILE) {
+
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                    dialog.setTitle("请检查网络连接");
+                    dialog.setNegativeButton("确定",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
+                    }
+                });
+                    dialog.show();
+                }
+            }
+        }
+    };
 
     /**
      * 导航栏的点击监听事件
@@ -137,9 +193,4 @@ public class MainActivity extends BaseActivity {
             tempFragment = nextFragment;
         }
     }
-
-
-
-
-
 }

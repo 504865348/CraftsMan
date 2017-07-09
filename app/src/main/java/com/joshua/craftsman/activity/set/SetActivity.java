@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class SetActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.set_tool_bar)
-    Toolbar setToolBar;
+    //@BindView(R.id.set_tool_bar)
+    //Toolbar setToolBar;
     @BindView(R.id.set_ll_bind)
     LinearLayout setLlBind;
     @BindView(R.id.set_ll_change_pwd)
@@ -43,8 +43,8 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.set);
         ButterKnife.bind(this);
         initListener();
-        setToolBar.setTitle("");
-        setSupportActionBar(setToolBar);
+        //setToolBar.setTitle("");
+        //setSupportActionBar(setToolBar);
     }
 
     private void initListener() {
@@ -83,6 +83,8 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
+
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -90,5 +92,5 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

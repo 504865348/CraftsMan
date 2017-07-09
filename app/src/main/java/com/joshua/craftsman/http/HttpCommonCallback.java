@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.joshua.craftsman.activity.account.LoginActivity;
+import com.joshua.craftsman.activity.error.DataErrorActivity;
 
 import java.io.IOException;
 
@@ -50,6 +51,7 @@ public abstract class HttpCommonCallback implements Callback {
         }
         if (responseInfo.isError()) {
             Log.d(TAG, "onResponse: 出现异常");
+            mActivity.startActivity(new Intent(mActivity, DataErrorActivity.class));
             error();
         } else {
             String result = responseInfo.getResult();
@@ -67,5 +69,6 @@ public abstract class HttpCommonCallback implements Callback {
 
 
     }
-
 }
+
+
