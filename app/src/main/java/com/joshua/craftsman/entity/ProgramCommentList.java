@@ -55,7 +55,7 @@ public class ProgramCommentList {
         return "ProgramCommentList{" +
                 "commentID='" + commentID + '\'' +
                 ", userImage='" + userImage + '\'' +
-                ", userName='" + userName + '\'' +
+                ", UserNameClass='" + userName + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

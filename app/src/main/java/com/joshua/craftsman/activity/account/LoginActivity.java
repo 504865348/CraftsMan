@@ -4,24 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.MainActivity;
-import com.joshua.craftsman.activity.ask.CraftsAnswerQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.activity.core.TestActivity;
 import com.joshua.craftsman.entity.Server;
-import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
-import com.joshua.craftsman.http.ResponseInfo;
 import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
@@ -53,6 +46,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @BindView(R.id.ll_container)
     LinearLayout ll_container;
 
+    //public static String appUserName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +65,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void login() {
         showLoadingProgress();
         Log.d(TAG, "login: " + "connecting");
-//        final String username = et_username.getText().toString();
-//        String pwd = et_pwd.getText().toString();
+ //       final String username = et_username.getText().toString();
+ //       String pwd = et_pwd.getText().toString();
 //          final String username = "18761996926";
 //          String pwd = "123456";
 
@@ -134,6 +128,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     PrefUtils.setString(mBaseActivity, "phone", username);
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(mBaseActivity, MainActivity.class));
+                                    //appUserName = username;
                                     finish();
                                 }
                             });
@@ -148,6 +143,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     PrefUtils.setString(mBaseActivity, "phone", username);
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(mBaseActivity, MainActivity.class));
+                                    //appUserName = username;
                                     finish();
                                 }
                             });

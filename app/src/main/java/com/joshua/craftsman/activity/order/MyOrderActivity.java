@@ -1,10 +1,9 @@
-package com.joshua.craftsman.activity;
+package com.joshua.craftsman.activity.order;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -13,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.myorder.MyOrderAlbumFragment;
 import com.joshua.craftsman.fragment.myorder.MyOrderProgramFragment;
@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyOrderActivity extends AppCompatActivity {
+public class MyOrderActivity extends BaseActivity {
 
     @BindView(R.id.myrecorder_toolbar) Toolbar mToolbar;
     @BindView(R.id.my_order_ll_album) LinearLayout mMyOrderLlAlbum;

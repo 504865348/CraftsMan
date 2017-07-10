@@ -1,6 +1,7 @@
 package com.joshua.craftsman.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,7 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.MyOrderActivity;
+import com.joshua.craftsman.activity.account.LoginActivity;
+import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
@@ -69,6 +71,8 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     private View view;
     private Uri fileUri;
     private int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 1;
+    //private SharedPreferences sp;
+    private static final String userClass = LoginActivity.appUserName;
 
     @Override
     public View initView() {
@@ -83,6 +87,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoFeedback.setOnClickListener(this);
         mMyInfoSets.setOnClickListener(this);
         mMyInfoCraftsUpload.setOnClickListener(this);
+        //showUserName();
     }
 
     @Override
@@ -180,4 +185,13 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
                 break;
         }
     }
+/*
+    private void showUserName() {
+        sp = getActivity().getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
+        if(sp.getString("nickName","").equals("")) {
+            mMyInfoUserName.setText(userClass);
+            return;
+        }
+        mMyInfoUserName.setText(sp.getString("nickName", ""));
+    }*/
 }

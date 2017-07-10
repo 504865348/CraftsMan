@@ -118,7 +118,7 @@ public class PublicUser {
                 "headImage='" + headImage + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
-                ", userName='" + userName + '\'' +
+                ", UserNameClass='" + userName + '\'' +
                 ", concernNumber=" + concernNumber +
                 ", subscription=" + subscription +
                 ", collection=" + collection +

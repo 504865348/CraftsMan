@@ -2,9 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.joshua.craftsman.activity.info.EditInfoActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/edit_my_info_tool_bar"
         android:layout_width="match_parent"
@@ -23,36 +25,12 @@
     <View style="@style/horizontal_split" />
 
     <LinearLayout
-        android:id="@+id/head_image"
-        style="@style/my_info_linear">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="头像"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-
-        <ImageView
-            android:id="@+id/my_info_picture"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="260dp"
-            android:src="@drawable/my_info_picture" />
-    </LinearLayout>
-
-    <View style="@style/horizontal_split"/>
-
-    <LinearLayout
         style="@style/my_info_linear">
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/black"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:textSize="16dp"
@@ -62,10 +40,10 @@
             android:id="@+id/etNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="260dp"
+            android:layout_marginLeft="60dp"
             android:background="@color/white"
-            android:hint="小码"
             android:textColor="@color/black"
+            android:hint="填写昵称"
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -77,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:text="简介"
             android:textColor="@color/black"
@@ -86,10 +64,10 @@
             android:id="@+id/etIntroduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
+            android:layout_marginLeft="60dp"
             android:background="@color/white"
-            android:hint="致力于房屋建筑的研究工作"
             android:textColor="@color/black"
+            android:hint="简单介绍一下自己"
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -101,20 +79,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:text="性别"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
-        <EditText
-            android:id="@+id/etSex"
+        <TextView
+            android:id="@+id/tvSex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="270dp"
+            android:layout_marginLeft="60dp"
             android:background="@color/white"
-            android:hint="男"
             android:textColor="@color/black"
+            android:hint="设置性别"
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -126,46 +104,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:text="生日"
             android:textColor="@color/black"
             android:textSize="16dp" />
-        <EditText
-            android:id="@+id/etBirthday"
+        <TextView
+            android:id="@+id/tvBirthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
+            android:layout_marginLeft="60dp"
             android:background="@color/white"
-            android:hint="20171111"
             android:textColor="@color/black"
+            android:hint="设置生日"
             android:textSize="15dp" />
     </LinearLayout>
 
     <View style="@style/horizontal_split"/>
 
-    <LinearLayout
-        android:id="@+id/ensure_psw"
-        style="@style/my_info_linear">
+    <LinearLayout style="@style/my_info_linear">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
-            android:text="地区"
+            android:text="所在地"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
-        <EditText
-            android:id="@+id/etAddress"
+        <TextView
+            android:id="@+id/tvAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
+            android:layout_marginLeft="44dp"
             android:background="@color/white"
-            android:hint="江苏镇江"
             android:textColor="@color/black"
+            android:hint="选择所在地"
             android:textSize="15dp" />
+
     </LinearLayout>
 
     <View style="@style/horizontal_split"/>
@@ -173,10 +150,12 @@
     <Button
         android:id="@+id/my_info_commit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@color/red"
-        android:text="确定"
-        android:textSize="16dp" />
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_light_red_shape"
+        android:text="保存"
+        android:textColor="#FFF"/>
 
 </LinearLayout>

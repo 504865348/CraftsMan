@@ -65,7 +65,7 @@
         <activity android:name=".activity.account.RechargeActivity" />
         <activity android:name=".activity.craftsHome.CraftsHomeActivity" />
         <activity android:name=".activity.albumHome.AlbumHomeActivity" />
-        <activity android:name=".activity.MyOrderActivity" />
+        <activity android:name=".activity.order.MyOrderActivity" />
         <activity android:name=".activity.set.SetActivity" />
         <activity android:name=".activity.set.BindActivity" />
         <activity android:name=".activity.set.HelpActivity" />
