@@ -58,20 +58,21 @@ public class MainActivity extends BaseActivity{
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mFragments = new ArrayList<>();
         /**
          * 将主页面的 Fragment 添加到集合中
          */
-        mFragments = new ArrayList<>();
         mFragments.add(new HomeFragment());
         mFragments.add(new BillBoardFragment());
         mFragments.add(new QAFragment());
         mFragments.add(new FindFragment());
-        String type=PrefUtils.getString(mBaseActivity,"type","normal");
-        if(type.equals("normal")){
+        String type = PrefUtils.getString(mBaseActivity,"type","normal");
+        if (type.equals("normal")) {
             mFragments.add(new PublicInfoFragment());
-        }else {
+        } else {
             mFragments.add(new CraftsInfoFragment());
         }
+
         /**
          * 设置 RadioGroup 点击监听事件
          */
@@ -80,7 +81,6 @@ public class MainActivity extends BaseActivity{
         mFilter = new IntentFilter();
         mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(myNetReceiver, mFilter);
-
     }
 
     /**
