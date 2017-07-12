@@ -81,7 +81,9 @@
         <activity android:name=".activity.record.PostRecordActivity" />
         <activity android:name=".activity.record.AlbumListActivity" />
         <activity android:name=".activity.record.CreateAlbumActivity" />
-        <activity android:name=".activity.error.DataErrorActivity"></activity>
+        <activity android:name=".activity.error.DataErrorActivity" />
+        <activity android:name=".activity.my.MyAlbumActivity" />
+        <activity android:name=".activity.my.MyBillboardActivity"></activity>
     </application>
 
 </manifest>

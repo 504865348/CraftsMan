@@ -51,8 +51,8 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
 
     @BindView(R.id.tv_middle)
     TextView tv_middle;
-    @BindView(R.id.iv_right)
-    ImageView iv_right;
+    //@BindView(R.id.iv_right)
+   // ImageView iv_right;
     @BindView(R.id.tv_answer)
     TextView tv_answer;
     @BindView(R.id.tv_cost)
@@ -82,7 +82,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initListener() {
-        iv_right.setOnClickListener(this);
+        //iv_right.setOnClickListener(this);
         iv_add_pic.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
         btn_commit.setOnClickListener(this);
@@ -98,7 +98,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initToolBar() {
-        iv_right.setOnClickListener(this);
+        //iv_right.setOnClickListener(this);
     }
 
 

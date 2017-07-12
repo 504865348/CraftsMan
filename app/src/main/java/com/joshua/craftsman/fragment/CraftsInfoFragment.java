@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
+import com.joshua.craftsman.activity.my.MyAlbumActivity;
+import com.joshua.craftsman.activity.my.MyBillboardActivity;
 import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
@@ -72,7 +74,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     private Uri fileUri;
     private int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 1;
     //private SharedPreferences sp;
-    private static final String userClass = LoginActivity.appUserName;
+    //private static final String userClass = LoginActivity.appUserName;
 
     @Override
     public View initView() {
@@ -83,6 +85,8 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     @Override
     public void initData() {
         super.initData();
+        mMyInfoMyAlbums.setOnClickListener(this);
+        mMyInfoMyBillboard.setOnClickListener(this);
         mMyInfoMore.setOnClickListener(this);
         mMyInfoFeedback.setOnClickListener(this);
         mMyInfoSets.setOnClickListener(this);
@@ -171,6 +175,12 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.my_info_my_albums:
+                startActivity(new Intent(getActivity(), MyAlbumActivity.class));
+                break;
+            case R.id.my_info_my_billboard:
+                startActivity(new Intent(getActivity(), MyBillboardActivity.class));
+                break;
             case R.id.my_info_more:
                 startActivity(new Intent(getActivity(), EditInfoActivity.class));
                 break;

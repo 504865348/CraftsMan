@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- ToolBar（含返回按钮） -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_billboard_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:navigationIcon="@drawable/back">
+        android:layout_height="50dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="18sp"
+            android:text="我的榜单"
             android:textColor="@android:color/black"
-            android:text="我的榜单"/>
+            android:textSize="18sp" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -28,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:padding="10dp"
         android:text="工匠榜单"/>
@@ -47,15 +44,16 @@
             android:layout_marginLeft="10dp"
             android:padding="10dp"
             android:layout_centerVertical="true"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/black"
             android:text="XX"/>
 
         <ImageView
             android:id="@+id/my_billboard_crafts_cover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_centerVertical="true"
+            android:layout_marginTop="3dp"
             android:src="@drawable/my_billboard_cover_img"
             android:layout_toRightOf="@+id/my_billboard_crafts_rank"/>
 
@@ -73,7 +71,7 @@
                 android:id="@+id/my_billboard_crafts_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 android:text="账号名"/>
 
@@ -102,7 +100,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/my_billboard_img_more"
+            android:id="@+id/my_billboard_crafts_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/my_billboard_more"
@@ -111,15 +109,15 @@
 
     </RelativeLayout>
 
-    <View style="@style/horizontal_split"/>
+    <View style="@style/horizontal_split_wide"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/black"
         android:padding="10dp"
-        android:text="节目榜单"/>
+        android:text="节目榜单"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
     <View style="@style/horizontal_split" />
 

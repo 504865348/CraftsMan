@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 
 import com.joshua.craftsman.mode.CityBean;
@@ -76,7 +75,6 @@ public class ChooseCityUtil implements View.OnClickListener, NumberPicker.OnValu
         for (int i = 0; i < cityArray.length; i++) {
             cityArray[i] = cityList.get(i).getName();
         }
-        LogUtil.i(Arrays.toString(cityArray));
         try {
             npCity.setMinValue(0);
             npCity.setMaxValue(cityArray.length - 1);
@@ -105,7 +103,6 @@ public class ChooseCityUtil implements View.OnClickListener, NumberPicker.OnValu
         for (int i = 0; i < countyArray.length; i++) {
             countyArray[i] = countyList.get(i).toString();
         }
-        LogUtil.i(Arrays.toString(countyArray) + countyArray.length + " - " + (countyArray.length - 1));
         try {
             npCounty.setMinValue(0);
             npCounty.setMaxValue(countyArray.length - 1);

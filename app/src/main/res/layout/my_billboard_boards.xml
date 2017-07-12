@@ -29,7 +29,7 @@
                 <View style="@style/horizontal_split"/>
 
                 <ListView
-                    android:id="@+id/my_billboard_board_1"
+                    android:id="@+id/my_billboard_hot"
                     android:layout_width="match_parent"
                     android:layout_height="120dp">
                 </ListView>
@@ -42,7 +42,7 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:id="@+id/my_billboard_1_more"
+                    android:id="@+id/my_billboard_hot_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/my_billboard_more"/>
@@ -74,7 +74,7 @@
                 <View style="@style/horizontal_split"/>
 
                 <ListView
-                    android:id="@+id/my_billboard_board_2"
+                    android:id="@+id/my_billboard_more"
                     android:layout_width="match_parent"
                     android:layout_height="120dp">
                 </ListView>
@@ -87,7 +87,7 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:id="@+id/my_billboard_2_more"
+                    android:id="@+id/my_billboard_more_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/my_billboard_more"/>
@@ -123,7 +123,7 @@
                 <View style="@style/horizontal_split"/>
 
                 <ListView
-                    android:id="@+id/my_billboard_board_3"
+                    android:id="@+id/my_billboard_pay"
                     android:layout_width="match_parent"
                     android:layout_height="120dp">
                 </ListView>
@@ -136,7 +136,7 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:id="@+id/my_billboard_3_more"
+                    android:id="@+id/my_billboard_pay_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/my_billboard_more"/>

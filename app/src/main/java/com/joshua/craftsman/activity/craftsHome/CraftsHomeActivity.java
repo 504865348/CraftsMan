@@ -1,5 +1,6 @@
 package com.joshua.craftsman.activity.craftsHome;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -7,12 +8,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftAlbumFragment;
@@ -24,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CraftsHomeActivity extends BaseActivity {
+public class CraftsHomeActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.crafts_name) TextView mCraftsName;
     @BindView(R.id.toolbar) Toolbar mToolbar;
@@ -61,6 +65,7 @@ public class CraftsHomeActivity extends BaseActivity {
         initPager();
         initTabLineWidth();
         initView();
+        initListener();
     }
 
 
@@ -141,6 +146,32 @@ public class CraftsHomeActivity extends BaseActivity {
         mCraftsTextName.setText(itemCraftsName);
         Glide.with(this).load(itemCraftsPic).into(mCraftsImageIcon);
 
+    }
+
+    private void initListener() {
+        mCraftsImageFollow.setOnClickListener(this);
+        mCraftsImageAsk.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.crafts_image_ask:
+                Intent intent = new Intent(mBaseActivity, AskQuestionActivity.class);
+                intent.putExtra("answer", itemCraftsName);
+                mBaseActivity.startActivity(intent);
+                break;
+            case R.id.crafts_image_follow:
+                getAttention();
+                break;
+        }
+    }
+
+    private void getAttention() {
+
+
+            //Toast.makeText(mBaseActivity, "已关注", Toast.LENGTH_SHORT).show();
     }
 
     /**

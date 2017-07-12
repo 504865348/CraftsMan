@@ -105,10 +105,12 @@
     <Button
         android:id="@+id/psw_commit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@color/red"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_light_red_shape"
         android:text="确定"
-        android:textSize="16dp" />
+        android:textColor="#FFF"/>
 
 </LinearLayout>

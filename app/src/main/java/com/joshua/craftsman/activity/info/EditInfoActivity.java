@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseCityInterface;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseCityUtil;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseDateInterface;
@@ -22,6 +26,11 @@ import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseDateUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 
 public class EditInfoActivity extends BaseActivity implements View.OnClickListener {
@@ -41,7 +50,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.tvAddress)
     TextView tvAddress;
 
-    public String nickName, introduce;
+    private String nickName, introduce,sex,birthday,address;
     private SharedPreferences sp;
 
     @Override
@@ -65,12 +74,6 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.etNickname:
-                setNickName();
-                break;
-            case R.id.etIntroduce:
-                setIntroduce();
-                break;
             case R.id.tvSex:
                 setSex();
                 break;
@@ -84,14 +87,6 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                 saveInfo();
                 break;
         }
-    }
-
-    private void setNickName() {
-        nickName = et_Nickname.getText().toString();
-    }
-
-    private void setIntroduce() {
-        introduce = et_Introduce.getText().toString();
     }
 
     private void setSex() {
@@ -108,6 +103,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 tvSex.setText(items[which].toString());
+                sex = tvSex.getText().toString();
                 dialog.dismiss();
             }
         });
@@ -124,6 +120,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
             public void sure(int[] newDateArray) {
                 tvBirthday.setText(newDateArray[0] + "年" + newDateArray[1] + "月" + newDateArray[2] + "日");
                 tvBirthday.setTextColor(getResources().getColor(R.color.black));
+                birthday = tvBirthday.getText().toString();
             }
         });
 
@@ -136,24 +133,30 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void sure(String[] newCityArray) {
                 tvAddress.setText(newCityArray[0] + "-" + newCityArray[1] + "-" + newCityArray[2]);
+                address = tvAddress.getText().toString();
             }
         });
     }
 
     private void saveInfo() {
+        nickName = et_Nickname.getText().toString();
+        introduce = et_Introduce.getText().toString();
         sp = getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("nickName", et_Nickname.getText().toString());
-        editor.putString("introduce", et_Introduce.getText().toString());
-        editor.putString("sex", tvSex.getText().toString());
-        editor.putString("birthday", tvBirthday.getText().toString());
-        editor.putString("address", tvAddress.getText().toString());
+        editor.putString("nickName", nickName);
+        editor.putString("introduce", introduce);
+        editor.putString("sex", sex);
+        editor.putString("birthday", birthday);
+        editor.putString("address", address);
         editor.commit();
-        Toast.makeText(getBaseContext(), "保存成功", Toast.LENGTH_SHORT).show();
-        //putDataToServer();
+        if (nickName == null || introduce == null || sex == null
+                || birthday == null || address == null)
+            showErrorMsg("请将信息填写完整");
+        else
+            putDataToServer();
     }
 
-    /*private void putDataToServer() {
+    private void putDataToServer() {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getApplicationContext()))
                 .build();
@@ -180,10 +183,9 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "个人资料编辑成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "保存成功", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    //showMyInfo();
                     finish();
                 } else {
                     Toast.makeText(mBaseActivity, "个人资料编辑失败,请检查网络连接", Toast.LENGTH_SHORT).show();
@@ -195,7 +197,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                 Toast.makeText(mBaseActivity, "个人资料编辑失败,请检查网络连接", Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
 
     private void showInfo() {
         sp = getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
@@ -204,6 +206,13 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         tvSex.setText(sp.getString("sex", ""));
         tvBirthday.setText(sp.getString("birthday", ""));
         tvAddress.setText(sp.getString("address", ""));
+    }
+
+    private void showErrorMsg(String value) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mBaseActivity);
+        dialog.setMessage(value);
+        dialog.setPositiveButton("确定",null);
+        dialog.show();
     }
 
     @Override
