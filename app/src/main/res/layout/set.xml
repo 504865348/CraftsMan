@@ -28,21 +28,27 @@
         android:id="@+id/set_ll_bind"
         style="@style/set_linear"
         android:weightSum="1">
+
         <TextView
-            android:text="账号绑定"
-            style="@style/set_text"/>
+            style="@style/set_text"
+            android:text="账号绑定" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/phone" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/chat" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/find_wechat" />
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/q" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/find_qq" />
+
         <ImageButton
             android:id="@+id/count"
             android:layout_width="wrap_content"

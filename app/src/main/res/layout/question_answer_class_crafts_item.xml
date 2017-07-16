@@ -4,65 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <View style="@style/horizontal_split"/>
+
     <ImageView
-        android:id="@+id/crafts_item_icon"
+        android:id="@+id/question_answer_crafts_img"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/friends_icon"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/question_answer_crafts_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:src="@drawable/q_a_item_icon"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"/>
+        android:layout_marginTop="17dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:text="工匠名"
+        android:layout_toRightOf="@+id/question_answer_crafts_img"
+        android:layout_toEndOf="@+id/question_answer_crafts_img" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/question_answer_crafts_v"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/find_v"
+        android:layout_toRightOf="@+id/question_answer_crafts_name"
+        android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:id="@+id/question_answer_crafts_ask"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/crafts_item_icon">
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/q_a_ask"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="3dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/crafts_item_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="姓名"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"/>
-                <TextView
-                    android:id="@+id/crafts_item_introduction"
-                    android:layout_width="240dp"
-                    android:layout_height="wrap_content"
-                    android:text="简介简介简介"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/crafts_item_follow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/crafts_item_follow"/>
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/crafts_item_detail_introduction"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
-            android:text="详细介绍详细介绍详细介绍"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/question_answer_crafts_introduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="简介简介简介简介简介简介"
+        android:textSize="14sp"
+        android:layout_below="@+id/question_answer_crafts_name"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/question_answer_crafts_img"
+        android:layout_toEndOf="@+id/question_answer_crafts_img"
+        />
 
 </RelativeLayout>

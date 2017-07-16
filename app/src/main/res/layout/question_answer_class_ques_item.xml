@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/question_answer_ques_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/q_a_item_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/question_answer_ques_img">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/question_answer_ques_crafts_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"/>
+                <TextView
+                    android:id="@+id/question_answer_ques_crafts_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="简介简介简介"
+                    android:textSize="12sp"
+                    android:textColor="#c5c5c5"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/question_answer_ques_go_ask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/q_a_ask"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/question_answer_ques_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:text="问题问题问题问题"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/q_a_audio_bar">
+
+            <ImageView
+                android:id="@+id/question_answer_ques_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/q_a_audio_icon"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/question_answer_ques_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/question_answer_ques_audio"
+                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:text="2:00"/>
+
+            <TextView
+                android:id="@+id/question_answer_ques_people_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:text=" 人听过"/>
+
+            <TextView
+                android:id="@+id/question_answer_ques_audio_people_listened"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/question_answer_ques_people_content"
+                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

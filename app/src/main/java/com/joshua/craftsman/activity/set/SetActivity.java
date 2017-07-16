@@ -2,7 +2,10 @@ package com.joshua.craftsman.activity.set;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.Intent;;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +22,10 @@ import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.utils.CacheDataManager;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,18 +55,21 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.tv_cache)
     TextView tvCache;
 
+    private SharedPreferences sp;
+    private boolean isListen,isMobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set);
         ButterKnife.bind(this);
+        sp = getSharedPreferences("switchCompat.txt", Context.MODE_PRIVATE);
+        settingStart();
         initListener();
         listenSwitch();
         showCache();
         //setToolBar.setTitle("");
         //setSupportActionBar(setToolBar);
-
-
     }
 
     private void initListener() {
@@ -81,16 +91,11 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
             case R.id.set_ll_change_pwd:
                 startActivity(new Intent(mBaseActivity, EditPswActivity.class));
                 break;
-            case R.id.sc_listen:
-
-                break;
-            case R.id.sc_mobile:
-
-                break;
             case R.id.set_ll_clear:
                 clear();
                 break;
             case R.id.set_ll_recommend:
+
                 break;
             case R.id.set_ll_help:
                 startActivity(new Intent(mBaseActivity, HelpActivity.class));
@@ -109,15 +114,11 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if (checked == true) {
-
-
                     Toast.makeText(mBaseActivity, "开启断点续听", Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     Toast.makeText(mBaseActivity, "关闭断点续听", Toast.LENGTH_SHORT).show();
                 }
-
+                settingSave();
             }
         });
 
@@ -125,14 +126,11 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if (checked == true) {
-
-
                     Toast.makeText(mBaseActivity, "允许2G/3G/4G播放和下载", Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     Toast.makeText(mBaseActivity, "不允许2G/3G/4G播放和下载", Toast.LENGTH_SHORT).show();
                 }
+                settingSave();
             }
         });
     }
@@ -166,9 +164,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     public static AlertDialog.Builder getDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         return builder;
-
     }
-
 
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -198,6 +194,20 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 return;
             }
         }
+    }
+
+    private void settingSave(){
+        isListen = scListen.isChecked();
+        isMobile = scMobile.isChecked();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("listen",isListen);
+        editor.putBoolean("mobile",isMobile);
+        editor.commit();
+    }
+
+    private void settingStart(){
+        scListen.setChecked(sp.getBoolean("listen",false));
+        scMobile.setChecked(sp.getBoolean("mobile",false));
     }
 
     /*
