@@ -1,11 +1,13 @@
 package com.joshua.craftsman.activity.record;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.LinearGradient;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.drawable.btn;
+
 public class PostRecordActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.record_info_title)
     EditText record_info_title;
@@ -44,6 +48,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
 
     private String mAlbumId;
     private String name;
+    private ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +57,15 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         ButterKnife.bind(this);
         record_info_choose_album.setOnClickListener(this);
         name = getIntent().getStringExtra("name");
+        Button btn_post= (Button) findViewById(R.id.btn_post);
+        btn_post.setOnClickListener(this);
 
     }
 
     /**
      * 上传至
      */
-    public void postToServer(View view) {
+    public void postToServer() {
         String title = record_info_title.getText().toString();
         String idAlbum = mAlbumId;
         String creater = PrefUtils.getString(mBaseActivity, "phone", "");
@@ -85,6 +92,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d(TAG, "createAlbum:fail" + e.getMessage());
+                mDialog.dismiss();
             }
 
             @Override
@@ -99,7 +107,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(mBaseActivity, "专辑添加成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mBaseActivity, "节目添加成功", Toast.LENGTH_SHORT).show();
                             }
                         });
                         finish();
@@ -107,12 +115,14 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(mBaseActivity, "专辑添加失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mBaseActivity, "节目添加失败", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    mDialog.dismiss();
                 }
 
             }
@@ -126,6 +136,12 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 Intent intent = new Intent(this, AlbumListActivity.class);
                 startActivityForResult(intent, 1);
                 break;
+            case R.id.btn_post:
+                mDialog = new ProgressDialog(this);
+                mDialog.setCancelable(false);
+                mDialog.setMessage("视频上传中，请稍后...");
+                mDialog.show();
+                postToServer();
         }
     }
 

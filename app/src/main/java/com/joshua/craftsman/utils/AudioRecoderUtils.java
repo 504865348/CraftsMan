@@ -19,6 +19,8 @@ public class AudioRecoderUtils {
     //文件夹路径
     private String FolderPath;
 
+    public final static String RECODE_PATH=Environment.getExternalStorageDirectory()+"/craftsman/record/";
+
     private MediaRecorder mMediaRecorder;
     private final String TAG = "fan";
     public static final int MAX_LENGTH = 1000 * 60 * 10;// 最大录音时长1000*60*10;
@@ -31,7 +33,7 @@ public class AudioRecoderUtils {
     public AudioRecoderUtils(){
 
         //默认保存路径为/sdcard/record/下
-        this(Environment.getExternalStorageDirectory()+"/craftsman/record/");
+        this(RECODE_PATH);
     }
 
     public AudioRecoderUtils(String filePath) {

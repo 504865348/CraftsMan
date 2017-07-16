@@ -6,7 +6,10 @@ package com.joshua.craftsman.entity;
  */
 
 public class QuesAnsClassify {
+
+
     /* 问答 */
+    private String Id;
     private String craftsImage; //工匠头像
     private String craftsName; //工匠名
     private String introduction; //工匠简介
@@ -71,8 +74,16 @@ public class QuesAnsClassify {
     public void setDetails(String details) {
         this.details = details;
     }
+    public String getId() {
+        return Id;
+    }
 
-    public QuesAnsClassify(String craftsImage, String craftsName, String introduction, String content, String time, String listenrNumber, String details) {
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public QuesAnsClassify(String Id,String craftsImage, String craftsName, String introduction, String content, String time, String listenrNumber, String details) {
+        this.Id=Id;
         this.craftsImage = craftsImage;
         this.craftsName = craftsName;
         this.introduction = introduction;
@@ -85,7 +96,8 @@ public class QuesAnsClassify {
     @Override
     public String toString() {
         return "QuesAnsClassify{" +
-                "craftsImage='" + craftsImage + '\'' +
+                "Id='" + Id + '\'' +
+                ", craftsImage='" + craftsImage + '\'' +
                 ", craftsName='" + craftsName + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", content='" + content + '\'' +
@@ -94,4 +106,6 @@ public class QuesAnsClassify {
                 ", details='" + details + '\'' +
                 '}';
     }
+
+
 }

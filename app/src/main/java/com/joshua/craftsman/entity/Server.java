@@ -48,6 +48,6 @@ public class Server {
     public static final String EDIT_PSW = "EditPsw"; //修改密码
     public static final String EDIT_MY_INFO = "EditMyInfo"; //我的--编辑个人资料
     public static final String ALBUM_LIST = "queryMyAlbum"; //专辑列表
-
+    public static final String QUERY_QUESTION = "queryQuesById"; //获得问题
 
 }
