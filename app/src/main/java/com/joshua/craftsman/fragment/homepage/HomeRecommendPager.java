@@ -1,8 +1,11 @@
 package com.joshua.craftsman.fragment.homepage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
 import com.joshua.craftsman.entity.BillboardHot;
 import com.joshua.craftsman.entity.Server;
@@ -22,18 +26,30 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+import static android.media.CamcorderProfile.get;
+
 public class HomeRecommendPager extends BaseFragment {
 
+
     @BindView(R.id.home_recommend_rv)
+
     RecyclerView home_recommend_rv;
 
     private List<BillboardHot> list_TJ;
+    private Context mContext;
+
+    public HomeRecommendPager(Context context) {
+        mContext = context;
+    }
+
 
     @Override
     public View initView() {
@@ -106,7 +122,29 @@ public class HomeRecommendPager extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         home_recommend_rv.setLayoutManager(linearLayoutManager);
-        home_recommend_rv.setAdapter(new HomeRecommendAdapter(getActivity(),list_TJ));
+        HomeRecommendAdapter adapter = new HomeRecommendAdapter(getActivity(), list_TJ);
+        adapter.setOnRecyclerViewItemClickListener(new HomeRecommendAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Log.d(TAG, "onItemClick: " + pos);
+                String url = list_TJ.get(pos).getDownloadUrl();
+                Intent intent=new Intent(mContext,PlayerFrameActivity.class);
+                intent.putExtra("url",url);
+                Log.d(TAG, "onItemClick: "+url);
+//                startActivity(intent);
+                startFullScreen(url);
+
+            }
+        });
+        home_recommend_rv.setAdapter(adapter);
+    }
+
+
+    public void startFullScreen(String url) {
+        JCVideoPlayerStandard.startFullscreen(mContext,
+                JCVideoPlayerStandard.class,
+                url);
     }
 
 }

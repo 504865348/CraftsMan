@@ -40,6 +40,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.id;
+import static android.media.CamcorderProfile.get;
 import static android.os.Build.VERSION_CODES.M;
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
@@ -107,6 +109,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
             @Override
             public void onClick(View v) {
                 String id = data.get(position).getId();
+                String url=data.get(position).getDownloadUrl();
                 //首先判断是否已经下载
                 if (checkLocal(id)) {
                     //录音的播放与暂停
@@ -122,7 +125,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
                         }
                     });
                     mDialog.show();
-                    getSoundFromServer(id);
+                    getSoundFromServer(id,url);
                 }
             }
         });
@@ -164,14 +167,15 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
     }
 
     //访问网络，获取音频流，下载，准备播放
-    private void getSoundFromServer(final String id) {
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.QUERY_QUESTION)
-                .add("Id", id)
-                .build();
+    private void getSoundFromServer(final String id,final String url) {
+//        RequestBody params = new FormBody.Builder()
+//                .add("method", Server.QUERY_QUESTION)
+//                .add("Id", id)
+//                .build();
         Request request = new Request.Builder()
-                .post(params)
-                .url(Server.SERVER_REMOTE).build();
+//                .post(params)
+                .url(url)
+                .build();
         mCall = mOkHttpClient.newCall(request);
 
         mCall.enqueue(new Callback() {

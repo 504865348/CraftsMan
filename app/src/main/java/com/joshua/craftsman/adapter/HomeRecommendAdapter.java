@@ -74,7 +74,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

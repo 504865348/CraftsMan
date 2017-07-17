@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.homepage;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,11 @@ public class HomeCraftsPager extends BaseFragment {
     RecyclerView home_page_crafts_gv;
 
     private List<HotCraftsman> list_GJ;
+    private Context mContext;
+
+    public HomeCraftsPager(Context context) {
+        this.mContext=context;
+    }
 
     @Override
     public View initView() {

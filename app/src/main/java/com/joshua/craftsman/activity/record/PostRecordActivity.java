@@ -3,12 +3,14 @@ package com.joshua.craftsman.activity.record;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.LinearGradient;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.duration;
 import static com.joshua.craftsman.R.drawable.btn;
 
 public class PostRecordActivity extends BaseActivity implements View.OnClickListener {
@@ -49,6 +52,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     private String mAlbumId;
     private String name;
     private ProgressDialog mDialog;
+    private long mDuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         ButterKnife.bind(this);
         record_info_choose_album.setOnClickListener(this);
         name = getIntent().getStringExtra("name");
-        Button btn_post= (Button) findViewById(R.id.btn_post);
+        Button btn_post = (Button) findViewById(R.id.btn_post);
         btn_post.setOnClickListener(this);
 
     }
@@ -72,6 +76,13 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         String intro = record_info_intro.getText().toString();
         String path = Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + name;
         File file = new File(path);
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(file.getAbsolutePath());
+            mDuration = mediaPlayer.getDuration();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
         RequestBody requestBody = new MultipartBody.Builder()
@@ -81,7 +92,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 .addFormDataPart("Name", creater)
                 .addFormDataPart("Special", idAlbum)
                 .addFormDataPart("Introduction", intro)
-                .addFormDataPart("Duration", 0 + "")
+                .addFormDataPart("Duration", mDuration + "")
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_RECORD)
@@ -121,7 +132,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     mDialog.dismiss();
                 }
 

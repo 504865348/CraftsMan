@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.homepage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -92,6 +93,12 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     private List<HotListen> list_TZT;
     private List<HotLook> list_KLQ;
     private OkHttpClient mClient;
+
+    private Context mContext;
+
+    public HomeHotPager(Context context) {
+        this.mContext=context;
+    }
 
     @Override
     public View initView() {

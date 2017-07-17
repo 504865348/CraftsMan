@@ -18,6 +18,15 @@ public class QuesAnsClassify {
     private String listenrNumber; //收听人数
     /* 工匠--前3个属性同“问答” */
     private String details; //工匠详细介绍
+    private String downloadUrl;
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
 
     public String getCraftsImage() {
         return craftsImage;
@@ -82,7 +91,8 @@ public class QuesAnsClassify {
         Id = id;
     }
 
-    public QuesAnsClassify(String Id,String craftsImage, String craftsName, String introduction, String content, String time, String listenrNumber, String details) {
+    public QuesAnsClassify(String Id,String craftsImage, String craftsName, String introduction, String content, String time, String listenrNumber, String details
+    ,String downloadUrl) {
         this.Id=Id;
         this.craftsImage = craftsImage;
         this.craftsName = craftsName;
@@ -91,6 +101,7 @@ public class QuesAnsClassify {
         this.time = time;
         this.listenrNumber = listenrNumber;
         this.details = details;
+        this.downloadUrl=downloadUrl;
     }
 
     @Override
@@ -104,8 +115,7 @@ public class QuesAnsClassify {
                 ", time='" + time + '\'' +
                 ", listenrNumber='" + listenrNumber + '\'' +
                 ", details='" + details + '\'' +
+                ", downloadUrl='" + downloadUrl + '\'' +
                 '}';
     }
-
-
 }

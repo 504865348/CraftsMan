@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.homepage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -42,6 +43,11 @@ public class HomeClassifyPager extends BaseFragment implements View.OnClickListe
             R.id.home_page_classify_road, R.id.home_page_classify_water_cons,
             R.id.home_page_classify_railway, R.id.home_page_classify_mining,
             R.id.home_page_classify_airport, R.id.home_page_classify_communication};
+    private Context mContext;
+
+    public HomeClassifyPager(Context context) {
+       this.mContext=context;
+    }
 
     @Override
     public View initView() {
