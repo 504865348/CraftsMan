@@ -66,7 +66,7 @@ public class BillboardMoreActivity extends BaseActivity {
             mDialog.setProgress(progress);
         }
     };
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    //private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,14 +84,14 @@ public class BillboardMoreActivity extends BaseActivity {
         mDialog = new ProgressDialog(mBaseActivity);
         mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDialog.setMax(100);
-        initRefreshRecycleView(View.inflate(mBaseActivity, R.layout.billboard_more_program, null));
+        //initRefreshRecycleView(View.inflate(mBaseActivity, R.layout.billboard_more_program, null));
     }
 
     public void initData() {
         list_more = new ArrayList<>();
         getDataFromServer();
     }
-
+/*
     private void initRefreshRecycleView(View view) {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.billboard_more_swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -100,7 +100,7 @@ public class BillboardMoreActivity extends BaseActivity {
                 getDataFromServer();
             }
         });
-    }
+    }*/
 
     private void getDataFromServer() {
         getMore();
@@ -122,27 +122,27 @@ public class BillboardMoreActivity extends BaseActivity {
         call.enqueue(new HttpCommonCallback(this) {
             @Override
             protected void success(String result) {
-                mBaseActivity.runOnUiThread(new Runnable() {
+                /*mBaseActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if(mSwipeRefreshLayout.isRefreshing()){
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
-                });
+                });*/
                 parseMore(result);
             }
 
             @Override
             protected void error() {
-                mBaseActivity.runOnUiThread(new Runnable() {
+                /*mBaseActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if(mSwipeRefreshLayout.isRefreshing()){
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
-                });
+                });*/
             }
         });
     }

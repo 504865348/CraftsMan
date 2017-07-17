@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/billboard_hot_program_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:src="@drawable/photo_two" />

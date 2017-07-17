@@ -17,6 +17,6 @@ public class MoneyActivity extends BaseActivity {
     }
 
     public void pay(View view) {
-        startActivity(new Intent(mBaseActivity,RechargeActivity.class));
+        //startActivity(new Intent(mBaseActivity,RechargeActivity.class));
     }
 }

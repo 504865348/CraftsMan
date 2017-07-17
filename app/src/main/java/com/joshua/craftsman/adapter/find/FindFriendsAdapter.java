@@ -1,6 +1,7 @@
 package com.joshua.craftsman.adapter.find;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.entity.FindFriendsAttention;
 
 import java.util.ArrayList;
@@ -36,10 +38,20 @@ public class FindFriendsAdapter extends android.support.v7.widget.RecyclerView.A
     }
 
     @Override
-    public void onBindViewHolder(FindFriendsAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(FindFriendsAdapter.MyViewHolder holder, final int position) {
         holder.tv_name.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
+        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
+                intent.putExtra("craftsName", data.get(position).getCraftsmanName());
+                //intent.putExtra("craftsIntro", data.get(position).getIntroduction());
+                intent.putExtra("craftsPic", data.get(position).getImageUrl());
+                mContext.startActivity(intent);
+            }
+        });
         holder.itemView.setTag(position+"");
     }
 

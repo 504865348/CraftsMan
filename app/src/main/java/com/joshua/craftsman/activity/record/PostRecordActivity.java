@@ -2,15 +2,14 @@ package com.joshua.craftsman.activity.record;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.LinearGradient;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +35,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.R.attr.duration;
-import static com.joshua.craftsman.R.drawable.btn;
-
 public class PostRecordActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.record_info_title)
     EditText record_info_title;
@@ -48,6 +44,8 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     EditText record_info_price;
     @BindView(R.id.record_info_intro)
     EditText record_info_intro;
+    @BindView(R.id.record_info_tool_bar)
+    Toolbar recordInfoToolBar;
 
     private String mAlbumId;
     private String name;
@@ -63,6 +61,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         name = getIntent().getStringExtra("name");
         Button btn_post = (Button) findViewById(R.id.btn_post);
         btn_post.setOnClickListener(this);
+        recordInfoToolBar.setOnClickListener(this);
 
     }
 
@@ -143,6 +142,9 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.record_info_tool_bar:
+                startActivity(new Intent(mBaseActivity, MyRecordActivity.class));
+                break;
             case R.id.record_info_choose_album:
                 Intent intent = new Intent(this, AlbumListActivity.class);
                 startActivityForResult(intent, 1);

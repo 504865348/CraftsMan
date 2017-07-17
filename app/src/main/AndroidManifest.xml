@@ -25,74 +25,72 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
+<!--
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter> -->
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN"/>
+       </activity>
+       <activity android:name=".activity.account.LoginActivity">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN"/>
+               <category android:name="android.intent.category.LAUNCHER"/>
+           </intent-filter>
+       </activity>
+       <activity android:name=".activity.search.SearchActivity"/>
+       <activity android:name=".activity.search.SearchResultActivity"/>
+       <activity android:name=".activity.download.DownloadActivity"/>
 
+       <meta-data
+           android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+           android:value="GlideModule"/>
 
-             <category android:name="android.intent.category.LAUNCHER"/>
-             </intent-filter>
-        </activity>
-        <activity android:name=".activity.account.LoginActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".activity.search.SearchActivity"/>
-        <activity android:name=".activity.search.SearchResultActivity"/>
-        <activity android:name=".activity.download.DownloadActivity"/>
-
-        <meta-data
-            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
-            android:value="GlideModule"/>
-
-        <activity android:name=".activity.history.HistoryActivity"/>
-        <activity android:name=".activity.core.TestActivity"/>
-        <activity android:name=".activity.ask.AskQuestionActivity"/>
-        <activity android:name=".activity.record.MyRecordActivity"/>
-        <activity android:name=".activity.billboard.BillboardHotActivity"/>
-        <activity android:name=".activity.billboard.BillboardMoreActivity"/>
-        <activity android:name=".activity.billboard.BillboardPayActivity"/>
-        <activity android:name=".activity.billboard.BillboardCraftsmanActivity"/>
-        <activity android:name=".activity.classify.ClassifyActivity"/>
-        <activity android:name=".activity.find.FriendCircleActivity"/>
-        <activity android:name=".activity.find.FindActivityActivity"/>
-        <activity android:name=".activity.find.FindFriendsActivity"/>
-        <activity android:name=".activity.account.RegisterActivity"/>
-        <activity android:name=".activity.ask.CraftsAnswerQuestionActivity"/>
-        <activity android:name=".activity.answer.MyAskAnswerActivity"/>
-        <activity android:name=".activity.answer.MyAskAnswerCommonActivity"/>
-        <activity android:name=".activity.account.MoneyActivity"/>
-        <activity android:name=".activity.account.RechargeActivity"/>
-        <activity android:name=".activity.craftsHome.CraftsHomeActivity"/>
-        <activity android:name=".activity.albumHome.AlbumHomeActivity"/>
-        <activity android:name=".activity.order.MyOrderActivity"/>
-        <activity android:name=".activity.set.SetActivity"/>
-        <activity android:name=".activity.set.BindActivity"/>
-        <activity android:name=".activity.set.HelpActivity"/>
-        <activity android:name=".activity.set.EditPswActivity"/>
-        <activity android:name=".activity.feedback.FeedbackActivity"/>
-        <activity android:name=".activity.info.EditInfoActivity"/>
-        <activity android:name=".activity.set.AboutActivity"/>
-        <activity android:name=".activity.hot.CraftsActivity"/>
-        <activity android:name=".activity.hot.SkillsActivity"/>
-        <activity android:name=".activity.hot.PolicyActivity"/>
-        <activity android:name=".activity.hot.ListenActivity"/>
-        <activity android:name=".activity.hot.LookActivity"/>
-        <activity android:name=".activity.record.PostRecordActivity"/>
-        <activity android:name=".activity.record.AlbumListActivity"/>
-        <activity android:name=".activity.record.CreateAlbumActivity"/>
-        <activity android:name=".activity.error.DataErrorActivity"/>
-        <activity android:name=".activity.my.MyAlbumActivity"/>
-        <activity android:name=".activity.my.MyBillboardActivity"/>
-        <activity android:name=".activity.qaclassify.QAClassifyActivity"/>
-        <activity
-            android:name=".activity.record.PlayerFrameActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait">
-        </activity>
-    </application>
+       <activity android:name=".activity.history.HistoryActivity"/>
+       <activity android:name=".activity.core.TestActivity"/>
+       <activity android:name=".activity.ask.AskQuestionActivity"/>
+       <activity android:name=".activity.record.MyRecordActivity"/>
+       <activity android:name=".activity.billboard.BillboardHotActivity"/>
+       <activity android:name=".activity.billboard.BillboardMoreActivity"/>
+       <activity android:name=".activity.billboard.BillboardPayActivity"/>
+       <activity android:name=".activity.billboard.BillboardCraftsmanActivity"/>
+       <activity android:name=".activity.classify.ClassifyActivity"/>
+       <activity android:name=".activity.find.FriendCircleActivity"/>
+       <activity android:name=".activity.find.FindActivityActivity"/>
+       <activity android:name=".activity.find.FindFriendsActivity"/>
+       <activity android:name=".activity.account.RegisterActivity"/>
+       <activity android:name=".activity.ask.CraftsAnswerQuestionActivity"/>
+       <activity android:name=".activity.answer.MyAskAnswerActivity"/>
+       <activity android:name=".activity.answer.MyAskAnswerCommonActivity"/>
+       <activity android:name=".activity.account.MoneyActivity"/>
+       <activity android:name=".activity.account.RechargeActivity"/>
+       <activity android:name=".activity.craftsHome.CraftsHomeActivity"/>
+       <activity android:name=".activity.albumHome.AlbumHomeActivity"/>
+       <activity android:name=".activity.order.MyOrderActivity"/>
+       <activity android:name=".activity.set.SetActivity"/>
+       <activity android:name=".activity.set.BindActivity"/>
+       <activity android:name=".activity.set.HelpActivity"/>
+       <activity android:name=".activity.set.EditPswActivity"/>
+       <activity android:name=".activity.feedback.FeedbackActivity"/>
+       <activity android:name=".activity.info.EditInfoActivity"/>
+       <activity android:name=".activity.set.AboutActivity"/>
+       <activity android:name=".activity.hot.CraftsActivity"/>
+       <activity android:name=".activity.hot.SkillsActivity"/>
+       <activity android:name=".activity.hot.PolicyActivity"/>
+       <activity android:name=".activity.hot.ListenActivity"/>
+       <activity android:name=".activity.hot.LookActivity"/>
+       <activity android:name=".activity.record.PostRecordActivity"/>
+       <activity android:name=".activity.record.AlbumListActivity"/>
+       <activity android:name=".activity.record.CreateAlbumActivity"/>
+       <activity android:name=".activity.error.DataErrorActivity"/>
+       <activity android:name=".activity.my.MyAlbumActivity"/>
+       <activity android:name=".activity.my.MyBillboardActivity"/>
+       <activity android:name=".activity.qaclassify.QAClassifyActivity"/>
+       <activity
+           android:name=".activity.record.PlayerFrameActivity"
+           android:configChanges="orientation|screenSize|keyboardHidden"
+           android:screenOrientation="portrait">
+       </activity>
+   </application>
 
 </manifest>
