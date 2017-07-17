@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nzz on 2017/4/31.------------暂时使用BillboardHot实体类,Server.BILLBOARD_HOT接口
+ * Created by nzz on 2017/4/31.
  * 首页-推荐--适配器
  */
 
