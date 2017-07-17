@@ -1,6 +1,7 @@
 package com.joshua.craftsman.adapter.billboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.entity.BillboardCraftsman;
 
 import java.util.ArrayList;
@@ -32,18 +34,28 @@ public class BillboardCraftsmanAdapter extends RecyclerView.Adapter<BillboardCra
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         View view = mInflater.inflate(R.layout.billboard_craftsman_item, parent, false);
         view.setOnClickListener(this);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_rank.setText(data.get(position).getId());
         holder.tv_name.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
-        Glide.with(mContext).load(data.get(position).getImageUrl()).into(holder.iv_pic);
+        Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
+        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
+                intent.putExtra("craftsName", data.get(position).getCraftsmanName());
+                //intent.putExtra("craftsIntro", data.get(position).getIntroduction());
+                intent.putExtra("craftsPic", data.get(position).getImageUrl());
+                mContext.startActivity(intent);
+            }
+        });
         holder.itemView.setTag(position+"");
     }
     @Override

@@ -8,6 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="3dp"
         android:layout_height="80dp">
 
         <TextView
@@ -57,6 +58,8 @@
             android:layout_centerVertical="true"
             android:src="@drawable/downblue" />
     </RelativeLayout>
+
+    <View style="@style/horizontal_split"/>
 
 </LinearLayout>
 

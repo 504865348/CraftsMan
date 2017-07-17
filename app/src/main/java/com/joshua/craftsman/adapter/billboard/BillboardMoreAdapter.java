@@ -74,7 +74,7 @@ public class BillboardMoreAdapter extends RecyclerView.Adapter<BillboardMoreAdap
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

@@ -74,7 +74,7 @@ public class BillboardHotAdapter extends RecyclerView.Adapter<BillboardHotAdapte
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 
