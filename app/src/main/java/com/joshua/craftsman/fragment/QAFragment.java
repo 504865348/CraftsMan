@@ -221,8 +221,12 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         private void initRecycleQuesAns() {
             //设置布局管理器
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            linearLayoutManager.setSmoothScrollbarEnabled(true);
+            linearLayoutManager.setAutoMeasureEnabled(true);
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             q_a_list_view_examples.setLayoutManager(linearLayoutManager);
+            q_a_list_view_examples.setHasFixedSize(true);
+            q_a_list_view_examples.setNestedScrollingEnabled(false);
             q_a_list_view_examples.setAdapter(new QuesAnsClassifyAdapter(getActivity(), list_ques_ans));
         }
 

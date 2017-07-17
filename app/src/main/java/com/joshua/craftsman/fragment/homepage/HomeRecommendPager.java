@@ -129,22 +129,16 @@ public class HomeRecommendPager extends BaseFragment {
                 int pos = Integer.parseInt(position);
                 Log.d(TAG, "onItemClick: " + pos);
                 String url = list_TJ.get(pos).getDownloadUrl();
+                String title = list_TJ.get(pos).getRecordTitle();
                 Intent intent=new Intent(mContext,PlayerFrameActivity.class);
                 intent.putExtra("url",url);
-                Log.d(TAG, "onItemClick: "+url);
-//                startActivity(intent);
-                startFullScreen(url);
+                intent.putExtra("title",title);
+                startActivity(intent);
 
             }
         });
         home_recommend_rv.setAdapter(adapter);
     }
 
-
-    public void startFullScreen(String url) {
-        JCVideoPlayerStandard.startFullscreen(mContext,
-                JCVideoPlayerStandard.class,
-                url);
-    }
 
 }

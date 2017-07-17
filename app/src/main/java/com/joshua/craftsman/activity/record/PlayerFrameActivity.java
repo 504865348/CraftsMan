@@ -1,45 +1,72 @@
 package com.joshua.craftsman.activity.record;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.core.BaseActivity;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-public class PlayerFrameActivity extends BaseActivity {
+public class PlayerFrameActivity extends AppCompatActivity {
+
+    ImageView iv_back;
+
+    JCVideoPlayerStandard mJcVideoPlayerStandard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_frame);
-        String url=getIntent().getStringExtra("url");
-        startFullScreen(url);
-    }
+        iv_back = (ImageView) findViewById(R.id.back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
-
-    public void startFullScreen(String url) {
-        JCVideoPlayerStandard.startFullscreen(this,
-                JCVideoPlayerStandard.class,
-                url);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (JCVideoPlayer.backPress()) {
-            finish();
-            return;
+        String url = getIntent().getStringExtra("url");
+        String title = getIntent().getStringExtra("title");
+        //沉浸式
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        super.onBackPressed();
+
+        mJcVideoPlayerStandard = (JCVideoPlayerStandard) findViewById(R.id.jc_video);
+        mJcVideoPlayerStandard.setUp(url
+                , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+        Glide.with(this)
+                .load("http://img4.jiecaojingxuan.com/2016/11/23/00b026e7-b830-4994-bc87-38f4033806a6.jpg@!640_360")
+                .into(mJcVideoPlayerStandard.thumbImageView);
     }
+
 
     @Override
     protected void onPause() {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
     }
 
     @Override

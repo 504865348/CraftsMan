@@ -24,9 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activity.MainActivity"
-            >
+        <activity android:name=".activity.MainActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN"/> -->
@@ -90,9 +88,10 @@
         <activity android:name=".activity.my.MyAlbumActivity"/>
         <activity android:name=".activity.my.MyBillboardActivity"/>
         <activity android:name=".activity.qaclassify.QAClassifyActivity"/>
-        <activity android:name=".activity.record.PlayerFrameActivity"
-                  android:configChanges="orientation|screenSize|keyboardHidden"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activity.record.PlayerFrameActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
