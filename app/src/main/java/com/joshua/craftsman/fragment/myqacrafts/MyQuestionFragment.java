@@ -42,9 +42,13 @@ public class MyQuestionFragment extends BaseFragment {
     private View mView;
     private List<CraftsMyQues> list_TW;
 
+    public MyQuestionFragment() {
+
+    }
+
     @Override
     public View initView() {
-        mView = View.inflate(mContext, R.layout.my_ask_answer_crafts_ques, null);
+        mView = View.inflate(getActivity(), R.layout.my_ask_answer_crafts_ques, null);
         return mView;
     }
 
@@ -66,6 +70,7 @@ public class MyQuestionFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
     private void getDataFromServer() {
         getTW();
     }
@@ -98,7 +103,7 @@ public class MyQuestionFragment extends BaseFragment {
 
     private void parseTW(String result) {
         Gson gson = new Gson();
-        list_TW= gson.fromJson(result, new TypeToken<List<CraftsMyQues>>() {
+        list_TW = gson.fromJson(result, new TypeToken<List<CraftsMyQues>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -112,6 +117,6 @@ public class MyQuestionFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftsQuesRv.setLayoutManager(linearLayoutManager);
-        craftsQuesRv.setAdapter(new QuesAdapter(getActivity(),list_TW));
+        craftsQuesRv.setAdapter(new QuesAdapter(getActivity(), list_TW));
     }
 }

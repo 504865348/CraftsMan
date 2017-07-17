@@ -62,10 +62,10 @@ public class QuesAdapter extends RecyclerView.Adapter<QuesAdapter.MyViewHolder> 
 
         MyViewHolder(View itemView) {
             super(itemView);
-            tv_asker = (TextView) itemView.findViewById(R.id.ques_tv_asker);
-            tv_price = (TextView) itemView.findViewById(R.id.ques_tv_ask_price);
-            tv_content = (TextView) itemView.findViewById(R.id.ques_tv_ask_content);
-            tv_time = (TextView) itemView.findViewById(R.id.ques_tv_time);
+            tv_asker = (TextView) itemView.findViewById(R.id.answer_tv_asker);
+            tv_price = (TextView) itemView.findViewById(R.id.answer_tv_ask_price);
+            tv_content = (TextView) itemView.findViewById(R.id.answer_tv_ask_content);
+            tv_time = (TextView) itemView.findViewById(R.id.answer_tv_time);
         }
     }
 

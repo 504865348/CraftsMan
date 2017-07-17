@@ -2,6 +2,7 @@ package com.joshua.craftsman.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -57,6 +58,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout qAAirport;
         @BindView(R.id.q_a_communication)
         LinearLayout qACommunication;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
         private View view;
         private OkHttpClient mClient;
@@ -66,14 +68,24 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public View initView() {
             view = View.inflate(mContext, R.layout.q_a, null);
+            initRefreshRecycleView(view);
             return view;
         }
-
+    private void initRefreshRecycleView(View view) {
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromServer();
+            }
+        });
+    }
         @Override
         public void initData() {
             super.initData();
             initListener();
             getDataFromServer();
+
 
         }
 
@@ -156,6 +168,14 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
 
                 @Override
                 protected void error() {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(mSwipeRefreshLayout.isRefreshing()){
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
+                    });
 
                 }
             });
@@ -176,11 +196,26 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
                 protected void success(String result) {
                     Log.d(TAG, "getQuesAns: " + result);
                     parseQuesAns(result);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(mSwipeRefreshLayout.isRefreshing()){
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
+                    });
                 }
 
                 @Override
                 protected void error() {
-
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(mSwipeRefreshLayout.isRefreshing()){
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
+                    });
                 }
             });
         }

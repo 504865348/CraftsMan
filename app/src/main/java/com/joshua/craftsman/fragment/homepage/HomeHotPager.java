@@ -94,15 +94,15 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     private List<HotLook> list_KLQ;
     private OkHttpClient mClient;
 
-    private Context mContext;
 
-    public HomeHotPager(Context context) {
-        this.mContext=context;
+    public HomeHotPager() {
+    
     }
+
 
     @Override
     public View initView() {
-        return View.inflate(mContext, R.layout.home_page_hot, null);
+        return View.inflate(getActivity(), R.layout.home_page_hot, null);
     }
 
     @Override

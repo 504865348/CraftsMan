@@ -15,11 +15,12 @@ import java.io.IOException;
 public class AudioRecoderUtils {
 
     //文件路径
-    private String filePath="";
+    private String filePath = "";
     //文件夹路径
     private String FolderPath;
 
-    public final static String RECODE_PATH=Environment.getExternalStorageDirectory()+"/craftsman/record/";
+    public final static String RECODE_PATH = Environment.getExternalStorageDirectory() + "/craftsman/record/";
+    public final static String VIDEO_PATH = Environment.getExternalStorageDirectory() + "/craftsman/video/";
 
     private MediaRecorder mMediaRecorder;
     private final String TAG = "fan";
@@ -30,7 +31,7 @@ public class AudioRecoderUtils {
     /**
      * 文件存储默认sdcard/record
      */
-    public AudioRecoderUtils(){
+    public AudioRecoderUtils() {
 
         //默认保存路径为/sdcard/record/下
         this(RECODE_PATH);
@@ -39,7 +40,7 @@ public class AudioRecoderUtils {
     public AudioRecoderUtils(String filePath) {
 
         File path = new File(filePath);
-        if(!path.exists())
+        if (!path.exists())
             path.mkdirs();
 
         this.FolderPath = filePath;
@@ -54,7 +55,8 @@ public class AudioRecoderUtils {
 
     /**
      * 开始录音 使用amr格式
-     *      录音文件
+     * 录音文件
+     *
      * @return
      */
     public void startRecord() {
@@ -73,7 +75,7 @@ public class AudioRecoderUtils {
              */
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
-            filePath = FolderPath + TimeUtils.getCurrentTime() + ".amr" ;
+            filePath = FolderPath + TimeUtils.getCurrentTime() + ".amr";
             /* ③准备 */
             mMediaRecorder.setOutputFile(filePath);
             mMediaRecorder.setMaxDuration(MAX_LENGTH);
@@ -110,7 +112,7 @@ public class AudioRecoderUtils {
             audioStatusUpdateListener.onStop(filePath);
             filePath = "";
 
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             mMediaRecorder.reset();
             mMediaRecorder.release();
             mMediaRecorder = null;
@@ -129,7 +131,7 @@ public class AudioRecoderUtils {
     /**
      * 取消录音
      */
-    public void cancelRecord(){
+    public void cancelRecord() {
 
         try {
 
@@ -138,7 +140,7 @@ public class AudioRecoderUtils {
             mMediaRecorder.release();
             mMediaRecorder = null;
 
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             mMediaRecorder.reset();
             mMediaRecorder.release();
             mMediaRecorder = null;
@@ -173,12 +175,12 @@ public class AudioRecoderUtils {
     private void updateMicStatus() {
 
         if (mMediaRecorder != null) {
-            double ratio = (double)mMediaRecorder.getMaxAmplitude() / BASE;
+            double ratio = (double) mMediaRecorder.getMaxAmplitude() / BASE;
             double db = 0;// 分贝
             if (ratio > 1) {
                 db = 20 * Math.log10(ratio);
-                if(null != audioStatusUpdateListener) {
-                    audioStatusUpdateListener.onUpdate(db,System.currentTimeMillis()-startTime);
+                if (null != audioStatusUpdateListener) {
+                    audioStatusUpdateListener.onUpdate(db, System.currentTimeMillis() - startTime);
                 }
             }
             mHandler.postDelayed(mUpdateMicStatusTimer, SPACE);
@@ -188,13 +190,15 @@ public class AudioRecoderUtils {
     public interface OnAudioStatusUpdateListener {
         /**
          * 录音中...
-         * @param db 当前声音分贝
+         *
+         * @param db   当前声音分贝
          * @param time 录音时长
          */
         public void onUpdate(double db, long time);
 
         /**
          * 停止录音
+         *
          * @param filePath 保存路径
          */
         public void onStop(String filePath);

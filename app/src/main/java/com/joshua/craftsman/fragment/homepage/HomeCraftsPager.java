@@ -37,15 +37,14 @@ public class HomeCraftsPager extends BaseFragment {
     RecyclerView home_page_crafts_gv;
 
     private List<HotCraftsman> list_GJ;
-    private Context mContext;
 
-    public HomeCraftsPager(Context context) {
-        this.mContext=context;
+    public HomeCraftsPager( ) {
+
     }
 
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.home_page_crafts, null);
+        View view = View.inflate(getActivity(), R.layout.home_page_crafts, null);
         return view;
     }
 

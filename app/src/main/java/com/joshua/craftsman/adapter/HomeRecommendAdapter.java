@@ -42,7 +42,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_title.setText(data.get(position).getRecordTitle());
         holder.tv_author.setText(data.get(position).getName());
-        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
+//        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
 

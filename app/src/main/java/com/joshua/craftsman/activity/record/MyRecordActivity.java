@@ -1,11 +1,14 @@
 package com.joshua.craftsman.activity.record;
 
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.joshua.craftsman.R;
@@ -19,6 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.media.CamcorderProfile.get;
 
 public class MyRecordActivity extends AppCompatActivity {
 
@@ -77,6 +82,7 @@ public class MyRecordActivity extends AppCompatActivity {
                 myRecording.setName(files[i].getName());
                 String publish_time = new SimpleDateFormat("yyyy年MM月dd日").format(files[i].lastModified());
                 myRecording.setTime(publish_time);
+                myRecording.setStorageUrl(files[i].getAbsolutePath());
                 mMyRecordings.add(myRecording);
             }
         }

@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,6 +74,14 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
     private File mFile;
     private boolean isFinishPlaying = true;
 
+    private Handler mHandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int progress=msg.arg1;
+            mDialog.setProgress(progress);
+        }
+    };
 
     public QuesAnsClassifyAdapter(Activity context, List<QuesAnsClassify> data) {
         mInflater = LayoutInflater.from(context);
@@ -80,6 +90,10 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         mOkHttpClient = new OkHttpClient();
         music = new MediaPlayer();
         music.setOnCompletionListener(this);
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mDialog.setMax(100);
+
     }
 
     @Override
@@ -115,13 +129,13 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
                     //录音的播放与暂停
                     playRecord();
                 } else {
-                    mDialog = new ProgressDialog(mContext);
+
                     mDialog.setMessage("音频下载中，请稍后");
                     mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                         @Override
                         public void onCancel(DialogInterface dialog) {
                             mCall.cancel();
-                            Toast.makeText(mContext, "任务已取消", Toast.LENGTH_SHORT).show();
+                            mFile.delete();
                         }
                     });
                     mDialog.show();
@@ -187,6 +201,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
                     public void run() {
                         Toast.makeText(mContext, "下载失败", Toast.LENGTH_SHORT).show();
                         mDialog.dismiss();
+                        mFile.delete();
                     }
                 });
 
@@ -209,10 +224,10 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
                         sum += len;
                         int progress = (int) (sum * 1.0f / total * 100);
                         Log.d("h_bl", "progress=" + progress);
-//                        Message msg = mHandler.obtainMessage();
-//                        msg.what = 1;
-//                        msg.arg1 = progress;
-//                        mHandler.sendMessage(msg);
+                        Message msg = mHandler.obtainMessage();
+                        msg.what = 1;
+                        msg.arg1 = progress;
+                        mHandler.sendMessage(msg);
                     }
                     fos.flush();
                     mContext.runOnUiThread(new Runnable() {
@@ -228,6 +243,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
                         @Override
                         public void run() {
                             Toast.makeText(mContext, "下载失败", Toast.LENGTH_SHORT).show();
+                            mFile.delete();
                             mDialog.dismiss();
                         }
                     });

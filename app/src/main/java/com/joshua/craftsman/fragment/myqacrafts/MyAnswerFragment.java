@@ -42,9 +42,13 @@ public class MyAnswerFragment extends BaseFragment {
     private List<CraftsMyAns> list_ANS;
     private View mView;
 
+    public MyAnswerFragment() {
+
+    }
+
     @Override
     public View initView() {
-        mView = View.inflate(mContext, R.layout.my_ask_answer_crafts_ans, null);
+        mView = View.inflate(getActivity(), R.layout.my_ask_answer_crafts_ans, null);
         return mView;
     }
 
@@ -65,6 +69,7 @@ public class MyAnswerFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
     private void getDataFromServer() {
         getANS();
     }
@@ -111,6 +116,6 @@ public class MyAnswerFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftsAnsRv.setLayoutManager(linearLayoutManager);
-        craftsAnsRv.setAdapter(new AnsAdapter(getActivity(),list_ANS));
+        craftsAnsRv.setAdapter(new AnsAdapter(getActivity(), list_ANS));
     }
 }

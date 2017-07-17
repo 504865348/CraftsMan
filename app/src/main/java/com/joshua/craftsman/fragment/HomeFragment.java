@@ -89,10 +89,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
      * 初始化滑动 Pager 数据
      */
     private void initPager() {
-        recommendPager = new HomeRecommendPager(mContext);
-        hotPager = new HomeHotPager(mContext);
-        classifyPager = new HomeClassifyPager(mContext);
-        craftsPager = new HomeCraftsPager(mContext);
+        recommendPager = new HomeRecommendPager();
+        hotPager = new HomeHotPager();
+        classifyPager = new HomeClassifyPager();
+        craftsPager = new HomeCraftsPager();
         mFragmentList.add(recommendPager);
         mFragmentList.add(hotPager);
         mFragmentList.add(classifyPager);

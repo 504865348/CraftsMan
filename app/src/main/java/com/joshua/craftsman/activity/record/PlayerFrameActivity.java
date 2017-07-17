@@ -50,7 +50,7 @@ public class PlayerFrameActivity extends AppCompatActivity {
         mJcVideoPlayerStandard.setUp(url
                 , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
         Glide.with(this)
-                .load("http://img4.jiecaojingxuan.com/2016/11/23/00b026e7-b830-4994-bc87-38f4033806a6.jpg@!640_360")
+                .load("http://139.224.35.126:8080/GJ/upload/background.png")
                 .into(mJcVideoPlayerStandard.thumbImageView);
     }
 

@@ -47,7 +47,7 @@ public class NotAnswerFragment extends BaseFragment {
     @Override
 
     public View initView() {
-        mView = View.inflate(mContext, R.layout.my_ask_answer_crafts_undeal, null);
+        mView = View.inflate(getActivity(), R.layout.my_ask_answer_crafts_undeal, null);
         return mView;
     }
 
@@ -90,6 +90,7 @@ public class NotAnswerFragment extends BaseFragment {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
+                Log.d(TAG, "success: "+result);
                 parseWCL(result);
             }
 
