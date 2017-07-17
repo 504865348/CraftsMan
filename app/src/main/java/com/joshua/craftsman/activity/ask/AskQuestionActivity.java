@@ -1,5 +1,6 @@
 package com.joshua.craftsman.activity.ask;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -45,6 +46,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.layout_gravity;
 import static android.R.attr.path;
 
 public class AskQuestionActivity extends BaseActivity implements View.OnClickListener {
@@ -52,7 +54,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.tv_middle)
     TextView tv_middle;
     //@BindView(R.id.iv_right)
-   // ImageView iv_right;
+    // ImageView iv_right;
     @BindView(R.id.tv_answer)
     TextView tv_answer;
     @BindView(R.id.tv_cost)
@@ -70,6 +72,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private View parentView;
     private LinearLayout ll_popup;
     private String mAnswer;
+    private ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         //加载父布局
         parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
         InitPopWindow();
+        mDialog = new ProgressDialog(this);
     }
 
     private void initToolBar() {
@@ -125,18 +129,27 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private void postToServer() {
         String user = PrefUtils.getString(mBaseActivity, "phone", "");
         String question = et_question.getText().toString();
-        String cost = 100 + "";
+        if (question.trim().isEmpty()) {
+            Toast.makeText(this, "请输入问题内容", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String cost = 0 + "";
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
-
+        if (!file.exists()) {
+            Toast.makeText(this, "请上传一张图片", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mDialog.setMessage("问题上传中，请稍等片刻");
+        mDialog.show();
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("image", "question.JPEG", fileBody)
-                .addFormDataPart("craftsman",mAnswer)
-                .addFormDataPart("questionWord",question)
-                .addFormDataPart("money",cost)
-                .addFormDataPart("user",user)
+                .addFormDataPart("craftsman", mAnswer)
+                .addFormDataPart("questionWord", question)
+                .addFormDataPart("money", cost)
+                .addFormDataPart("user", user)
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_UPLOAD)
@@ -146,7 +159,15 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "run: "+e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
+                        Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
+                        mDialog.cancel();
+                    }
+                });
             }
 
             @Override
@@ -157,7 +178,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 try {
                     jo = new JSONObject(responseJson);
                     String result = jo.getString("result");
-                    if(result.equals("true")){
+                    if (result.equals("true")) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -165,7 +186,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                             }
                         });
                         finish();
-                    }else {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -251,7 +272,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "phone", ""),PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
                     iv_add_pic.setImageBitmap(bitmap);
                 }
                 break;
@@ -262,7 +283,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                     Bitmap bitmap = MyUtils.getBitmapFromUri(this, uri);
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "phone", ""),PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
                     iv_add_pic.setImageBitmap(bitmap);
                 }
                 break;

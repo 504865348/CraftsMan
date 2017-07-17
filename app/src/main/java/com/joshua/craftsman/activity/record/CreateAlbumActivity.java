@@ -178,7 +178,7 @@ public class CreateAlbumActivity extends BaseActivity {
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "album", ""), PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
                     add.setImageBitmap(bitmap);
                 }
                 break;
@@ -189,7 +189,7 @@ public class CreateAlbumActivity extends BaseActivity {
                     Bitmap bitmap = MyUtils.getBitmapFromUri(this, uri);
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "album", ""), PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
+                          , PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
                     add.setImageBitmap(bitmap);
                 }
                 break;

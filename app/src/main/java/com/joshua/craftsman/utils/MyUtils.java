@@ -28,6 +28,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.R.attr.path;
+
 
 /**
  * ============================================================
@@ -226,12 +228,11 @@ public class MyUtils extends Activity {
      * 将bitmap保存为图片文件
      *
      * @param bitmap  bitmap
-     * @param path    SD卡下的子地址，为用户手机号
      * @param picName 文件名称
      */
-    public static void saveBitmap(Bitmap bitmap, String path,String user, String picName) {
+    public static void saveBitmap(Bitmap bitmap, String user, String picName) {
         //sd卡保存路径
-        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" +user+"/"+ path;
+        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" +user;
         try {
             File category = new File(absPath);
             File file = new File(absPath, picName + ".JPEG");
