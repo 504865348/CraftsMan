@@ -1,16 +1,22 @@
 package com.joshua.craftsman.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -27,13 +33,23 @@ import com.joshua.craftsman.fragment.PublicInfoFragment;
 import com.joshua.craftsman.fragment.QAFragment;
 import com.joshua.craftsman.utils.PrefUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity{
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
+public class MainActivity extends BaseActivity {
 
     private int position = 0;
     private List<BaseFragment> mFragments;
@@ -66,7 +82,7 @@ public class MainActivity extends BaseActivity{
         mFragments.add(new BillBoardFragment());
         mFragments.add(new QAFragment());
         mFragments.add(new FindFragment());
-        String type = PrefUtils.getString(mBaseActivity,"type","normal");
+        String type = PrefUtils.getString(mBaseActivity, "type", "normal");
         if (type.equals("normal")) {
             mFragments.add(new PublicInfoFragment());
         } else {
@@ -81,6 +97,7 @@ public class MainActivity extends BaseActivity{
         mFilter = new IntentFilter();
         mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(myNetReceiver, mFilter);
+        permissionRequest();
     }
 
     /**
@@ -92,7 +109,7 @@ public class MainActivity extends BaseActivity{
         public void onReceive(Context context, Intent intent) {
             intentAction = intent.getAction();
             if (intentAction.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                mConnectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 netInfo = mConnectivityManager.getActiveNetworkInfo();
                 if (netInfo != null && netInfo.isAvailable()) {
                     netType = netInfo.getType();
@@ -107,12 +124,12 @@ public class MainActivity extends BaseActivity{
                     Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                     dialog.setTitle("请检查网络连接");
-                    dialog.setNegativeButton("确定",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-                    }
-                });
+                    dialog.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
+                        }
+                    });
                     dialog.show();
                 }
             }
@@ -193,4 +210,49 @@ public class MainActivity extends BaseActivity{
             tempFragment = nextFragment;
         }
     }
+
+
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+    private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 2;
+    public void permissionRequest() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            //读取SD卡
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_CALL_PHONE);
+            }
+            //读取摄像头
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECORD_AUDIO},
+                        MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
+            }
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this,"授权开启失败去，请到设置中手动授权",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_RECORD_AUDIO) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this,"授权开启失败去，请到设置中手动授权",Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
 }
