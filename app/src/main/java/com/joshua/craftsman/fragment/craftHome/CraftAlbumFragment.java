@@ -48,13 +48,12 @@ public class CraftAlbumFragment extends BaseFragment {
     public void initData() {
         super.initData();
         //list_album = new ArrayList<>();
-       // getDataFromServer();
+        // getDataFromServer();
     }
 /*
     private void getDataFromServer() {
         getBillboard();
     }
-
     private void getBillboard() {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
@@ -62,7 +61,6 @@ public class CraftAlbumFragment extends BaseFragment {
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.ALBUM_LIST)
                 .build();
-
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -73,14 +71,11 @@ public class CraftAlbumFragment extends BaseFragment {
             protected void success(String result) {
                 parseBillboard(result);
             }
-
             @Override
             protected void error() {
-
             }
         });
     }
-
     private void parseBillboard(String result) {
         Gson gson = new Gson();
         list_album = gson.fromJson(result, new TypeToken<List<Album>>() {
@@ -92,7 +87,6 @@ public class CraftAlbumFragment extends BaseFragment {
             }
         });
     }
-
     private void initLayout() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

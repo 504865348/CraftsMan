@@ -5,46 +5,46 @@ package com.joshua.craftsman.entity;
  */
 
 public class CraftsHome {
-    private String ImageUrl;
-    private String CraftsmanName;
-    private String Introducton;
+    private String imageUrl;
+    private String craftsmanName;
+    private String introduction;
 
     public String getImageUrl() {
-        return ImageUrl;
+        return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        ImageUrl = imageUrl;
+        this.imageUrl = imageUrl;
     }
 
     public String getCraftsmanName() {
-        return CraftsmanName;
+        return craftsmanName;
     }
 
     public void setCraftsmanName(String craftsmanName) {
-        CraftsmanName = craftsmanName;
+        this.craftsmanName = craftsmanName;
     }
 
-    public String getIntroducton() {
-        return Introducton;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setIntroducton(String introducton) {
-        Introducton = introducton;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
-    public CraftsHome(String imageUrl, String craftsmanName, String introducton) {
-        ImageUrl = imageUrl;
-        CraftsmanName = craftsmanName;
-        Introducton = introducton;
+    public CraftsHome(String imageUrl, String craftsmanName, String introduction) {
+        this.imageUrl = imageUrl;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
     }
 
     @Override
     public String toString() {
         return "CraftsHome{" +
-                "ImageUrl='" + ImageUrl + '\'' +
-                ", CraftsmanName='" + CraftsmanName + '\'' +
-                ", Introducton='" + Introducton + '\'' +
+                "imageUrl='" + imageUrl + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
+                ", introduction='" + introduction + '\'' +
                 '}';
     }
 }

@@ -12,14 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:navigationIcon="@drawable/friends_back">
+
         <TextView
             android:id="@+id/crafts_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="18sp"
+            android:text="姓名"
             android:textColor="@android:color/black"
-            android:text="姓名"/>
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <View style="@style/horizontal_split"/>

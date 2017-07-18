@@ -25,6 +25,7 @@ public class CraftAlbumAdapter extends android.support.v7.widget.RecyclerView.Ad
     private Context mContext;
     private List<Album> data = new ArrayList<>();
 
+
     public CraftAlbumAdapter(Context context,List<Album> data) {
         mInflater = LayoutInflater.from(context);
         this.data=data;
