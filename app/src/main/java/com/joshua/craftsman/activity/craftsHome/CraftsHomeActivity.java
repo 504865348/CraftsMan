@@ -7,6 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,15 +19,23 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftAlbumFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftQAFragment;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class CraftsHomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -66,6 +75,42 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         initTabLineWidth();
         initView();
         initListener();
+        putDataToServer();
+    }
+
+    private void putDataToServer() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getApplicationContext()))
+                .build();
+        final RequestBody params = new FormBody.Builder()
+                .add("method", Server.CRAFTS_HOME)
+                .add("CraftsName", itemCraftsName)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(this) {
+            @Override
+            protected void success(String result) {
+                Log.d(TAG, "success: " + result);
+                if (result.equals("true")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //getDataFromServer();
+                        }
+                    });
+                    finish();
+                }
+            }
+
+            @Override
+            protected void error() {
+            }
+        });
     }
 
 

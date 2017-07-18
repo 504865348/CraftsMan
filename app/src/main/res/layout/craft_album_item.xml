@@ -16,8 +16,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:src="@drawable/album_cover" />
+            android:layout_marginLeft="8dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,17 +27,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/craft_album_name"
-                style="@style/search_interface_sub_title"
-                android:text="专辑标题" />
+                android:id="@+id/craft_album_title"
+                style="@style/search_interface_sub_title" />
 
+            <TextView
+                android:id="@+id/craft_album_classify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
             <TextView
                 android:id="@+id/craft_album_introduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="6dp"
-                android:text="专辑简介"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 

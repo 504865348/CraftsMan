@@ -42,14 +42,14 @@ public class BillBoardAdapter extends RecyclerView.Adapter<BillBoardAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.tv_hot_program1.setText(data.get(position).getRecordTitle_one());
-        holder.tv_hot_program2.setText(data.get(position).getRecordTitle_two());
-        holder.tv_more_program1.setText(data.get(position).getRecordTitle_three());
-        holder.tv_more_program2.setText(data.get(position).getRecordTitle_four());
-        holder.tv_pay_program1.setText(data.get(position).getRecordTitle_five());
-        holder.tv_pay_program2.setText(data.get(position).getRecordTitle_six());
-        holder.tv_crafts1.setText(data.get(position).getRecordTitle_seven());
-        holder.tv_crafts2.setText(data.get(position).getRecordTitle_eight());
+        holder.tv_hot_program1.setText(data.get(position).getProHotNameTop1());
+        holder.tv_hot_program2.setText(data.get(position).getProHotNameTop2());
+        holder.tv_more_program1.setText(data.get(position).getProHotNameTop3());
+        holder.tv_more_program2.setText(data.get(position).getProHotNameTop4());
+        holder.tv_pay_program1.setText(data.get(position).getProHotNameTop5());
+        holder.tv_pay_program2.setText(data.get(position).getProHotNameTop6());
+        holder.tv_crafts1.setText(data.get(position).getProHotNameTop7());
+        holder.tv_crafts2.setText(data.get(position).getProHotNameTop8());
         holder.rl_hot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

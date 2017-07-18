@@ -8,101 +8,101 @@ package com.joshua.craftsman.entity;
 public class Billboard {
 
     /* 从服务器拿到的字段 */
-    private String recordTitle_one;
-    private String recordTitle_two;
-    private String recordTitle_three;
-    private String recordTitle_four;
-    private String recordTitle_five;
-    private String recordTitle_six;
-    private String recordTitle_seven;
-    private String recordTitle_eight;
+    private String proHotNameTop1;
+    private String proHotNameTop2;
+    private String proHotNameTop3;
+    private String proHotNameTop4;
+    private String proHotNameTop5;
+    private String proHotNameTop6;
+    private String proHotNameTop7;
+    private String proHotNameTop8;
 
-    public String getRecordTitle_one() {
-        return recordTitle_one;
+    public String getProHotNameTop1() {
+        return proHotNameTop1;
     }
 
-    public void setRecordTitle_one(String recordTitle_one) {
-        this.recordTitle_one = recordTitle_one;
+    public void setProHotNameTop1(String proHotNameTop1) {
+        this.proHotNameTop1 = proHotNameTop1;
     }
 
-    public String getRecordTitle_two() {
-        return recordTitle_two;
+    public String getProHotNameTop2() {
+        return proHotNameTop2;
     }
 
-    public void setRecordTitle_two(String recordTitle_two) {
-        this.recordTitle_two = recordTitle_two;
+    public void setProHotNameTop2(String proHotNameTop2) {
+        this.proHotNameTop2 = proHotNameTop2;
     }
 
-    public String getRecordTitle_three() {
-        return recordTitle_three;
+    public String getProHotNameTop3() {
+        return proHotNameTop3;
     }
 
-    public void setRecordTitle_three(String recordTitle_three) {
-        this.recordTitle_three = recordTitle_three;
+    public void setProHotNameTop3(String proHotNameTop3) {
+        this.proHotNameTop3 = proHotNameTop3;
     }
 
-    public String getRecordTitle_four() {
-        return recordTitle_four;
+    public String getProHotNameTop4() {
+        return proHotNameTop4;
     }
 
-    public void setRecordTitle_four(String recordTitle_four) {
-        this.recordTitle_four = recordTitle_four;
+    public void setProHotNameTop4(String proHotNameTop4) {
+        this.proHotNameTop4 = proHotNameTop4;
     }
 
-    public String getRecordTitle_five() {
-        return recordTitle_five;
+    public String getProHotNameTop5() {
+        return proHotNameTop5;
     }
 
-    public void setRecordTitle_five(String recordTitle_five) {
-        this.recordTitle_five = recordTitle_five;
+    public void setProHotNameTop5(String proHotNameTop5) {
+        this.proHotNameTop5 = proHotNameTop5;
     }
 
-    public String getRecordTitle_six() {
-        return recordTitle_six;
+    public String getProHotNameTop6() {
+        return proHotNameTop6;
     }
 
-    public void setRecordTitle_six(String recordTitle_six) {
-        this.recordTitle_six = recordTitle_six;
+    public void setProHotNameTop6(String proHotNameTop6) {
+        this.proHotNameTop6 = proHotNameTop6;
     }
 
-    public String getRecordTitle_seven() {
-        return recordTitle_seven;
+    public String getProHotNameTop7() {
+        return proHotNameTop7;
     }
 
-    public void setRecordTitle_seven(String recordTitle_seven) {
-        this.recordTitle_seven = recordTitle_seven;
+    public void setProHotNameTop7(String proHotNameTop7) {
+        this.proHotNameTop7 = proHotNameTop7;
     }
 
-    public String getRecordTitle_eight() {
-        return recordTitle_eight;
+    public String getProHotNameTop8() {
+        return proHotNameTop8;
     }
 
-    public void setRecordTitle_eight(String recordTitle_eight) {
-        this.recordTitle_eight = recordTitle_eight;
+    public void setProHotNameTop8(String proHotNameTop8) {
+        this.proHotNameTop8 = proHotNameTop8;
     }
 
-    public Billboard(String recordTitle_one, String recordTitle_two, String recordTitle_three, String recordTitle_four, String recordTitle_five, String recordTitle_six, String recordTitle_seven, String recordTitle_eight) {
-        this.recordTitle_one = recordTitle_one;
-        this.recordTitle_two = recordTitle_two;
-        this.recordTitle_three = recordTitle_three;
-        this.recordTitle_four = recordTitle_four;
-        this.recordTitle_five = recordTitle_five;
-        this.recordTitle_six = recordTitle_six;
-        this.recordTitle_seven = recordTitle_seven;
-        this.recordTitle_eight = recordTitle_eight;
+    public Billboard(String proHotNameTop1, String proHotNameTop2, String proHotNameTop3, String proHotNameTop4, String proHotNameTop5, String proHotNameTop6, String proHotNameTop7, String proHotNameTop8) {
+        this.proHotNameTop1 = proHotNameTop1;
+        this.proHotNameTop2 = proHotNameTop2;
+        this.proHotNameTop3 = proHotNameTop3;
+        this.proHotNameTop4 = proHotNameTop4;
+        this.proHotNameTop5 = proHotNameTop5;
+        this.proHotNameTop6 = proHotNameTop6;
+        this.proHotNameTop7 = proHotNameTop7;
+        this.proHotNameTop8 = proHotNameTop8;
     }
 
     @Override
     public String toString() {
         return "Billboard{" +
-                "recordTitle_one='" + recordTitle_one + '\'' +
-                ", recordTitle_two='" + recordTitle_two + '\'' +
-                ", recordTitle_three='" + recordTitle_three + '\'' +
-                ", recordTitle_four='" + recordTitle_four + '\'' +
-                ", recordTitle_five='" + recordTitle_five + '\'' +
-                ", recordTitle_six='" + recordTitle_six + '\'' +
-                ", recordTitle_seven='" + recordTitle_seven + '\'' +
-                ", recordTitle_eight='" + recordTitle_eight + '\'' +
+                "proHotNameTop1='" + proHotNameTop1 + '\'' +
+                ", proHotNameTop2='" + proHotNameTop2 + '\'' +
+                ", proHotNameTop3='" + proHotNameTop3 + '\'' +
+                ", proHotNameTop4='" + proHotNameTop4 + '\'' +
+                ", proHotNameTop5='" + proHotNameTop5 + '\'' +
+                ", proHotNameTop6='" + proHotNameTop6 + '\'' +
+                ", proHotNameTop7='" + proHotNameTop7 + '\'' +
+                ", proHotNameTop8='" + proHotNameTop8 + '\'' +
                 '}';
     }
 }

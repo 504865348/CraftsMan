@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:text="XXX"/>
+            android:text="  "/>
         <TextView
             android:id="@+id/video_player_add_comment"
             android:layout_width="0dp"

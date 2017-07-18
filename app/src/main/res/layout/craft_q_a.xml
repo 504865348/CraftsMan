@@ -18,14 +18,14 @@
             android:id="@+id/crafts_ans_craftsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TA"
+            android:text="  "
             android:textSize="14dp"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="的回答"
+            android:text="回答"
             android:textSize="14dp"
             android:textColor="@color/black"/>
         <TextView
@@ -38,7 +38,7 @@
             android:id="@+id/crafts_ans_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XX"
+            android:text="  "
             android:textSize="14dp"
             android:textColor="@color/black"/>
         <TextView

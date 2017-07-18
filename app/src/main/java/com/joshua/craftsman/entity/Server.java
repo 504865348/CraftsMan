@@ -49,5 +49,6 @@ public class Server {
     public static final String EDIT_MY_INFO = "EditMyInfo"; //我的--编辑个人资料
     public static final String ALBUM_LIST = "queryMyAlbum"; //专辑列表
     public static final String QUERY_QUESTION = "queryQuesById"; //获得问题
+    public static final String CRAFTS_HOME = "CraftsHome"; //工匠主页
 
 }

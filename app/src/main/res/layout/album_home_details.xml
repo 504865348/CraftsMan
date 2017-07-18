@@ -34,8 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                android:text="专辑简介专辑简介专辑简介专辑简介专辑简介"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -60,10 +59,9 @@
 
         <ImageView
             android:id="@+id/particulars_crafts_cover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/album_detail_small_cover"/>
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -78,17 +76,15 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:text="工匠名"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/particulars_crafts_info"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/light_gray_text"
-                android:text="简介"
                 />
 
         </LinearLayout>

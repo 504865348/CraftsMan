@@ -47,7 +47,6 @@
         android:layout_marginRight="15dp"
         android:background="@color/light_blue"
         android:gravity="center"
-        android:text="详细介绍擅长的专业"
         android:textSize="12sp"
         android:textColor="@android:color/black"/>
 
