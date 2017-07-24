@@ -7,7 +7,6 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -133,7 +132,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_forget_pwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"

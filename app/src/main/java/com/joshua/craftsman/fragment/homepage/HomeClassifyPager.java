@@ -1,6 +1,5 @@
 package com.joshua.craftsman.fragment.homepage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,14 +35,10 @@ public class HomeClassifyPager extends BaseFragment implements View.OnClickListe
     @BindView(R.id.home_page_classify_communication)
     LinearLayout homePageClassifyCommunication;
 
-    public int item;
-    public String id;
-    private int idArray[] = new int[]{R.id.home_page_classify_construction,
-            R.id.home_page_classify_civilization, R.id.home_page_classify_electric,
-            R.id.home_page_classify_road, R.id.home_page_classify_water_cons,
-            R.id.home_page_classify_railway, R.id.home_page_classify_mining,
-            R.id.home_page_classify_airport, R.id.home_page_classify_communication};
-
+    private String classiyFlag[] = new String[]{
+            "房屋建筑", "市政公用", "机电工程",
+            "公路", "水利水电", "铁路工程",
+            "矿业工程", "民航机场工程", "通信广电工程"};
 
     public HomeClassifyPager( ) {
 
@@ -82,7 +77,39 @@ public class HomeClassifyPager extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        for(item=0; item<idArray.length; item++)
-            startActivity(new Intent(getActivity(), ClassifyActivity.class));
+        switch (v.getId()) {
+            case R.id.home_page_classify_construction:
+                putClassifyFlag(classiyFlag[0]);
+                break;
+            case R.id.home_page_classify_civilization:
+                putClassifyFlag(classiyFlag[1]);
+                break;
+            case R.id.home_page_classify_electric:
+                putClassifyFlag(classiyFlag[2]);
+                break;
+            case R.id.home_page_classify_road:
+                putClassifyFlag(classiyFlag[3]);
+                break;
+            case R.id.home_page_classify_water_cons:
+                putClassifyFlag(classiyFlag[4]);
+                break;
+            case R.id.home_page_classify_railway:
+                putClassifyFlag(classiyFlag[5]);
+                break;
+            case R.id.home_page_classify_mining:
+                putClassifyFlag(classiyFlag[6]);
+                break;
+            case R.id.home_page_classify_airport:
+                putClassifyFlag(classiyFlag[7]);
+                break;
+            case R.id.home_page_classify_communication:
+                putClassifyFlag(classiyFlag[8]);
+                break;
+        }
+    }
+    private void putClassifyFlag(String str) {
+        Intent intent = new Intent(mContext, ClassifyActivity.class);
+        intent.putExtra("classifyFlag", str);
+        mContext.startActivity(intent);
     }
 }

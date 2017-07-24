@@ -44,6 +44,7 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
             "房屋建筑", "市政公用", "机电工程",
             "公路", "水利水电", "铁路工程",
             "矿业工程", "民航机场工程", "通信广电工程"};
+    private String itemClassifyFlag;
 
     private Fragment[] mFragmentArrays = new Fragment[9];
 
@@ -53,9 +54,8 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.classify);
         ButterKnife.bind(this);
-        //classifyToolBar.setTitle("");
-        //setSupportActionBar(classifyToolBar);
         classifyToolBar.setOnClickListener(this);
+        itemClassifyFlag = getIntent().getStringExtra("classifyFlag");
         initView();
     }
 
@@ -72,9 +72,7 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
         mFragmentArrays[8] = CommunicationsFragment.newInstance();
         PagerAdapter pagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         vp_pager.setAdapter(pagerAdapter);
-
-        //vp_pager.setCurrentItem(5);
-
+        vp_pager.setCurrentItem(strTitleNumber());
         tabLayout.setupWithViewPager(vp_pager);
     }
 
@@ -99,15 +97,6 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -116,5 +105,13 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(mBaseActivity, MainActivity.class));
                 break;
         }
+    }
+    private int strTitleNumber() {
+        int cursor;
+        for (cursor=0; cursor<strTitle.length; cursor++) {
+            if (itemClassifyFlag.equals(strTitle[cursor]))
+                break;
+        }
+        return cursor;
     }
 }

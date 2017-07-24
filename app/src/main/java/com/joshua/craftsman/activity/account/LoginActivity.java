@@ -45,7 +45,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     ProgressBar progressBar;
     @BindView(R.id.ll_container)
     LinearLayout ll_container;
-
+    @BindView(R.id.tv_forget_pwd)
+    TextView tv_forget_pwd;
     //public static String appUserName = "";
 
     @Override
@@ -58,6 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         btn_register.setOnClickListener(this);
+        tv_forget_pwd.setOnClickListener(this);
     }
 
 
@@ -174,6 +176,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.btn_register:
                 startActivity(new Intent(mBaseActivity, RegisterActivity.class));
+                break;
+            case R.id.tv_forget_pwd:
+//                startActivity(new Intent(mBaseActivity, ForgetPasswordActivity.class));
                 break;
         }
     }

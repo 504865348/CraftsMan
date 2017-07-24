@@ -29,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.R.attr.path;
+import static com.joshua.craftsman.R.drawable.p;
 
 
 /**
@@ -178,13 +179,25 @@ public class MyUtils extends Activity {
         if (mobiles.isEmpty()) {
             return false;
         }
+        Pattern MB = Pattern.compile("^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\\d{8}$");
+        /**
+         * 中国移动：China Mobile
+         * 134,135,136,137,138,139,147,150,151,152,157,158,159,170,178,182,183,184,187,188
+         */
+        Pattern CM = Pattern.compile("^1(3[4-9]|4[7]|5[0-27-9]|7[08]|8[2-478])\\\\d{8}$");
+        /**
+         * 中国联通：China Unicom
+         * 130,131,132,145,155,156,170,171,175,176,185,186
+         */
+        Pattern CU = Pattern.compile("^1(3[0-2]|4[5]|5[56]|7[0156]|8[56])\\\\d{8}$");
+        /**
+         * 中国电信：China Telecom
+         * 133,149,153,170,173,177,180,181,189
+         */
+        Pattern CT = Pattern.compile("^1(3[3]|4[9]|53|7[037]|8[019])\\\\d{8}$");
 
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 
-        Matcher m = p.matcher(mobiles);
-
-        return m.matches();
-
+        return MB.matcher(mobiles).matches() ||CM.matcher(mobiles).matches() || CU.matcher(mobiles).matches() || CT.matcher(mobiles).matches();
     }
 
     /**
@@ -232,7 +245,7 @@ public class MyUtils extends Activity {
      */
     public static void saveBitmap(Bitmap bitmap, String user, String picName) {
         //sd卡保存路径
-        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" +user;
+        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + user;
         try {
             File category = new File(absPath);
             File file = new File(absPath, picName + ".JPEG");
@@ -272,7 +285,7 @@ public class MyUtils extends Activity {
     }
 
     /**
-     *把drawable转化为bitmap
+     * 把drawable转化为bitmap
      */
     public static Bitmap drawableToBitamp(Drawable drawable) {
         BitmapDrawable bd = (BitmapDrawable) drawable;
@@ -281,15 +294,15 @@ public class MyUtils extends Activity {
 
     /**
      * 生成验证码
+     *
      * @return
      */
-    public static String generifyCode(){
-        Random random=new Random();
-        StringBuilder sRand=new StringBuilder();
-        for (int i=0;i<4;i++)
-        {
+    public static String generifyCode() {
+        Random random = new Random();
+        StringBuilder sRand = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
             int itmp = random.nextInt(9);
-            String stmp=itmp+"";
+            String stmp = itmp + "";
             sRand.append(stmp);
         }
         return sRand.toString();

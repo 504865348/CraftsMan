@@ -1,30 +1,27 @@
 package com.joshua.craftsman.activity.account;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.utils.MyUtils;
-import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,27 +39,27 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.R.attr.x;
-import static com.joshua.craftsman.R.id.cancel_action;
-import static com.joshua.craftsman.R.id.et_username;
-import static com.joshua.craftsman.R.id.iv_right;
+import static com.joshua.craftsman.R.id.cb_agree;
 import static com.joshua.craftsman.R.id.tv_protocol;
-import static okhttp3.Protocol.get;
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.et_username) EditText et_username;
+    @BindView(R.id.et_username)
+    EditText et_username;
     @BindView(R.id.et_password) EditText et_password;
     @BindView(R.id.et_sms) EditText et_sms;
-    @BindView(R.id.btn_send_sms) Button btn_send_sms;
+    @BindView(R.id.btn_send_sms)
+    Button btn_send_sms;
     @BindView(R.id.btn_register) Button btn_register;
-    @BindView(R.id.tv_err) TextView tv_err;
-    @BindView(R.id.cb_agree) CheckBox cb_agree;
-    @BindView(R.id.register_tool_bar) Toolbar mToolbar;
+    @BindView(R.id.tv_err)
+    TextView tv_err;
+    @BindView(R.id.register_tool_bar)
+    Toolbar mToolbar;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.ll_container)
     LinearLayout ll_container;
-    @BindView(R.id.tv_protocol) TextView tv_protocol;
+
 
     private String username = "";
     private String mCode;
@@ -70,7 +67,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
 
         mToolbar.setTitle("");
@@ -83,8 +80,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private void initListener() {
         btn_send_sms.setOnClickListener(this);
         btn_register.setOnClickListener(this);
-        tv_protocol.setOnClickListener(this);
-    }
+   }
 
     @Override
     public void onClick(View v) {
@@ -100,27 +96,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_register:
                 register();
                 break;
-            case R.id.tv_protocol:
-               goToProtocol();
-                break;
         }
     }
 
-    private void goToProtocol() {
-        startActivity(new Intent(this,ProtocolActivity.class));
-    }
 
     private void register() {
-        if (cb_agree.isChecked()) {
             if (mCode.equals(et_sms.getText().toString())) {
                 String password = et_password.getText().toString();
                 if (!password.isEmpty() && password.length() >= 6 && password.length() <= 20) {
                     showLoadingProgress();
                     OkHttpClient mClient = new OkHttpClient.Builder()
-                            .cookieJar(new HttpCookieJar(getApplicationContext()))
                             .build();
                     RequestBody params = new FormBody.Builder()
-                            .add("method", Server.SERVER_REGISTER)
+                            .add("method", Server.FORGET_PASSWORD)
                             .add("username", username)
                             .add("password", password)
                             .add("type", "normal")
@@ -175,11 +163,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             } else {
                 showError("验证码错误");
             }
-        } else {
-            showError("请阅读并同意工匠注册协议");
         }
 
-    }
+
 
     /**
      * 发送短信验证码
@@ -188,10 +174,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         username = et_username.getText().toString();
         OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getApplicationContext()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.SERVER_SMS)
+                .add("method", Server.SERVER_SMS_FORGET_PWD)
                 .add("tel", username)
                 .add("code", mCode)
                 .build();
@@ -218,32 +203,32 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String responseJson = response.body().string();
                 Log.d(TAG, "onResponse: "+responseJson);
                 try {
-                JSONObject jo = new JSONObject(responseJson);
-                String result = jo.getString("result");
-                if (result.equals("true")) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                    JSONObject jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    if (result.equals("true")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                            Toast.makeText(mBaseActivity, "验证码发送成功", Toast.LENGTH_SHORT).show();
-                            TimeCount time = new TimeCount(60000, 1000);
-                            time.start();
-                        }
-                    });
+                                Toast.makeText(mBaseActivity, "验证码发送成功", Toast.LENGTH_SHORT).show();
+                                TimeCount time = new TimeCount(60000, 1000);
+                                time.start();
+                            }
+                        });
 
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(mBaseActivity, "验证码发送失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "验证码发送失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
         });
     }
 

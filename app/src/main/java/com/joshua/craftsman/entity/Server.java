@@ -50,5 +50,6 @@ public class Server {
     public static final String ALBUM_LIST = "queryMyAlbum"; //专辑列表
     public static final String QUERY_QUESTION = "queryQuesById"; //获得问题
     public static final String CRAFTS_HOME = "CraftsHome"; //工匠主页
-
+    public static final String FORGET_PASSWORD = "updatePwd"; //工匠主页
+    public static final String SERVER_SMS_FORGET_PWD = "verifyAccount"; //注册验证码
 }
