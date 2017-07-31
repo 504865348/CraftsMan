@@ -6,7 +6,9 @@ package com.joshua.craftsman.entity;
  */
 
 public class Question {
+    private String askId; //问题ID
     private String byAskedName; //被提问者名字
+    private String askName; //提问者名字
     private String askCoins; //提问价值金额
     private String content; //提问内容
     private String imgUrl; //添加的图片

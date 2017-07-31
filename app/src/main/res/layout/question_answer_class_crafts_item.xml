@@ -2,14 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
 
     <View style="@style/horizontal_split"/>
 
     <ImageView
         android:id="@+id/question_answer_crafts_img"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
         android:layout_marginLeft="5dp"
         android:src="@drawable/friends_icon"
         android:layout_centerVertical="true"
@@ -37,14 +38,17 @@
         android:layout_toRightOf="@+id/question_answer_crafts_name"
         android:layout_alignParentTop="true"/>
 
-    <ImageView
+    <Button
         android:id="@+id/question_answer_crafts_ask"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:background="@drawable/check_border"
+        android:textColor="@color/red"
+        android:textSize="12sp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="23dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/q_a_ask"/>
+        android:text="向TA提问" />
 
     <TextView
         android:id="@+id/question_answer_crafts_introduction"

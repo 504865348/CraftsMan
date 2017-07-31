@@ -62,12 +62,12 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     private void putDataToServer() {
         editContent = edit_content.getText().toString();
         editTel = edit_tel.getText().toString();
-        if (editContent.isEmpty()) {
-            Toast.makeText(mBaseActivity, "反馈意见不能为空", Toast.LENGTH_SHORT).show();
+        if (editContent.isEmpty() || editTel.isEmpty()) {
+            Toast.makeText(mBaseActivity, "请您填写完整信息", Toast.LENGTH_SHORT).show();
             return;
         }
         OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getApplicationContext()))
+                .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.FEEDBACK)
@@ -79,8 +79,10 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                 .url(Server.SERVER_REMOTE)
                 .post(params)
                 .build();
+
+
         Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(this) {
+        call.enqueue(new HttpCommonCallback(mBaseActivity) {
             @Override
             protected void success(String result) {
                 Log.d(TAG, "success: " + result);

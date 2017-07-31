@@ -6,9 +6,6 @@ package com.joshua.craftsman.entity;
  */
 
 public class QuesAnsClassify {
-
-
-    /* 问答 */
     private String Id;
     private String craftsImage; //工匠头像
     private String craftsName; //工匠名
@@ -16,9 +13,10 @@ public class QuesAnsClassify {
     private String content; //问题内容
     private String time; //音频时长
     private String listenrNumber; //收听人数
-    /* 工匠--前3个属性同“问答” */
     private String details; //工匠详细介绍
     private String downloadUrl;
+    private String askName;//提问者
+    private String price;//价格
 
     public String getDownloadUrl() {
         return downloadUrl;

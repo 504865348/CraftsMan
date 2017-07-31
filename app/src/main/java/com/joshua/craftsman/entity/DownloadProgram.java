@@ -6,20 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class DownloadProgram {
-    private String downloadProgramID; //下载专辑的ID
+    private String proID; //下载节目的ID
     private String image; //图片
     private String title; //标题
     private String craftsmanName; //工匠名
-    private int playTimes; //播放量
+    private String playTimes; //播放量
     private String time; //时长
-    private String storage; //存储容量
 
-    public String getDownloadProgramID() {
-        return downloadProgramID;
+    public String getProID() {
+        return proID;
     }
 
-    public void setDownloadProgramID(String downloadProgramID) {
-        this.downloadProgramID = downloadProgramID;
+    public void setProID(String proID) {
+        this.proID = proID;
     }
 
     public String getImage() {
@@ -46,11 +45,11 @@ public class DownloadProgram {
         this.craftsmanName = craftsmanName;
     }
 
-    public int getPlayTimes() {
+    public String getPlayTimes() {
         return playTimes;
     }
 
-    public void setPlayTimes(int playTimes) {
+    public void setPlayTimes(String playTimes) {
         this.playTimes = playTimes;
     }
 
@@ -62,34 +61,24 @@ public class DownloadProgram {
         this.time = time;
     }
 
-    public String getStorage() {
-        return storage;
-    }
-
-    public void setStorage(String storage) {
-        this.storage = storage;
-    }
-
-    public DownloadProgram(String downloadProgramID, String image, String title, String craftsmanName, int playTimes, String time, String storage) {
-        this.downloadProgramID = downloadProgramID;
+    public DownloadProgram(String proID, String image, String title, String craftsmanName, String playTimes, String time) {
+        this.proID = proID;
         this.image = image;
         this.title = title;
         this.craftsmanName = craftsmanName;
         this.playTimes = playTimes;
         this.time = time;
-        this.storage = storage;
     }
 
     @Override
     public String toString() {
         return "DownloadProgram{" +
-                "downloadProgramID='" + downloadProgramID + '\'' +
+                "proID='" + proID + '\'' +
                 ", image='" + image + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
-                ", playTimes=" + playTimes +
+                ", playTimes='" + playTimes + '\'' +
                 ", time='" + time + '\'' +
-                ", storage='" + storage + '\'' +
                 '}';
     }
 }

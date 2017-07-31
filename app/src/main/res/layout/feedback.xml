@@ -60,7 +60,7 @@
         android:layout_height="30dp"
         android:layout_margin="8dp"
         android:background="@drawable/whit"
-        android:hint=" 选填，方便我们联系"
+        android:hint=" 填写您的手机号码，方便我们联系"
         android:textColor="@color/black"
         android:textSize="14dp" />
 

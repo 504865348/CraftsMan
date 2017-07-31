@@ -7,33 +7,33 @@ package com.joshua.craftsman.entity;
  */
 
 public class HomeRecommend {
-    private String programImage; //节目图片
-    private String title; //标题
-    private String introduction; //简介
-    private String downloadUrl; //下载地址
+    private String recordImage;//节目图片
+    private String recordTitle;//节目的标题
+    private String name;//节目所属的作者名字
+    private String downloadUrl;//节目下载的Url地址
 
-    public String getProgramImage() {
-        return programImage;
+    public String getRecordImage() {
+        return recordImage;
     }
 
-    public void setProgramImage(String programImage) {
-        this.programImage = programImage;
+    public void setRecordImage(String recordImage) {
+        this.recordImage = recordImage;
     }
 
-    public String getTitle() {
-        return title;
+    public String getRecordTitle() {
+        return recordTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRecordTitle(String recordTitle) {
+        this.recordTitle = recordTitle;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public String getName() {
+        return name;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDownloadUrl() {
@@ -44,19 +44,19 @@ public class HomeRecommend {
         this.downloadUrl = downloadUrl;
     }
 
-    public HomeRecommend(String programIamge, String title, String introduction, String downloadUrl) {
-        this.programImage = programIamge;
-        this.title = title;
-        this.introduction = introduction;
+    public HomeRecommend(String recordImage, String recordTitle, String name, String downloadUrl) {
+        this.recordImage = recordImage;
+        this.recordTitle = recordTitle;
+        this.name = name;
         this.downloadUrl = downloadUrl;
     }
 
     @Override
     public String toString() {
         return "HomeRecommend{" +
-                "programImage='" + programImage + '\'' +
-                ", title='" + title + '\'' +
-                ", introduction='" + introduction + '\'' +
+                "recordImage='" + recordImage + '\'' +
+                ", recordTitle='" + recordTitle + '\'' +
+                ", name='" + name + '\'' +
                 ", downloadUrl='" + downloadUrl + '\'' +
                 '}';
     }

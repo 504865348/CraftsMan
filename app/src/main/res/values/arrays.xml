@@ -11,4 +11,10 @@
         <item>民航机场工程</item>
         <item>通信广电工程</item>
     </string-array>
+    <string-array name="albumModels">
+        <item>匠心独运</item>
+        <item>讲政策</item>
+        <item>听专题</item>
+        <item>看利器</item>
+    </string-array>
 </resources>

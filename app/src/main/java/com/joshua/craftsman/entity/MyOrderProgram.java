@@ -7,12 +7,11 @@ package com.joshua.craftsman.entity;
 
 public class MyOrderProgram {
     private String programOrderID; //节目订单ID
-    private String programID; //节目ID
-    private String idAlbum; //所属专辑编号----根据该编号可得所属专辑信息
+    private String craftsmanName; //工匠名
     private String programImage; //节目图片
     private String programTitle; //节目标题
-    private int playTimes; //播放量
-    private long releaseTime; //发布时间
+    private String playTimes; //播放量
+    private String releaseTime; //发布时间
     private String programPrice; //节目价格
 
     public String getProgramOrderID() {
@@ -23,20 +22,12 @@ public class MyOrderProgram {
         this.programOrderID = programOrderID;
     }
 
-    public String getProgramID() {
-        return programID;
+    public String getCraftsmanName() {
+        return craftsmanName;
     }
 
-    public void setProgramID(String programID) {
-        this.programID = programID;
-    }
-
-    public String getIdAlbum() {
-        return idAlbum;
-    }
-
-    public void setIdAlbum(String idAlbum) {
-        this.idAlbum = idAlbum;
+    public void setCraftsmanName(String craftsmanName) {
+        this.craftsmanName = craftsmanName;
     }
 
     public String getProgramImage() {
@@ -55,19 +46,19 @@ public class MyOrderProgram {
         this.programTitle = programTitle;
     }
 
-    public int getPlayTimes() {
+    public String getPlayTimes() {
         return playTimes;
     }
 
-    public void setPlayTimes(int playTimes) {
+    public void setPlayTimes(String playTimes) {
         this.playTimes = playTimes;
     }
 
-    public long getReleaseTime() {
+    public String getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(long releaseTime) {
+    public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
     }
 
@@ -79,10 +70,9 @@ public class MyOrderProgram {
         this.programPrice = programPrice;
     }
 
-    public MyOrderProgram(String programOrderID, String programID, String idAlbum, String programImage, String programTitle, int playTimes, long releaseTime, String programPrice) {
+    public MyOrderProgram(String programOrderID, String craftsmanName, String programImage, String programTitle, String playTimes, String releaseTime, String programPrice) {
         this.programOrderID = programOrderID;
-        this.programID = programID;
-        this.idAlbum = idAlbum;
+        this.craftsmanName = craftsmanName;
         this.programImage = programImage;
         this.programTitle = programTitle;
         this.playTimes = playTimes;
@@ -94,12 +84,11 @@ public class MyOrderProgram {
     public String toString() {
         return "MyOrderProgram{" +
                 "programOrderID='" + programOrderID + '\'' +
-                ", programID='" + programID + '\'' +
-                ", idAlbum='" + idAlbum + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
                 ", programImage='" + programImage + '\'' +
                 ", programTitle='" + programTitle + '\'' +
-                ", playTimes=" + playTimes +
-                ", releaseTime=" + releaseTime +
+                ", playTimes='" + playTimes + '\'' +
+                ", releaseTime='" + releaseTime + '\'' +
                 ", programPrice='" + programPrice + '\'' +
                 '}';
     }

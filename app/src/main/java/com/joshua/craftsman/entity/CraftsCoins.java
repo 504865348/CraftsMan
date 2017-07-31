@@ -1,6 +1,5 @@
 package com.joshua.craftsman.entity;
 
-import java.util.List;
 
 /**
  * Created by nzz on 2017/5/1.
@@ -8,57 +7,35 @@ import java.util.List;
  */
 
 public class CraftsCoins {
-    private int coinsNumber; //匠币数
-    private List<String> recharge; //充值记录
-    private List<String> consumption; //消费记录
-    private List<String> income; //收入记录
+    private String coinsNumber; //匠币数
+    private String craftsmanName; //工匠名
 
-    public int getCoinsNumber() {
+    public String getCoinsNumber() {
         return coinsNumber;
     }
 
-    public void setCoinsNumber(int coinsNumber) {
+    public void setCoinsNumber(String coinsNumber) {
         this.coinsNumber = coinsNumber;
     }
 
-    public List<String> getRecharge() {
-        return recharge;
+    public String getCraftsmanName() {
+        return craftsmanName;
     }
 
-    public void setRecharge(List<String> recharge) {
-        this.recharge = recharge;
+    public void setCraftsmanName(String craftsmanName) {
+        this.craftsmanName = craftsmanName;
     }
 
-    public List<String> getConsumption() {
-        return consumption;
-    }
-
-    public void setConsumption(List<String> consumption) {
-        this.consumption = consumption;
-    }
-
-    public List<String> getIncome() {
-        return income;
-    }
-
-    public void setIncome(List<String> income) {
-        this.income = income;
-    }
-
-    public CraftsCoins(int coinsNumber, List<String> recharge, List<String> consumption, List<String> income) {
+    public CraftsCoins(String coinsNumber, String craftsmanName) {
         this.coinsNumber = coinsNumber;
-        this.recharge = recharge;
-        this.consumption = consumption;
-        this.income = income;
+        this.craftsmanName = craftsmanName;
     }
 
     @Override
     public String toString() {
         return "CraftsCoins{" +
-                "coinsNumber=" + coinsNumber +
-                ", recharge=" + recharge +
-                ", consumption=" + consumption +
-                ", income=" + income +
+                "coinsNumber='" + coinsNumber + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
                 '}';
     }
 }

@@ -11,46 +11,68 @@ package com.joshua.craftsman.entity;
  */
 
 public class Classify {
-    private String recordImage; //节目图片
-    private String recordTitle; //标题
-    private String name; //作者名字
+    private String albumImage; //图片
+    private String title; //专辑标题
+    private String craftsmanName; //工匠名
+    private String introduction; //专辑简介
+    private String model; //所属模块(匠心独运 讲政策 听专题 看利器)
 
-    public String getRecordImage() {
-        return recordImage;
+    public String getAlbumImage() {
+        return albumImage;
     }
 
-    public void setRecordImage(String recordImage) {
-        this.recordImage = recordImage;
+    public void setAlbumImage(String albumImage) {
+        this.albumImage = albumImage;
     }
 
-    public String getRecordTitle() {
-        return recordTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setRecordTitle(String recordTitle) {
-        this.recordTitle = recordTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getCraftsmanName() {
+        return craftsmanName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCraftsmanName(String craftsmanName) {
+        this.craftsmanName = craftsmanName;
     }
 
-    public Classify(String recordImage, String recordTitle, String name) {
-        this.recordImage = recordImage;
-        this.recordTitle = recordTitle;
-        this.name = name;
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Classify(String albumImage, String title, String craftsmanName, String introduction, String model) {
+        this.albumImage = albumImage;
+        this.title = title;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
+        this.model = model;
     }
 
     @Override
     public String toString() {
         return "Classify{" +
-                "recordImage='" + recordImage + '\'' +
-                ", recordTitle='" + recordTitle + '\'' +
-                ", name='" + name + '\'' +
+                "albumImage='" + albumImage + '\'' +
+                ", title='" + title + '\'' +
+                ", craftsmanName='" + craftsmanName + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", model='" + model + '\'' +
                 '}';
     }
 }

@@ -1,7 +1,9 @@
 package com.joshua.craftsman.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,13 +20,15 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
-import com.joshua.craftsman.activity.my.MyAlbumActivity;
-import com.joshua.craftsman.activity.my.MyBillboardActivity;
-import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
+import com.joshua.craftsman.activity.info.CollectActivity;
 import com.joshua.craftsman.activity.info.EditInfoActivity;
+import com.joshua.craftsman.activity.info.SubscribeActivity;
+import com.joshua.craftsman.activity.my.MyAlbumActivity;
+import com.joshua.craftsman.activity.my.MyBillboardActivity;
+import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 
@@ -35,46 +39,75 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.R.attr.data;
 import static com.joshua.craftsman.R.id.my_info_my_coins;
 
-public class CraftsInfoFragment extends BaseFragment implements View.OnClickListener{
+public class CraftsInfoFragment extends BaseFragment implements View.OnClickListener {
 
-    @BindView(R.id.my_info_crafts_record) RelativeLayout btn_record;
-    @BindView(R.id.my_info_my_records) LinearLayout btn_my_record;
-    @BindView(R.id.my_info_my_q_a) LinearLayout my_info_my_q_a;
-    @BindView(R.id.my_info_picture) ImageView mMyInfoPicture;
-    @BindView(R.id.my_info_user_name) TextView mMyInfoUserName;
-    @BindView(R.id.my_info_following) TextView mMyInfoFollowing;
-    @BindView(R.id.my_info_followers) TextView mMyInfoFollowers;
-    @BindView(R.id.next) ImageButton mNext;
-    @BindView(R.id.my_info_more) RelativeLayout mMyInfoMore;
-    @BindView(R.id.my_info_subscribe) LinearLayout mMyInfoSubscribe;
-    @BindView(R.id.my_info_collection) LinearLayout mMyInfoCollection;
-    @BindView(R.id.text_start_record) TextView mTextStartRecord;
-    @BindView(R.id.text_start_upload) TextView mTextStartUpload;
-    @BindView(R.id.my_info_crafts_upload) RelativeLayout mMyInfoCraftsUpload;
-    @BindView(R.id.orderform) ImageButton mOrderform;
-    @BindView(R.id.my_info_my_orders) LinearLayout mMyInfoMyOrders;
-    @BindView(R.id.my_info_money) TextView mMyInfoMoney;
-    @BindView(R.id.money) ImageButton mMoney;
-    @BindView(R.id.my_info_my_coins) LinearLayout mMyInfoMyCoins;
-    @BindView(R.id.my_info_q_a_one) ImageView mMyInfoQAOne;
-    @BindView(R.id.question) ImageButton mQuestion;
-    @BindView(R.id.album) ImageButton mAlbum;
-    @BindView(R.id.my_info_my_albums) LinearLayout mMyInfoMyAlbums;
-    @BindView(R.id.list) ImageButton mList;
-    @BindView(R.id.my_info_my_billboard) LinearLayout mMyInfoMyBillboard;
-    @BindView(R.id.recorder) ImageButton mRecorder;
-    @BindView(R.id.opinion) ImageButton mOpinion;
-    @BindView(R.id.my_info_feedback) LinearLayout mMyInfoFeedback;
-    @BindView(R.id.set) ImageButton mSet;
-    @BindView(R.id.my_info_sets) LinearLayout mMyInfoSets;
+    @BindView(R.id.my_info_crafts_record)
+    RelativeLayout btn_record;
+    @BindView(R.id.my_info_my_records)
+    LinearLayout btn_my_record;
+    @BindView(R.id.my_info_my_q_a)
+    LinearLayout my_info_my_q_a;
+    @BindView(R.id.my_info_picture)
+    ImageView mMyInfoPicture;
+    @BindView(R.id.my_info_user_name)
+    TextView mMyInfoUserName;
+    @BindView(R.id.next)
+    ImageButton mNext;
+    @BindView(R.id.my_info_more)
+    RelativeLayout mMyInfoMore;
+    @BindView(R.id.my_info_subscribe)
+    LinearLayout mMyInfoSubscribe;
+    @BindView(R.id.my_info_collection)
+    LinearLayout mMyInfoCollection;
+    @BindView(R.id.text_start_record)
+    TextView mTextStartRecord;
+    @BindView(R.id.text_start_upload)
+    TextView mTextStartUpload;
+    @BindView(R.id.my_info_crafts_upload)
+    RelativeLayout mMyInfoCraftsUpload;
+    @BindView(R.id.orderform)
+    ImageButton mOrderform;
+    @BindView(R.id.my_info_my_orders)
+    LinearLayout mMyInfoMyOrders;
+    @BindView(R.id.my_info_money)
+    TextView mMyInfoMoney;
+    @BindView(R.id.money)
+    ImageButton mMoney;
+    @BindView(R.id.my_info_my_coins)
+    LinearLayout mMyInfoMyCoins;
+    @BindView(R.id.my_info_q_a_one)
+    ImageView mMyInfoQAOne;
+    @BindView(R.id.question)
+    ImageButton mQuestion;
+    @BindView(R.id.album)
+    ImageButton mAlbum;
+    @BindView(R.id.my_info_my_albums)
+    LinearLayout mMyInfoMyAlbums;
+    @BindView(R.id.list)
+    ImageButton mList;
+    @BindView(R.id.my_info_my_billboard)
+    LinearLayout mMyInfoMyBillboard;
+    @BindView(R.id.recorder)
+    ImageButton mRecorder;
+    @BindView(R.id.opinion)
+    ImageButton mOpinion;
+    @BindView(R.id.my_info_feedback)
+    LinearLayout mMyInfoFeedback;
+    @BindView(R.id.set)
+    ImageButton mSet;
+    @BindView(R.id.my_info_sets)
+    LinearLayout mMyInfoSets;
+    @BindView(R.id.my_info_user_account)
+    TextView myInfoUserAccount;
 
     private View view;
     private Uri fileUri;
     private int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 1;
-    //private SharedPreferences sp;
-    //private static final String userClass = LoginActivity.appUserName;
+    private SharedPreferences sp;
+    private String userClass = LoginActivity.appUserName;
 
     @Override
     public View initView() {
@@ -85,13 +118,15 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     @Override
     public void initData() {
         super.initData();
+        mMyInfoSubscribe.setOnClickListener(this);
+        mMyInfoCollection.setOnClickListener(this);
         mMyInfoMyAlbums.setOnClickListener(this);
         mMyInfoMyBillboard.setOnClickListener(this);
         mMyInfoMore.setOnClickListener(this);
         mMyInfoFeedback.setOnClickListener(this);
         mMyInfoSets.setOnClickListener(this);
         mMyInfoCraftsUpload.setOnClickListener(this);
-        //showUserName();
+        showUserInfo();
     }
 
     @Override
@@ -175,6 +210,12 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.my_info_subscribe:
+                startActivity(new Intent(getActivity(), SubscribeActivity.class));
+                break;
+            case R.id.my_info_collection:
+                startActivity(new Intent(getActivity(), CollectActivity.class));
+                break;
             case R.id.my_info_my_albums:
                 startActivity(new Intent(getActivity(), MyAlbumActivity.class));
                 break;
@@ -195,13 +236,26 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
                 break;
         }
     }
-/*
-    private void showUserName() {
+
+    private void showUserInfo() {
         sp = getActivity().getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
-        if(sp.getString("nickName","").equals("")) {
+        if (sp.getString("nickName", "").equals(""))
             mMyInfoUserName.setText(userClass);
-            return;
-        }
-        mMyInfoUserName.setText(sp.getString("nickName", ""));
-    }*/
+        else
+            mMyInfoUserName.setText(sp.getString("nickName", ""));
+        myInfoUserAccount.setText(userClass);
+        mMyInfoPicture.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/headImage.JPEG")));
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showUserInfo();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }

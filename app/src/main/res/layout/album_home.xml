@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/album_detail_tool_bar"
         android:layout_width="match_parent"
@@ -21,7 +22,8 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <View style="@style/horizontal_split"/>
+
+    <View style="@style/horizontal_split" />
 
     <!-- 专辑信息 -->
     <include layout="@layout/album_home_album_info" />
@@ -40,14 +42,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
+
             <TextView
                 android:id="@+id/album_detail_tv_particulars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
                 android:padding="10dp"
-                android:text="详情"/>
+                android:text="详情"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,14 +59,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
+
             <TextView
                 android:id="@+id/album_detail_tv_program"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/black"
                 android:padding="10dp"
-                android:text="节目"/>
+                android:text="节目"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>

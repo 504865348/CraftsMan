@@ -43,6 +43,7 @@ public class QAClassifyActivity extends BaseActivity {
     private int screenWidth;
     private QAClassifyQuesFragment mQAClassifyQuesFragment;
     private QAClassifyCraftsFragment mQAClassifyCraftsFragment;
+    public static String classifyCraftsFlag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,15 @@ public class QAClassifyActivity extends BaseActivity {
         setSupportActionBar(questionAnswerToolBar);
         initPager();
         initTabLineWidth();
+        initData();
+    }
+
+    private void initData() {
+        classifyCraftsFlag = getIntent().getStringExtra("classifyFlag");
+        qATvClass.setText(classifyCraftsFlag);
     }
 
     private void initPager() {
-        qATvClass.setText(getIntent().getStringExtra("classifyFlag"));
         mQAClassifyQuesFragment = new QAClassifyQuesFragment();
         mQAClassifyCraftsFragment = new QAClassifyCraftsFragment();
         mFragmentList.add(mQAClassifyQuesFragment);

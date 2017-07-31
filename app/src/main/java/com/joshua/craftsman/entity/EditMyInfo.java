@@ -2,7 +2,7 @@ package com.joshua.craftsman.entity;
 
 /**
  * Created by nzz on 2017/6/3.
- * 我的--编辑个人资料
+ * 我的--编辑个人资料(待修改)
  */
 
 public class EditMyInfo {

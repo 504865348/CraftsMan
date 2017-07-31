@@ -6,11 +6,19 @@ package com.joshua.craftsman.entity;
  */
 
 public class DownloadAlbum {
+    private String albumID; //下载专辑的ID
     private String image; //图片
     private String title; //标题
     private String craftsmanName; //工匠名
     private int programNumber; //分集数量
-    private String storage; //存储容量
+
+    public String getAlbumID() {
+        return albumID;
+    }
+
+    public void setAlbumID(String albumID) {
+        this.albumID = albumID;
+    }
 
     public String getImage() {
         return image;
@@ -44,30 +52,22 @@ public class DownloadAlbum {
         this.programNumber = programNumber;
     }
 
-    public String getStorage() {
-        return storage;
-    }
-
-    public void setStorage(String storage) {
-        this.storage = storage;
-    }
-
-    public DownloadAlbum(String image, String title, String craftsmanName, int programNumber, String storage) {
+    public DownloadAlbum(String albumID, String image, String title, String craftsmanName, int programNumber) {
+        this.albumID = albumID;
         this.image = image;
         this.title = title;
         this.craftsmanName = craftsmanName;
         this.programNumber = programNumber;
-        this.storage = storage;
     }
 
     @Override
     public String toString() {
         return "DownloadAlbum{" +
-                "image='" + image + '\'' +
+                "albumID='" + albumID + '\'' +
+                ", image='" + image + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
                 ", programNumber=" + programNumber +
-                ", storage='" + storage + '\'' +
                 '}';
     }
 }

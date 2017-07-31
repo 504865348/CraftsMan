@@ -30,7 +30,6 @@ import com.joshua.craftsman.fragment.classify.WaterConservancyFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class ClassifyActivity extends BaseActivity implements View.OnClickListener{
 
     @BindView(R.id.tablayout)

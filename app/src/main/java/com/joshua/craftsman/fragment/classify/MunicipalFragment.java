@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -101,6 +102,22 @@ public class MunicipalFragment extends BaseFragment {
                 initRecycleMunicipal();
             }
         });
+        /*if(list_municipal.get(0).getCraftsmanName().equals("null")){
+            getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setEmptyView(true);
+            }
+        });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setEmptyView(false);
+                initRecycleMunicipal();
+                }
+            });
+        }*/
     }
 
     private void initRecycleMunicipal() {
@@ -117,6 +134,22 @@ public class MunicipalFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+
     }
 
     @Override

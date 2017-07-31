@@ -1,30 +1,46 @@
 package com.joshua.craftsman.activity.albumHome;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
-public class AlbumHomeActivity extends BaseActivity {
+public class AlbumHomeActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.album_detail_tool_bar)
     Toolbar albumDetailToolBar;
@@ -38,10 +54,6 @@ public class AlbumHomeActivity extends BaseActivity {
     TextView albumDetailPlayNum;
     @BindView(R.id.album_detail_classification)
     TextView albumDetailClassification;
-    @BindView(R.id.album_detail_subscribe)
-    ImageView albumDetailSubscribe;
-    @BindView(R.id.album_detail_buy)
-    ImageView albumDetailBuy;
     @BindView(R.id.album_detail_pager)
     ViewPager mViewPager;
     @BindView(R.id.album_detail_tv_particulars)
@@ -50,6 +62,10 @@ public class AlbumHomeActivity extends BaseActivity {
     TextView albumDetailTvProgram;
     @BindView(R.id.img_tab_line)
     ImageView mTabLine;
+    @BindView(R.id.album_subscribe)
+    Button albumSubscribe;
+    @BindView(R.id.album_buy)
+    Button albumBuy;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
@@ -57,8 +73,15 @@ public class AlbumHomeActivity extends BaseActivity {
     private AlbumDetailsFragment mAlbumDetailsFragment;
     private AlbumProgramFragment mAlbumProgramFragment;
 
-    private String itemAlbumName;
-    private String itemAlbumPic;
+    private String itemAlbumId,itemAlbumName, itemAlbumPic, itemAlbumCrafts, itemAlbumClassify, getItemAlbumPlay;
+    public static String homeAlbumCraftName = "";
+    public static String homeAlbumId = "";
+    public static String homeAlbumIntroduction = "";
+    private long subscribeNumber = 29;
+    private boolean isSubscribe = true;
+    private SharedPreferences sp,sp2;
+    private String subscribeFlag,subscribeUser;
+    private String userName = LoginActivity.appUserName;
 
 
     @Override
@@ -71,33 +94,24 @@ public class AlbumHomeActivity extends BaseActivity {
         initPager();
         initTabLineWidth();
         initView();
+        initListener();
+        showInfo();
     }
 
-    /**
-     * 初始化滑动 Pager 数据
-     */
     private void initPager() {
+        homeAlbumCraftName = getIntent().getStringExtra("albumCrafts");
+        homeAlbumId = getIntent().getStringExtra("albumId");
+        homeAlbumIntroduction = getIntent().getStringExtra("albumIntroduction");
         mAlbumDetailsFragment = new AlbumDetailsFragment();
         mAlbumProgramFragment = new AlbumProgramFragment();
         mFragmentList.add(mAlbumDetailsFragment);
         mFragmentList.add(mAlbumProgramFragment);
-        /**
-         * 设置适配器和初始选中项
-         */
         adapter = new com.joshua.craftsman.fragment.homepage
                 .PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
         albumDetailTvParticulars.setTextColor(Color.RED);
-        /**
-         * 添加滑动监听器
-         */
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            /**
-             * position :当前页面，及点击滑动的页面
-             * offset:当前页面偏移的百分比
-             * positionOffsetPixels:当前页面偏移的像素位置
-             */
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
@@ -118,9 +132,6 @@ public class AlbumHomeActivity extends BaseActivity {
                 }
             }
 
-            /**
-             * 滑动中的状态 1: 正在滑动  2: 滑动完毕  3: 无操作
-             */
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -132,9 +143,6 @@ public class AlbumHomeActivity extends BaseActivity {
         albumDetailTvProgram.setTextColor(Color.BLACK);
     }
 
-    /**
-     * 设置滑动条的宽度为屏幕的 1/2 (根据Tab的个数而定)
-     */
     private void initTabLineWidth() {
         DisplayMetrics dpMetrics = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
@@ -145,15 +153,113 @@ public class AlbumHomeActivity extends BaseActivity {
     }
 
     private void initView() {
+        itemAlbumId = getIntent().getStringExtra("albumId");
         itemAlbumName = getIntent().getStringExtra("albumName");
         itemAlbumPic = getIntent().getStringExtra("albumPic");
+        itemAlbumCrafts = getIntent().getStringExtra("albumCrafts");
+        itemAlbumClassify = getIntent().getStringExtra("albumClassify");
+        getItemAlbumPlay = getIntent().getStringExtra("albumPlay");
         albumDetailName.setText(itemAlbumName);
+        albumDetailCraftsName.setText(itemAlbumCrafts);
+        albumDetailClassification.setText(itemAlbumClassify);
+        albumDetailPlayNum.setText(getItemAlbumPlay);
         Glide.with(this).load(itemAlbumPic).into(albumDetailCover);
     }
 
-    /**
-     * 监听返回按键
-     */
+    private void initListener() {
+        albumSubscribe.setOnClickListener(this);
+        albumBuy.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.album_subscribe:
+                countSubscribeNumber(isSubscribe);
+                saveInfo(isSubscribe);
+                isSubscribe = !isSubscribe;
+                //putDataToServer();
+                break;
+            case R.id.album_buy:
+                Toast.makeText(mBaseActivity,"暂未开放购买专辑功能",Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    private void countSubscribeNumber(boolean bool) {
+        if (bool) {
+            subscribeNumber++;
+            albumSubscribe.setText("已订阅("+subscribeNumber+")");
+        }
+        else {
+            subscribeNumber--;
+            albumSubscribe.setText("订阅("+subscribeNumber+")");
+            deleteSharedPreferencesFile();
+        }
+    }
+
+    private void saveInfo(boolean bool) {
+        sp = getSharedPreferences("SubscribeAlbumId"+homeAlbumId, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("UserName", userName);
+        editor.putString("AlbumId", itemAlbumId);
+        editor.putString("IsSubscribe", String.valueOf(bool));
+        editor.commit();
+    }
+
+
+    private void showInfo() {
+        sp = getSharedPreferences("SubscribeAlbumId"+homeAlbumId, Context.MODE_PRIVATE);
+        subscribeFlag = sp.getString("IsSubscribe", "");
+        subscribeUser = sp.getString("UserName", "");
+        if (!subscribeUser.equals(userName)) {
+            deleteSharedPreferencesFile();
+        }
+        else {
+            if (subscribeFlag.equals(String.valueOf(true))) {
+                albumSubscribe.setText("已订阅("+30+")");
+            }
+            else {
+                albumSubscribe.setText("订阅("+29+")");
+            }
+        }
+    }
+
+    private void deleteSharedPreferencesFile() {
+        File file = new File("/data/data/"+getPackageName().toString()+"/shared_prefs","SubscribeAlbumId"+homeAlbumId+".xml");
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+
+    private void putDataToServer() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getApplicationContext()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.ALBUM_SUBSCRIBE)
+                .add("albumId", itemAlbumId)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(this) {
+            @Override
+            protected void success(String result) {
+                Log.d(TAG, "success: " + result);
+            }
+
+            @Override
+            protected void error() {
+            }
+        });
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

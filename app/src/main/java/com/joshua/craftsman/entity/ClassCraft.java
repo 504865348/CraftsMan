@@ -1,13 +1,14 @@
 package com.joshua.craftsman.entity;
 
 /**
- * Created by nzz on 2017/7/18.
+ * Created by nzz on 2017/7/23.
+ * 问答主界面--分类--工匠
  */
 
-public class CraftsHome {
-    private String imageUrl;
-    private String craftsmanName;
-    private String introduction;
+public class ClassCraft {
+    private String imageUrl; //图片
+    private String craftsmanName; //工匠名
+    private String introduction;//简介
 
     public String getImageUrl() {
         return imageUrl;
@@ -33,7 +34,7 @@ public class CraftsHome {
         this.introduction = introduction;
     }
 
-    public CraftsHome(String imageUrl, String craftsmanName, String introduction) {
+    public ClassCraft(String imageUrl, String craftsmanName, String introduction) {
         this.imageUrl = imageUrl;
         this.craftsmanName = craftsmanName;
         this.introduction = introduction;
@@ -41,7 +42,7 @@ public class CraftsHome {
 
     @Override
     public String toString() {
-        return "CraftsHome{" +
+        return "ClassCraft{" +
                 "imageUrl='" + imageUrl + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
                 ", introduction='" + introduction + '\'' +

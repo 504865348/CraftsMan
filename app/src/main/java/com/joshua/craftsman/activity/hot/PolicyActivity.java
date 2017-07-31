@@ -1,7 +1,7 @@
 package com.joshua.craftsman.activity.hot;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.adapter.HotPolicyAdapter;
-import com.joshua.craftsman.entity.HotPolicy;
+import com.joshua.craftsman.adapter.HotMoreAlbumAdapter;
+import com.joshua.craftsman.entity.HotSkills;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -35,7 +35,7 @@ public class PolicyActivity extends BaseActivity {
     @BindView(R.id.hot_policy_rv)
     RecyclerView hotPolicyRv;
 
-    private List<HotPolicy> list_JZC;
+    private List<HotSkills> list_JZC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class PolicyActivity extends BaseActivity {
 
     private void parseJZC(String result) {
         Gson gson = new Gson();
-        list_JZC = gson.fromJson(result, new TypeToken<List<HotPolicy>>() {
+        list_JZC = gson.fromJson(result, new TypeToken<List<HotSkills>>() {
         }.getType());
         this.runOnUiThread(new Runnable() {
             @Override
@@ -97,11 +97,10 @@ public class PolicyActivity extends BaseActivity {
     }
 
     private void initRecycleJZC() {
-        //设置网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,4);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        hotPolicyRv.setLayoutManager(gridLayoutManager);
-        hotPolicyRv.setAdapter(new HotPolicyAdapter(this, list_JZC));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        hotPolicyRv.setLayoutManager(linearLayoutManager);
+        hotPolicyRv.setAdapter(new HotMoreAlbumAdapter(this, list_JZC));
     }
 
     @Override

@@ -13,8 +13,8 @@ public class Program {
     private String programImage; //节目缩略图
     private String title; //标题
     private String introduction; //简介
-    private int playTimes; //播放量
-    private long releaseTime; //发布时间
+    private String playTimes; //播放量
+    private String releaseTime; //发布时间
     private String programUrl; //节目链接地址
     private List commentList; //评论列表----根据评论列表中的记录数可得评论次数
 
@@ -58,19 +58,19 @@ public class Program {
         this.introduction = introduction;
     }
 
-    public int getPlayTimes() {
+    public String getPlayTimes() {
         return playTimes;
     }
 
-    public void setPlayTimes(int playTimes) {
+    public void setPlayTimes(String playTimes) {
         this.playTimes = playTimes;
     }
 
-    public long getReleaseTime() {
+    public String getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(long releaseTime) {
+    public void setReleaseTime(String releaseTime) {
         this.releaseTime = releaseTime;
     }
 
@@ -90,7 +90,7 @@ public class Program {
         this.commentList = commentList;
     }
 
-    public Program(String programID, String idAlbum, String programImage, String title, String introduction, int playTimes, long releaseTime, String programUrl, List commentList) {
+    public Program(String programID, String idAlbum, String programImage, String title, String introduction, String playTimes, String releaseTime, String programUrl, List commentList) {
         this.programID = programID;
         this.idAlbum = idAlbum;
         this.programImage = programImage;
@@ -110,8 +110,8 @@ public class Program {
                 ", programImage='" + programImage + '\'' +
                 ", title='" + title + '\'' +
                 ", introduction='" + introduction + '\'' +
-                ", playTimes=" + playTimes +
-                ", releaseTime=" + releaseTime +
+                ", playTimes='" + playTimes + '\'' +
+                ", releaseTime='" + releaseTime + '\'' +
                 ", programUrl='" + programUrl + '\'' +
                 ", commentList=" + commentList +
                 '}';

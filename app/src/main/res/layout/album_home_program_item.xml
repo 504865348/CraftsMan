@@ -1,83 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
-    <ImageView
-        android:id="@+id/album_program_cover"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="5dp"
-        android:src="@drawable/recommend_item_cover"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="10dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="3dp"
+        android:layout_height="80dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/album_program_cover"
-        android:layout_marginLeft="5dp"
-        android:gravity="center_vertical"
-        android:layout_centerVertical="true">
-
-        <TextView
-            android:id="@+id/album_program_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="分集标题"
-            android:textSize="16sp"
-            android:layout_marginTop="5dp"
-            android:textColor="@android:color/black"/>
+        <ImageView
+            android:id="@+id/album_program_cover"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/photo_two" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/album_program_cover"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/album_program_pv"
-                style="@style/album_program_small"
-                android:drawableLeft="@drawable/album_program_pv_img"
-                android:text="播放量"/>
-
-            <TextView
-                android:id="@+id/album_program_duration"
-                style="@style/album_program_small"
-                android:drawableLeft="@drawable/album_program_duration_img"
-                android:text="时长"/>
-
-            <TextView
-                android:id="@+id/album_program_comments"
-                style="@style/album_program_small"
-                android:drawableLeft="@drawable/album_program_comments_img"
-                android:text="6"/>
+                android:id="@+id/album_program_name"
+                style="@style/search_interface_sub_title"
+                android:text="节目标题" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/album_program_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/downblue" />
+    </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/album_program_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/recommend_item_download"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"/>
+    <View style="@style/horizontal_split"/>
 
-    <TextView
-        android:id="@+id/album_program_publish_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="20dp"
-        android:textSize="12sp"
-        android:textColor="@color/light_gray_text"
-        android:text="发布时间"/>
+</LinearLayout>
 
-</RelativeLayout>
+
+

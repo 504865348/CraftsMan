@@ -26,7 +26,6 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
 
     @BindView(R.id.my_info_public_picture) ImageView mMyInfoPublicPicture;
     @BindView(R.id.my_info_public_name) TextView mMyInfoPublicName;
-    @BindView(R.id.my_info_public_following) TextView mMyInfoPublicFollowing;
     @BindView(R.id.public_next) ImageButton mPublicNext;
     @BindView(R.id.my_info_public_more) RelativeLayout mMyInfoPublicMore;
     @BindView(R.id.my_info_public_subscribe) LinearLayout mMyInfoPublicSubscribe;

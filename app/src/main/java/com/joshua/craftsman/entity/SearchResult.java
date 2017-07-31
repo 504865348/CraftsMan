@@ -10,19 +10,22 @@ public class SearchResult {
     private String albumImage; //专辑图片
     private String title; //标题
     private String albumIntroduction; //专辑简介
-    private int playTimes; //播放量
-    private int albumNumber; //搜索专辑所得数量
+    private String playTimes; //播放量
+    private String albumNumber; //搜索专辑所得数量
     /* 问答 */
+    private String quesCraftsImage; //问答对应的工匠图片
+    private String quesCraftsName; //问答对应的工匠名
+    private String quesCraftsIntroduction; //问答对应的工匠简介
     private String content; //问题内容
     private String time; //时长
-    private int listenrNumber; //收听人数
-    private int quesAnsNumber; //搜索问答所得数量
+    private String quesImage; //问题图片
+    private String listenrNumber; //收听人数
+    private String quesAnsNumber; //搜索问答所得数量
     /* 工匠 */
     private String craftsImage; //工匠图片
-    private String craftsName; //账号名
+    private String craftsName; //工匠名
     private String craftsIntroduction; //工匠简介
-    private String craftsContent; //工匠详细介绍
-    private int craftsNumber; //搜索工匠所得数量
+    private String craftsNumber; //搜索工匠所得数量
 
     public String getAlbumImage() {
         return albumImage;
@@ -48,20 +51,44 @@ public class SearchResult {
         this.albumIntroduction = albumIntroduction;
     }
 
-    public int getPlayTimes() {
+    public String getPlayTimes() {
         return playTimes;
     }
 
-    public void setPlayTimes(int playTimes) {
+    public void setPlayTimes(String playTimes) {
         this.playTimes = playTimes;
     }
 
-    public int getAlbumNumber() {
+    public String getAlbumNumber() {
         return albumNumber;
     }
 
-    public void setAlbumNumber(int albumNumber) {
+    public void setAlbumNumber(String albumNumber) {
         this.albumNumber = albumNumber;
+    }
+
+    public String getQuesCraftsImage() {
+        return quesCraftsImage;
+    }
+
+    public void setQuesCraftsImage(String quesCraftsImage) {
+        this.quesCraftsImage = quesCraftsImage;
+    }
+
+    public String getQuesCraftsName() {
+        return quesCraftsName;
+    }
+
+    public void setQuesCraftsName(String quesCraftsName) {
+        this.quesCraftsName = quesCraftsName;
+    }
+
+    public String getQuesCraftsIntroduction() {
+        return quesCraftsIntroduction;
+    }
+
+    public void setQuesCraftsIntroduction(String quesCraftsIntroduction) {
+        this.quesCraftsIntroduction = quesCraftsIntroduction;
     }
 
     public String getContent() {
@@ -80,19 +107,27 @@ public class SearchResult {
         this.time = time;
     }
 
-    public int getListenrNumber() {
+    public String getQuesImage() {
+        return quesImage;
+    }
+
+    public void setQuesImage(String quesImage) {
+        this.quesImage = quesImage;
+    }
+
+    public String getListenrNumber() {
         return listenrNumber;
     }
 
-    public void setListenrNumber(int listenrNumber) {
+    public void setListenrNumber(String listenrNumber) {
         this.listenrNumber = listenrNumber;
     }
 
-    public int getQuesAnsNumber() {
+    public String getQuesAnsNumber() {
         return quesAnsNumber;
     }
 
-    public void setQuesAnsNumber(int quesAnsNumber) {
+    public void setQuesAnsNumber(String quesAnsNumber) {
         this.quesAnsNumber = quesAnsNumber;
     }
 
@@ -120,36 +155,31 @@ public class SearchResult {
         this.craftsIntroduction = craftsIntroduction;
     }
 
-    public String getCraftsContent() {
-        return craftsContent;
-    }
-
-    public void setCraftsContent(String craftsContent) {
-        this.craftsContent = craftsContent;
-    }
-
-    public int getCraftsNumber() {
+    public String getCraftsNumber() {
         return craftsNumber;
     }
 
-    public void setCraftsNumber(int craftsNumber) {
+    public void setCraftsNumber(String craftsNumber) {
         this.craftsNumber = craftsNumber;
     }
 
-    public SearchResult(String albumImage, String title, String albumIntroduction, int playTimes, int albumNumber, String content, String time, int listenrNumber, int quesAnsNumber, String craftsImage, String craftsName, String craftsIntroduction, String craftsContent, int craftsNumber) {
+    public SearchResult(String albumImage, String title, String albumIntroduction, String playTimes, String albumNumber, String quesCraftsImage, String quesCraftsName, String quesCraftsIntroduction, String content, String time, String quesImage, String listenrNumber, String quesAnsNumber, String craftsImage, String craftsName, String craftsIntroduction, String craftsNumber) {
         this.albumImage = albumImage;
         this.title = title;
         this.albumIntroduction = albumIntroduction;
         this.playTimes = playTimes;
         this.albumNumber = albumNumber;
+        this.quesCraftsImage = quesCraftsImage;
+        this.quesCraftsName = quesCraftsName;
+        this.quesCraftsIntroduction = quesCraftsIntroduction;
         this.content = content;
         this.time = time;
+        this.quesImage = quesImage;
         this.listenrNumber = listenrNumber;
         this.quesAnsNumber = quesAnsNumber;
         this.craftsImage = craftsImage;
         this.craftsName = craftsName;
         this.craftsIntroduction = craftsIntroduction;
-        this.craftsContent = craftsContent;
         this.craftsNumber = craftsNumber;
     }
 
@@ -159,17 +189,20 @@ public class SearchResult {
                 "albumImage='" + albumImage + '\'' +
                 ", title='" + title + '\'' +
                 ", albumIntroduction='" + albumIntroduction + '\'' +
-                ", playTimes=" + playTimes +
-                ", albumNumber=" + albumNumber +
+                ", playTimes='" + playTimes + '\'' +
+                ", albumNumber='" + albumNumber + '\'' +
+                ", quesCraftsImage='" + quesCraftsImage + '\'' +
+                ", quesCraftsName='" + quesCraftsName + '\'' +
+                ", quesCraftsIntroduction='" + quesCraftsIntroduction + '\'' +
                 ", content='" + content + '\'' +
                 ", time='" + time + '\'' +
-                ", listenrNumber=" + listenrNumber +
-                ", quesAnsNumber=" + quesAnsNumber +
+                ", quesImage='" + quesImage + '\'' +
+                ", listenrNumber='" + listenrNumber + '\'' +
+                ", quesAnsNumber='" + quesAnsNumber + '\'' +
                 ", craftsImage='" + craftsImage + '\'' +
                 ", craftsName='" + craftsName + '\'' +
                 ", craftsIntroduction='" + craftsIntroduction + '\'' +
-                ", craftsContent='" + craftsContent + '\'' +
-                ", craftsNumber=" + craftsNumber +
+                ", craftsNumber='" + craftsNumber + '\'' +
                 '}';
     }
 }

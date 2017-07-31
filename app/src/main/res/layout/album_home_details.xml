@@ -3,18 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_gray">
-
+    android:layout_height="wrap_content">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@android:color/white"
-        android:paddingLeft="10dp"
-        android:gravity="center_vertical"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:text="专辑详情"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="专辑简介"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
     <View style="@style/horizontal_split"/>
 
@@ -25,11 +23,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/particulars_title"
+                android:id="@+id/album_home_item_introduction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -39,56 +37,28 @@
 
     </RelativeLayout>
 
+    <View style="@style/horizontal_split_wide"/>
+
     <!-- 工匠详情 -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:padding="10dp"
-        android:layout_marginTop="10dp"
         android:textSize="16sp"
         android:textColor="@color/black"
         android:text="工匠详情"/>
 
     <View style="@style/horizontal_split"/>
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/album_home_craft_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
-        <ImageView
-            android:id="@+id/particulars_crafts_cover"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_margin="20dp" />
+    <View style="@style/horizontal_split"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_toRightOf="@+id/particulars_crafts_cover"
-            android:layout_alignTop="@+id/particulars_crafts_cover">
-
-            <TextView
-                android:id="@+id/particulars_crafts_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/particulars_crafts_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/light_gray_text"
-                />
-
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </LinearLayout>
+

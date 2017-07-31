@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,29 +31,42 @@ import butterknife.ButterKnife;
 
 public class CraftsHomeActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.crafts_name) TextView mCraftsName;
-    @BindView(R.id.toolbar) Toolbar mToolbar;
-    @BindView(R.id.crafts_image_icon) ImageView mCraftsImageIcon;
-    @BindView(R.id.crafts_text_name) TextView mCraftsTextName;
-    @BindView(R.id.crafts_text_introduction) TextView mCraftsTextIntroduction;
-    @BindView(R.id.crafts_image_follow) ImageView mCraftsImageFollow;
-    @BindView(R.id.crafts_image_ask) ImageView mCraftsImageAsk;
-    @BindView(R.id.crafts_tv_album) TextView mCraftsTvAlbum;
-    @BindView(R.id.crafts_ll_album) LinearLayout mCraftsLlAlbum;
-    @BindView(R.id.crafts_tv_q_a) TextView mCraftsTvQA;
-    @BindView(R.id.crafts_ll_q_a) LinearLayout mCraftsLlQA;
-    @BindView(R.id.crafts_ll_switch) LinearLayout mCraftsLlSwitch;
-    @BindView(R.id.img_tab_line) ImageView mTabLine;
-    @BindView(R.id.crafts_view_pager) ViewPager mViewPager;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.crafts_image_icon)
+    ImageView mCraftsImageIcon;
+    @BindView(R.id.crafts_text_name)
+    TextView mCraftsTextName;
+    @BindView(R.id.crafts_text_introduction)
+    TextView mCraftsTextIntroduction;
+    @BindView(R.id.crafts_tv_album)
+    TextView mCraftsTvAlbum;
+    @BindView(R.id.crafts_ll_album)
+    LinearLayout mCraftsLlAlbum;
+    @BindView(R.id.crafts_tv_q_a)
+    TextView mCraftsTvQA;
+    @BindView(R.id.crafts_ll_q_a)
+    LinearLayout mCraftsLlQA;
+    @BindView(R.id.crafts_ll_switch)
+    LinearLayout mCraftsLlSwitch;
+    @BindView(R.id.img_tab_line)
+    ImageView mTabLine;
+    @BindView(R.id.crafts_view_pager)
+    ViewPager mViewPager;
+    @BindView(R.id.crafts_image_follow)
+    Button mCraftsImageFollow;
+    @BindView(R.id.crafts_image_ask)
+    Button mCraftsImageAsk;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
     private int screenWidth;
     private CraftAlbumFragment mCraftAlbumFragment;
     private CraftQAFragment mCraftQAFragment;
-    private String itemCraftsName;
+    public String itemCraftsName;
     private String itemCraftsIntro;
     private String itemCraftsPic;
+    public static String homeCraftsName;
 
 
     @Override
@@ -67,10 +81,12 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         initView();
         initListener();
     }
+
     /**
      * 初始化滑动 Pager 数据
      */
     private void initPager() {
+        homeCraftsName = getIntent().getStringExtra("craftsName");
         mCraftAlbumFragment = new CraftAlbumFragment();
         mCraftQAFragment = new CraftQAFragment();
         mFragmentList.add(mCraftAlbumFragment);
@@ -92,10 +108,11 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
              * offset:当前页面偏移的百分比
              * positionOffsetPixels:当前页面偏移的像素位置
              */
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-                lp.leftMargin = screenWidth/2*position + positionOffsetPixels/2;
+                lp.leftMargin = screenWidth / 2 * position + positionOffsetPixels / 2;
                 mTabLine.setLayoutParams(lp);
             }
 
@@ -111,6 +128,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
                         break;
                 }
             }
+
             /**
              * 滑动中的状态 1: 正在滑动  2: 滑动完毕  3: 无操作
              */
@@ -140,10 +158,10 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     private void initView() {
         itemCraftsName = getIntent().getStringExtra("craftsName");
         itemCraftsPic = getIntent().getStringExtra("craftsPic");
-        mCraftsName.setText(itemCraftsName);
+        itemCraftsIntro = getIntent().getStringExtra("craftsIntro");
         mCraftsTextName.setText(itemCraftsName);
+        mCraftsTextIntroduction.setText(itemCraftsIntro);
         Glide.with(this).load(itemCraftsPic).into(mCraftsImageIcon);
-
     }
 
     private void initListener() {
@@ -167,14 +185,9 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     }
 
     private void getAttention() {
-
-
-        //Toast.makeText(mBaseActivity, "已关注", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mBaseActivity, "暂未开放关注功能", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * 监听返回按键
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

@@ -13,26 +13,9 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.entity.HotListen;
-import com.joshua.craftsman.entity.HotPolicy;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * ============================================================
- * <p>
- * 版 权 ： 吴奇俊  (c) 2017
- * <p>
- * 作 者 : 吴奇俊
- * <p>
- * 版 本 ： 1.0
- * <p>
- * 创建日期 ： 2017/4/24 13:56
- * <p>
- * 描 述 ：
- * <p>
- * ============================================================
- **/
 
 public class HotListenAdapter extends RecyclerView.Adapter<HotListenAdapter.MyViewHolder> implements View.OnClickListener {
     private LayoutInflater mInflater;
@@ -60,8 +43,13 @@ public class HotListenAdapter extends RecyclerView.Adapter<HotListenAdapter.MyVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumId", data.get(position).getId());
                 intent.putExtra("albumName", data.get(position).getProgramName());
                 intent.putExtra("albumPic", data.get(position).getImageUrl());
+                intent.putExtra("albumCrafts", data.get(position).getAuthor());
+                intent.putExtra("albumIntroduction", data.get(position).getIntroduction());
+                intent.putExtra("albumClassify", data.get(position).getClassify());
+                intent.putExtra("albumPlay", data.get(position).getPlay());
                 mContext.startActivity(intent);
             }
         });

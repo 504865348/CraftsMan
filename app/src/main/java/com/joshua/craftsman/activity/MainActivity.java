@@ -60,9 +60,6 @@ public class MainActivity extends BaseActivity {
     private NetworkInfo netInfo;
     private int netType;
 
-    /**
-     * 初始化视图对象
-     */
     @BindView(R.id.main_frame_content)
     FrameLayout mMainFragment;
     @BindView(R.id.main_rg_guide)
@@ -73,11 +70,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         mFragments = new ArrayList<>();
-        /**
-         * 将主页面的 Fragment 添加到集合中
-         */
         mFragments.add(new HomeFragment());
         mFragments.add(new BillBoardFragment());
         mFragments.add(new QAFragment());
@@ -88,22 +81,17 @@ public class MainActivity extends BaseActivity {
         } else {
             mFragments.add(new CraftsInfoFragment());
         }
-
-        /**
-         * 设置 RadioGroup 点击监听事件
-         */
         setRadioGroupListener();
-
-        mFilter = new IntentFilter();
-        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(myNetReceiver, mFilter);
+        //mFilter = new IntentFilter();
+       // mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        //registerReceiver(myNetReceiver, mFilter);
         permissionRequest();
     }
 
     /**
      * 监听网络连接是否正常
      */
-    private BroadcastReceiver myNetReceiver = new BroadcastReceiver() {
+   /* private BroadcastReceiver myNetReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -134,7 +122,7 @@ public class MainActivity extends BaseActivity {
                 }
             }
         }
-    };
+    };*/
 
     /**
      * 导航栏的点击监听事件
