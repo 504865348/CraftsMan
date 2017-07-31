@@ -12,13 +12,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.core.BaseActivity;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-public class PlayerFrameActivity extends AppCompatActivity {
-
-    ImageView iv_back;
+public class PlayerFrameActivity extends BaseActivity {
 
     JCVideoPlayerStandard mJcVideoPlayerStandard;
 
@@ -26,14 +25,6 @@ public class PlayerFrameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_frame);
-        iv_back = (ImageView) findViewById(R.id.back);
-        iv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
 
         String url = getIntent().getStringExtra("url");
         String title = getIntent().getStringExtra("title");

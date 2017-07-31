@@ -32,8 +32,8 @@ import butterknife.ButterKnife;
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.main_text_search) TextView mTextSearch;
-    @BindView(R.id.main_ll_history) LinearLayout mLinearHistory;
-    @BindView(R.id.main_ll_download) LinearLayout mLinearDownload;
+//    @BindView(R.id.main_ll_history) LinearLayout mLinearHistory;
+//    @BindView(R.id.main_ll_download) LinearLayout mLinearDownload;
 
     @BindView(R.id.home_tv_recommend) TextView mTvRecommend;
     @BindView(R.id.home_tv_hot) TextView mTvHot;
@@ -62,8 +62,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         super.initData();
 
         mTextSearch.setOnClickListener(this);
-        mLinearHistory.setOnClickListener(this);
-        mLinearDownload.setOnClickListener(this);
+//        mLinearHistory.setOnClickListener(this);
+//        mLinearDownload.setOnClickListener(this);
 
         initPager();
         initTabLineWidth();
@@ -185,12 +185,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.main_text_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
-            case R.id.main_ll_history:
-                startActivity(new Intent(getActivity(), HistoryActivity.class));
-                break;
-            case R.id.main_ll_download:
-                startActivity(new Intent(getActivity(), DownloadActivity.class));
-                break;
+//            case R.id.main_ll_history:
+//                startActivity(new Intent(getActivity(), HistoryActivity.class));
+//                break;
+//            case R.id.main_ll_download:
+//                startActivity(new Intent(getActivity(), DownloadActivity.class));
+//                break;
         }
     }
 }

@@ -7,12 +7,17 @@ package com.joshua.craftsman.entity;
 
 public class Server {
 //    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
-    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
+//    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
+//    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
+//    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
+//    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
+//    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
 
-    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
-    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
-    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
-    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
+    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ_AND/MainServlet";
+    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
+    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
+    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
+    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
 
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片
@@ -52,4 +57,7 @@ public class Server {
     public static final String CRAFTS_HOME = "CraftsHome"; //工匠主页
     public static final String FORGET_PASSWORD = "updatePwd"; //工匠主页
     public static final String SERVER_SMS_FORGET_PWD = "verifyAccount"; //注册验证码
+
+    public static final String SERVER_SEARCH = "fuzzySearch"; //搜索-问答专辑工匠
+
 }

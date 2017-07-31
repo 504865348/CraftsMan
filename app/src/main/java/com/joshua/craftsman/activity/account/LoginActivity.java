@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String pwd = et_pwd.getText().toString();
 //          final String username = "18761996926";
 //          String pwd = "123456";
-//
+////
 //        final String username = "gj1";
 //        String pwd = "111111";
         if (username.isEmpty()) {
@@ -178,7 +178,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(new Intent(mBaseActivity, RegisterActivity.class));
                 break;
             case R.id.tv_forget_pwd:
-//                startActivity(new Intent(mBaseActivity, ForgetPasswordActivity.class));
+                startActivity(new Intent(mBaseActivity, ForgetPasswordActivity.class));
                 break;
         }
     }

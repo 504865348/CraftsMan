@@ -51,12 +51,13 @@ android {
 
 
 
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
+    compile files('libs/alipaySdk-20170710.jar')
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.jakewharton:butterknife:8.5.1'

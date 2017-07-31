@@ -98,6 +98,8 @@
         </activity>
         <activity android:name=".activity.account.ForgetPasswordActivity">
         </activity>
+        <activity android:name=".activity.answer.QuestionDetailActivity">
+        </activity>
     </application>
 
 </manifest>

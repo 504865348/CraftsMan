@@ -73,6 +73,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private LinearLayout ll_popup;
     private String mAnswer;
     private ProgressDialog mDialog;
+    private File mFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,14 +136,14 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         }
         String cost = 0 + "";
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
-        File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
-        if (!file.exists()) {
+        mFile = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
+        if (!mFile.exists()) {
             Toast.makeText(this, "请上传一张图片", Toast.LENGTH_SHORT).show();
             return;
         }
         mDialog.setMessage("问题上传中，请稍等片刻");
         mDialog.show();
-        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), mFile);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("image", "question.JPEG", fileBody)
@@ -166,6 +167,9 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
 
                         Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
                         mDialog.cancel();
+                        if(mFile.exists()){
+                            mFile.delete();
+                        }
                     }
                 });
             }
@@ -182,7 +186,11 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 Toast.makeText(mBaseActivity, "提问成功", Toast.LENGTH_SHORT).show();
+                                if(mFile.exists()){
+                                    mFile.delete();
+                                }
                             }
                         });
                         finish();
@@ -191,11 +199,17 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                             @Override
                             public void run() {
                                 Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
+                                if(mFile.exists()){
+                                    mFile.delete();
+                                }
                             }
                         });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    if(mFile.exists()){
+                        mFile.delete();
+                    }
                 }
 
             }
