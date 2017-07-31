@@ -2,7 +2,7 @@ package com.joshua.craftsman.entity;
 
 /**
  * Created by nzz on 2017/5/1.
- * 普通用户--我的问答
+ * 普通用户--我的问答（待修改）
  */
 public class PublicQuesAns {
     private String questionID; //问题ID

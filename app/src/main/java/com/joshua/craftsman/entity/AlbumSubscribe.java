@@ -1,0 +1,40 @@
+package com.joshua.craftsman.entity;
+
+/**
+ * Created by nzz on 2017/7/25.
+ * 专辑订阅量
+ */
+
+public class AlbumSubscribe {
+    private String albumID;//专辑ID
+    private String totalSubscribeTimes;//专辑订阅量
+
+    public String getAlbumID() {
+        return albumID;
+    }
+
+    public void setAlbumID(String albumID) {
+        this.albumID = albumID;
+    }
+
+    public String getTotalSubscribeTimes() {
+        return totalSubscribeTimes;
+    }
+
+    public void setTotalSubscribeTimes(String totalSubscribeTimes) {
+        this.totalSubscribeTimes = totalSubscribeTimes;
+    }
+
+    public AlbumSubscribe(String albumID, String totalSubscribeTimes) {
+        this.albumID = albumID;
+        this.totalSubscribeTimes = totalSubscribeTimes;
+    }
+
+    @Override
+    public String toString() {
+        return "AlbumSubscribe{" +
+                "albumID='" + albumID + '\'' +
+                ", totalSubscribeTimes='" + totalSubscribeTimes + '\'' +
+                '}';
+    }
+}

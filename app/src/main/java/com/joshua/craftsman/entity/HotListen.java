@@ -6,26 +6,20 @@ package com.joshua.craftsman.entity;
  */
 
 public class HotListen {
-    private String programID; //节目ID
-    private String toAlbumID; //节目所属专辑ID
-    private String imageUrl; //图片
-    private String programName; //节目名
-    private String topicClassify; //该节目类型为“听专题”系列
+    private String id; //专辑ID
+    private String imageUrl; //专辑封面
+    private String programName; //专辑名
+    private String author; //专辑所属工匠
+    private String introduction; //专辑简介
+    private String classify; //专辑所属分类
+    private String play; //专辑下的节目播放量
 
-    public String getProgramID() {
-        return programID;
+    public String getId() {
+        return id;
     }
 
-    public void setProgramID(String programID) {
-        this.programID = programID;
-    }
-
-    public String getToAlbumID() {
-        return toAlbumID;
-    }
-
-    public void setToAlbumID(String toAlbumID) {
-        this.toAlbumID = toAlbumID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getImageUrl() {
@@ -44,30 +38,58 @@ public class HotListen {
         this.programName = programName;
     }
 
-    public String getTopicClassify() {
-        return topicClassify;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setTopicClassify(String topicClassify) {
-        this.topicClassify = topicClassify;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public HotListen(String programID, String toAlbumID, String imageUrl, String programName, String topicClassify) {
-        this.programID = programID;
-        this.toAlbumID = toAlbumID;
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify;
+    }
+
+    public String getPlay() {
+        return play;
+    }
+
+    public void setPlay(String play) {
+        this.play = play;
+    }
+
+    public HotListen(String id, String imageUrl, String programName, String author, String introduction, String classify, String play) {
+        this.id = id;
         this.imageUrl = imageUrl;
         this.programName = programName;
-        this.topicClassify = topicClassify;
+        this.author = author;
+        this.introduction = introduction;
+        this.classify = classify;
+        this.play = play;
     }
 
     @Override
     public String toString() {
         return "HotListen{" +
-                "programID='" + programID + '\'' +
-                ", toAlbumID='" + toAlbumID + '\'' +
+                "id='" + id + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", programName='" + programName + '\'' +
-                ", topicClassify='" + topicClassify + '\'' +
+                ", author='" + author + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", classify='" + classify + '\'' +
+                ", play='" + play + '\'' +
                 '}';
     }
 }

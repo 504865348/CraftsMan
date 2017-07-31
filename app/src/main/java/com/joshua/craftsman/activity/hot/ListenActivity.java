@@ -1,7 +1,7 @@
 package com.joshua.craftsman.activity.hot;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.adapter.HotListenAdapter;
-import com.joshua.craftsman.entity.HotListen;
+import com.joshua.craftsman.adapter.HotMoreAlbumAdapter;
+import com.joshua.craftsman.entity.HotSkills;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -35,7 +35,7 @@ public class ListenActivity extends BaseActivity {
     @BindView(R.id.hot_listen_rv)
     RecyclerView hotListenRv;
 
-    private List<HotListen> list_TZT;
+    private List<HotSkills> list_TZT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class ListenActivity extends BaseActivity {
 
     private void parseTZT(String result) {
         Gson gson = new Gson();
-        list_TZT = gson.fromJson(result, new TypeToken<List<HotListen>>() {
+        list_TZT = gson.fromJson(result, new TypeToken<List<HotSkills>>() {
         }.getType());
         this.runOnUiThread(new Runnable() {
             @Override
@@ -96,11 +96,10 @@ public class ListenActivity extends BaseActivity {
     }
 
     private void initRecycleTZT() {
-        //设置网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,4);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        hotListenRv.setLayoutManager(gridLayoutManager);
-        hotListenRv.setAdapter(new HotListenAdapter(this, list_TZT));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        hotListenRv.setLayoutManager(linearLayoutManager);
+        hotListenRv.setAdapter(new HotMoreAlbumAdapter(this, list_TZT));
     }
 
     @Override

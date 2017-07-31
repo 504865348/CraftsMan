@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/empty"/>
+
     <View style="@style/horizontal_split"/>
 
     <LinearLayout
@@ -18,7 +20,6 @@
             android:id="@+id/crafts_ans_craftsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  "
             android:textSize="14dp"
             android:textColor="@color/black"/>
         <TextView
@@ -31,31 +32,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已回答"
+            android:text="已回答:"
             android:textSize="14dp"
             android:textColor="@color/black"/>
         <TextView
             android:id="@+id/crafts_ans_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  "
+            android:layout_marginRight="10dp"
             android:textSize="14dp"
             android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="条"
-            android:textSize="14dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/black"/>
+
     </LinearLayout>
+
 
     <View style="@style/horizontal_split"/>
 
-    <ListView
-        android:id="@+id/craft_q_a_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/craft_q_a_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

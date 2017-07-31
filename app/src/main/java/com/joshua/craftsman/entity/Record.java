@@ -1,20 +1,5 @@
 package com.joshua.craftsman.entity;
 
-/**
- * ============================================================
- * <p>
- * 版 权 ： 吴奇俊  (c) 2017
- * <p>
- * 作 者 : 吴奇俊
- * <p>
- * 版 本 ： 1.0
- * <p>
- * 创建日期 ： 2017/7/7 21:54
- * <p>
- * 描 述 ：
- * <p>
- * ============================================================
- **/
 
 public class Record {
     private String Id;//序列号
@@ -32,11 +17,10 @@ public class Record {
     private String Special;//专辑
     private String Type;//类型
     private String Introduction;//介绍
+    private String price;//价格
 
-    public Record(String id, String recordImage, String recordVedio, String recordTitle, String name, String recordTime,
-                  String releaseTime, String duration, String commentTimes, String playTimes, String bookTimes,
-                  String buyTimes, String special, String type,String introduction) {
-        Id = null;
+    public Record(String id, String recordImage, String recordVedio, String recordTitle, String name, String recordTime, String releaseTime, String duration, String commentTimes, String playTimes, String bookTimes, String buyTimes, String special, String type, String introduction, String price) {
+        Id = id;
         RecordImage = recordImage;
         RecordVedio = recordVedio;
         RecordTitle = recordTitle;
@@ -50,16 +34,10 @@ public class Record {
         BuyTimes = buyTimes;
         Special = special;
         Type = type;
-        Introduction=introduction;
-    }
-
-    public String getIntroduction() {
-        return Introduction;
-    }
-
-    public void setIntroduction(String introduction) {
         Introduction = introduction;
+        this.price = price;
     }
+
     public String getId() {
         return Id;
     }
@@ -74,6 +52,22 @@ public class Record {
 
     public void setRecordImage(String recordImage) {
         RecordImage = recordImage;
+    }
+
+    public String getRecordVedio() {
+        return RecordVedio;
+    }
+
+    public void setRecordVedio(String recordVedio) {
+        RecordVedio = recordVedio;
+    }
+
+    public String getRecordTitle() {
+        return RecordTitle;
+    }
+
+    public void setRecordTitle(String recordTitle) {
+        RecordTitle = recordTitle;
     }
 
     public String getName() {
@@ -92,12 +86,28 @@ public class Record {
         RecordTime = recordTime;
     }
 
+    public String getReleaseTime() {
+        return ReleaseTime;
+    }
+
+    public void setReleaseTime(String releaseTime) {
+        ReleaseTime = releaseTime;
+    }
+
     public String getDuration() {
         return Duration;
     }
 
     public void setDuration(String duration) {
         Duration = duration;
+    }
+
+    public String getCommentTimes() {
+        return CommentTimes;
+    }
+
+    public void setCommentTimes(String commentTimes) {
+        CommentTimes = commentTimes;
     }
 
     public String getPlayTimes() {
@@ -124,74 +134,57 @@ public class Record {
         BuyTimes = buyTimes;
     }
 
-
-    public String getRecordTitle() {
-        return RecordTitle;
-    }
-
-
-    public void setRecordTitle(String recordTitle) {
-        RecordTitle = recordTitle;
-    }
-
-
-    public String getReleaseTime() {
-        return ReleaseTime;
-    }
-
-
-    public void setReleaseTime(String releaseTime) {
-        ReleaseTime = releaseTime;
-    }
-
-
-    public String getCommentTimes() {
-        return CommentTimes;
-    }
-
-
-    public void setCommentTimes(String commentTimes) {
-        CommentTimes = commentTimes;
-    }
-
-
-    public String getRecordVedio() {
-        return RecordVedio;
-    }
-
-
-    public void setRecordVedio(String recordVedio) {
-        RecordVedio = recordVedio;
-    }
-
-
-    public String getType() {
-        return Type;
-    }
-
-
-    public void setType(String type) {
-        Type = type;
-    }
-
-
     public String getSpecial() {
         return Special;
     }
-
 
     public void setSpecial(String special) {
         Special = special;
     }
 
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public String getIntroduction() {
+        return Introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        Introduction = introduction;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     @Override
     public String toString() {
-        return "MyRecording [Id=" + Id + ", RecordImage=" + RecordImage + ", RecordVedio=" + RecordVedio
-                + ", RecordTitle=" + RecordTitle + ", Name=" + Name + ", RecordTime=" + RecordTime + ", ReleaseTime="
-                + ReleaseTime + ", Duration=" + Duration + ", CommentTimes=" + CommentTimes + ", PlayTimes=" + PlayTimes
-                + ", BookTimes=" + BookTimes + ", BuyTimes=" + BuyTimes + ", Special=" + Special + ", Type=" + Type
-                + "]";
+        return "Record{" +
+                "Id='" + Id + '\'' +
+                ", RecordImage='" + RecordImage + '\'' +
+                ", RecordVedio='" + RecordVedio + '\'' +
+                ", RecordTitle='" + RecordTitle + '\'' +
+                ", Name='" + Name + '\'' +
+                ", RecordTime='" + RecordTime + '\'' +
+                ", ReleaseTime='" + ReleaseTime + '\'' +
+                ", Duration='" + Duration + '\'' +
+                ", CommentTimes='" + CommentTimes + '\'' +
+                ", PlayTimes='" + PlayTimes + '\'' +
+                ", BookTimes='" + BookTimes + '\'' +
+                ", BuyTimes='" + BuyTimes + '\'' +
+                ", Special='" + Special + '\'' +
+                ", Type='" + Type + '\'' +
+                ", Introduction='" + Introduction + '\'' +
+                ", price='" + price + '\'' +
+                '}';
     }
-
 }

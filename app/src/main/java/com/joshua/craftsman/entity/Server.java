@@ -6,6 +6,7 @@ package com.joshua.craftsman.entity;
  */
 
 public class Server {
+
 //    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
 //    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
 //    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
@@ -13,16 +14,18 @@ public class Server {
 //    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
 //    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
 
+
     public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ_AND/MainServlet";
     public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
     public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
     public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
     public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
+    public static final String SERVER_MY_INFO = "http://139.224.35.126:8080/GJ_AND/MyInfoServlet";
 
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片
     public static final String HOME_HOT_CRAFTSMAN = "HotCraftsman"; //首页-热门-大国工匠
-    public static final String HOME_HOT_SKILLS = "SkillsInfo"; //首页-热门-匠心独运
+    public static final String HOME_HOT_SKILLS = "SkillsInfo"; //首页-热门-匠心独运e
     public static final String HOME_HOT_POLICY = "PolicyInfo"; //首页-热门-讲政策
     public static final String HOME_HOT_LISTEN = "ListenInfo"; //首页-热门-听专题
     public static final String HOME_HOT_LOOK = "LookInfo"; //首页-热门-看利器
@@ -52,12 +55,23 @@ public class Server {
     public static final String FEEDBACK = "Feedback"; //意见反馈
     public static final String EDIT_PSW = "EditPsw"; //修改密码
     public static final String EDIT_MY_INFO = "EditMyInfo"; //我的--编辑个人资料
+    public static final String MY_INFO_LIST = "queryMyInfo"; //个人资料列表
     public static final String ALBUM_LIST = "queryMyAlbum"; //专辑列表
     public static final String QUERY_QUESTION = "queryQuesById"; //获得问题
-    public static final String CRAFTS_HOME = "CraftsHome"; //工匠主页
     public static final String FORGET_PASSWORD = "updatePwd"; //工匠主页
     public static final String SERVER_SMS_FORGET_PWD = "verifyAccount"; //注册验证码
 
+
     public static final String SERVER_SEARCH = "fuzzySearch"; //搜索-问答专辑工匠
+
+    public static final String ALBUM_LIST_BY_CRAFTS = "queryMyAlbumByName"; //工匠个人主页--专辑
+    public static final String ANS_LIST_BY_CRAFTS = "queryMyAnsByName"; //工匠个人主页--问答
+    public static final String CRAFTS_HOME = "CraftsHome"; //专辑主页--详情--工匠
+    public static final String PRO_LIST_BY_NAME = "queryProByName"; //专辑主页--节目
+    public static final String ALBUM_PLAY = "AlbumPlay"; //专辑播放量(专辑下所有节目的总播放量)
+    public static final String ALBUM_SUBSCRIBE = "AlbumSubscribe"; //专辑订阅量
+    public static final String ALBUM_BUY = "AlbumBuy"; //专辑购买量
+    public static final String CLASSIFY_QUES_ANS_LIST_BY_NAME = "queryClassifyQuesAnsByName"; //问答主界面--分类--问答
+    public static final String CLASSIFY_CRAFTS_LIST_BY_NAME = "queryClassifyCraftByName"; //问答主界面--分类--工匠git
 
 }

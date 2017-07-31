@@ -1,6 +1,5 @@
 package com.joshua.craftsman.fragment.homepage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -188,16 +187,12 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         getJZC();//讲政策
         getTZT();//听专题
         getKLQ();//看利器
-
     }
 
     /**
      * --------------------------------数据获取---------------------------------
      */
     private void getDGGJ() {
-//        mClient = new OkHttpClient.Builder()
-//                .cookieJar(new HttpCookieJar(getActivity()))
-//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_CRAFTSMAN)
                 .build();
@@ -221,9 +216,6 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     }
 
     private void getJXDY() {
-//        mClient = new OkHttpClient.Builder()
-//                .cookieJar(new HttpCookieJar(getActivity()))
-//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_SKILLS)
                 .build();
@@ -247,9 +239,6 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     }
 
     private void getJZC() {
-//        mClient = new OkHttpClient.Builder()
-//                .cookieJar(new HttpCookieJar(getActivity()))
-//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_POLICY)
                 .build();
@@ -274,9 +263,6 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     }
 
     private void getTZT() {
-//        OkHttpClient mClient = new OkHttpClient.Builder()
-//                .cookieJar(new HttpCookieJar(getActivity()))
-//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_LISTEN)
                 .build();
@@ -300,9 +286,6 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     }
 
     private void getKLQ() {
-//        OkHttpClient mClient = new OkHttpClient.Builder()
-//                .cookieJar(new HttpCookieJar(getActivity()))
-//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.HOME_HOT_LOOK)
                 .build();
@@ -334,11 +317,11 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         list_DGGJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleDGGJ();
-            }
-        });
+                @Override
+                public void run() {
+                    initRecycleDGGJ();
+                }
+            });
     }
 
     private void parseJXDY(String result) {
@@ -358,11 +341,11 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         list_JZC = gson.fromJson(result, new TypeToken<List<HotPolicy>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleJZC();
-            }
-        });
+                    @Override
+                    public void run() {
+                        initRecycleJZC();
+                    }
+                });
     }
 
     private void parseTZT(String result) {
@@ -370,11 +353,11 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         list_TZT = gson.fromJson(result, new TypeToken<List<HotListen>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleTZT();
-            }
-        });
+                @Override
+                public void run() {
+                    initRecycleTZT();
+                }
+            });
     }
 
     private void parseKLQ(String result) {
@@ -436,9 +419,6 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
      * --------------------------------轮播图---------------------------------
      */
     private void getBanner() {
-//        OkHttpClient mClient = new OkHttpClient.Builder()
-//                .cookieJar(new HttpCookieJar(getActivity()))
-//                .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.CAROUSEL_PIC)
                 .build();

@@ -1,6 +1,5 @@
 package com.joshua.craftsman.entity;
 
-import java.util.List;
 
 /**
  * Created by nzz on 2017/4/28.
@@ -13,11 +12,11 @@ public class Album {
     private String albumImage; //图片
     private String title; //标题
     private String craftsmanName; //工匠名
-    private int playTimes; //播放量
+    private String playTimes; //播放量
+    private String subscribeTimes; //订阅量
     private String classifyName; //分类名
-    private String introduction; //专辑简介
-    private List<String> arrayProgram; //节目列表(参见Program类)
-    private int programNumber; //节目总数
+    private String introduction; //简介
+    private String model; //所属模块(匠心独运 讲政策 听专题 看利器)
 
     public String getAlbumID() {
         return albumID;
@@ -59,12 +58,20 @@ public class Album {
         this.craftsmanName = craftsmanName;
     }
 
-    public int getPlayTimes() {
+    public String getPlayTimes() {
         return playTimes;
     }
 
-    public void setPlayTimes(int playTimes) {
+    public void setPlayTimes(String playTimes) {
         this.playTimes = playTimes;
+    }
+
+    public String getSubscribeTimes() {
+        return subscribeTimes;
+    }
+
+    public void setSubscribeTimes(String subscribeTimes) {
+        this.subscribeTimes = subscribeTimes;
     }
 
     public String getClassifyName() {
@@ -83,33 +90,25 @@ public class Album {
         this.introduction = introduction;
     }
 
-    public List<String> getArrayProgram() {
-        return arrayProgram;
+    public String getModel() {
+        return model;
     }
 
-    public void setArrayProgram(List<String> arrayProgram) {
-        this.arrayProgram = arrayProgram;
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public int getProgramNumber() {
-        return programNumber;
-    }
-
-    public void setProgramNumber(int programNumber) {
-        this.programNumber = programNumber;
-    }
-
-    public Album(String albumID, String idClassify, String albumImage, String title, String craftsmanName, int playTimes, String classifyName, String introduction, List<String> arrayProgram, int programNumber) {
+    public Album(String albumID, String idClassify, String albumImage, String title, String craftsmanName, String playTimes, String subscribeTimes, String classifyName, String introduction, String model) {
         this.albumID = albumID;
         this.idClassify = idClassify;
         this.albumImage = albumImage;
         this.title = title;
         this.craftsmanName = craftsmanName;
         this.playTimes = playTimes;
+        this.subscribeTimes = subscribeTimes;
         this.classifyName = classifyName;
         this.introduction = introduction;
-        this.arrayProgram = arrayProgram;
-        this.programNumber = programNumber;
+        this.model = model;
     }
 
     @Override
@@ -120,11 +119,11 @@ public class Album {
                 ", albumImage='" + albumImage + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
-                ", playTimes=" + playTimes +
+                ", playTimes='" + playTimes + '\'' +
+                ", subscribeTimes='" + subscribeTimes + '\'' +
                 ", classifyName='" + classifyName + '\'' +
                 ", introduction='" + introduction + '\'' +
-                ", arrayProgram=" + arrayProgram +
-                ", programNumber=" + programNumber +
+                ", model='" + model + '\'' +
                 '}';
     }
 }

@@ -7,7 +7,6 @@ package com.joshua.craftsman.entity;
 
 public class MyOrderAlbum {
     private String albumOrderID; //专辑订单ID
-    private String albumID; //专辑ID
     private String albumImage; //专辑图片
     private String albumTitle; //专辑标题
     private String craftsmanName; //工匠名
@@ -20,14 +19,6 @@ public class MyOrderAlbum {
 
     public void setAlbumOrderID(String albumOrderID) {
         this.albumOrderID = albumOrderID;
-    }
-
-    public String getAlbumID() {
-        return albumID;
-    }
-
-    public void setAlbumID(String albumID) {
-        this.albumID = albumID;
     }
 
     public String getAlbumImage() {
@@ -70,9 +61,8 @@ public class MyOrderAlbum {
         this.albumPrice = albumPrice;
     }
 
-    public MyOrderAlbum(String albumOrderID, String albumID, String albumImage, String albumTitle, String craftsmanName, int programNumber, String albumPrice) {
+    public MyOrderAlbum(String albumOrderID, String albumImage, String albumTitle, String craftsmanName, int programNumber, String albumPrice) {
         this.albumOrderID = albumOrderID;
-        this.albumID = albumID;
         this.albumImage = albumImage;
         this.albumTitle = albumTitle;
         this.craftsmanName = craftsmanName;
@@ -84,7 +74,6 @@ public class MyOrderAlbum {
     public String toString() {
         return "MyOrderAlbum{" +
                 "albumOrderID='" + albumOrderID + '\'' +
-                ", albumID='" + albumID + '\'' +
                 ", albumImage='" + albumImage + '\'' +
                 ", albumTitle='" + albumTitle + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +

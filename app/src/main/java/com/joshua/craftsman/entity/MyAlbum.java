@@ -8,10 +8,10 @@ package com.joshua.craftsman.entity;
 public class MyAlbum {
     private String myAlbumID; //专辑ID
     private String albumImage; //专辑图片
+    private String craftsman; //工匠名
     private String albumTitle; //专辑标题
     private String introduction; //简介
-    private int programNumber; //分集数量
-    private String storage; //存储容量
+    private String programNumber; //分集数量
 
     public String getMyAlbumID() {
         return myAlbumID;
@@ -27,6 +27,14 @@ public class MyAlbum {
 
     public void setAlbumImage(String albumImage) {
         this.albumImage = albumImage;
+    }
+
+    public String getCraftsman() {
+        return craftsman;
+    }
+
+    public void setCraftsman(String craftsman) {
+        this.craftsman = craftsman;
     }
 
     public String getAlbumTitle() {
@@ -45,29 +53,21 @@ public class MyAlbum {
         this.introduction = introduction;
     }
 
-    public int getProgramNumber() {
+    public String getProgramNumber() {
         return programNumber;
     }
 
-    public void setProgramNumber(int programNumber) {
+    public void setProgramNumber(String programNumber) {
         this.programNumber = programNumber;
     }
 
-    public String getStorage() {
-        return storage;
-    }
-
-    public void setStorage(String storage) {
-        this.storage = storage;
-    }
-
-    public MyAlbum(String myAlbumID, String albumImage, String albumTitle, String introduction, int programNumber, String storage) {
+    public MyAlbum(String myAlbumID, String albumImage, String craftsman, String albumTitle, String introduction, String programNumber) {
         this.myAlbumID = myAlbumID;
         this.albumImage = albumImage;
+        this.craftsman = craftsman;
         this.albumTitle = albumTitle;
         this.introduction = introduction;
         this.programNumber = programNumber;
-        this.storage = storage;
     }
 
     @Override
@@ -75,10 +75,10 @@ public class MyAlbum {
         return "MyAlbum{" +
                 "myAlbumID='" + myAlbumID + '\'' +
                 ", albumImage='" + albumImage + '\'' +
+                ", craftsman='" + craftsman + '\'' +
                 ", albumTitle='" + albumTitle + '\'' +
                 ", introduction='" + introduction + '\'' +
-                ", programNumber=" + programNumber +
-                ", storage='" + storage + '\'' +
+                ", programNumber='" + programNumber + '\'' +
                 '}';
     }
 }

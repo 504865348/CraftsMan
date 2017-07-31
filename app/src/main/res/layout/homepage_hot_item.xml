@@ -14,7 +14,6 @@
     <TextView
         android:id="@+id/hot_item_text"
         style="@style/home_page_hot_bottom_text"
-        android:textSize="12sp"
-        android:text="标题"/>
+        android:textSize="12sp" />
 
 </LinearLayout>

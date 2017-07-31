@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -111,7 +112,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         holder.tv_content.setText(data.get(position).getContent());
         holder.tv_listenrNumber.setText(data.get(position).getListenrNumber() + "人听过");
         holder.tv_time.setText(data.get(position).getTime());
-        holder.iv_q_a_item_go_ask.setOnClickListener(new View.OnClickListener() {
+        holder.btn_q_a_item_go_ask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AskQuestionActivity.class);
@@ -278,7 +279,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         TextView tv_listenrNumber;
         TextView tv_time;
 
-        ImageView iv_q_a_item_go_ask;
+        Button btn_q_a_item_go_ask;
         RelativeLayout rl_play_sound;
 
         MyViewHolder(View itemView) {
@@ -289,7 +290,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
             tv_content = (TextView) itemView.findViewById(R.id.q_a_item_question);
             tv_listenrNumber = (TextView) itemView.findViewById(R.id.q_a_people_content);
             tv_time = (TextView) itemView.findViewById(R.id.q_a_audio_duration);
-            iv_q_a_item_go_ask = (ImageView) itemView.findViewById(R.id.q_a_item_go_ask);
+            btn_q_a_item_go_ask = (Button) itemView.findViewById(R.id.q_a_item_go_ask);
             rl_play_sound = (RelativeLayout) itemView.findViewById(R.id.rl_play_sound);
 
         }

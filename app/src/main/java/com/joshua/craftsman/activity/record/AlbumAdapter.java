@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.entity.Album;
-import com.joshua.craftsman.entity.HotCraftsman;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_name.setText(data.get(position).getTitle());
+        holder.tv_info.setText(data.get(position).getIntroduction());
         holder.tv_type.setText(data.get(position).getClassifyName());
+        holder.tv_model.setText(data.get(position).getModel());
         Glide.with(mContext).load(data.get(position).getAlbumImage()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position);
     }
@@ -74,13 +75,17 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyViewHolder
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_name;
+        TextView tv_info;
         TextView tv_type;
+        TextView tv_model;
         ImageView iv_pic;
 
         MyViewHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.album_item_name);
+            tv_info = (TextView) itemView.findViewById(R.id.album_item_info);
             tv_type= (TextView) itemView.findViewById(R.id.album_item_type);
+            tv_model= (TextView) itemView.findViewById(R.id.album_item_model);
             iv_pic= (ImageView) itemView.findViewById(R.id.album_item_cover);
         }
     }

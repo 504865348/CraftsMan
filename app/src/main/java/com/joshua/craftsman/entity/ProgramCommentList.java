@@ -2,7 +2,7 @@ package com.joshua.craftsman.entity;
 
 /**
  * Created by nzz on 2017/4/28.
- * 节目(视频)--评论列表
+ * 节目(视频)--评论列表（待修改）
  */
 
 public class ProgramCommentList {

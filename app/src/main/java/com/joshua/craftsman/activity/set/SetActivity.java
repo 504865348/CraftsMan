@@ -32,8 +32,6 @@ import butterknife.ButterKnife;
 
 public class SetActivity extends BaseActivity implements View.OnClickListener {
 
-    //@BindView(R.id.set_tool_bar)
-    //Toolbar setToolBar;
     @BindView(R.id.set_ll_bind)
     LinearLayout setLlBind;
     @BindView(R.id.set_ll_change_pwd)
@@ -68,8 +66,6 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
         initListener();
         listenSwitch();
         showCache();
-        //setToolBar.setTitle("");
-        //setSupportActionBar(setToolBar);
     }
 
     private void initListener() {
@@ -95,7 +91,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 clear();
                 break;
             case R.id.set_ll_recommend:
-
+                Toast.makeText(mBaseActivity, "暂未开放推送设置", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.set_ll_help:
                 startActivity(new Intent(mBaseActivity, HelpActivity.class));
@@ -209,14 +205,4 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
         scListen.setChecked(sp.getBoolean("listen",false));
         scMobile.setChecked(sp.getBoolean("mobile",false));
     }
-
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }

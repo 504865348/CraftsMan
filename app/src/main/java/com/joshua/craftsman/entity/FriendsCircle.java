@@ -2,7 +2,7 @@ package com.joshua.craftsman.entity;
 
 /**
  * Created by nzz on 2017/5/10.
- * 匠友圈
+ * 匠友圈------暂定不用,待修改
  */
 
 public class FriendsCircle {

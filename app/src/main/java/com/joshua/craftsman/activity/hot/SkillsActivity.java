@@ -1,7 +1,7 @@
 package com.joshua.craftsman.activity.hot;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.adapter.HotSkillsAdapter;
+import com.joshua.craftsman.adapter.HotMoreAlbumAdapter;
 import com.joshua.craftsman.entity.HotSkills;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
@@ -92,11 +92,10 @@ public class SkillsActivity extends BaseActivity {
         });
     }
     private void initRecycleJXDY() {
-        //设置网格布局管理器
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,4);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        hotSkillsRv.setLayoutManager(gridLayoutManager);
-        hotSkillsRv.setAdapter(new HotSkillsAdapter(this, list_JXDY));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        hotSkillsRv.setLayoutManager(linearLayoutManager);
+        hotSkillsRv.setAdapter(new HotMoreAlbumAdapter(this, list_JXDY));
     }
 
     @Override

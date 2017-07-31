@@ -2,35 +2,60 @@ package com.joshua.craftsman.activity.info;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.utils.MyUtils;
+import com.joshua.craftsman.utils.PrefUtils;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseCityInterface;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseCityUtil;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseDateInterface;
 import com.joshua.craftsman.utils.myinfoCityAndDate.ChooseDateUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class EditInfoActivity extends BaseActivity implements View.OnClickListener {
@@ -49,9 +74,17 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     Button myInfoCommit;
     @BindView(R.id.tvAddress)
     TextView tvAddress;
+    @BindView(R.id.iv_my_image)
+    ImageView ivMyImage;
 
-    private String nickName, introduce,sex,birthday,address;
+    private PopupWindow pop = null;
+    private View parentView;
+    private LinearLayout ll_popup;
+    private String nickName, introduce, sex, birthday, address;
     private SharedPreferences sp;
+    private static final int CHOOSE_PICTURE = 0x000001;
+    private static final int TAKE_PICTURE = 0x000002;
+    private static final String IMAGE_FILE_NAME = "headImage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +92,102 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.set_edit_myinfo);
         ButterKnife.bind(this);
         initListener();
+        InitPopWindow();
         editMyInfoToolBar.setTitle("");
         setSupportActionBar(editMyInfoToolBar);
         showInfo();
+        parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
     }
 
     private void initListener() {
+        ivMyImage.setOnClickListener(this);
         tvSex.setOnClickListener(this);
         tvBirthday.setOnClickListener(this);
         tvAddress.setOnClickListener(this);
         myInfoCommit.setOnClickListener(this);
     }
 
+    private void InitPopWindow() {
+        pop = new PopupWindow(this);
+        View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
+        ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(true);
+        pop.setContentView(view);
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent);
+        Button bt1 = (Button) view
+                .findViewById(R.id.item_popupwindows_camera);
+        Button bt2 = (Button) view
+                .findViewById(R.id.item_popupwindows_Photo);
+        Button bt3 = (Button) view
+                .findViewById(R.id.item_popupwindows_cancel);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(openCameraIntent, TAKE_PICTURE);
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent openHeadImageIntent = new Intent(
+                        Intent.ACTION_GET_CONTENT);
+                openHeadImageIntent.setType("image/*");
+                startActivityForResult(openHeadImageIntent, CHOOSE_PICTURE);
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case TAKE_PICTURE:
+                if (resultCode == RESULT_OK) {
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    //保存为头像文件
+                    MyUtils.saveBitmap(bitmap
+                            , PrefUtils.getString(mBaseActivity, "imageInfo", ""), IMAGE_FILE_NAME);
+                    ivMyImage.setImageBitmap(bitmap);
+                }
+                break;
+            case CHOOSE_PICTURE:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    //获取图片路径并保存为Bitmap
+                    Bitmap bitmap = MyUtils.getBitmapFromUri(this, uri);
+                    //保存为头像文件
+                    MyUtils.saveBitmap(bitmap
+                            , PrefUtils.getString(mBaseActivity, "imageInfo", ""), IMAGE_FILE_NAME);
+                    ivMyImage.setImageBitmap(bitmap);
+                }
+                break;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.iv_my_image:
+                setHeadImage();
+                break;
             case R.id.tvSex:
                 setSex();
                 break;
@@ -87,6 +201,10 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                 saveInfo();
                 break;
         }
+    }
+
+    private void setHeadImage() {
+        pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
     }
 
     private void setSex() {
@@ -149,52 +267,66 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         editor.putString("birthday", birthday);
         editor.putString("address", address);
         editor.commit();
-        if (nickName == null || introduce == null || sex == null
-                || birthday == null || address == null)
-            showErrorMsg("请将信息填写完整");
-        else
-            putDataToServer();
+        /*if (headImage == null || nickName == null || introduce == null
+                || sex == null || birthday == null || address == null)
+            showErrorMsg("请将信息填写完整");*/
+        //else
+            //putDataToServer();
     }
 
     private void putDataToServer() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getApplicationContext()))
+        String userAccount = PrefUtils.getString(mBaseActivity, "imageInfo", "");
+        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "imageInfo", "");
+        File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
+        RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("image", "headImage.JPEG", fileBody)
+                .addFormDataPart("nickName", nickName)
+                .addFormDataPart("introduce", introduce)
+                .addFormDataPart("sex", sex)
+                .addFormDataPart("birthday", birthday)
+                .addFormDataPart("address", address)
+                .addFormDataPart("userAccount", userAccount)
                 .build();
-
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.EDIT_MY_INFO)
-                .add("nickName", nickName)
-                .add("introduce", introduce)
-                .add("sex", sex)
-                .add("birthday", birthday)
-                .add("address", address)
+        Request request = new Request.Builder()
+                .url(Server.SERVER_MY_INFO)
+                .post(requestBody)
                 .build();
-
-        final Request request = new Request.Builder()
-                .url(Server.SERVER_REMOTE)
-                .post(params)
-                .build();
-        Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(this) {
+        Call call = new OkHttpClient().newCall(request);
+        call.enqueue(new Callback() {
             @Override
-            protected void success(String result) {
-                Log.d(TAG, "success: " + result);
-                if (result.equals("true")) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getBaseContext(), "保存成功", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    finish();
-                } else {
-                    Toast.makeText(mBaseActivity, "个人资料编辑失败,请检查网络连接", Toast.LENGTH_SHORT).show();
-                }
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "createHeadImage:fail" + e.getMessage());
             }
 
             @Override
-            protected void error() {
-                Toast.makeText(mBaseActivity, "个人资料编辑失败,请检查网络连接", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                JSONObject jo = null;
+                try {
+                    jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    if (result.equals("true")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "保存成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "个人资料编辑失败,请检查网络连接", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -206,12 +338,13 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         tvSex.setText(sp.getString("sex", ""));
         tvBirthday.setText(sp.getString("birthday", ""));
         tvAddress.setText(sp.getString("address", ""));
+        ivMyImage.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/headImage.JPEG")));
     }
 
     private void showErrorMsg(String value) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(mBaseActivity);
         dialog.setMessage(value);
-        dialog.setPositiveButton("确定",null);
+        dialog.setPositiveButton("确定", null);
         dialog.show();
     }
 

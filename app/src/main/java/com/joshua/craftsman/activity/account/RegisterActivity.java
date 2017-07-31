@@ -9,22 +9,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.utils.MyUtils;
-import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,14 +46,22 @@ import static okhttp3.Protocol.get;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.et_username) EditText et_username;
-    @BindView(R.id.et_password) EditText et_password;
-    @BindView(R.id.et_sms) EditText et_sms;
-    @BindView(R.id.btn_send_sms) Button btn_send_sms;
-    @BindView(R.id.btn_register) Button btn_register;
-    @BindView(R.id.tv_err) TextView tv_err;
-    @BindView(R.id.cb_agree) CheckBox cb_agree;
-    @BindView(R.id.register_tool_bar) Toolbar mToolbar;
+    @BindView(R.id.et_username)
+    EditText et_username;
+    @BindView(R.id.et_password)
+    EditText et_password;
+    @BindView(R.id.et_sms)
+    EditText et_sms;
+    @BindView(R.id.btn_send_sms)
+    Button btn_send_sms;
+    @BindView(R.id.btn_register)
+    Button btn_register;
+    @BindView(R.id.tv_err)
+    TextView tv_err;
+    @BindView(R.id.cb_agree)
+    CheckBox cb_agree;
+    @BindView(R.id.register_tool_bar)
+    Toolbar mToolbar;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.ll_container)
@@ -101,7 +105,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 register();
                 break;
             case R.id.tv_protocol:
-               goToProtocol();
+                goToProtocol();
                 break;
         }
     }
@@ -218,32 +222,32 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String responseJson = response.body().string();
                 Log.d(TAG, "onResponse: "+responseJson);
                 try {
-                JSONObject jo = new JSONObject(responseJson);
-                String result = jo.getString("result");
-                if (result.equals("true")) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                    JSONObject jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    if (result.equals("true")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                            Toast.makeText(mBaseActivity, "验证码发送成功", Toast.LENGTH_SHORT).show();
-                            TimeCount time = new TimeCount(60000, 1000);
-                            time.start();
-                        }
-                    });
+                                Toast.makeText(mBaseActivity, "验证码发送成功", Toast.LENGTH_SHORT).show();
+                                TimeCount time = new TimeCount(60000, 1000);
+                                time.start();
+                            }
+                        });
 
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(mBaseActivity, "验证码发送失败，请稍后重试", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "验证码发送失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
         });
     }
 
@@ -270,6 +274,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 显示错误
+     *
      * @param err 错误信息
      */
     private void showError(String err) {

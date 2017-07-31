@@ -15,6 +15,7 @@
             android:id="@+id/recommend_program_img"
             android:layout_width="68dp"
             android:layout_height="68dp"
+            android:scaleType="centerCrop"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/photo_two" />

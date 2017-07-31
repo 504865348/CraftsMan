@@ -62,7 +62,7 @@ public class HotCraftsAdapter extends android.support.v7.widget.RecyclerView.Ada
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CraftsHomeActivity.class);
                 intent.putExtra("craftsName", data.get(position).getCraftsmanName());
-                //intent.putExtra("craftsIntro", data.get(position).getIntroduction());
+                intent.putExtra("craftsIntro", data.get(position).getIntroduction());
                 intent.putExtra("craftsPic", data.get(position).getImageUrl());
                 mContext.startActivity(intent);
             }

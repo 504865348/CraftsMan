@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -24,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.utils.MyUtils;
@@ -47,9 +45,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.joshua.craftsman.R.id.et_question;
-import static com.joshua.craftsman.R.id.iv_add_pic;
-
 public class CreateAlbumActivity extends BaseActivity {
     @BindView(R.id.iv_add_pic)
     ImageView add;
@@ -57,8 +52,12 @@ public class CreateAlbumActivity extends BaseActivity {
     EditText et_title;
     @BindView(R.id.Spinner01)
     Spinner spinner;
-    private String[] mTypes;
-    private String mType;
+    @BindView(R.id.Spinner02)
+    Spinner spinnerModels;
+    @BindView(R.id.et_introduction)
+    EditText etIntroduction;
+    private String[] mTypes, mModels;
+    private String mType, mModel;
 
     private PopupWindow pop = null;
     private View parentView;
@@ -88,6 +87,19 @@ public class CreateAlbumActivity extends BaseActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        spinnerModels.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                mModel = mModels[pos];
+                Log.d(TAG, "onItemModelSelected: " + mModel);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         //加载父布局
         parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
         InitPopWindow();
@@ -106,6 +118,8 @@ public class CreateAlbumActivity extends BaseActivity {
     private void initData() {
         mTypes = getResources().getStringArray(R.array.albumTypes);
         mType = mTypes[0];
+        mModels = getResources().getStringArray(R.array.albumModels);
+        mModel = mModels[0];
     }
 
 
@@ -178,7 +192,7 @@ public class CreateAlbumActivity extends BaseActivity {
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
                     add.setImageBitmap(bitmap);
                 }
                 break;
@@ -189,7 +203,7 @@ public class CreateAlbumActivity extends BaseActivity {
                     Bitmap bitmap = MyUtils.getBitmapFromUri(this, uri);
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                          , PrefUtils.getString(mBaseActivity, "phone", ""),IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
                     add.setImageBitmap(bitmap);
                 }
                 break;
@@ -209,7 +223,9 @@ public class CreateAlbumActivity extends BaseActivity {
 
     public void createAlbum(View view) {
         String specialName = et_title.getText().toString();
+        String introduction = etIntroduction.getText().toString();
         String typeName = mType;
+        String modelName = mModel;
         String creater = PrefUtils.getString(mBaseActivity, "phone", "");
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
@@ -218,9 +234,11 @@ public class CreateAlbumActivity extends BaseActivity {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("image", "album.JPEG", fileBody)
-                .addFormDataPart("specialName",specialName)
-                .addFormDataPart("typeName",typeName)
-                .addFormDataPart("creater",creater)
+                .addFormDataPart("specialName", specialName)
+                .addFormDataPart("typeName", typeName)
+                .addFormDataPart("creater", creater)
+                .addFormDataPart("introduction", introduction)
+                .addFormDataPart("modelName", modelName)
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_ALBUM)
@@ -230,7 +248,7 @@ public class CreateAlbumActivity extends BaseActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d(TAG, "createAlbum:fail"+e.getMessage());
+                Log.d(TAG, "createAlbum:fail" + e.getMessage());
             }
 
             @Override
@@ -241,7 +259,7 @@ public class CreateAlbumActivity extends BaseActivity {
                 try {
                     jo = new JSONObject(responseJson);
                     String result = jo.getString("result");
-                    if(result.equals("true")){
+                    if (result.equals("true")) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -249,7 +267,7 @@ public class CreateAlbumActivity extends BaseActivity {
                             }
                         });
                         finish();
-                    }else {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

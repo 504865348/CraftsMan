@@ -39,9 +39,11 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.MyView
 
     @Override
     public void onBindViewHolder(ClassifyAdapter.MyViewHolder holder, int position) {
-        holder.tv_title.setText(data.get(position).getRecordTitle());
-        holder.tv_author.setText(data.get(position).getName());
-        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
+        holder.tv_title.setText(data.get(position).getTitle());
+        holder.tv_info.setText(data.get(position).getIntroduction());
+        holder.tv_author.setText(data.get(position).getCraftsmanName());
+        holder.tv_model.setText(data.get(position).getModel());
+        Glide.with(mContext).load(data.get(position).getAlbumImage()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
     @Override
@@ -58,13 +60,17 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
+        TextView tv_info;
         TextView tv_author;
+        TextView tv_model;
         ImageView iv_pic;
         MyViewHolder(View itemView) {
             super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.classify_house_title);
-            tv_author = (TextView) itemView.findViewById(R.id.classify_house_author);
-            iv_pic= (ImageView) itemView.findViewById(R.id.classify_house_img);
+            tv_title = (TextView) itemView.findViewById(R.id.classify_item_albums_name);
+            tv_info = (TextView) itemView.findViewById(R.id.classify_item_info);
+            tv_author = (TextView) itemView.findViewById(R.id.classify_item_craft);
+            tv_model = (TextView) itemView.findViewById(R.id.classify_item_model);
+            iv_pic= (ImageView) itemView.findViewById(R.id.classify_item_img);
         }
     }
 
