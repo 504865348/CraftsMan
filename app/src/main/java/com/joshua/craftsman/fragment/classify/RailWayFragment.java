@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.classify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.adapter.classify.ClassifyAdapter;
 import com.joshua.craftsman.entity.Classify;
 import com.joshua.craftsman.entity.Server;
@@ -61,18 +64,15 @@ public class RailWayFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getRailWay();
+        getRailWay("铁路工程");
     }
 
-    private void getRailWay() {
+    private void getRailWay(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.HOME_CLASSIFY)
-                .add("type", "railWay")
-                .build();
-
+        String requestStr = "method=" + Server.HOME_CLASSIFY + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(Server.MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -95,20 +95,47 @@ public class RailWayFragment extends BaseFragment {
         Gson gson = new Gson();
         list_railWay = gson.fromJson(result, new TypeToken<List<Classify>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleRailWay();
-            }
-        });
+        if (list_railWay.get(0).getTitle().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleRailWay();
+                }
+            });
+        }
     }
 
     private void initRecycleRailWay() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         classifyRailWayRv.setLayoutManager(linearLayoutManager);
-        classifyRailWayRv.setAdapter(new ClassifyAdapter(getActivity(), list_railWay));
+        ClassifyAdapter adapter = new ClassifyAdapter(getActivity(), list_railWay);
+        adapter.setOnRecyclerViewItemClickListener(new ClassifyAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_railWay.get(pos).getId());
+                intent.putExtra("albumName", list_railWay.get(pos).getTitle());
+                intent.putExtra("albumPic", list_railWay.get(pos).getAlbumImage());
+                intent.putExtra("albumCrafts", list_railWay.get(pos).getCraftsmanName());
+                intent.putExtra("albumIntroduction", list_railWay.get(pos).getIntroduction());
+                intent.putExtra("albumClassify", list_railWay.get(pos).getClassify());
+                intent.putExtra("albumModel", list_railWay.get(pos).getModel());
+                intent.putExtra("albumPlay", list_railWay.get(pos).getPlay());
+                intent.putExtra("albumSubscribe", list_railWay.get(pos).getSubscribe());
+                mContext.startActivity(intent);
+            }
+        });
+        classifyRailWayRv.setAdapter(adapter);
     }
 
     @Nullable
@@ -117,6 +144,21 @@ public class RailWayFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_classify_f);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 
     @Override

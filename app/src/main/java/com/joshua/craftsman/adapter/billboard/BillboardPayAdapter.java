@@ -43,7 +43,7 @@ public class BillboardPayAdapter extends RecyclerView.Adapter<BillboardPayAdapte
         holder.tv_rank.setText(data.get(position).getId());
         holder.tv_title.setText(data.get(position).getRecordTitle());
         holder.tv_author.setText(data.get(position).getName());
-        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
+        //Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
     @Override

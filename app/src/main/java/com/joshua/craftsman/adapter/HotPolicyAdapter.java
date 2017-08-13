@@ -50,7 +50,9 @@ public class HotPolicyAdapter extends RecyclerView.Adapter<HotPolicyAdapter.MyVi
                 intent.putExtra("albumCrafts", data.get(position).getAuthor());
                 intent.putExtra("albumIntroduction", data.get(position).getIntroduction());
                 intent.putExtra("albumClassify", data.get(position).getClassify());
+                intent.putExtra("albumModel", data.get(position).getModel());
                 intent.putExtra("albumPlay", data.get(position).getPlay());
+                intent.putExtra("albumSubscribe", data.get(position).getSubscribe());
                 mContext.startActivity(intent);
             }
         });

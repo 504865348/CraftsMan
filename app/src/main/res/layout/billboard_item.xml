@@ -37,7 +37,7 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/billboard_hot_name"
-                style="@style/search_interface_sub_title"
+                style="@style/billboard_interface_sub_title"
                 android:text="最火节目飙升榜" />
             <TextView
                 android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
 
             <TextView
                 android:id="@+id/billboard_more_name"
-                style="@style/search_interface_sub_title"
+                style="@style/billboard_interface_sub_title"
                 android:text="最多订阅经典榜" />
 
             <TextView
@@ -201,7 +201,7 @@
 
             <TextView
                 android:id="@+id/billboard_pay_name"
-                style="@style/search_interface_sub_title"
+                style="@style/billboard_interface_sub_title"
                 android:text="付费精品畅销榜" />
 
             <TextView
@@ -304,7 +304,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/billboard_crafts_name"
-                    style="@style/search_interface_sub_title"
+                    style="@style/billboard_interface_sub_title"
                     android:text="最大国工匠榜" />
                 <TextView
                     android:layout_width="150dp"

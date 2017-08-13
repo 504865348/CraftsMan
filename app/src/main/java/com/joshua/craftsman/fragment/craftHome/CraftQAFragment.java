@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -42,6 +44,8 @@ public class CraftQAFragment extends BaseFragment {
 
     private List<CraftHomeAns> list_qa;
     private String craftsName = CraftsHomeActivity.homeCraftsName;
+    private String craftsAccount = CraftsHomeActivity.homeCraftsAccount;
+    public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown;charset=utf-8");
 
     @Override
     public View initView() {
@@ -57,16 +61,14 @@ public class CraftQAFragment extends BaseFragment {
         getDataFromServer();
     }
     private void getDataFromServer() {
-        getCraftAlbum();
+        getCraftAlbum(craftsAccount);
     }
-    private void getCraftAlbum() {
+    private void getCraftAlbum(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.ANS_LIST_BY_CRAFTS)
-                .add("craftsName",craftsName)
-                .build();
+        String requestStr = "method=" + Server.ANS_LIST_BY_CRAFTS + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -86,13 +88,7 @@ public class CraftQAFragment extends BaseFragment {
         Gson gson = new Gson();
         list_qa = gson.fromJson(result, new TypeToken<List<CraftHomeAns>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initLayout();
-            }
-        });
-        /*if(list_qa.get(0).getContent().equals("null")) {
+        if(list_qa.get(0).getContent().equals("null")) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -107,11 +103,11 @@ public class CraftQAFragment extends BaseFragment {
                     initLayout();
                 }
             });
-        }*/
+        }
     }
     private void initLayout() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftQARv.setLayoutManager(linearLayoutManager);
         craftQARv.setAdapter(new CraftQuesAnsAdapter(getActivity(), list_qa));
         craftsAnsNumber.setText(String.valueOf(linearLayoutManager.getItemCount()));
@@ -131,13 +127,6 @@ public class CraftQAFragment extends BaseFragment {
         }else {
             empty.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getDataFromServer();
-
     }
 
     @Override

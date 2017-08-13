@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.classify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.adapter.classify.ClassifyAdapter;
 import com.joshua.craftsman.entity.Classify;
 import com.joshua.craftsman.entity.Server;
@@ -61,18 +64,15 @@ public class CommunicationsFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getCommunications();
+        getCommunications("通信广电工程");
     }
 
-    private void getCommunications() {
+    private void getCommunications(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.HOME_CLASSIFY)
-                .add("type", "communications")
-                .build();
-
+        String requestStr = "method=" + Server.HOME_CLASSIFY + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(Server.MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -95,12 +95,22 @@ public class CommunicationsFragment extends BaseFragment {
         Gson gson = new Gson();
         list_communications = gson.fromJson(result, new TypeToken<List<Classify>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleCommunications();
-            }
-        });
+        if(list_communications.get(0).getTitle().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleCommunications();
+                }
+            });
+        }
     }
 
     private void initRecycleCommunications() {
@@ -108,7 +118,25 @@ public class CommunicationsFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         classifyCommunicationsRv.setLayoutManager(linearLayoutManager);
-        classifyCommunicationsRv.setAdapter(new ClassifyAdapter(getActivity(), list_communications));
+        ClassifyAdapter adapter = new ClassifyAdapter(getActivity(), list_communications);
+        adapter.setOnRecyclerViewItemClickListener(new ClassifyAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_communications.get(pos).getId());
+                intent.putExtra("albumName", list_communications.get(pos).getTitle());
+                intent.putExtra("albumPic", list_communications.get(pos).getAlbumImage());
+                intent.putExtra("albumCrafts", list_communications.get(pos).getCraftsmanName());
+                intent.putExtra("albumIntroduction", list_communications.get(pos).getIntroduction());
+                intent.putExtra("albumClassify", list_communications.get(pos).getClassify());
+                intent.putExtra("albumModel", list_communications.get(pos).getModel());
+                intent.putExtra("albumPlay", list_communications.get(pos).getPlay());
+                intent.putExtra("albumSubscribe", list_communications.get(pos).getSubscribe());
+                mContext.startActivity(intent);
+            }
+        });
+        classifyCommunicationsRv.setAdapter(adapter);
     }
 
     @Nullable
@@ -117,6 +145,22 @@ public class CommunicationsFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+
     }
 
     @Override

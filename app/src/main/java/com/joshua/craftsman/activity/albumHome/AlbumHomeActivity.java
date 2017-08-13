@@ -66,6 +66,8 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     Button albumSubscribe;
     @BindView(R.id.album_buy)
     Button albumBuy;
+    @BindView(R.id.album_detail_model)
+    TextView albumDetailModel;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
@@ -73,14 +75,15 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     private AlbumDetailsFragment mAlbumDetailsFragment;
     private AlbumProgramFragment mAlbumProgramFragment;
 
-    private String itemAlbumId,itemAlbumName, itemAlbumPic, itemAlbumCrafts, itemAlbumClassify, getItemAlbumPlay;
+    private String itemAlbumId, itemAlbumName, itemAlbumPic, itemAlbumCrafts,
+            itemAlbumModel, itemAlbumClassify, getItemAlbumPlay, itemAlbumSubscribe;
     public static String homeAlbumCraftName = "";
     public static String homeAlbumId = "";
     public static String homeAlbumIntroduction = "";
-    private long subscribeNumber = 29;
+    public static String albumPic = "";
     private boolean isSubscribe = true;
-    private SharedPreferences sp,sp2;
-    private String subscribeFlag,subscribeUser;
+    private SharedPreferences sp;
+    private String subscribeFlag, subscribeUser;
     private String userName = LoginActivity.appUserName;
 
 
@@ -95,7 +98,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         initTabLineWidth();
         initView();
         initListener();
-        showInfo();
+        //showInfo();
     }
 
     private void initPager() {
@@ -158,12 +161,16 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         itemAlbumPic = getIntent().getStringExtra("albumPic");
         itemAlbumCrafts = getIntent().getStringExtra("albumCrafts");
         itemAlbumClassify = getIntent().getStringExtra("albumClassify");
+        itemAlbumModel = getIntent().getStringExtra("albumModel");
         getItemAlbumPlay = getIntent().getStringExtra("albumPlay");
+        itemAlbumSubscribe = getIntent().getStringExtra("albumSubscribe");
         albumDetailName.setText(itemAlbumName);
         albumDetailCraftsName.setText(itemAlbumCrafts);
         albumDetailClassification.setText(itemAlbumClassify);
+        albumDetailModel.setText(itemAlbumModel);
         albumDetailPlayNum.setText(getItemAlbumPlay);
         Glide.with(this).load(itemAlbumPic).into(albumDetailCover);
+        albumPic = itemAlbumPic;
     }
 
     private void initListener() {
@@ -176,31 +183,39 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.album_subscribe:
-                countSubscribeNumber(isSubscribe);
-                saveInfo(isSubscribe);
-                isSubscribe = !isSubscribe;
-                //putDataToServer();
+                //saveInfo(isSubscribe);
+                //albumIsSubscribe(String.valueOf(isSubscribe));
+                //isSubscribe = !isSubscribe;
+                Toast.makeText(mBaseActivity, "暂未开放专辑订阅功能", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.album_buy:
-                Toast.makeText(mBaseActivity,"暂未开放购买专辑功能",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mBaseActivity, "暂未开放专辑购买功能", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
-    private void countSubscribeNumber(boolean bool) {
-        if (bool) {
-            subscribeNumber++;
-            albumSubscribe.setText("已订阅("+subscribeNumber+")");
-        }
-        else {
-            subscribeNumber--;
-            albumSubscribe.setText("订阅("+subscribeNumber+")");
-            deleteSharedPreferencesFile();
+/*
+    private void albumIsSubscribe(String strIsSubscribe) {
+        if (strIsSubscribe.equals("true")) {
+            if (itemAlbumSubscribe.equals("null")) {
+                albumSubscribe.setText("已订阅(" + 0 + ")");
+            }
+            else {
+                albumSubscribe.setText("已订阅(" + itemAlbumSubscribe + ")");
+            }
+            putDataToServer(strIsSubscribe);
+        } else {
+            if (itemAlbumSubscribe.equals("null")) {
+                albumSubscribe.setText("订阅(" + 0 + ")");
+            }
+            else {
+                albumSubscribe.setText("订阅(" + itemAlbumSubscribe + ")");
+            }
+            putDataToServer(strIsSubscribe);
         }
     }
 
     private void saveInfo(boolean bool) {
-        sp = getSharedPreferences("SubscribeAlbumId"+homeAlbumId, Context.MODE_PRIVATE);
+        sp = getSharedPreferences("SubscribeAlbumId" + homeAlbumId, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("UserName", userName);
         editor.putString("AlbumId", itemAlbumId);
@@ -210,37 +225,36 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
 
 
     private void showInfo() {
-        sp = getSharedPreferences("SubscribeAlbumId"+homeAlbumId, Context.MODE_PRIVATE);
+        sp = getSharedPreferences("SubscribeAlbumId" + homeAlbumId, Context.MODE_PRIVATE);
         subscribeFlag = sp.getString("IsSubscribe", "");
         subscribeUser = sp.getString("UserName", "");
         if (!subscribeUser.equals(userName)) {
             deleteSharedPreferencesFile();
-        }
-        else {
+        } else {
             if (subscribeFlag.equals(String.valueOf(true))) {
-                albumSubscribe.setText("已订阅("+30+")");
-            }
-            else {
-                albumSubscribe.setText("订阅("+29+")");
+                albumSubscribe.setText("已订阅(" + itemAlbumSubscribe + ")");
+            } else {
+                albumSubscribe.setText("订阅(" + itemAlbumSubscribe + ")");
             }
         }
     }
 
     private void deleteSharedPreferencesFile() {
-        File file = new File("/data/data/"+getPackageName().toString()+"/shared_prefs","SubscribeAlbumId"+homeAlbumId+".xml");
+        File file = new File("/data/data/" + getPackageName().toString() + "/shared_prefs", "SubscribeAlbumId" + homeAlbumId + ".xml");
         if (file.exists()) {
             file.delete();
         }
     }
 
 
-    private void putDataToServer() {
+    private void putDataToServer(String strFlag) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getApplicationContext()))
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.ALBUM_SUBSCRIBE)
                 .add("albumId", itemAlbumId)
+                .add("flag", strFlag)
                 .build();
 
         final Request request = new Request.Builder()
@@ -259,6 +273,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
             }
         });
     }
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

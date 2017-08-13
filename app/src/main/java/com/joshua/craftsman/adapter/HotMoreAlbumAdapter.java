@@ -46,20 +46,6 @@ public class HotMoreAlbumAdapter extends RecyclerView.Adapter<HotMoreAlbumAdapte
         holder.tv_craft.setText(data.get(position).getAuthor());
         holder.tv_classify.setText(data.get(position).getClassify());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
-        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
-                intent.putExtra("albumId", data.get(position).getId());
-                intent.putExtra("albumName", data.get(position).getProgramName());
-                intent.putExtra("albumPic", data.get(position).getImageUrl());
-                intent.putExtra("albumCrafts", data.get(position).getAuthor());
-                intent.putExtra("albumIntroduction", data.get(position).getIntroduction());
-                intent.putExtra("albumClassify", data.get(position).getClassify());
-                intent.putExtra("albumPlay", data.get(position).getPlay());
-                mContext.startActivity(intent);
-            }
-        });
         holder.itemView.setTag(position+"");
     }
 
@@ -95,7 +81,7 @@ public class HotMoreAlbumAdapter extends RecyclerView.Adapter<HotMoreAlbumAdapte
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

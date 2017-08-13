@@ -1,48 +1,36 @@
 package com.joshua.craftsman.activity.billboard;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.billboard.BillboardMoreAdapter;
 import com.joshua.craftsman.entity.BillboardMore;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
-import com.joshua.craftsman.utils.AudioRecoderUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
+
 
 public class BillboardMoreActivity extends BaseActivity {
 
@@ -53,19 +41,6 @@ public class BillboardMoreActivity extends BaseActivity {
 
     private List<BillboardMore> list_more;
 
-    private Call mCall;
-    private File mFile;
-    private OkHttpClient mOkHttpClient;
-
-    private ProgressDialog mDialog;
-    private Handler mHandler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            int progress=msg.arg1;
-            mDialog.setProgress(progress);
-        }
-    };
     //private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -76,15 +51,6 @@ public class BillboardMoreActivity extends BaseActivity {
         initData();
         billboardMoreToolBar.setTitle("");
         setSupportActionBar(billboardMoreToolBar);
-        mOkHttpClient=new OkHttpClient();
-        initProDialogRefresh();
-    }
-
-    private void initProDialogRefresh() {
-        mDialog = new ProgressDialog(mBaseActivity);
-        mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mDialog.setMax(100);
-        //initRefreshRecycleView(View.inflate(mBaseActivity, R.layout.billboard_more_program, null));
     }
 
     public void initData() {
@@ -151,150 +117,56 @@ public class BillboardMoreActivity extends BaseActivity {
         Gson gson = new Gson();
         list_more = gson.fromJson(result, new TypeToken<List<BillboardMore>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleMore();
-            }
-        });
+        if (list_more.get(0).getTitle().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleMore();
+                }
+            });
+        }
     }
 
     private void initRecycleMore() {
-        //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         billboard_more_program_rv.setLayoutManager(linearLayoutManager);
-        BillboardMoreAdapter adapter = new BillboardMoreAdapter(this, list_more);
+        BillboardMoreAdapter adapter = new BillboardMoreAdapter(mBaseActivity, list_more);
         adapter.setOnRecyclerViewItemClickListener(new BillboardMoreAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, String position) {
                 int pos = Integer.parseInt(position);
-                String id = list_more.get(pos).getId();
-                String url=list_more.get(pos).getDownloadUrl();
-                String title = list_more.get(pos).getRecordTitle();
-                //首先判断是否已经下载
-                if (checkLocal(id)) {
-                    //录音的播放与暂停
-                    mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-                    Intent intent=new Intent(mBaseActivity,PlayerFrameActivity.class);
-                    intent.putExtra("url",mFile.getAbsolutePath());
-                    intent.putExtra("title",title);
-                    startActivity(intent);
-                } else {
-
-                    mDialog.setMessage("视频下载中，请稍后");
-                    mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            mFile.delete();
-                            mCall.cancel();
-                        }
-                    });
-                    mDialog.show();
-                    getSoundFromServer(id,url,title);
-                }
-
-
-
+                Intent intent = new Intent(mBaseActivity, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_more.get(pos).getAlbumID());
+                intent.putExtra("albumName", list_more.get(pos).getTitle());
+                intent.putExtra("albumPic", list_more.get(pos).getAlbumImage());
+                intent.putExtra("albumCrafts", list_more.get(pos).getAuthor());
+                intent.putExtra("albumIntroduction", list_more.get(pos).getIntro());
+                intent.putExtra("albumClassify", list_more.get(pos).getClassifyName());
+                intent.putExtra("albumModel", list_more.get(pos).getModel());
+                intent.putExtra("albumPlay", list_more.get(pos).getPlay());
+                intent.putExtra("albumSubscribe", list_more.get(pos).getSubscribe());
+                mBaseActivity.startActivity(intent);
             }
         });
         billboard_more_program_rv.setAdapter(adapter);
     }
 
-    /**
-     * 判断音频文件是否存在
-     */
-    private boolean checkLocal(String id) {
-        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-        return mFile.exists();
-    }
-
-    //访问网络，获取音频流，下载，准备播放
-    private void getSoundFromServer(final String id,final String url,final String title) {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        mCall = mOkHttpClient.newCall(request);
-
-        mCall.enqueue(new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d(TAG, "onFailure: "+e.getMessage());
-                mBaseActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(mBaseActivity, "下载失败", Toast.LENGTH_SHORT).show();
-                        mDialog.dismiss();
-                        mFile.delete();
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                InputStream is = null;
-                byte[] buf = new byte[2048];
-                int len = 0;
-                FileOutputStream fos = null;
-                try {
-                    is = response.body().byteStream();
-                    long total = response.body().contentLength();
-                    //首先要创建文件夹
-                    File path = new File(AudioRecoderUtils.VIDEO_PATH);
-                    if (!path.exists())
-                        path.mkdirs();
-                    File file = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-                    fos = new FileOutputStream(file);
-                    long sum = 0;
-                    while ((len = is.read(buf)) != -1) {
-                        fos.write(buf, 0, len);
-                        sum += len;
-                        int progress = (int) (sum * 1.0f / total * 100);
-                        Log.d("h_bl", "progress=" + progress);
-
-                        Message msg = mHandler.obtainMessage();
-                        msg.what = 1;
-                        msg.arg1 = progress;
-                        mHandler.sendMessage(msg);
-                    }
-                    fos.flush();
-                    mBaseActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(mBaseActivity, "下载成功", Toast.LENGTH_SHORT).show();
-                            mDialog.dismiss();
-                            //录音的播放与暂停
-                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-                            Intent intent=new Intent(mBaseActivity,PlayerFrameActivity.class);
-                            intent.putExtra("url",mFile.getAbsolutePath());
-                            intent.putExtra("title",title);
-                            startActivity(intent);
-                        }
-                    });
-
-                } catch (Exception e) {
-                    Log.d(TAG, "onFailure: "+e.getMessage());
-                    mBaseActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(mBaseActivity, "下载失败", Toast.LENGTH_SHORT).show();
-                            mFile.delete();
-                            mDialog.dismiss();
-                        }
-                    });
-
-                } finally {
-                    if (is != null)
-                        is.close();
-                    if (fos != null)
-                        fos.close();
-                }
-            }
-        });
-
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     @Override

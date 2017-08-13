@@ -6,6 +6,8 @@
 
     <View style="@style/horizontal_split"/>
 
+    <include layout="@layout/empty"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/classify_communications_rv"
         android:layout_width="match_parent"

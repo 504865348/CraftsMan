@@ -13,6 +13,8 @@ public class HotPolicy {
     private String introduction; //专辑简介
     private String classify; //专辑所属分类
     private String play; //专辑下的节目播放量
+    private String model; //专辑所属模块
+    private String subscribe; //专辑订阅量
 
     public String getId() {
         return id;
@@ -70,7 +72,23 @@ public class HotPolicy {
         this.play = play;
     }
 
-    public HotPolicy(String id, String imageUrl, String programName, String author, String introduction, String classify, String play) {
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSubscribe() {
+        return subscribe;
+    }
+
+    public void setSubscribe(String subscribe) {
+        this.subscribe = subscribe;
+    }
+
+    public HotPolicy(String id, String imageUrl, String programName, String author, String introduction, String classify, String play, String model, String subscribe) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.programName = programName;
@@ -78,6 +96,8 @@ public class HotPolicy {
         this.introduction = introduction;
         this.classify = classify;
         this.play = play;
+        this.model = model;
+        this.subscribe = subscribe;
     }
 
     @Override
@@ -90,6 +110,8 @@ public class HotPolicy {
                 ", introduction='" + introduction + '\'' +
                 ", classify='" + classify + '\'' +
                 ", play='" + play + '\'' +
+                ", model='" + model + '\'' +
+                ", subscribe='" + subscribe + '\'' +
                 '}';
     }
 }

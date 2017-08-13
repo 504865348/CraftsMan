@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:text="  "/>
+            android:text="0"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,6 +41,8 @@
     </LinearLayout>
 
     <View style="@style/horizontal_split"/>
+
+    <include layout="@layout/emptylayout"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/album_pro_rv"

@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -86,12 +88,22 @@ public class MyAlbumActivity extends BaseActivity {
         Gson gson = new Gson();
         list_album = gson.fromJson(result, new TypeToken<List<Album>>() {
         }.getType());
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycle();
-            }
-        });
+        if (list_album.get(0).getTitle().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycle();
+                }
+            });
+        }
     }
 
     private void initRecycle() {
@@ -101,6 +113,20 @@ public class MyAlbumActivity extends BaseActivity {
         myAlbumRv.setAdapter(new MyAlbumAdapter(this, list_album));
     }
 
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

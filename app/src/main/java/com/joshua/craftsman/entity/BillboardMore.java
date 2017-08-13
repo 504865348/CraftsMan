@@ -2,72 +2,127 @@ package com.joshua.craftsman.entity;
 
 /**
  * Created by nzz on 2017/5/2.
- * 榜单-最多订阅经典榜
+ * 榜单-最多订阅经典榜(专辑)
  */
 
 public class BillboardMore {
-    private String id;//节目排名的名次
-    private String recordImage;//节目的缩略图或图片
-    private String recordTitle;//节目的标题
-    private String name;//节目所属的作者名字
-    private String downloadUrl;//节目下载的Url地址
+    private String albumID; //专辑ID
+    private String albumRank; //专辑排名
+    private String albumImage; //图片
+    private String title; //标题
+    private String author; //专辑所属工匠
+    private String classifyName; //分类名
+    private String intro; //简介
+    private String model; //模块名
+    private String play; //播放量
+    private String subscribe; //订阅量
 
-    public String getId() {
-        return id;
+    public String getAlbumID() {
+        return albumID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAlbumID(String albumID) {
+        this.albumID = albumID;
     }
 
-    public String getRecordImage() {
-        return recordImage;
+    public String getAlbumRank() {
+        return albumRank;
     }
 
-    public void setRecordImage(String recordImage) {
-        this.recordImage = recordImage;
+    public void setAlbumRank(String albumRank) {
+        this.albumRank = albumRank;
     }
 
-    public String getRecordTitle() {
-        return recordTitle;
+    public String getAlbumImage() {
+        return albumImage;
     }
 
-    public void setRecordTitle(String recordTitle) {
-        this.recordTitle = recordTitle;
+    public void setAlbumImage(String albumImage) {
+        this.albumImage = albumImage;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDownloadUrl() {
-        return downloadUrl;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public BillboardMore(String id, String recordImage, String recordTitle, String name, String downloadUrl) {
-        this.id = id;
-        this.recordImage = recordImage;
-        this.recordTitle = recordTitle;
-        this.name = name;
-        this.downloadUrl = downloadUrl;
+    public String getClassifyName() {
+        return classifyName;
+    }
+
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getPlay() {
+        return play;
+    }
+
+    public void setPlay(String play) {
+        this.play = play;
+    }
+
+    public String getSubscribe() {
+        return subscribe;
+    }
+
+    public void setSubscribe(String subscribe) {
+        this.subscribe = subscribe;
+    }
+
+    public BillboardMore(String albumID, String albumRank, String albumImage, String title, String author, String classifyName, String intro, String model, String play, String subscribe) {
+        this.albumID = albumID;
+        this.albumRank = albumRank;
+        this.albumImage = albumImage;
+        this.title = title;
+        this.author = author;
+        this.classifyName = classifyName;
+        this.intro = intro;
+        this.model = model;
+        this.play = play;
+        this.subscribe = subscribe;
     }
 
     @Override
     public String toString() {
         return "BillboardMore{" +
-                "id='" + id + '\'' +
-                ", recordImage='" + recordImage + '\'' +
-                ", recordTitle='" + recordTitle + '\'' +
-                ", name='" + name + '\'' +
-                ", downloadUrl='" + downloadUrl + '\'' +
+                "albumID='" + albumID + '\'' +
+                ", albumRank='" + albumRank + '\'' +
+                ", albumImage='" + albumImage + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", classifyName='" + classifyName + '\'' +
+                ", intro='" + intro + '\'' +
+                ", model='" + model + '\'' +
+                ", play='" + play + '\'' +
+                ", subscribe='" + subscribe + '\'' +
                 '}';
     }
 }

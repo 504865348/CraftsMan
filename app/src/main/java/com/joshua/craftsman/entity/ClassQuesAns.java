@@ -6,9 +6,9 @@ package com.joshua.craftsman.entity;
  */
 
 public class ClassQuesAns {
-    private String Id;
+    private String Id;//问题ID
     private String craftsImage; //工匠头像
-    private String craftsName; //工匠名
+    private String craftsName; //工匠账号
     private String introduction; //工匠简介
     private String content; //问题内容
     private String time; //音频时长

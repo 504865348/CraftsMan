@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp">
+    android:layout_height="wrap_content">
     <RelativeLayout
+        android:id="@+id/billboard_pay_rl_layout"
+        android:background="@drawable/ll_click_selector"
         android:layout_width="match_parent"
-        android:layout_marginTop="3dp"
-        android:layout_height="80dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/billboard_pay_program_rank"
             style="@style/search_interface_sub_title"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:text="1" />
         <ImageView
             android:id="@+id/billboard_pay_program_img"
             android:layout_width="68dp"
             android:layout_height="68dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/photo_two" />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,14 +34,15 @@
 
             <TextView
                 android:id="@+id/billboard_pay_program_name"
-                style="@style/search_interface_sub_title"
+                style="@style/billboard_interface_sub_title"
                 android:text="节目标题" />
 
             <TextView
                 android:id="@+id/billboard_pay_program_author_name"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:layout_marginLeft="3dp"
                 android:text="作者名"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -54,9 +57,15 @@
             android:src="@drawable/downblue" />
     </RelativeLayout>
 
-    <View style="@style/horizontal_split"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/billboard_pay_rl_layout"
+        android:orientation="vertical">
+        <View style="@style/horizontal_split"/>
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
 
 
 

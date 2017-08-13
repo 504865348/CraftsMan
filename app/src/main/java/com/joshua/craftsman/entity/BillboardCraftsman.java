@@ -6,14 +6,13 @@ package com.joshua.craftsman.entity;
  */
 
 public class BillboardCraftsman {
-    //private String rankNumber;//工匠排名的名次
-    //private String craftsImg;//工匠头像
-    //private String craftsName;//工匠名字
-    //private String craftsIntroduction;//工匠简介
     private String id;//工匠排名的名次
+    private String craftsAccount; //工匠账号
     private String imageUrl;//工匠头像
     private String craftsmanName;//工匠名字
     private String introduction;//工匠简介
+    private String classifyCrafts;//工匠分类
+    private String hotDegree; //热度(回答问题的个数)
 
     public String getId() {
         return id;
@@ -21,6 +20,14 @@ public class BillboardCraftsman {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCraftsAccount() {
+        return craftsAccount;
+    }
+
+    public void setCraftsAccount(String craftsAccount) {
+        this.craftsAccount = craftsAccount;
     }
 
     public String getImageUrl() {
@@ -47,20 +54,42 @@ public class BillboardCraftsman {
         this.introduction = introduction;
     }
 
-    public BillboardCraftsman(String id, String imageUrl, String craftsmanName, String introduction) {
+    public String getClassifyCrafts() {
+        return classifyCrafts;
+    }
+
+    public void setClassifyCrafts(String classifyCrafts) {
+        this.classifyCrafts = classifyCrafts;
+    }
+
+    public String getHotDegree() {
+        return hotDegree;
+    }
+
+    public void setHotDegree(String hotDegree) {
+        this.hotDegree = hotDegree;
+    }
+
+    public BillboardCraftsman(String id, String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree) {
         this.id = id;
+        this.craftsAccount = craftsAccount;
         this.imageUrl = imageUrl;
         this.craftsmanName = craftsmanName;
         this.introduction = introduction;
+        this.classifyCrafts = classifyCrafts;
+        this.hotDegree = hotDegree;
     }
 
     @Override
     public String toString() {
         return "BillboardCraftsman{" +
                 "id='" + id + '\'' +
+                ", craftsAccount='" + craftsAccount + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
                 ", introduction='" + introduction + '\'' +
+                ", classifyCrafts='" + classifyCrafts + '\'' +
+                ", hotDegree='" + hotDegree + '\'' +
                 '}';
     }
 }

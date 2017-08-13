@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.entity.AlbumHomePro;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class AlbumProgramAdapter extends android.support.v7.widget.RecyclerView.
     private LayoutInflater mInflater;
     private Context mContext;
     private List<AlbumHomePro> data = new ArrayList<>();
+    private String proPic = AlbumHomeActivity.albumPic;
 
     public AlbumProgramAdapter(Context context,List<AlbumHomePro> data) {
         mInflater = LayoutInflater.from(context);
@@ -41,10 +43,10 @@ public class AlbumProgramAdapter extends android.support.v7.widget.RecyclerView.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_proName.setText(data.get(position).getRecordTitle());
-        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
+        //Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
+        Glide.with(mContext).load(proPic).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
-
 
     @Override
     public int getItemCount() {
@@ -77,7 +79,7 @@ public class AlbumProgramAdapter extends android.support.v7.widget.RecyclerView.
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

@@ -1,15 +1,19 @@
 package com.joshua.craftsman.activity.hot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.adapter.HotMoreCraftAdapter;
 import com.joshua.craftsman.entity.HotCraftsman;
 import com.joshua.craftsman.entity.Server;
@@ -52,7 +56,7 @@ public class CraftsActivity extends BaseActivity {
     }
 
     private void getDataFromServer() {
-        getGJ();//工匠
+        getGJ();
     }
 
     private void getGJ() {
@@ -86,19 +90,59 @@ public class CraftsActivity extends BaseActivity {
         Gson gson = new Gson();
         list_DGGJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleGJ();
-            }
-        });
+        if (list_DGGJ.get(0).getCraftsmanName().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleGJ();
+                }
+            });
+        }
     }
 
     private void initRecycleGJ() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         hotCraftsRv.setLayoutManager(linearLayoutManager);
-        hotCraftsRv.setAdapter(new HotMoreCraftAdapter(this,list_DGGJ));
+        HotMoreCraftAdapter adapter = new HotMoreCraftAdapter(this,list_DGGJ);
+        adapter.setOnRecyclerViewItemClickListener(new HotMoreCraftAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mBaseActivity, CraftsHomeActivity.class);
+                intent.putExtra("craftsName", list_DGGJ.get(pos).getCraftsmanName());
+                intent.putExtra("craftsAccount", list_DGGJ.get(pos).getCraftsAccount());
+                intent.putExtra("craftsIntro", list_DGGJ.get(pos).getIntroduction());
+                intent.putExtra("craftsClassify", list_DGGJ.get(pos).getClassifyCrafts());
+                intent.putExtra("craftsHotDegree", list_DGGJ.get(pos).getHotDegree());
+                intent.putExtra("craftsPic", list_DGGJ.get(pos).getImageUrl());
+                mBaseActivity.startActivity(intent);
+            }
+        });
+        hotCraftsRv.setAdapter(adapter);
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 
     @Override

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
-import com.joshua.craftsman.entity.HotCraftsman;
 import com.joshua.craftsman.entity.HotSkills;
 
 import java.util.ArrayList;
@@ -50,7 +49,9 @@ public class HotSkillsAdapter extends RecyclerView.Adapter<HotSkillsAdapter.MyVi
                 intent.putExtra("albumCrafts", data.get(position).getAuthor());
                 intent.putExtra("albumIntroduction", data.get(position).getIntroduction());
                 intent.putExtra("albumClassify", data.get(position).getClassify());
+                intent.putExtra("albumModel", data.get(position).getModel());
                 intent.putExtra("albumPlay", data.get(position).getPlay());
+                intent.putExtra("albumSubscribe", data.get(position).getSubscribe());
                 mContext.startActivity(intent);
             }
         });

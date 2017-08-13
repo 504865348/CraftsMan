@@ -7,11 +7,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.media.RatingCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.MainActivity;
@@ -44,7 +46,6 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
             "公路", "水利水电", "铁路工程",
             "矿业工程", "民航机场工程", "通信广电工程"};
     private String itemClassifyFlag;
-
     private Fragment[] mFragmentArrays = new Fragment[9];
 
     @Override

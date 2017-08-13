@@ -1,16 +1,22 @@
 package com.joshua.craftsman.adapter.classify;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
+import com.joshua.craftsman.activity.classify.ClassifyActivity;
+import com.joshua.craftsman.adapter.HotSkillsAdapter;
 import com.joshua.craftsman.entity.Classify;
+import com.joshua.craftsman.fragment.homepage.HomeClassifyPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +37,14 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.MyView
         this.mContext = context;
     }
     @Override
-    public ClassifyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.classify_item, parent, false);
         view.setOnClickListener(this);
-        return new ClassifyAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ClassifyAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_title.setText(data.get(position).getTitle());
         holder.tv_info.setText(data.get(position).getIntroduction());
         holder.tv_author.setText(data.get(position).getCraftsmanName());
@@ -73,14 +79,13 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.MyView
             iv_pic= (ImageView) itemView.findViewById(R.id.classify_item_img);
         }
     }
+    private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    private ClassifyAdapter.onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
-
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 
-    public void setOnRecyclerViewItemClickListener(ClassifyAdapter.onRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
+    public void setOnRecyclerViewItemClickListener(onRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
         mOnRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
     }
 }

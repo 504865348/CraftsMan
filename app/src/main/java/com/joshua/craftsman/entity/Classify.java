@@ -4,18 +4,26 @@ package com.joshua.craftsman.entity;
 /**
  * Created by nzz on 2017/6/5.
  * 首页--分类
- * 通过参数获取具体分类的相关数据：参数-具体分类
- * houses-房屋建筑; municipal-市政公用; mechanical-机电工程
- * highWays-公路; waterConservancy-水利水电; railWay-铁路工程
- * mining-矿业工程; airport-民航机场工程; communications-通信广电工程
  */
 
 public class Classify {
+    private String Id; //专辑ID
     private String albumImage; //图片
     private String title; //专辑标题
     private String craftsmanName; //工匠名
     private String introduction; //专辑简介
     private String model; //所属模块(匠心独运 讲政策 听专题 看利器)
+    private String classify;//专辑所属分类
+    private String play; //专辑下的节目播放量
+    private String subscribe; //专辑订阅量
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
 
     public String getAlbumImage() {
         return albumImage;
@@ -57,22 +65,54 @@ public class Classify {
         this.model = model;
     }
 
-    public Classify(String albumImage, String title, String craftsmanName, String introduction, String model) {
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify;
+    }
+
+    public String getPlay() {
+        return play;
+    }
+
+    public void setPlay(String play) {
+        this.play = play;
+    }
+
+    public String getSubscribe() {
+        return subscribe;
+    }
+
+    public void setSubscribe(String subscribe) {
+        this.subscribe = subscribe;
+    }
+
+    public Classify(String id, String albumImage, String title, String craftsmanName, String introduction, String model, String classify, String play, String subscribe) {
+        Id = id;
         this.albumImage = albumImage;
         this.title = title;
         this.craftsmanName = craftsmanName;
         this.introduction = introduction;
         this.model = model;
+        this.classify = classify;
+        this.play = play;
+        this.subscribe = subscribe;
     }
 
     @Override
     public String toString() {
         return "Classify{" +
-                "albumImage='" + albumImage + '\'' +
+                "Id='" + Id + '\'' +
+                ", albumImage='" + albumImage + '\'' +
                 ", title='" + title + '\'' +
                 ", craftsmanName='" + craftsmanName + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", model='" + model + '\'' +
+                ", classify='" + classify + '\'' +
+                ", play='" + play + '\'' +
+                ", subscribe='" + subscribe + '\'' +
                 '}';
     }
 }

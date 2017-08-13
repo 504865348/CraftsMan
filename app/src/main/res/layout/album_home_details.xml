@@ -16,6 +16,8 @@
 
     <View style="@style/horizontal_split"/>
 
+    <include layout="@layout/empty"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,14 +53,12 @@
 
     <View style="@style/horizontal_split"/>
 
+    <include layout="@layout/empty_classify_a"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/album_home_craft_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
-    <View style="@style/horizontal_split"/>
-
-
 </LinearLayout>
-

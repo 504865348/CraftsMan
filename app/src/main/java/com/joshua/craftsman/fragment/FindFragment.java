@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.find.FindActivityActivity;
@@ -56,7 +57,8 @@ public class FindFragment extends BaseFragment implements View.OnClickListener{
                 startActivity(new Intent(getActivity(), FriendCircleActivity.class));
                 break;
             case R.id.find_ll_activity:
-                startActivity(new Intent(getActivity(), FindActivityActivity.class));
+                //startActivity(new Intent(getActivity(), FindActivityActivity.class));
+                Toast.makeText(getActivity(), "抱歉，该模块暂未开放", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

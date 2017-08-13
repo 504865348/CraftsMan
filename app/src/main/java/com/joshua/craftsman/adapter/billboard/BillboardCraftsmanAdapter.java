@@ -1,7 +1,6 @@
 package com.joshua.craftsman.adapter.billboard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.entity.BillboardCraftsman;
 
 import java.util.ArrayList;
@@ -45,17 +43,9 @@ public class BillboardCraftsmanAdapter extends RecyclerView.Adapter<BillboardCra
         holder.tv_rank.setText(data.get(position).getId());
         holder.tv_name.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
+        holder.tv_classify.setText(data.get(position).getClassifyCrafts());
+        holder.tv_hot_degree.setText(data.get(position).getHotDegree());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
-        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
-                intent.putExtra("craftsName", data.get(position).getCraftsmanName());
-                //intent.putExtra("craftsIntro", data.get(position).getIntroduction());
-                intent.putExtra("craftsPic", data.get(position).getImageUrl());
-                mContext.startActivity(intent);
-            }
-        });
         holder.itemView.setTag(position+"");
     }
     @Override
@@ -74,19 +64,23 @@ public class BillboardCraftsmanAdapter extends RecyclerView.Adapter<BillboardCra
         TextView tv_rank;
         TextView tv_name;
         TextView tv_introduction;
+        TextView tv_classify;
+        TextView tv_hot_degree;
         ImageView iv_pic;
         MyViewHolder(View itemView) {
             super(itemView);
             tv_rank = (TextView) itemView.findViewById(R.id.billboard_craftsman_rank);
             tv_name = (TextView) itemView.findViewById(R.id.billboard_craftsman_name);
             tv_introduction = (TextView) itemView.findViewById(R.id.billboard_craftsman_introduction);
+            tv_classify = (TextView) itemView.findViewById(R.id.billboard_craftsman_classify);
+            tv_hot_degree = (TextView) itemView.findViewById(R.id.billboard_craftsman_hot_greed);
             iv_pic= (ImageView) itemView.findViewById(R.id.billboard_craftsman_img);
         }
     }
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

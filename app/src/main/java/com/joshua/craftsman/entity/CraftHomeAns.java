@@ -13,6 +13,7 @@ public class CraftHomeAns {
     private String timeLength; //回答时长
     private String listenrNumber; //收听人数
     private String time; //回答时间
+    private String downloadUrl; //音频URL地址
 
     public String getId() {
         return Id;
@@ -70,7 +71,15 @@ public class CraftHomeAns {
         this.time = time;
     }
 
-    public CraftHomeAns(String id, String askName, String price, String content, String timeLength, String listenrNumber, String time) {
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+
+    public CraftHomeAns(String id, String askName, String price, String content, String timeLength, String listenrNumber, String time, String downloadUrl) {
         Id = id;
         this.askName = askName;
         this.price = price;
@@ -78,6 +87,7 @@ public class CraftHomeAns {
         this.timeLength = timeLength;
         this.listenrNumber = listenrNumber;
         this.time = time;
+        this.downloadUrl = downloadUrl;
     }
 
     @Override
@@ -90,6 +100,7 @@ public class CraftHomeAns {
                 ", timeLength='" + timeLength + '\'' +
                 ", listenrNumber='" + listenrNumber + '\'' +
                 ", time='" + time + '\'' +
+                ", downloadUrl='" + downloadUrl + '\'' +
                 '}';
     }
 }

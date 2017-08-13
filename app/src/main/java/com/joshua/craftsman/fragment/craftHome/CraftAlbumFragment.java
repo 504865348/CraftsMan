@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.craftHome;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.adapter.craftshome.CraftAlbumAdapter;
 import com.joshua.craftsman.entity.CraftHomeAlbum;
@@ -26,7 +27,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -38,7 +38,6 @@ public class CraftAlbumFragment extends BaseFragment {
 
     private List<CraftHomeAlbum> list_album;
     private String craftsName = CraftsHomeActivity.homeCraftsName;
-    public String str;
 
     @Override
     public View initView() {
@@ -54,17 +53,16 @@ public class CraftAlbumFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getCraftAlbum();
+        getCraftAlbum(craftsName);
     }
 
-    private void getCraftAlbum() {
+
+    private void getCraftAlbum(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.ALBUM_LIST_BY_CRAFTS)
-                .add("craftsName",craftsName)
-                .build();
+        String requestStr = "method=" + Server.ALBUM_LIST_BY_CRAFTS + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(Server.MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -80,17 +78,12 @@ public class CraftAlbumFragment extends BaseFragment {
             }
         });
     }
+
     private void parseCraftAlbum(String result) {
         Gson gson = new Gson();
         list_album = gson.fromJson(result, new TypeToken<List<CraftHomeAlbum>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initLayout();
-            }
-        });
-        /*if(list_album.get(0).getTitle().equals("null")) {
+        if (list_album.get(0).getTitle().equals("null")) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -105,13 +98,31 @@ public class CraftAlbumFragment extends BaseFragment {
                     initLayout();
                 }
             });
-        }*/
+        }
     }
     private void initLayout() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftAlbumRv.setLayoutManager(linearLayoutManager);
-        craftAlbumRv.setAdapter(new CraftAlbumAdapter(getActivity(), list_album));
+        CraftAlbumAdapter adapter = new CraftAlbumAdapter(getActivity(), list_album);
+        adapter.setOnRecyclerViewItemClickListener(new CraftAlbumAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_album.get(pos).getAlbumID());
+                intent.putExtra("albumName", list_album.get(pos).getTitle());
+                intent.putExtra("albumPic", list_album.get(pos).getAlbumImage());
+                intent.putExtra("albumCrafts", list_album.get(pos).getAuthor());
+                intent.putExtra("albumIntroduction", list_album.get(pos).getIntro());
+                intent.putExtra("albumClassify", list_album.get(pos).getClassifyName());
+                intent.putExtra("albumModel", list_album.get(pos).getModel());
+                intent.putExtra("albumPlay", list_album.get(pos).getPlay());
+                intent.putExtra("albumSubscribe", list_album.get(pos).getSubscribe());
+                mContext.startActivity(intent);
+            }
+        });
+        craftAlbumRv.setAdapter(adapter);
     }
 
     @Override
@@ -134,7 +145,6 @@ public class CraftAlbumFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         getDataFromServer();
-
     }
 
     @Override

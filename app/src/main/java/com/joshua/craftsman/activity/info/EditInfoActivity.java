@@ -164,7 +164,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "imageInfo", ""), IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
                     ivMyImage.setImageBitmap(bitmap);
                 }
                 break;
@@ -175,7 +175,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                     Bitmap bitmap = MyUtils.getBitmapFromUri(this, uri);
                     //保存为头像文件
                     MyUtils.saveBitmap(bitmap
-                            , PrefUtils.getString(mBaseActivity, "imageInfo", ""), IMAGE_FILE_NAME);
+                            , PrefUtils.getString(mBaseActivity, "phone", ""), IMAGE_FILE_NAME);
                     ivMyImage.setImageBitmap(bitmap);
                 }
                 break;
@@ -267,16 +267,16 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         editor.putString("birthday", birthday);
         editor.putString("address", address);
         editor.commit();
-        /*if (headImage == null || nickName == null || introduce == null
+        if (nickName == null || introduce == null
                 || sex == null || birthday == null || address == null)
-            showErrorMsg("请将信息填写完整");*/
-        //else
-            //putDataToServer();
+            showErrorMsg("请将信息填写完整");
+        else
+            putDataToServer();
     }
 
     private void putDataToServer() {
-        String userAccount = PrefUtils.getString(mBaseActivity, "imageInfo", "");
-        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "imageInfo", "");
+        String userAccount = PrefUtils.getString(mBaseActivity, "phone", "");
+        String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
         RequestBody requestBody = new MultipartBody.Builder()

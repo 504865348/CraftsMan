@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -76,7 +77,6 @@ public class HomeCraftsPager extends BaseFragment {
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                //.add("method", Server.HOME_CRAFTSMAN)
                 .add("method", Server.HOME_HOT_CRAFTSMAN)
                 .build();
 
@@ -102,19 +102,43 @@ public class HomeCraftsPager extends BaseFragment {
         Gson gson = new Gson();
         list_GJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleGJ();
-            }
-        });
+        if (list_GJ.get(0).getCraftsmanName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleGJ();
+                }
+            });
+        }
     }
 
     private void initRecycleGJ() {
-        //设置网格布局管理器
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),4);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         home_page_crafts_gv.setLayoutManager(gridLayoutManager);
         home_page_crafts_gv.setAdapter(new HotCraftsAdapter(getActivity(),list_GJ));
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 }

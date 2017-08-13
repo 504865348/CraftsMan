@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -92,12 +93,11 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     private List<HotListen> list_TZT;
     private List<HotLook> list_KLQ;
     private OkHttpClient mClient;
-
+    FrameLayout empty_DGGJ,empty_JXDY,empty_JZC,empty_TZT,empty_KLQ;
 
     public HomeHotPager() {
     
     }
-
 
     @Override
     public View initView() {
@@ -113,6 +113,7 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         list_TZT = new ArrayList<>();
         list_KLQ = new ArrayList<>();
         initListener();
+        initEmptyView();
         getDataFromServer();
     }
 
@@ -127,6 +128,14 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         homePageHotMorePolicy.setOnClickListener(this);
         homePageHotMoreListen.setOnClickListener(this);
         homePageHotMoreLook.setOnClickListener(this);
+    }
+
+    private void initEmptyView() {
+        empty_DGGJ = (FrameLayout) getActivity().findViewById(R.id.empty_classify_a);
+        empty_JXDY = (FrameLayout) getActivity().findViewById(R.id.empty_classify_b);
+        empty_JZC = (FrameLayout) getActivity().findViewById(R.id.empty_classify_c);
+        empty_TZT = (FrameLayout) getActivity().findViewById(R.id.empty_classify_d);
+        empty_KLQ = (FrameLayout) getActivity().findViewById(R.id.empty_classify_e);
     }
 
     @Override
@@ -316,60 +325,110 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         Gson gson = new Gson();
         list_DGGJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
+        if (list_DGGJ.get(0).getCraftsmanName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    setEmptyView(true,empty_DGGJ);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false,empty_DGGJ);
                     initRecycleDGGJ();
                 }
             });
+        }
     }
 
     private void parseJXDY(String result) {
         Gson gson = new Gson();
         list_JXDY = gson.fromJson(result, new TypeToken<List<HotSkills>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleJXDY();
-            }
-        });
+        if (list_JXDY.get(0).getProgramName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true,empty_JXDY);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false,empty_JXDY);
+                    initRecycleJXDY();
+                }
+            });
+        }
     }
 
     private void parseJZC(String result) {
         Gson gson = new Gson();
         list_JZC = gson.fromJson(result, new TypeToken<List<HotPolicy>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initRecycleJZC();
-                    }
-                });
+        if (list_JZC.get(0).getProgramName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true,empty_JZC);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false,empty_JZC);
+                    initRecycleJZC();
+                }
+            });
+        }
     }
 
     private void parseTZT(String result) {
         Gson gson = new Gson();
         list_TZT = gson.fromJson(result, new TypeToken<List<HotListen>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
+        if (list_TZT.get(0).getProgramName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    setEmptyView(true,empty_TZT);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false,empty_TZT);
                     initRecycleTZT();
                 }
             });
+        }
     }
 
     private void parseKLQ(String result) {
         Gson gson = new Gson();
         list_KLQ = gson.fromJson(result, new TypeToken<List<HotLook>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleKLQ();
-            }
-        });
+        if (list_KLQ.get(0).getProgramName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true,empty_KLQ);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false,empty_KLQ);
+                    initRecycleKLQ();
+                }
+            });
+        }
     }
 
     /**
@@ -479,4 +538,15 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         });
 
     }
+    /**
+     * 设置空视图
+     */
+    private void setEmptyView(Boolean isEmpty,FrameLayout empty) {
+        if(isEmpty) {
+            empty.setVisibility(View.VISIBLE);
+        } else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
 }

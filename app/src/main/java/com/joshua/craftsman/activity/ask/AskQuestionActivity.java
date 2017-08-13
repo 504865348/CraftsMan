@@ -71,7 +71,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private PopupWindow pop = null;
     private View parentView;
     private LinearLayout ll_popup;
-    private String mAnswer;
+    private String mAnswer,mCraftsAccount;
     private ProgressDialog mDialog;
     private File mFile;
 
@@ -94,6 +94,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
 
     private void initView() {
         mAnswer = getIntent().getStringExtra("answer");
+        mCraftsAccount = getIntent().getStringExtra("craftsAccount");
         tv_middle.setText(mAnswer);
         tv_answer.setText("向" + mAnswer + "提问");
         //加载父布局
@@ -147,7 +148,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("image", "question.JPEG", fileBody)
-                .addFormDataPart("craftsman", mAnswer)
+                .addFormDataPart("craftsman", mCraftsAccount)
                 .addFormDataPart("questionWord", question)
                 .addFormDataPart("money", cost)
                 .addFormDataPart("user", user)

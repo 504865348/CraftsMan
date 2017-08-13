@@ -8,6 +8,7 @@ package com.joshua.craftsman.entity;
 public class AlbumSubscribe {
     private String albumID;//专辑ID
     private String totalSubscribeTimes;//专辑订阅量
+    //private String flag;//传true则订阅量加1，传false则订阅量减1
 
     public String getAlbumID() {
         return albumID;

@@ -1,14 +1,18 @@
 package com.joshua.craftsman.activity.hot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.adapter.HotMoreAlbumAdapter;
 import com.joshua.craftsman.entity.HotSkills;
@@ -84,18 +88,61 @@ public class SkillsActivity extends BaseActivity {
         Gson gson = new Gson();
         list_JXDY = gson.fromJson(result, new TypeToken<List<HotSkills>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleJXDY();
-            }
-        });
+
+        if (list_JXDY.get(0).getProgramName().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleJXDY();
+                }
+            });
+        }
     }
     private void initRecycleJXDY() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         hotSkillsRv.setLayoutManager(linearLayoutManager);
-        hotSkillsRv.setAdapter(new HotMoreAlbumAdapter(this, list_JXDY));
+        HotMoreAlbumAdapter adapter = new HotMoreAlbumAdapter(this, list_JXDY);
+        adapter.setOnRecyclerViewItemClickListener(new HotMoreAlbumAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mBaseActivity, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_JXDY.get(pos).getId());
+                intent.putExtra("albumName", list_JXDY.get(pos).getProgramName());
+                intent.putExtra("albumPic", list_JXDY.get(pos).getImageUrl());
+                intent.putExtra("albumCrafts", list_JXDY.get(pos).getAuthor());
+                intent.putExtra("albumIntroduction", list_JXDY.get(pos).getIntroduction());
+                intent.putExtra("albumClassify", list_JXDY.get(pos).getClassify());
+                intent.putExtra("albumModel", list_JXDY.get(pos).getModel());
+                intent.putExtra("albumPlay", list_JXDY.get(pos).getPlay());
+                mBaseActivity.startActivity(intent);
+            }
+        });
+        hotSkillsRv.setAdapter(adapter);
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 
     @Override

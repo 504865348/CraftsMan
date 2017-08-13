@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
@@ -211,10 +212,12 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.my_info_subscribe:
-                startActivity(new Intent(getActivity(), SubscribeActivity.class));
+                //startActivity(new Intent(getActivity(), SubscribeActivity.class));
+                Toast.makeText(getActivity(), "暂未开放专辑订阅功能", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.my_info_collection:
-                startActivity(new Intent(getActivity(), CollectActivity.class));
+                //startActivity(new Intent(getActivity(), CollectActivity.class));
+                Toast.makeText(getActivity(), "暂未开放节目收藏功能", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.my_info_my_albums:
                 startActivity(new Intent(getActivity(), MyAlbumActivity.class));

@@ -1,15 +1,20 @@
 package com.joshua.craftsman.activity.billboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.adapter.billboard.BillboardCraftsmanAdapter;
 import com.joshua.craftsman.entity.BillboardCraftsman;
 import com.joshua.craftsman.entity.Server;
@@ -85,20 +90,54 @@ public class BillboardCraftsmanActivity extends BaseActivity {
         Gson gson = new Gson();
         list_craftsman = gson.fromJson(result, new TypeToken<List<BillboardCraftsman>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleCraftsman();
-            }
-        });
+        if (list_craftsman.get(0).getCraftsmanName().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleCraftsman();
+                }
+            });
+        }
     }
 
     private void initRecycleCraftsman() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         billboard_craftsman_rv.setLayoutManager(linearLayoutManager);
-        billboard_craftsman_rv.setAdapter(new BillboardCraftsmanAdapter(this, list_craftsman));
+        BillboardCraftsmanAdapter adapter = new BillboardCraftsmanAdapter(this, list_craftsman);
+        adapter.setOnRecyclerViewItemClickListener(new BillboardCraftsmanAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mBaseActivity, CraftsHomeActivity.class);
+                intent.putExtra("craftsAccount", list_craftsman.get(pos).getCraftsAccount());
+                intent.putExtra("craftsName", list_craftsman.get(pos).getCraftsmanName());
+                intent.putExtra("craftsIntro", list_craftsman.get(pos).getIntroduction());
+                intent.putExtra("craftsClassify", list_craftsman.get(pos).getClassifyCrafts());
+                intent.putExtra("craftsHotDegree", list_craftsman.get(pos).getHotDegree());
+                intent.putExtra("craftsPic", list_craftsman.get(pos).getImageUrl());
+                Toast.makeText(mBaseActivity,list_craftsman.get(pos).getCraftsAccount(),Toast.LENGTH_SHORT).show();
+                mBaseActivity.startActivity(intent);
+            }
+        });
+        billboard_craftsman_rv.setAdapter(adapter);
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     @Override

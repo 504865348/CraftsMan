@@ -6,6 +6,8 @@
 
     <View style="@style/horizontal_split"/>
 
+    <include layout="@layout/emptylayout"/>
+
 <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"

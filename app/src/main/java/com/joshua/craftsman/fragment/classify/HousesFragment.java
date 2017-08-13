@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.classify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.adapter.classify.ClassifyAdapter;
 import com.joshua.craftsman.entity.Classify;
 import com.joshua.craftsman.entity.Server;
@@ -61,18 +64,15 @@ public class HousesFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getHouse();
+        getHouse("房屋建筑");
     }
 
-    private void getHouse() {
+    private void getHouse(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.HOME_CLASSIFY)
-                .add("type", "houses")
-                .build();
-
+        String requestStr = "method=" + Server.HOME_CLASSIFY + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(Server.MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -95,20 +95,47 @@ public class HousesFragment extends BaseFragment {
         Gson gson = new Gson();
         list_house = gson.fromJson(result, new TypeToken<List<Classify>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleHouse();
-            }
-        });
+        if (list_house.get(0).getTitle().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleHouse();
+                }
+            });
+        }
     }
 
     private void initRecycleHouse() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         classifyHouseRv.setLayoutManager(linearLayoutManager);
-        classifyHouseRv.setAdapter(new ClassifyAdapter(getActivity(), list_house));
+        ClassifyAdapter adapter = new ClassifyAdapter(getActivity(), list_house);
+        adapter.setOnRecyclerViewItemClickListener(new ClassifyAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_house.get(pos).getId());
+                intent.putExtra("albumName", list_house.get(pos).getTitle());
+                intent.putExtra("albumPic", list_house.get(pos).getAlbumImage());
+                intent.putExtra("albumCrafts", list_house.get(pos).getCraftsmanName());
+                intent.putExtra("albumIntroduction", list_house.get(pos).getIntroduction());
+                intent.putExtra("albumClassify", list_house.get(pos).getClassify());
+                intent.putExtra("albumModel", list_house.get(pos).getModel());
+                intent.putExtra("albumPlay", list_house.get(pos).getPlay());
+                intent.putExtra("albumSubscribe", list_house.get(pos).getSubscribe());
+                mContext.startActivity(intent);
+            }
+        });
+        classifyHouseRv.setAdapter(adapter);
     }
 
     @Nullable
@@ -117,6 +144,15 @@ public class HousesFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_classify_b);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     @Override

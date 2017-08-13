@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -68,7 +69,6 @@ public class BillboardHotActivity extends BaseActivity {
     };
     //private SwipeRefreshLayout mSwipeRefreshLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class BillboardHotActivity extends BaseActivity {
         initData();
         billboardHotToolBar.setTitle("");
         setSupportActionBar(billboardHotToolBar);
-        mOkHttpClient=new OkHttpClient();
+        mOkHttpClient = new OkHttpClient();
         initProDialogRefresh();
     }
 
@@ -152,16 +152,25 @@ public class BillboardHotActivity extends BaseActivity {
         Gson gson = new Gson();
         list_hot = gson.fromJson(result, new TypeToken<List<BillboardHot>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleHot();
-            }
-        });
+        if (list_hot.get(0).getRecordTitle().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleHot();
+                }
+            });
+        }
     }
 
     private void initRecycleHot() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         billboard_hot_program_rv.setLayoutManager(linearLayoutManager);
@@ -296,6 +305,15 @@ public class BillboardHotActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     @Override

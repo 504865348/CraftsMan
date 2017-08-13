@@ -1,15 +1,19 @@
 package com.joshua.craftsman.activity.hot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.adapter.HotMoreAlbumAdapter;
 import com.joshua.craftsman.entity.HotSkills;
@@ -88,19 +92,61 @@ public class PolicyActivity extends BaseActivity {
         Gson gson = new Gson();
         list_JZC = gson.fromJson(result, new TypeToken<List<HotSkills>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleJZC();
-            }
-        });
+        if (list_JZC.get(0).getProgramName().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleJZC();
+                }
+            });
+        }
     }
 
     private void initRecycleJZC() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         hotPolicyRv.setLayoutManager(linearLayoutManager);
-        hotPolicyRv.setAdapter(new HotMoreAlbumAdapter(this, list_JZC));
+        HotMoreAlbumAdapter adapter = new HotMoreAlbumAdapter(this, list_JZC);
+        adapter.setOnRecyclerViewItemClickListener(new HotMoreAlbumAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mBaseActivity, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_JZC.get(pos).getId());
+                intent.putExtra("albumName", list_JZC.get(pos).getProgramName());
+                intent.putExtra("albumPic", list_JZC.get(pos).getImageUrl());
+                intent.putExtra("albumCrafts", list_JZC.get(pos).getAuthor());
+                intent.putExtra("albumIntroduction", list_JZC.get(pos).getIntroduction());
+                intent.putExtra("albumClassify", list_JZC.get(pos).getClassify());
+                intent.putExtra("albumModel", list_JZC.get(pos).getModel());
+                intent.putExtra("albumPlay", list_JZC.get(pos).getPlay());
+                mBaseActivity.startActivity(intent);
+            }
+        });
+        hotPolicyRv.setAdapter(adapter);
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 
     @Override

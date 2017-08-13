@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <include layout="@layout/emptylayout"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/question_answer_crafts_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
-
-    <View style="@style/horizontal_split"/>
 
 </LinearLayout>

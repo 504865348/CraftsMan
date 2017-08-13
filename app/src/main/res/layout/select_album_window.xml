@@ -64,6 +64,10 @@
 
         </LinearLayout>
 
+        <View style="@style/horizontal_split"/>
+
+        <include layout="@layout/empty"/>
+
         <!-- ListView 中添加 select_album_item -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/album_list_lv"

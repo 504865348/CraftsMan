@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,10 +48,6 @@ public class BillBoardFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        //billboardHot.setOnClickListener(this);
-        //billboardMore.setOnClickListener(this);
-        //billboardPay.setOnClickListener(this);
-        //billboardCraftsman.setOnClickListener(this);
         list_billboard = new ArrayList<>();
         getDataFromServer();
     }
@@ -66,7 +63,6 @@ public class BillBoardFragment extends BaseFragment {
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.BILLBOARD)
                 .build();
-
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -89,16 +85,25 @@ public class BillBoardFragment extends BaseFragment {
         Gson gson = new Gson();
         list_billboard = gson.fromJson(result, new TypeToken<List<Billboard>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initLayout();
-            }
-        });
+        if (list_billboard.get(0).getProHotNameTop1().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initLayout();
+                }
+            });
+        }
     }
 
     private void initLayout() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         billboardRv.setLayoutManager(linearLayoutManager);
@@ -112,26 +117,18 @@ public class BillBoardFragment extends BaseFragment {
         return rootView;
     }
 
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
-/*
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.billboard_hot:
-                startActivity(new Intent(getActivity(), BillboardHotActivity.class));
-                break;
-            case R.id.billboard_more:
-                startActivity(new Intent(getActivity(), BillboardMoreActivity.class));
-                break;
-            case R.id.billboard_pay:
-                startActivity(new Intent(getActivity(), BillboardPayActivity.class));
-                break;
-            case R.id.billboard_craftsman:
-                startActivity(new Intent(getActivity(), BillboardCraftsmanActivity.class));
-                break;
-        }
-    }*/
+
 }

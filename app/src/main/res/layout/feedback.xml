@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="问题和意见"
         android:textColor="@color/black"
         android:textSize="16sp" />
@@ -45,32 +45,13 @@
         android:scrollbars="vertical"
         android:textSize="14dp" />
 
-    <TextView
-        android:id="@+id/feedback_tel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="联系方式"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-    <EditText
-        android:id="@+id/feedback_edit_tel"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/whit"
-        android:hint=" 填写您的手机号码，方便我们联系"
-        android:textColor="@color/black"
-        android:textSize="14dp" />
-
     <Button
         android:id="@+id/feedback_commit"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/button_light_red_shape"
         android:text="提交"
         android:textColor="#FFF"/>

@@ -1,5 +1,6 @@
 package com.joshua.craftsman.fragment.classify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.adapter.classify.ClassifyAdapter;
 import com.joshua.craftsman.entity.Classify;
 import com.joshua.craftsman.entity.Server;
@@ -61,18 +64,15 @@ public class MiningFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getMining();
+        getMining("矿业工程");
     }
 
-    private void getMining() {
+    private void getMining(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.HOME_CLASSIFY)
-                .add("type", "mining")
-                .build();
-
+        String requestStr = "method=" + Server.HOME_CLASSIFY + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(Server.MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -95,20 +95,47 @@ public class MiningFragment extends BaseFragment {
         Gson gson = new Gson();
         list_mining = gson.fromJson(result, new TypeToken<List<Classify>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleMining();
-            }
-        });
+        if(list_mining.get(0).getTitle().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleMining();
+                }
+            });
+        }
     }
 
     private void initRecycleMining() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         classifyMiningRv.setLayoutManager(linearLayoutManager);
-        classifyMiningRv.setAdapter(new ClassifyAdapter(getActivity(), list_mining));
+        ClassifyAdapter adapter = new ClassifyAdapter(getActivity(), list_mining);
+        adapter.setOnRecyclerViewItemClickListener(new ClassifyAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, AlbumHomeActivity.class);
+                intent.putExtra("albumId", list_mining.get(pos).getId());
+                intent.putExtra("albumName", list_mining.get(pos).getTitle());
+                intent.putExtra("albumPic", list_mining.get(pos).getAlbumImage());
+                intent.putExtra("albumCrafts", list_mining.get(pos).getCraftsmanName());
+                intent.putExtra("albumIntroduction", list_mining.get(pos).getIntroduction());
+                intent.putExtra("albumClassify", list_mining.get(pos).getClassify());
+                intent.putExtra("albumModel", list_mining.get(pos).getModel());
+                intent.putExtra("albumPlay", list_mining.get(pos).getPlay());
+                intent.putExtra("albumSubscribe", list_mining.get(pos).getSubscribe());
+                mContext.startActivity(intent);
+            }
+        });
+        classifyMiningRv.setAdapter(adapter);
     }
 
     @Nullable
@@ -117,6 +144,22 @@ public class MiningFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_classify_d);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+
     }
 
     @Override

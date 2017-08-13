@@ -36,8 +36,6 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     ImageView mTabLineIv;
     @BindView(R.id.find_friends_page_pager)
     ViewPager mViewPager;
-    @BindView(R.id.find_friend_tool_bar)
-    Toolbar findFriendToolBar;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private AttentionPager mAttentionPager;
@@ -107,7 +105,6 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initListener() {
-        findFriendToolBar.setOnClickListener(this);
         mRecommendAttention.setOnClickListener(this);
         mMyFriend.setOnClickListener(this);
     }
@@ -115,9 +112,6 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.find_friend_tool_bar:
-                startActivity(new Intent(mBaseActivity, FriendCircleActivity.class));
-                break;
             case R.id.recommend_attention:
                 mViewPager.setCurrentItem(0);
                 break;

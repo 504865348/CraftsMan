@@ -1,11 +1,13 @@
 package com.joshua.craftsman.fragment.albumHome;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.adapter.albumhome.AlbumDetailsAdapter;
 import com.joshua.craftsman.entity.AlbumHomeDetails;
 import com.joshua.craftsman.entity.Server;
@@ -27,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -46,6 +50,7 @@ public class AlbumDetailsFragment extends BaseFragment {
     private List<AlbumHomeDetails> list_albumCraft;
     private String craftName = AlbumHomeActivity.homeAlbumCraftName;
     private String albumIntroduction = AlbumHomeActivity.homeAlbumIntroduction;
+    public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown;charset=utf-8");
 
     @Override
     public View initView() {
@@ -57,23 +62,30 @@ public class AlbumDetailsFragment extends BaseFragment {
     public void initData() {
         super.initData();
         list_albumCraft = new ArrayList<>();
-        albumHomeItemIntroduction.setText(albumIntroduction);
-        //Toast.makeText(getActivity(),craftName,Toast.LENGTH_SHORT).show();
+        initAlbumIntro();
         getDataFromServer();
     }
 
-    private void getDataFromServer() {
-        getAlbumCraft();
+    private void initAlbumIntro() {
+        if (albumIntroduction.equals(null)) {
+            setEmptyView(true);
+        }
+        else {
+            setEmptyView(false);
+            albumHomeItemIntroduction.setText(albumIntroduction);
+        }
     }
 
-    private void getAlbumCraft() {
+    private void getDataFromServer() {
+        getAlbumCraft(craftName);
+    }
+
+    private void getAlbumCraft(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.CRAFTS_HOME)
-                .add("craftName", craftName)
-                .build();
+        String requestStr = "method=" + Server.CRAFTS_HOME + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -95,19 +107,44 @@ public class AlbumDetailsFragment extends BaseFragment {
         Gson gson = new Gson();
         list_albumCraft = gson.fromJson(result, new TypeToken<List<AlbumHomeDetails>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initLayout();
-            }
-        });
+        if(list_albumCraft.get(0).getCraftsmanName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setCraftEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setCraftEmptyView(false);
+                    initLayout();
+                }
+            });
+        }
     }
 
     private void initLayout() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         albumHomeCraftRv.setLayoutManager(linearLayoutManager);
-        albumHomeCraftRv.setAdapter(new AlbumDetailsAdapter(getActivity(), list_albumCraft));
+        AlbumDetailsAdapter adapter = new AlbumDetailsAdapter(getActivity(), list_albumCraft);
+        adapter.setOnRecyclerViewItemClickListener(new AlbumDetailsAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
+                intent.putExtra("craftsName", list_albumCraft.get(pos).getCraftsmanName());
+                intent.putExtra("craftsAccount", list_albumCraft.get(pos).getCraftsAccount());
+                intent.putExtra("craftsIntro", list_albumCraft.get(pos).getIntroduction());
+                intent.putExtra("craftsClassify", list_albumCraft.get(pos).getClassifyCrafts());
+                intent.putExtra("craftsHotDegree", list_albumCraft.get(pos).getHotDegree());
+                intent.putExtra("craftsPic", list_albumCraft.get(pos).getImageUrl());
+                mContext.startActivity(intent);
+            }
+        });
+        albumHomeCraftRv.setAdapter(adapter);
     }
 
     @Override
@@ -115,6 +152,30 @@ public class AlbumDetailsFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setCraftEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_classify_a);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 
     @Override

@@ -42,6 +42,8 @@ public class AlbumDetailsAdapter extends android.support.v7.widget.RecyclerView.
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_craftName.setText(data.get(position).getCraftsmanName());
         holder.tv_craftIntro.setText(data.get(position).getIntroduction());
+        holder.tv_classify.setText(data.get(position).getClassifyCrafts());
+        holder.tv_hotDegree.setText(data.get(position).getHotDegree());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
@@ -61,12 +63,16 @@ public class AlbumDetailsAdapter extends android.support.v7.widget.RecyclerView.
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_craftName;
+        TextView tv_classify;
+        TextView tv_hotDegree;
         TextView tv_craftIntro;
         ImageView iv_pic;
 
         MyViewHolder(View itemView) {
             super(itemView);
             tv_craftName = (TextView) itemView.findViewById(R.id.particulars_crafts_account);
+            tv_classify = (TextView) itemView.findViewById(R.id.particulars_crafts_classify);
+            tv_hotDegree = (TextView) itemView.findViewById(R.id.particulars_crafts_hot_greed);
             tv_craftIntro = (TextView) itemView.findViewById(R.id.particulars_crafts_info);
             iv_pic= (ImageView) itemView.findViewById(R.id.particulars_crafts_cover);
         }
@@ -74,7 +80,7 @@ public class AlbumDetailsAdapter extends android.support.v7.widget.RecyclerView.
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

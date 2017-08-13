@@ -23,6 +23,8 @@
 
     <View style="@style/horizontal_split"/>
 
+    <include layout="@layout/empty"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hot_policy_rv"
         android:layout_width="match_parent"

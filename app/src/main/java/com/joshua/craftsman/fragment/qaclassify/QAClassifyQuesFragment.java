@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.qaclassify.QAClassifyActivity;
 import com.joshua.craftsman.adapter.qafragment.ClassQuesAnsAdapter;
 import com.joshua.craftsman.entity.ClassQuesAns;
 import com.joshua.craftsman.entity.Server;
@@ -24,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -38,6 +42,8 @@ public class QAClassifyQuesFragment extends BaseFragment {
     RecyclerView questionAnswerQuesRv;
 
     private List<ClassQuesAns> list_quesAns;
+    private String classifyCrafts = QAClassifyActivity.classifyCraftsFlag;
+    public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown;charset=utf-8");
 
     @Override
     public View initView() {
@@ -49,20 +55,19 @@ public class QAClassifyQuesFragment extends BaseFragment {
     public void initData() {
         super.initData();
         list_quesAns = new ArrayList<>();
-        //getDataFromServer();
+        getDataFromServer();
     }
 
     private void getDataFromServer() {
-        getClassifyQues();
+        getClassifyQues(classifyCrafts);
     }
 
-    private void getClassifyQues() {
+    private void getClassifyQues(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.CLASSIFY_QUES_ANS_LIST_BY_NAME)
-                .build();
+        String requestStr = "method=" + Server.CLASSIFY_QUES_ANS_LIST_BY_NAME + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -82,16 +87,26 @@ public class QAClassifyQuesFragment extends BaseFragment {
         Gson gson = new Gson();
         list_quesAns = gson.fromJson(result, new TypeToken<List<ClassQuesAns>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initLayout();
-            }
-        });
+        if (list_quesAns.get(0).getId().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initLayout();
+                }
+            });
+        }
     }
     private void initLayout() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         questionAnswerQuesRv.setLayoutManager(linearLayoutManager);
         questionAnswerQuesRv.setAdapter(new ClassQuesAnsAdapter(getActivity(), list_quesAns));
     }
@@ -101,6 +116,15 @@ public class QAClassifyQuesFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     @Override

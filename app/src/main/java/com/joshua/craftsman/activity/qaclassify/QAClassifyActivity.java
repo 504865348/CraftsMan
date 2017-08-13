@@ -10,18 +10,27 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.qaclassify.QAClassifyCraftsFragment;
 import com.joshua.craftsman.fragment.qaclassify.QAClassifyQuesFragment;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class QAClassifyActivity extends BaseActivity {
 
@@ -58,11 +67,11 @@ public class QAClassifyActivity extends BaseActivity {
     }
 
     private void initData() {
-        classifyCraftsFlag = getIntent().getStringExtra("classifyFlag");
         qATvClass.setText(classifyCraftsFlag);
     }
 
     private void initPager() {
+        classifyCraftsFlag = getIntent().getStringExtra("classifyFlag");
         mQAClassifyQuesFragment = new QAClassifyQuesFragment();
         mQAClassifyCraftsFragment = new QAClassifyCraftsFragment();
         mFragmentList.add(mQAClassifyQuesFragment);
@@ -98,7 +107,6 @@ public class QAClassifyActivity extends BaseActivity {
         });
     }
 
-
     private void resetTextView() {
         qATvInterLocution.setTextColor(Color.BLACK);
         qATvCrafts.setTextColor(Color.BLACK);
@@ -112,7 +120,6 @@ public class QAClassifyActivity extends BaseActivity {
         lp.width = screenWidth / 2;
         mTabLine.setLayoutParams(lp);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

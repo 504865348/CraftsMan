@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -86,12 +87,22 @@ public class AlbumListActivity extends BaseActivity implements View.OnClickListe
         Gson gson = new Gson();
         list_album = gson.fromJson(result, new TypeToken<List<Album>>() {
         }.getType());
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycle();
-            }
-        });
+        if (list_album.get(0).getTitle().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycle();
+                }
+            });
+        }
     }
 
     private void initRecycle() {
@@ -124,5 +135,20 @@ public class AlbumListActivity extends BaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 }

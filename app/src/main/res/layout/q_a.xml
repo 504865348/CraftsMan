@@ -40,7 +40,7 @@
                 android:clickable="true"
                 android:drawableLeft="@drawable/search_icon"
                 android:gravity="center_vertical"
-                android:text="搜问题搜工匠"
+                android:text="搜索"
                 android:textSize="12sp"/>
 
             <include layout="@layout/q_a_classification"/>

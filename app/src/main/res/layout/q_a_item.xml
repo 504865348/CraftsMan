@@ -31,6 +31,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/q_a_item_name"
@@ -43,6 +44,7 @@
                     android:id="@+id/q_a_item_introduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="简介简介简介"
                     android:textSize="12sp"
                     android:textColor="#c5c5c5"/>
@@ -53,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="22dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/check_border"
                 android:textColor="@color/red"
                 android:layout_alignParentRight="true"
@@ -64,7 +67,8 @@
             android:id="@+id/q_a_item_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
             android:textSize="14sp"
             android:textColor="@android:color/black"
             android:text="问题问题问题问题"/>
@@ -102,22 +106,18 @@
                 android:layout_marginRight="15dp"
                 android:layout_centerVertical="true"
                 android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:text=" 人听过"/>
-
-            <TextView
-                android:id="@+id/q_a_audio_people_listened"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/q_a_people_content"
-                android:layout_centerVertical="true"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:text="0"/>
+                android:textColor="@android:color/black" />
 
         </RelativeLayout>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
+        android:orientation="vertical">
+        <View style="@style/horizontal_split"/>
     </LinearLayout>
 
 </RelativeLayout>

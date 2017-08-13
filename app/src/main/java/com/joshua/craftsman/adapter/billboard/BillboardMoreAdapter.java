@@ -20,7 +20,7 @@ import java.util.List;
  * 底部导航--榜单--最多订阅经典榜--适配器
  */
 
-public class BillboardMoreAdapter extends RecyclerView.Adapter<BillboardMoreAdapter.MyViewHolder> implements View.OnClickListener{
+public class BillboardMoreAdapter extends RecyclerView.Adapter<BillboardMoreAdapter.MyViewHolder> implements View.OnClickListener {
     private LayoutInflater mInflater;
     private Context mContext;
     private List<BillboardMore> data = new ArrayList<>();
@@ -40,10 +40,12 @@ public class BillboardMoreAdapter extends RecyclerView.Adapter<BillboardMoreAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.tv_rank.setText(data.get(position).getId());
-        holder.tv_title.setText(data.get(position).getRecordTitle());
-        holder.tv_author.setText(data.get(position).getName());
-        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
+        holder.tv_rank.setText(data.get(position).getAlbumRank());
+        holder.tv_name.setText(data.get(position).getTitle());
+        holder.tv_info.setText(data.get(position).getIntro());
+        holder.tv_classify.setText(data.get(position).getClassifyName());
+        holder.tv_model.setText(data.get(position).getModel());
+        Glide.with(mContext).load(data.get(position).getAlbumImage()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
     @Override
@@ -60,15 +62,19 @@ public class BillboardMoreAdapter extends RecyclerView.Adapter<BillboardMoreAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_rank;
-        TextView tv_title;
-        TextView tv_author;
+        TextView tv_name;
+        TextView tv_info;
+        TextView tv_classify;
+        TextView tv_model;
         ImageView iv_pic;
         MyViewHolder(View itemView) {
             super(itemView);
-            tv_rank = (TextView) itemView.findViewById(R.id.billboard_more_program_rank);
-            tv_title = (TextView) itemView.findViewById(R.id.billboard_more_program_name);
-            tv_author = (TextView) itemView.findViewById(R.id.billboard_more_program_author_name);
-            iv_pic= (ImageView) itemView.findViewById(R.id.billboard_more_program_img);
+            tv_rank = (TextView) itemView.findViewById(R.id.billboard_more_rank);
+            tv_name = (TextView) itemView.findViewById(R.id.billboard_more_name);
+            tv_info = (TextView) itemView.findViewById(R.id.billboard_more_info);
+            tv_classify = (TextView) itemView.findViewById(R.id.billboard_more_classify);
+            tv_model = (TextView) itemView.findViewById(R.id.billboard_more_model);
+            iv_pic= (ImageView) itemView.findViewById(R.id.billboard_more_pic);
         }
     }
 

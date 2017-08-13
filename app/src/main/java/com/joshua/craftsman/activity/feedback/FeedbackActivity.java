@@ -31,10 +31,8 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
     Button feedbackCommit;
     @BindView(R.id.feedback_edit_content)
     EditText edit_content;
-    @BindView(R.id.feedback_edit_tel)
-    EditText edit_tel;
 
-    public String editContent,editTel;
+    private String editContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,26 +59,25 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     private void putDataToServer() {
         editContent = edit_content.getText().toString();
-        editTel = edit_tel.getText().toString();
-        if (editContent.isEmpty() || editTel.isEmpty()) {
+        if (editContent.isEmpty()) {
             Toast.makeText(mBaseActivity, "请您填写完整信息", Toast.LENGTH_SHORT).show();
             return;
         }
+        else {
+            putFeedBack(editContent);
+        }
+    }
+
+    private void putFeedBack(String keyWord) {
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.FEEDBACK)
-                .add("content", editContent)
-                .add("tel", editTel)
-                .build();
-
+        String requestStr = "method=" + Server.FEEDBACK + "&keyWord=" + keyWord;
+        RequestBody params = RequestBody.create(Server.MEDIA_TYPE_MARKDOWN,requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
                 .build();
-
-
         Call call = mClient.newCall(request);
         call.enqueue(new HttpCommonCallback(mBaseActivity) {
             @Override

@@ -57,17 +57,19 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     Button mCraftsImageFollow;
     @BindView(R.id.crafts_image_ask)
     Button mCraftsImageAsk;
+    @BindView(R.id.crafts_text_classify)
+    TextView craftsTextClassify;
+    @BindView(R.id.crafts_text_hot_greed)
+    TextView craftsTextHotGreed;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
     private int screenWidth;
     private CraftAlbumFragment mCraftAlbumFragment;
     private CraftQAFragment mCraftQAFragment;
-    public String itemCraftsName;
-    private String itemCraftsIntro;
-    private String itemCraftsPic;
-    public static String homeCraftsName;
-
+    private String itemCraftsName, itemCraftsIntro, itemCraftsClassify,
+            itemCraftsHotDegree, itemCraftsPic, itemCraftsAccount;
+    public static String homeCraftsName,homeCraftsAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
      * 初始化滑动 Pager 数据
      */
     private void initPager() {
+        homeCraftsAccount = getIntent().getStringExtra("craftsAccount");
         homeCraftsName = getIntent().getStringExtra("craftsName");
         mCraftAlbumFragment = new CraftAlbumFragment();
         mCraftQAFragment = new CraftQAFragment();
@@ -156,10 +159,15 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
+        itemCraftsAccount = getIntent().getStringExtra("craftsAccount");
         itemCraftsName = getIntent().getStringExtra("craftsName");
         itemCraftsPic = getIntent().getStringExtra("craftsPic");
+        itemCraftsClassify = getIntent().getStringExtra("craftsClassify");
+        itemCraftsHotDegree = getIntent().getStringExtra("craftsHotDegree");
         itemCraftsIntro = getIntent().getStringExtra("craftsIntro");
         mCraftsTextName.setText(itemCraftsName);
+        craftsTextClassify.setText(itemCraftsClassify);
+        craftsTextHotGreed.setText(itemCraftsHotDegree);
         mCraftsTextIntroduction.setText(itemCraftsIntro);
         Glide.with(this).load(itemCraftsPic).into(mCraftsImageIcon);
     }
@@ -176,6 +184,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
             case R.id.crafts_image_ask:
                 Intent intent = new Intent(mBaseActivity, AskQuestionActivity.class);
                 intent.putExtra("answer", itemCraftsName);
+                intent.putExtra("craftsAccount", itemCraftsAccount);
                 mBaseActivity.startActivity(intent);
                 break;
             case R.id.crafts_image_follow:

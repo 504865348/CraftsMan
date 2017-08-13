@@ -46,22 +46,15 @@ public class ClassCraftAdapter extends android.support.v7.widget.RecyclerView.Ad
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_name.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
+        holder.tv_classify.setText(data.get(position).getClassifyCrafts());
+        holder.tv_hot_degree.setText(data.get(position).getHotDegree());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
-        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
-                intent.putExtra("craftsName", data.get(position).getCraftsmanName());
-                intent.putExtra("craftsIntro", data.get(position).getIntroduction());
-                intent.putExtra("craftsPic", data.get(position).getImageUrl());
-                mContext.startActivity(intent);
-            }
-        });
         holder.btn_ask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AskQuestionActivity.class);
                 intent.putExtra("answer", data.get(position).getCraftsmanName());
+                intent.putExtra("craftsAccount", data.get(position).getCraftsAccount());
                 mContext.startActivity(intent);
             }
         });
@@ -84,6 +77,8 @@ public class ClassCraftAdapter extends android.support.v7.widget.RecyclerView.Ad
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_name;
         TextView tv_introduction;
+        TextView tv_classify;
+        TextView tv_hot_degree;
         ImageView iv_pic;
         Button btn_ask;
 
@@ -91,6 +86,8 @@ public class ClassCraftAdapter extends android.support.v7.widget.RecyclerView.Ad
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.question_answer_crafts_name);
             tv_introduction = (TextView) itemView.findViewById(R.id.question_answer_crafts_introduction);
+            tv_classify = (TextView) itemView.findViewById(R.id.question_answer_crafts_classify);
+            tv_hot_degree = (TextView) itemView.findViewById(R.id.question_answer_crafts_hot_greed);
             iv_pic= (ImageView) itemView.findViewById(R.id.question_answer_crafts_img);
             btn_ask= (Button) itemView.findViewById(R.id.question_answer_crafts_ask);
         }
@@ -98,7 +95,7 @@ public class ClassCraftAdapter extends android.support.v7.widget.RecyclerView.Ad
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

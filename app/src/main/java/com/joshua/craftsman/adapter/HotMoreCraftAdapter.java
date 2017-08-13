@@ -40,20 +40,12 @@ public class HotMoreCraftAdapter extends RecyclerView.Adapter<HotMoreCraftAdapte
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_name.setText(data.get(position).getCraftsmanName());
+        holder.tv_classify.setText(data.get(position).getClassifyCrafts());
+        holder.tv_hotDegree.setText(data.get(position).getHotDegree());
         holder.tv_info.setText(data.get(position).getIntroduction());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
-        holder.iv_pic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
-                intent.putExtra("craftsName", data.get(position).getCraftsmanName());
-                intent.putExtra("craftsIntro", data.get(position).getIntroduction());
-                intent.putExtra("craftsPic", data.get(position).getImageUrl());
-                mContext.startActivity(intent);
-            }
-        });
         holder.itemView.setTag(position+"");
     }
 
@@ -72,12 +64,16 @@ public class HotMoreCraftAdapter extends RecyclerView.Adapter<HotMoreCraftAdapte
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_name;
+        TextView tv_classify;
+        TextView tv_hotDegree;
         TextView tv_info;
         ImageView iv_pic;
 
         MyViewHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.hot_more_crafts_name);
+            tv_classify = (TextView) itemView.findViewById(R.id.hot_more_crafts_classify);
+            tv_hotDegree = (TextView) itemView.findViewById(R.id.hot_more_crafts_hot_greed);
             tv_info = (TextView) itemView.findViewById(R.id.hot_more_crafts_info);
             iv_pic= (ImageView) itemView.findViewById(R.id.hot_more_crafts_cover);
         }
@@ -85,7 +81,7 @@ public class HotMoreCraftAdapter extends RecyclerView.Adapter<HotMoreCraftAdapte
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

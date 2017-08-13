@@ -41,8 +41,9 @@ public class CraftAlbumAdapter extends android.support.v7.widget.RecyclerView.Ad
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_title.setText(data.get(position).getTitle());
-        holder.tv_classify.setText(data.get(position).getClassifyName());
         holder.tv_introduction.setText(data.get(position).getIntro());
+        holder.tv_classify.setText(data.get(position).getClassifyName());
+        holder.tv_model.setText(data.get(position).getModel());
         Glide.with(mContext).load(data.get(position).getAlbumImage()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
@@ -62,22 +63,24 @@ public class CraftAlbumAdapter extends android.support.v7.widget.RecyclerView.Ad
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
-        TextView tv_classify;
         TextView tv_introduction;
+        TextView tv_classify;
+        TextView tv_model;
         ImageView iv_pic;
 
         MyViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.craft_album_title);
-            tv_classify = (TextView) itemView.findViewById(R.id.craft_album_classify);
             tv_introduction = (TextView) itemView.findViewById(R.id.craft_album_introduction);
+            tv_classify = (TextView) itemView.findViewById(R.id.craft_album_classify);
+            tv_model = (TextView) itemView.findViewById(R.id.craft_album_model);
             iv_pic= (ImageView) itemView.findViewById(R.id.craft_album_img);
         }
     }
 
     private onRecyclerViewItemClickListener mOnRecyclerViewItemClickListener = null;
 
-    interface onRecyclerViewItemClickListener {
+    public interface onRecyclerViewItemClickListener {
         void onItemClick(View view, String position);
     }
 

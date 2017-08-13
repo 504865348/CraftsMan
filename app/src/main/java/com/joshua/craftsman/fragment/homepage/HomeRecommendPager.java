@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -115,7 +116,6 @@ public class HomeRecommendPager extends BaseFragment {
         ButterKnife.bind(this, rootView);
         return rootView;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -171,12 +171,22 @@ public class HomeRecommendPager extends BaseFragment {
         Gson gson = new Gson();
         list_TJ = gson.fromJson(result, new TypeToken<List<BillboardHot>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleTJ();
-            }
-        });
+        if (list_TJ.get(0).getRecordTitle().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleTJ();
+                }
+            });
+        }
     }
 
     private void initRecycleTJ() {
@@ -316,5 +326,20 @@ public class HomeRecommendPager extends BaseFragment {
             }
         });
 
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_layout);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 }

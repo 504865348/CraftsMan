@@ -9,10 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="325dp"
-
         android:src="@drawable/video_player_share"
         />
-    <!-- 专辑信息 -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +41,6 @@
                 android:id="@+id/album_detail_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:text="专辑名字"/>
@@ -83,6 +81,16 @@
                 android:layout_marginTop="3dp">
                 <TextView
                     style="@style/album_detail_intro_small"
+                    android:text="模块："/>
+                <TextView
+                    android:id="@+id/album_detail_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/black" />
+                <TextView
+                    style="@style/album_detail_intro_small"
+                    android:layout_marginLeft="20dp"
                     android:text="播放量："/>
                 <TextView
                     android:id="@+id/album_detail_play_num"

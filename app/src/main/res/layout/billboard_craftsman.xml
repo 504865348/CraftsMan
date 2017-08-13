@@ -16,12 +16,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="10dp"
-            android:text="大国工匠榜"
+            android:text="最大国工匠榜"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <View style="@style/horizontal_split"/>
+
+    <include layout="@layout/empty"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/billboard_craftsman_rv"

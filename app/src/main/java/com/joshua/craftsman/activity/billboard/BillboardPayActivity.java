@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -151,12 +152,22 @@ public class BillboardPayActivity extends BaseActivity {
         Gson gson = new Gson();
         list_pay = gson.fromJson(result, new TypeToken<List<BillboardPay>>() {
         }.getType());
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecyclePay();
-            }
-        });
+        if (list_pay.get(0).getRecordTitle().equals("null")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecyclePay();
+                }
+            });
+        }
     }
 
     private void initRecyclePay() {
@@ -296,6 +307,16 @@ public class BillboardPayActivity extends BaseActivity {
         });
 
     }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) mBaseActivity.findViewById(R.id.empty);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
