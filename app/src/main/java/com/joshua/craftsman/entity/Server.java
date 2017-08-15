@@ -41,7 +41,6 @@ public class Server {
     public static final String BILLBOARD_PAY= "BillboardPay"; //榜单-付费精品飙升榜
     public static final String BILLBOARD_CRAFTSMAN = "BillboardCraftsman"; //榜单-最大国工匠榜
     public static final String QUESANS_CLASSIFY = "QuesAnsClassify"; //问答-分类
-    public static final String FIND_FRIENDS_ATTENTION = "FindFriendsAttention"; //发现-匠友圈-找匠友-推荐关注
     public static final String CRAFTS_UNDEAL_ANS= "CraftsUnDealAns"; //工匠-我的问答-未处理回答
     public static final String CRAFTS_MY_ANS= "CraftsMyAns"; //工匠-我的问答-我的回答
     public static final String CRAFTS_MY_QUES= "CraftsMyQues"; //工匠-我的问答-我的提问

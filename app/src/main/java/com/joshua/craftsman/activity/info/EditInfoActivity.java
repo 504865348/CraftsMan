@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.entity.Server;
@@ -85,6 +86,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     private static final int CHOOSE_PICTURE = 0x000001;
     private static final int TAKE_PICTURE = 0x000002;
     private static final String IMAGE_FILE_NAME = "headImage";
+    private String userClass = LoginActivity.appUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -259,7 +261,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     private void saveInfo() {
         nickName = et_Nickname.getText().toString();
         introduce = et_Introduce.getText().toString();
-        sp = getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
+        sp = getSharedPreferences(userClass+".txt", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("nickName", nickName);
         editor.putString("introduce", introduce);
@@ -332,13 +334,13 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void showInfo() {
-        sp = getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
+        sp = getSharedPreferences(userClass+".txt", Context.MODE_PRIVATE);
         et_Nickname.setText(sp.getString("nickName", ""));
         et_Introduce.setText(sp.getString("introduce", ""));
         tvSex.setText(sp.getString("sex", ""));
         tvBirthday.setText(sp.getString("birthday", ""));
         tvAddress.setText(sp.getString("address", ""));
-        ivMyImage.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/headImage.JPEG")));
+        ivMyImage.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/"+userClass+"/headImage.JPEG")));
     }
 
     private void showErrorMsg(String value) {

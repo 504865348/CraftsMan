@@ -1,15 +1,18 @@
 package com.joshua.craftsman.fragment.findfriendpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.craftsHome.CraftsHomeActivity;
 import com.joshua.craftsman.adapter.find.FindFriendsAdapter;
 import com.joshua.craftsman.entity.FindFriendsAttention;
 import com.joshua.craftsman.entity.Server;
@@ -69,7 +72,7 @@ public class AttentionPager extends BaseFragment {
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.FIND_FRIENDS_ATTENTION)
+                .add("method", Server.HOME_HOT_CRAFTSMAN)
                 .build();
 
         final Request request = new Request.Builder()
@@ -94,19 +97,52 @@ public class AttentionPager extends BaseFragment {
         Gson gson = new Gson();
         list_FF = gson.fromJson(result, new TypeToken<List<FindFriendsAttention>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleFF();
-            }
-        });
+        if (list_FF.get(0).getCraftsmanName().equals("null")) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleFF();
+                }
+            });
+        }
     }
 
     private void initRecycleFF() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         findFriendsRecommendRv.setLayoutManager(linearLayoutManager);
-        findFriendsRecommendRv.setAdapter(new FindFriendsAdapter(getActivity(),list_FF));
+        FindFriendsAdapter adapter = new FindFriendsAdapter(getActivity(),list_FF);
+        adapter.setOnRecyclerViewItemClickListener(new FindFriendsAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String position) {
+                int pos = Integer.parseInt(position);
+                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
+                intent.putExtra("craftsName", list_FF.get(pos).getCraftsmanName());
+                intent.putExtra("craftsAccount", list_FF.get(pos).getCraftsAccount());
+                intent.putExtra("craftsIntro", list_FF.get(pos).getIntroduction());
+                intent.putExtra("craftsClassify", list_FF.get(pos).getClassifyCrafts());
+                intent.putExtra("craftsHotDegree", list_FF.get(pos).getHotDegree());
+                intent.putExtra("craftsPic", list_FF.get(pos).getImageUrl());
+                mContext.startActivity(intent);
+            }
+        });
+        findFriendsRecommendRv.setAdapter(adapter);
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_layout);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 }

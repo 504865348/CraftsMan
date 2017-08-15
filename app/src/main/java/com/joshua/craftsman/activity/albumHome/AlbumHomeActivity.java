@@ -1,6 +1,5 @@
 package com.joshua.craftsman.activity.albumHome;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,24 +19,15 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
-import com.joshua.craftsman.http.HttpCommonCallback;
-import com.joshua.craftsman.http.HttpCookieJar;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 
 public class AlbumHomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -68,6 +57,8 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     Button albumBuy;
     @BindView(R.id.album_detail_model)
     TextView albumDetailModel;
+    @BindView(R.id.album_share)
+    ImageView albumShare;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
@@ -174,6 +165,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initListener() {
+        albumShare.setOnClickListener(this);
         albumSubscribe.setOnClickListener(this);
         albumBuy.setOnClickListener(this);
     }
@@ -182,6 +174,9 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.album_share:
+                Toast.makeText(mBaseActivity, "暂未开放专辑分享功能", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.album_subscribe:
                 //saveInfo(isSubscribe);
                 //albumIsSubscribe(String.valueOf(isSubscribe));

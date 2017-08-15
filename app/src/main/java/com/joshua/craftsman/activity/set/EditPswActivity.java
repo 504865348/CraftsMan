@@ -24,9 +24,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class EditPswActivity extends BaseActivity implements View.OnClickListener{
-
-    @BindView(R.id.edit_psw_tool_bar)
-    Toolbar editPswToolBar;
     @BindView(R.id.etOldPsw)
     EditText et_OldPsw;
     @BindView(R.id.etNewPsw)
@@ -46,16 +43,12 @@ public class EditPswActivity extends BaseActivity implements View.OnClickListene
         initListener();
     }
     private void initListener() {
-        editPswToolBar.setOnClickListener(this);
         pswCommit.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.edit_psw_tool_bar:
-                startActivity(new Intent(this, SetActivity.class));
-                break;
             case R.id.psw_commit:
                 putDataToServer();
                 break;

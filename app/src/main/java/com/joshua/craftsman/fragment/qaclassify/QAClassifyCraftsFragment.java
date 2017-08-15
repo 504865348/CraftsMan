@@ -143,7 +143,6 @@ public class QAClassifyCraftsFragment extends BaseFragment {
         }
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

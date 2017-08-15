@@ -91,7 +91,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 clear();
                 break;
             case R.id.set_ll_recommend:
-                Toast.makeText(mBaseActivity, "暂未开放推送设置", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mBaseActivity, "暂未开放推送设置功能", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.set_ll_help:
                 startActivity(new Intent(mBaseActivity, HelpActivity.class));
