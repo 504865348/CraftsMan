@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -39,7 +40,7 @@
             <TextView
                 android:id="@+id/question_audit_questioner"
                 style="@style/question_audit_text"
-                android:text="XXX"/>
+                tools:text="XXX"/>
             <TextView
                 style="@style/question_audit_text"
                 android:layout_weight="1"
@@ -48,13 +49,14 @@
                 style="@style/question_audit_text"
                 android:text="价值"/>
             <TextView
+                android:id="@+id/tv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="16dp"
                 android:textColor="@color/red"
-                android:text="￥XX"/>
+                tools:text="￥XX"/>
         </LinearLayout>
 
         <TextView
@@ -64,7 +66,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:padding="20dp"
-            android:text="问题内容"/>
+            tools:text="问题内容"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +75,7 @@
             <TextView
                 android:id="@+id/question_audit_listen_count"
                 style="@style/question_audit_text"
-                android:text="XXX"/>
+                tools:text="XXX"/>
             <TextView
                 style="@style/question_audit_text"
                 android:text="人听过"/>
@@ -81,12 +83,12 @@
                 android:id="@+id/question_audit_time"
                 style="@style/question_audit_text"
                 android:layout_weight="1"
-                android:text="回答时间"/>
+                android:text="回答时间："/>
             <TextView
                 android:id="@+id/question_audit_duration"
                 style="@style/question_audit_text"
                 android:layout_marginRight="10dp"
-                android:text="答案时长"/>
+                android:text="答案时长："/>
         </LinearLayout>
 
         <!-- 购买后将第一个按钮隐藏，显示第二个 -->
@@ -99,14 +101,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:background="@drawable/btn_pay_audit"/>
             <ImageButton
                 android:id="@+id/question_audit_read_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@drawable/btn_read_answer"/>
         </LinearLayout>
 
@@ -136,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="工匠账号名"
+            tools:text="工匠账号名"
             android:textSize="16sp"
             android:textColor="@color/black"/>
 
@@ -146,7 +148,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/light_gray_text"
-            android:text="简介简介"/>
+            tools:text="简介简介"/>
 
         <ImageButton
             android:id="@+id/question_audit_ask"

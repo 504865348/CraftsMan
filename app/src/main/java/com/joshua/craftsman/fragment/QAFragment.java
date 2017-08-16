@@ -190,7 +190,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
-                Log.d(TAG, "getQuesAns: " + result);
+                Log.d("jun", "getQuesAns: " + result);
                 parseQuesAns(result);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override

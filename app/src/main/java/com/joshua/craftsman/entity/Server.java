@@ -12,18 +12,18 @@ public class Server {
 
 //    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
 //    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
-//    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
-//    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
-//    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
-//    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
+    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
+    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
+    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
+    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
 
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown;charset=utf-8");
     public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ_AND/MainServlet";
-    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
-    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
-    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
-    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
-    public static final String SERVER_MY_INFO = "http://139.224.35.126:8080/GJ_AND/MyInfoServlet";
+//    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
+//    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
+//    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
+//    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
+//    public static final String SERVER_MY_INFO = "http://139.224.35.126:8080/GJ_AND/MyInfoServlet";
 
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片

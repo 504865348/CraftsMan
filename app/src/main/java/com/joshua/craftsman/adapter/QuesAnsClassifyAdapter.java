@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.answer.QuestionDetailActivity;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.entity.QuesAnsClassify;
 import com.joshua.craftsman.entity.Server;
@@ -107,22 +108,23 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         Glide.with(mContext).load(data.get(position).getCraftsImage()).placeholder(R.drawable.load_error).into(holder.iv_craftsImage);
-        holder.tv_craftsName.setText(data.get(position).getCraftsName());
+        holder.tv_craftsName.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
-        holder.tv_content.setText(data.get(position).getContent());
-        if (data.get(position).getListenrNumber().equals("null")) {
+        holder.tv_content.setText(data.get(position).getQuestionWord());
+        if (data.get(position).getListenNumber().equals("null")) {
             holder.tv_listenrNumber.setText("0人听过");
         }
         else {
-            holder.tv_listenrNumber.setText(data.get(position).getListenrNumber() + "人听过");
+            holder.tv_listenrNumber.setText(data.get(position).getListenNumber() + "人听过");
         }
-        holder.tv_time.setText(data.get(position).getTime());
+        holder.tv_time.setText(data.get(position).getAnsterTime());
+
         holder.btn_q_a_item_go_ask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, AskQuestionActivity.class);
-                intent.putExtra("answer", data.get(position).getCraftsName());
-                intent.putExtra("craftsAccount", data.get(position).getCraftsName());
+                intent.putExtra("answer", data.get(position).getCraftsmanName());
+                intent.putExtra("craftsAccount", data.get(position).getCraftsmanId());
                 mContext.startActivity(intent);
             }
         });
@@ -130,7 +132,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
             @Override
             public void onClick(View v) {
                 String id = data.get(position).getId();
-                String url=data.get(position).getDownloadUrl();
+                String url=data.get(position).getAnswerAmr();
                 //首先判断是否已经下载
                 if (checkLocal(id)) {
                     //录音的播放与暂停
@@ -148,6 +150,14 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
                     mDialog.show();
                     getSoundFromServer(id,url);
                 }
+            }
+        });
+        holder.rl_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, QuestionDetailActivity.class);
+                intent.putExtra("content", data.get(position));
+                mContext.startActivity(intent);
             }
         });
         holder.itemView.setTag(position + "");
@@ -284,12 +294,14 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         TextView tv_content;
         TextView tv_listenrNumber;
         TextView tv_time;
+        View rl_view;
 
         Button btn_q_a_item_go_ask;
         RelativeLayout rl_play_sound;
 
         MyViewHolder(View itemView) {
             super(itemView);
+            rl_view=itemView.findViewById(R.id.rl_item);
             iv_craftsImage = (ImageView) itemView.findViewById(R.id.q_a_item_icon);
             tv_craftsName = (TextView) itemView.findViewById(R.id.q_a_item_name);
             tv_introduction = (TextView) itemView.findViewById(R.id.q_a_item_introduction);

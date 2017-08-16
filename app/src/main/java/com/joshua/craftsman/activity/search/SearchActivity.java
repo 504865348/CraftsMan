@@ -52,6 +52,7 @@ import static com.joshua.craftsman.R.id.album_list_lv;
 import static com.joshua.craftsman.R.id.hot_crafts_rv;
 import static com.joshua.craftsman.R.id.q_a_list_view_examples;
 import static com.joshua.craftsman.R.id.question;
+import static com.joshua.craftsman.R.id.tv_craftsman;
 
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
 
@@ -174,10 +175,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
         String requestStr="method="+Server.SERVER_SEARCH+"&keyWord="+keyWord;
-//        RequestBody params = new FormBody.Builder()
-//                .add("method", Server.SERVER_SEARCH)
-//                .add("keyWord", keyWord)
-//                .build();
         RequestBody params =RequestBody.create(MEDIA_TYPE_MARKDOWN, requestStr);
 
         final Request request = new Request.Builder()
@@ -188,8 +185,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         call.enqueue(new HttpCommonCallback(mBaseActivity) {
             @Override
             protected void success(String result) {
-                Log.d(TAG, "success:>>>>>>>>>>>>>>>>>>>>>> "+result);
-//                parseData(result);
+                parseData(result);
             }
 
             @Override
@@ -208,9 +204,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private void parseData(String result) {
         try {
             JSONObject jsonObject=new JSONObject(result);
+            Log.d(TAG, "parseData: "+jsonObject);
             String question=jsonObject.getString("question");
+            Log.d(TAG, "question: "+question);
             String album=jsonObject.getString("album");
+            Log.d(TAG, "album: "+album);
             String craftsman=jsonObject.getString("craftsman");
+            Log.d(TAG, "craftsman: "+craftsman);
             Gson gson = new Gson();
             //解析question
             list_question = gson.fromJson(question, new TypeToken<List<QuesAnsClassify>>() {
@@ -219,6 +219,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     initRecycleQuestion();
+                    if(list_question.size()>0){
+                        tv_question.setVisibility(View.GONE);
+                    }else {
+                        tv_question.setVisibility(View.VISIBLE);
+                    }
                 }
             });
             //解析album
@@ -228,6 +233,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     initRecycleAlbum();
+                    if(list_album.size()>0){
+                        tv_album.setVisibility(View.GONE);
+                    }else {
+                        tv_album.setVisibility(View.VISIBLE);
+                    }
                 }
             });
             //解析craftsman
@@ -237,6 +247,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     initRecycleCraftsman();
+                    if(list_craftsman.size()>0){
+                        tv_craftsman.setVisibility(View.GONE);
+                    }else {
+                        tv_craftsman.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         } catch (JSONException e) {

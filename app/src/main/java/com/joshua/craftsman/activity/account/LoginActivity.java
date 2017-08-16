@@ -45,11 +45,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     ProgressBar progressBar;
     @BindView(R.id.ll_container)
     LinearLayout ll_container;
-    @BindView(R.id.tv_forget_pwd)
-    TextView tvForgetPwd;
+
+    //@BindView(R.id.tv_forget_pwd)
+   // TextView tvForgetPwd;
 
     public static String appUserName = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         btn_register.setOnClickListener(this);
-        tvForgetPwd.setOnClickListener(this);
+        // tv_forget_pwd.setOnClickListener(this);
     }
 
 
@@ -69,8 +69,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void login() {
         showLoadingProgress();
         Log.d(TAG, "login: " + "connecting");
- //       final String username = et_username.getText().toString();
- //       String pwd = et_pwd.getText().toString();
+//        final String username = et_username.getText().toString();
+//        String pwd = et_pwd.getText().toString();
 //          final String username = "18761996926";
 //          String pwd = "123456";
 ////
@@ -85,8 +85,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (pwd.isEmpty()) {
             Toast.makeText(mBaseActivity, "密码不能为空", Toast.LENGTH_SHORT).show();
             dismissLoadingProgress();
+
             return;
         }
+
 
         OkHttpClient mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(getApplicationContext()))
@@ -112,6 +114,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         Toast.makeText(mBaseActivity, "登录失败", Toast.LENGTH_SHORT).show();
                     }
                 });
+
 
             }
 
@@ -159,6 +162,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 public void run() {
                                     dismissLoadingProgress();
                                     Toast.makeText(mBaseActivity, "用户名或密码错误，登录失败", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                             break;
