@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,10 +30,6 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-
-/**
- * Created by Lister on 2017-06-15.
- */
 
 public class MyQuestionFragment extends BaseFragment {
 
@@ -105,12 +102,22 @@ public class MyQuestionFragment extends BaseFragment {
         Gson gson = new Gson();
         list_TW = gson.fromJson(result, new TypeToken<List<CraftsMyQues>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleTW();
-            }
-        });
+        if(list_TW.get(0).getQuesId().equals("null")){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        }else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleTW();
+                }
+            });
+        }
     }
 
     private void initRecycleTW() {
@@ -118,5 +125,14 @@ public class MyQuestionFragment extends BaseFragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftsQuesRv.setLayoutManager(linearLayoutManager);
         craftsQuesRv.setAdapter(new QuesAdapter(getActivity(), list_TW));
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_classify_b);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 }

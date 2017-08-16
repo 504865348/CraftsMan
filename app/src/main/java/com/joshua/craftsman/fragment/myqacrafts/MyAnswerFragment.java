@@ -6,14 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.adapter.qacrafts.AnsAdapter;
-import com.joshua.craftsman.adapter.qacrafts.NotAnswerAdapter;
 import com.joshua.craftsman.entity.CraftsMyAns;
-import com.joshua.craftsman.entity.CraftsUnDealAns;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
@@ -30,9 +29,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-/**
- * Created by Lister on 2017-06-15.
- */
 
 public class MyAnswerFragment extends BaseFragment {
 
@@ -104,12 +100,22 @@ public class MyAnswerFragment extends BaseFragment {
         Gson gson = new Gson();
         list_ANS = gson.fromJson(result, new TypeToken<List<CraftsMyAns>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                initRecycleANS();
-            }
-        });
+        if(list_ANS.get(0).getAnsId().equals("null")){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(true);
+                }
+            });
+        }else {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setEmptyView(false);
+                    initRecycleANS();
+                }
+            });
+        }
     }
 
     private void initRecycleANS() {
@@ -117,5 +123,14 @@ public class MyAnswerFragment extends BaseFragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftsAnsRv.setLayoutManager(linearLayoutManager);
         craftsAnsRv.setAdapter(new AnsAdapter(getActivity(), list_ANS));
+    }
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_classify_a);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 }

@@ -69,8 +69,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void login() {
         showLoadingProgress();
         Log.d(TAG, "login: " + "connecting");
-//        final String username = et_username.getText().toString();
-//        String pwd = et_pwd.getText().toString();
+ //       final String username = et_username.getText().toString();
+ //       String pwd = et_pwd.getText().toString();
 //          final String username = "18761996926";
 //          String pwd = "123456";
 ////

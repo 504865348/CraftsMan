@@ -33,10 +33,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-/**
- * Created by Lister on 2017-06-15.
- */
-
 public class NotAnswerFragment extends BaseFragment {
 
     @BindView(R.id.crafts_not_answer_rv)
@@ -134,7 +130,6 @@ public class NotAnswerFragment extends BaseFragment {
     }
 
     private void initRecycleWCL() {
-        //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         craftsNotAnswerRv.setLayoutManager(linearLayoutManager);
@@ -151,7 +146,6 @@ public class NotAnswerFragment extends BaseFragment {
             }
         });
         craftsNotAnswerRv.setAdapter(notAnswerAdapter);
-
     }
 
     @Override

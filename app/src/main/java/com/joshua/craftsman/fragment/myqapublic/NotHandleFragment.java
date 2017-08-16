@@ -10,10 +10,6 @@ import com.joshua.craftsman.fragment.BaseFragment;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by Lister on 2017-06-17.
- */
-
 public class NotHandleFragment extends BaseFragment {
 
     @Override
