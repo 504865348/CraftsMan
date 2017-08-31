@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
@@ -65,7 +66,7 @@
         <TextView
             android:id="@+id/video_player_times"
             style="@style/video_player_info_text"
-            android:text="XXX"/>
+            tools:text="XXX"/>
 
         <TextView
             style="@style/video_player_info_text"
@@ -75,16 +76,16 @@
         <TextView
             android:id="@+id/video_player_publish_time"
             style="@style/video_player_info_text"
-            android:text="XXX"/>
+            tools:text="XXX"/>
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@color/little_gray"/>
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:background="@color/little_gray"/>-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_comment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
 </LinearLayout>

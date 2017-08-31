@@ -70,4 +70,8 @@ public class Server {
     public static final String MY_BILLBOARD_PAY= "MyBillboardPay"; //我的榜单-付费精品飙升榜
     public static final String MY_BILLBOARD_CRAFTSMAN = "MyBillboardCraftsman"; //我的榜单-最大国工匠榜
 
+    public static final String SERVER_SEND_ORDER = "sendOrder"; //向服务器发送订单
+    public static final String SERVER_SEND_ORDER_RESULT = "verifyResult"; //向服务器发送订单结果
+
+
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.entity.BillboardHot;
+import com.joshua.craftsman.entity.joshua.VideoDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,9 @@ import java.util.List;
 public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdapter.MyViewHolder> implements View.OnClickListener{
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<BillboardHot> data = new ArrayList<>();
+    private List<VideoDetail> data = new ArrayList<>();
 
-    public HomeRecommendAdapter(Context context,List<BillboardHot> data) {
+    public HomeRecommendAdapter(Context context,List<VideoDetail> data) {
         mInflater = LayoutInflater.from(context);
         this.data=data;
         this.mContext=context;

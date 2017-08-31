@@ -41,14 +41,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     EditText et_pwd;
     @BindView(R.id.btn_register)
     TextView btn_register;
+    @BindView(R.id.tv_forget_pwd)
+    TextView tv_forget_pwd;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.ll_container)
     LinearLayout ll_container;
-
-    //@BindView(R.id.tv_forget_pwd)
-   // TextView tvForgetPwd;
-
     public static String appUserName = "";
 
     @Override
@@ -61,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         btn_register.setOnClickListener(this);
-        // tv_forget_pwd.setOnClickListener(this);
+         tv_forget_pwd.setOnClickListener(this);
     }
 
 
@@ -74,8 +72,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //          final String username = "18761996926";
 //          String pwd = "123456";
 ////
-        final String username = "gj1";
-        String pwd = "111111";
+        final String username = "15706106292";
+        String pwd = "123456";
 
         if (username.isEmpty()) {
             Toast.makeText(mBaseActivity, "用户名不能为空", Toast.LENGTH_SHORT).show();

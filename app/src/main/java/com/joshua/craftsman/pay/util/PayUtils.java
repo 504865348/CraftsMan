@@ -1,149 +1,174 @@
 package com.joshua.craftsman.pay.util;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.joshua.craftsman.activity.MainActivity;
+import com.joshua.craftsman.application.BaseApplication;
+import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.utils.PrefUtils;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * class description here
  *
+ * @author wqj
  * @version 1.0.0
- * @outher wangqiang
- * @project 51Bike
  * @since 2017-03-29
  */
 public class PayUtils {
-//    private String TAG = "PayUtils";
-//    public  final String APPID = "2017062307555030";
-//    private PaySuccess paySuccess;
-//    public  static PayUtils payUtils = new PayUtils();
-//    public PayUtils() {
-//    }
-//    public void setPaySuccess(PaySuccess paySuccess){
-//        this.paySuccess = paySuccess;
-//    }
-//    public static  PayUtils getPayUtils(){
-//        return payUtils;
-//    }
-//    /**
-//     * 支付宝支付业务
-//     *
-//     *
-//     */
-//    public void payV2(final Activity activity, float money) {
-//
-//        Log.i(TAG, "payV2: ");
-//        /**
-//         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-//         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-//         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-//         *
-//         * orderInfo的获取必须来自服务端；
-//         */
-//        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID,money, false);
-//        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-//        Log.i("msp", ">>>>>>>>>>>>>>>>>>>>>>>>>>orderParam:"+params.toString());
-//        /**
-//         * 访问服务器
-//         * 上传订单信息
-//         */
-//        String url="http://123.206.104.107/diandongche/user/getOrder";
-//
-//        RequestParams order_params = new RequestParams(url);
-//        order_params.addParameter("app_id",params.get("app_id"));
-//        order_params.addParameter("biz_content",params.get("biz_content"));
-//        order_params.addParameter("charset",params.get("charset"));
-//        order_params.addParameter("method",params.get("method"));
-//        order_params.addParameter("sign_type",params.get("sign_type"));
-//        order_params.addParameter("timestamp",params.get("timestamp"));
-//        order_params.addParameter("version",params.get("version"));
-//        order_params.addParameter("orderParam",orderParam);
-//        x.http().post(order_params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                final String orderInfo = result.trim();
-//                Log.i("msp","orderInfo:"+result);
-//                Runnable payRunnable = new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        PayTask alipay = new PayTask(activity);
-//                        Map<String, String> result = alipay.payV2(orderInfo, true);
-//                        Log.d("msp", "<<<<<<<<<<<<payResult>>>>>>>>>>: "+result.toString());
-//                        postPayResult(result);
-//
-//                    }
-//                };
-//
-//                Thread payThread = new Thread(payRunnable);
-//                payThread.start();
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                Log.i("msp", ">>>>>>>>>>>>>>>>>>>>>>>>>>:"+ex.getMessage());
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
-//
-//    }
-//
-//    /**
-//     * 将支付结果发送给服务器
-//     */
-//    private void postPayResult(Map<String, String > result) {
-//        if(result.get("resultStatus").equals("6001")){
-//            UiUtils.showToast("操作已经取消");
-//        }
-//        Log.i(TAG, "postPayResult: ");
-//        String url="http://123.206.104.107/diandongche/user/verifyResult";
-//        RequestParams result_params = new RequestParams(url);
-//        result_params.addParameter("resultStatus",result.get("resultStatus"));
-//        result_params.addParameter("result",result.get("result"));
-//        result_params.addParameter("memo",result.get("memo"));
-//
-//
-//        x.http().post(result_params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                if (TextUtils.equals(result, "9000")) {
-//                    paySuccess.onSccuess();
-//                } else {
-//                    UiUtils.showToast("支付失败");
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                Log.i("msp", ">>>>>>>>>>>>>>>>>>>>>>>>>>o2:"+ex.getMessage());
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
-//
-//    }
+    private String TAG = "PayUtils";
+    public final String APPID = "2017062307555030";
+    private PaySuccess paySuccess;
+    public static PayUtils payUtils = new PayUtils();
+    private OkHttpClient mClient;
+
+    public PayUtils() {
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(BaseApplication.getApplication()))
+                .build();
+    }
+
+    public void setPaySuccess(PaySuccess paySuccess) {
+        this.paySuccess = paySuccess;
+    }
+
+    public static PayUtils getPayUtils() {
+        return payUtils;
+    }
+
+    /**
+     * 支付宝支付业务
+     */
+    public void payV2(final Activity activity, float money) {
+
+        Log.i(TAG, "payV2: ");
+        /**
+         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
+         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
+         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
+         *
+         * orderInfo的获取必须来自服务端；
+         */
+        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, money, true);
+        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
+        Log.i("msp", ">>>>>>>>>>>>>>>>>>>>>>>>>>orderParam:" + params.toString());
+        /**
+         * 访问服务器
+         * 上传订单信息
+         */
+
+        //这里有个method的问题需要解决
+        //两个都传了
+        //在结尾加上&key并返回
+        //String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
+        RequestBody payParams = new FormBody.Builder()
+                .add("app_id", params.get("app_id"))
+                .add("biz_content", params.get("biz_content"))
+                .add("charset", params.get("charset"))
+                .add("method", params.get("method"))
+                .add("sign_type", params.get("sign_type"))
+                .add("timestamp", params.get("timestamp"))
+                .add("version", params.get("version"))
+                .add("orderParam", orderParam)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(payParams)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                try {
+                    JSONObject jo = new JSONObject(responseJson);
+                    final String orderInfo = jo.getString("result");
+                    Runnable payRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            PayTask alipay = new PayTask(activity);
+                            Map<String, String> result = alipay.payV2(orderInfo, true);
+                            Log.d("msp", "<<<<<<<<<<<<payResult>>>>>>>>>>: " + result.toString());
+                            postPayResult(result);
+                        }
+                    };
+
+                    Thread payThread = new Thread(payRunnable);
+                    payThread.start();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    /**
+     * 将支付结果发送给服务器
+     */
+    private void postPayResult(Map<String, String> result) {
+        if (result.get("resultStatus").equals("6001")) {
+            Toast.makeText(BaseApplication.getApplication(), "操作已经取消", Toast.LENGTH_SHORT).show();
+        }
+        Log.i(TAG, "postPayResult: ");
+
+        RequestBody resultParams = new FormBody.Builder()
+                .add("resultStatus", result.get("resultStatus"))
+                .add("result", result.get("result"))
+                .add("memo", result.get("memo"))
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(resultParams)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                if (TextUtils.equals(result, "9000")) {
+                    paySuccess.onSccess();
+                } else {
+                    Toast.makeText(BaseApplication.getApplication(), "支付失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+    }
 
 }

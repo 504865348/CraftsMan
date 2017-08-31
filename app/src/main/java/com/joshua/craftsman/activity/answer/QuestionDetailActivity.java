@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.entity.QuesAnsClassify;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 
 import java.io.File;
@@ -34,8 +34,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static android.R.attr.data;
 
 
 public class QuestionDetailActivity extends BaseActivity implements View.OnClickListener, MediaPlayer.OnCompletionListener {

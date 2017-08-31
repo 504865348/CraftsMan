@@ -25,8 +25,8 @@ import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
-import com.joshua.craftsman.entity.BillboardHot;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.VideoDetail;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -41,8 +41,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -51,9 +49,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.R.attr.data;
-import static android.media.CamcorderProfile.get;
-import static com.joshua.craftsman.R.layout.video;
 
 public class HomeRecommendPager extends BaseFragment {
 
@@ -62,7 +57,7 @@ public class HomeRecommendPager extends BaseFragment {
 
     RecyclerView home_recommend_rv;
 
-    private List<BillboardHot> list_TJ;
+    private List<VideoDetail> list_TJ;
 
     private Call mCall;
     private File mFile;
@@ -169,7 +164,7 @@ public class HomeRecommendPager extends BaseFragment {
 
     private void parseTJ(String result) {
         Gson gson = new Gson();
-        list_TJ = gson.fromJson(result, new TypeToken<List<BillboardHot>>() {
+        list_TJ = gson.fromJson(result, new TypeToken<List<VideoDetail>>() {
         }.getType());
         if (list_TJ.get(0).getRecordTitle().equals("null")) {
             getActivity().runOnUiThread(new Runnable() {
@@ -209,6 +204,7 @@ public class HomeRecommendPager extends BaseFragment {
                     Intent intent=new Intent(mContext,PlayerFrameActivity.class);
                     intent.putExtra("url",mFile.getAbsolutePath());
                     intent.putExtra("title",title);
+                    intent.putExtra("entity",list_TJ.get(pos));
                     startActivity(intent);
                 } else {
 

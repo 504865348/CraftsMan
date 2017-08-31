@@ -13,5 +13,7 @@
         android:layout_height="200dp"
         />
 
-    <include layout="@layout/video_player_album_info"/>
+    <include
+        android:id="@+id/amr"
+        layout="@layout/video_player_album_info"/>
 </LinearLayout>

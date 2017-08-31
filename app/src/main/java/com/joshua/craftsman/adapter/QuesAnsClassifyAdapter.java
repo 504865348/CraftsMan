@@ -2,11 +2,9 @@ package com.joshua.craftsman.adapter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -24,8 +22,7 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.answer.QuestionDetailActivity;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
-import com.joshua.craftsman.entity.QuesAnsClassify;
-import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 
 import java.io.File;
@@ -35,19 +32,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.R.attr.id;
 import static android.media.CamcorderProfile.get;
-import static android.os.Build.VERSION_CODES.M;
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
+import static com.makeramen.roundedimageview.RoundedImageView.TAG;
 
 /**
  * ============================================================
@@ -112,10 +104,10 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         holder.tv_introduction.setText(data.get(position).getIntroduction());
         holder.tv_content.setText(data.get(position).getQuestionWord());
         if (data.get(position).getListenNumber().equals("null")) {
-            holder.tv_listenrNumber.setText("0人听过");
+            holder.tv_listenNumber.setText("0人听过");
         }
         else {
-            holder.tv_listenrNumber.setText(data.get(position).getListenNumber() + "人听过");
+            holder.tv_listenNumber.setText(data.get(position).getListenNumber() + "人听过");
         }
         holder.tv_time.setText(data.get(position).getAnsterTime());
 
@@ -199,12 +191,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
 
     //访问网络，获取音频流，下载，准备播放
     private void getSoundFromServer(final String id,final String url) {
-//        RequestBody params = new FormBody.Builder()
-//                .add("method", Server.QUERY_QUESTION)
-//                .add("Id", id)
-//                .build();
         Request request = new Request.Builder()
-//                .post(params)
                 .url(url)
                 .build();
         mCall = mOkHttpClient.newCall(request);
@@ -292,7 +279,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         TextView tv_craftsName;
         TextView tv_introduction;
         TextView tv_content;
-        TextView tv_listenrNumber;
+        TextView tv_listenNumber;
         TextView tv_time;
         View rl_view;
 
@@ -306,7 +293,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
             tv_craftsName = (TextView) itemView.findViewById(R.id.q_a_item_name);
             tv_introduction = (TextView) itemView.findViewById(R.id.q_a_item_introduction);
             tv_content = (TextView) itemView.findViewById(R.id.q_a_item_question);
-            tv_listenrNumber = (TextView) itemView.findViewById(R.id.q_a_people_content);
+            tv_listenNumber = (TextView) itemView.findViewById(R.id.q_a_people_content);
             tv_time = (TextView) itemView.findViewById(R.id.q_a_audio_duration);
             btn_q_a_item_go_ask = (Button) itemView.findViewById(R.id.q_a_item_go_ask);
             rl_play_sound = (RelativeLayout) itemView.findViewById(R.id.rl_play_sound);

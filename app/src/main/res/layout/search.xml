@@ -19,6 +19,7 @@
             android:src="@drawable/friends_back"/>
 
         <EditText
+            android:maxLines="1"
             android:id="@+id/search_history_edit"
             android:layout_width="0dp"
             android:layout_height="30dp"
@@ -49,49 +50,49 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="15dp"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:text="搜索历史"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"/>
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:text="搜索历史"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="14sp"/>-->
 
-                <TextView
-                    android:id="@+id/search_interface_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:clickable="true"
-                    android:text="清空"
-                    android:textColor="@color/red"
-                    android:textSize="14sp"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/search_interface_clear"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="15dp"-->
+                    <!--android:clickable="true"-->
+                    <!--android:text="清空"-->
+                    <!--android:textColor="@color/red"-->
+                    <!--android:textSize="14sp"/>-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-            <TextView
-                android:id="@+id/search_no_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="无搜索记录"
-                android:textColor="@color/light_gray_text"/>
+            <!--<TextView-->
+                <!--android:id="@+id/search_no_history"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:text="无搜索记录"-->
+                <!--android:textColor="@color/light_gray_text"/>-->
 
-            <!-- 搜索历史 -->
-            <com.joshua.craftsman.view.FlowLayout
-                android:id="@+id/search_flow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.joshua.craftsman.view.FlowLayout>
+            <!--&lt;!&ndash; 搜索历史 &ndash;&gt;-->
+            <!--<com.joshua.craftsman.view.FlowLayout-->
+                <!--android:id="@+id/search_flow"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+            <!--</com.joshua.craftsman.view.FlowLayout>-->
             <!-- 搜索内容 -->
             <!-- 问答 -->
             <TextView

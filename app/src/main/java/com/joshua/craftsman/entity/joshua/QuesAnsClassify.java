@@ -1,11 +1,22 @@
-package com.joshua.craftsman.entity;
+package com.joshua.craftsman.entity.joshua;
 
 import java.io.Serializable;
 
 /**
- * Created by nzz on 2017/5/1.
- * 问答分类--问答，工匠
- */
+ * ============================================================
+ * <p>
+ * 版 权 ： 吴奇俊  (c) 2017
+ * <p>
+ * 作 者 : 吴奇俊
+ * <p>
+ * 版 本 ： 1.0
+ * <p>
+ * 创建日期 ： 2017/8/14 21:06
+ * <p>
+ * 描 述 ：问答实体
+ * <p>
+ * ============================================================
+ **/
 
 public class QuesAnsClassify implements Serializable{
     private String id;//序列号

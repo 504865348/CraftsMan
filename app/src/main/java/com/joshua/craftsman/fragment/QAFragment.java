@@ -10,15 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.qaclassify.QAClassifyActivity;
+import com.joshua.craftsman.activity.search.SearchActivity;
 import com.joshua.craftsman.adapter.HotCraftsAdapter;
 import com.joshua.craftsman.adapter.QuesAnsClassifyAdapter;
 import com.joshua.craftsman.entity.HotCraftsman;
-import com.joshua.craftsman.entity.QuesAnsClassify;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -57,6 +59,8 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
     LinearLayout qAAirport;
     @BindView(R.id.q_a_communication)
     LinearLayout qACommunication;
+    @BindView(R.id.main_text_search)
+    TextView main_text_search;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private View view;
@@ -67,9 +71,11 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public View initView() {
         view = View.inflate(mContext, R.layout.q_a, null);
+
         initRefreshRecycleView(view);
         return view;
     }
+
     private void initRefreshRecycleView(View view) {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -79,6 +85,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+
     @Override
     public void initData() {
         super.initData();
@@ -96,6 +103,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         qAMining.setOnClickListener(this);
         qAAirport.setOnClickListener(this);
         qACommunication.setOnClickListener(this);
+        main_text_search.setOnClickListener(this);
     }
 
     @Override
@@ -127,6 +135,9 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.q_a_communication:
                 putExtraClassify("通信广电");
+                break;
+            case R.id.main_text_search:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
         }
     }
@@ -160,15 +171,16 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
-                    parseCJHR(result);
-                }
+                Log.d("junn", "success: " + result);
+                parseCJHR(result);
+            }
 
             @Override
             protected void error() {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(mSwipeRefreshLayout.isRefreshing()){
+                        if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
@@ -195,7 +207,7 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(mSwipeRefreshLayout.isRefreshing()){
+                        if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
@@ -203,11 +215,11 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
             }
 
             @Override
-               protected void error() {
+            protected void error() {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(mSwipeRefreshLayout.isRefreshing()){
+                        if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
@@ -220,12 +232,13 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         Gson gson = new Gson();
         list_CJHR = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
-        getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    initRecycleCJHR();
-                }
-            });
+        getActivity().
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initRecycleCJHR();
+                    }
+                });
     }
 
     private void parseQuesAns(String result) {
@@ -233,11 +246,11 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         list_ques_ans = gson.fromJson(result, new TypeToken<List<QuesAnsClassify>>() {
         }.getType());
         getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    initRecycleQuesAns();
-                }
-            });
+            @Override
+            public void run() {
+                initRecycleQuesAns();
+            }
+        });
     }
 
     private void initRecycleCJHR() {
@@ -257,7 +270,16 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         q_a_list_view_examples.setLayoutManager(linearLayoutManager);
         q_a_list_view_examples.setHasFixedSize(true);
         q_a_list_view_examples.setNestedScrollingEnabled(false);
-        q_a_list_view_examples.setAdapter(new QuesAnsClassifyAdapter(getActivity(), list_ques_ans));
+        if (list_ques_ans.get(0).getId() == null || list_ques_ans.get(0).getId().equals("null")) {
+            view.findViewById(R.id.empty).setVisibility(View.VISIBLE);
+            q_a_list_view_examples.setVisibility(View.GONE);
+        } else {
+            view.findViewById(R.id.empty).setVisibility(View.GONE);
+            q_a_list_view_examples.setVisibility(View.VISIBLE);
+            q_a_list_view_examples.setAdapter(new QuesAnsClassifyAdapter(getActivity(), list_ques_ans));
+        }
+
+
     }
 
     @Override
@@ -269,8 +291,8 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onDestroyView() {
-            super.onDestroyView();
-        }
+        super.onDestroyView();
+    }
 
     @Override
     public void onResume() {
