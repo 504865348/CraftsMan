@@ -117,6 +117,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                PrefUtils.setString(mBaseActivity,name,name);
                                 Toast.makeText(mBaseActivity, "节目添加成功", Toast.LENGTH_SHORT).show();
                             }
                         });

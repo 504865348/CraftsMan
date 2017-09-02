@@ -12,16 +12,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.activity.record.PostRecordActivity;
 import com.joshua.craftsman.entity.MyRecording;
+import com.joshua.craftsman.utils.PrefUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import static com.joshua.craftsman.utils.PrefUtils.getString;
 
 /**
  * Created by Lister on 2017-06-02.
@@ -82,9 +86,15 @@ public class MyRecordAdapter extends BaseAdapter {
         record_item_release.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PostRecordActivity.class);
-                intent.putExtra("name", mMyRecordings.get(position).getName());
-                mContext.startActivity(intent);
+                String videoName=PrefUtils.getString(mContext,mMyRecordings.get(position).getName(),"");
+                if(videoName.equals(mMyRecordings.get(position).getName())){
+                    Toast.makeText(mContext, "节目已经上传！", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(mContext, PostRecordActivity.class);
+                    intent.putExtra("name", mMyRecordings.get(position).getName());
+                    mContext.startActivity(intent);
+                }
+
             }
         });
         record_item_delete.setOnClickListener(new View.OnClickListener() {

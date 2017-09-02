@@ -99,7 +99,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Glide.with(mContext).load(data.get(position).getCraftsImage()).placeholder(R.drawable.load_error).into(holder.iv_craftsImage);
+        Glide.with(mContext).load(data.get(position).getQuestionPic()).placeholder(R.drawable.load_error).into(holder.iv_craftsImage);
         holder.tv_craftsName.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
         holder.tv_content.setText(data.get(position).getQuestionWord());
@@ -109,7 +109,12 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
         else {
             holder.tv_listenNumber.setText(data.get(position).getListenNumber() + "人听过");
         }
-        holder.tv_time.setText(data.get(position).getAnsterTime());
+        if (data.get(position).getAnsterTime().equals("null")) {
+            holder.tv_time.setText("尚未回答");
+        }else {
+            holder.tv_time.setText(data.get(position).getAnsterTime());
+        }
+
 
         holder.btn_q_a_item_go_ask.setOnClickListener(new View.OnClickListener() {
             @Override

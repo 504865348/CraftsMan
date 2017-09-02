@@ -12,10 +12,10 @@ public class Server {
 
 //    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
 //    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
-    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ/UploadServlet";
-    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ/VedioServlet";
-    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ/AlbumServlet";
-    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ/MyRecordingServlet";
+    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
+    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
+    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
+    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
 
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown;charset=utf-8");
     public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ_AND/MainServlet";
@@ -41,9 +41,13 @@ public class Server {
     public static final String BILLBOARD_PAY= "BillboardPay"; //榜单-付费精品飙升榜
     public static final String BILLBOARD_CRAFTSMAN = "BillboardCraftsman"; //榜单-最大国工匠榜
     public static final String QUESANS_CLASSIFY = "QuesAnsClassify"; //问答-分类
-    public static final String CRAFTS_UNDEAL_ANS= "CraftsUnDealAns"; //工匠-我的问答-未处理回答
-    public static final String CRAFTS_MY_ANS= "CraftsMyAns"; //工匠-我的问答-我的回答
-    public static final String CRAFTS_MY_QUES= "CraftsMyQues"; //工匠-我的问答-我的提问
+    public static final String CRAFTS_UNDEAL_ANS= "CraftsmanUnDealAns"; //工匠-我的问答-未处理回答
+    public static final String CRAFTS_MY_ANS= "CraftsmanMyAns"; //工匠-我的问答-我的回答
+    public static final String CRAFTS_MY_QUES= "CraftsmanMyQues"; //工匠-我的问答-我的提问
+    public static final String COMMON_UNDEAL_ANS= "NormalMyQues"; //我的问答-未处理回答
+    public static final String COMMON_MY_ANS= "NormalUnDealQues"; //我的问答-已处理回答
+
+
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册
     public static final String FEEDBACK = "Feedback"; //意见反馈

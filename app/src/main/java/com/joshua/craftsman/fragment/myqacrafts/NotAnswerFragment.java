@@ -17,6 +17,7 @@ import com.joshua.craftsman.activity.ask.CraftsAnswerQuestionActivity;
 import com.joshua.craftsman.adapter.qacrafts.NotAnswerAdapter;
 import com.joshua.craftsman.entity.CraftsUnDealAns;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -39,7 +40,7 @@ public class NotAnswerFragment extends BaseFragment {
     RecyclerView craftsNotAnswerRv;
 
     private View mView;
-    private List<CraftsUnDealAns> list_WCL;
+    private List<QuesAnsClassify> list_WCL;
 
     @Override
 
@@ -87,7 +88,6 @@ public class NotAnswerFragment extends BaseFragment {
         call.enqueue(new HttpCommonCallback(getActivity()) {
             @Override
             protected void success(String result) {
-                Log.d(TAG, "success: "+result);
                 parseWCL(result);
             }
 
@@ -100,9 +100,9 @@ public class NotAnswerFragment extends BaseFragment {
 
     private void parseWCL(String result) {
         Gson gson = new Gson();
-        list_WCL = gson.fromJson(result, new TypeToken<List<CraftsUnDealAns>>() {
+        list_WCL = gson.fromJson(result, new TypeToken<List<QuesAnsClassify>>() {
         }.getType());
-        if(list_WCL.get(0).getId().equals("null")){
+        if(list_WCL.get(0).getId()==null||list_WCL.get(0).getId().equals("null")){
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -139,7 +139,7 @@ public class NotAnswerFragment extends BaseFragment {
             public void onItemClick(View view, String position) {
                 Intent intent=new Intent(getActivity(),CraftsAnswerQuestionActivity.class);
                 intent.putExtra("Id",list_WCL.get(Integer.parseInt(position)).getId());
-                intent.putExtra("question",list_WCL.get(Integer.parseInt(position)).getContent());
+                intent.putExtra("question",list_WCL.get(Integer.parseInt(position)).getQuestionWord());
                 Log.d(TAG, "onItemClick: "+position);
                 Log.d(TAG, "onItemClick: "+list_WCL.get(Integer.parseInt(position)).getId());
                 startActivity(intent);

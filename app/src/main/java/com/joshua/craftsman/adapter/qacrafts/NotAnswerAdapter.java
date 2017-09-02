@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.entity.CraftsUnDealAns;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,8 @@ import java.util.List;
 public class NotAnswerAdapter extends RecyclerView.Adapter<NotAnswerAdapter.MyViewHolder> implements View.OnClickListener{
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<CraftsUnDealAns> data = new ArrayList<>();
-    public NotAnswerAdapter(Context context,List<CraftsUnDealAns> data) {
+    private List<QuesAnsClassify> data = new ArrayList<>();
+    public NotAnswerAdapter(Context context,List<QuesAnsClassify> data) {
         mInflater = LayoutInflater.from(context);
         this.data = data;
         this.mContext = context;
@@ -37,10 +38,10 @@ public class NotAnswerAdapter extends RecyclerView.Adapter<NotAnswerAdapter.MyVi
 
     @Override
     public void onBindViewHolder(NotAnswerAdapter.MyViewHolder holder, int position) {
-        holder.tv_asker.setText(data.get(position).getAskName());
-        holder.tv_price.setText(data.get(position).getPrice());
-        holder.tv_content.setText(data.get(position).getContent());
-        holder.tv_time.setText(data.get(position).getTime());
+        holder.tv_asker.setText(data.get(position).getUserId());
+        holder.tv_price.setText("￥1");
+        holder.tv_content.setText(data.get(position).getQuestionWord());
+        holder.tv_time.setText(data.get(position).getQueTime());
         holder.itemView.setTag(position+"");
     }
     @Override

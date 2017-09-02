@@ -9,9 +9,13 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.entity.CraftsMyQues;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.joshua.craftsman.R.id.answer_audio_duration;
+import static com.joshua.craftsman.R.id.answer_audio_people_listened;
 
 /**
  * Created by nzz on 2017/6/9.
@@ -21,8 +25,8 @@ import java.util.List;
 public class QuesAdapter extends RecyclerView.Adapter<QuesAdapter.MyViewHolder> implements View.OnClickListener{
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<CraftsMyQues> data = new ArrayList<>();
-    public QuesAdapter(Context context,List<CraftsMyQues> data) {
+    private List<QuesAnsClassify> data = new ArrayList<>();
+    public QuesAdapter(Context context,List<QuesAnsClassify> data) {
         mInflater = LayoutInflater.from(context);
         this.data = data;
         this.mContext = context;
@@ -36,10 +40,13 @@ public class QuesAdapter extends RecyclerView.Adapter<QuesAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(QuesAdapter.MyViewHolder holder, int position) {
-        holder.tv_asker.setText(data.get(position).getAskName());
-        holder.tv_price.setText(data.get(position).getPrice());
-        holder.tv_content.setText(data.get(position).getContent());
-        holder.tv_time.setText(data.get(position).getTime());
+        holder.tv_asker.setText(data.get(position).getUserId());
+//        holder.tv_price.setText(data.get(position).getPrice());
+        holder.tv_price.setText("￥1");
+        holder.tv_content.setText(data.get(position).getQuestionWord());
+        holder.tv_time.setText(data.get(position).getAnsterTime());
+        holder.answer_audio_duration.setText(data.get(position).getVedioTimes());
+        holder.answer_audio_people_listened.setText(data.get(position).getListenNumber());
         holder.itemView.setTag(position+"");
     }
     @Override
@@ -59,13 +66,16 @@ public class QuesAdapter extends RecyclerView.Adapter<QuesAdapter.MyViewHolder> 
         TextView tv_price;
         TextView tv_content;
         TextView tv_time;
-
+        TextView answer_audio_duration;
+        TextView  answer_audio_people_listened;
         MyViewHolder(View itemView) {
             super(itemView);
             tv_asker = (TextView) itemView.findViewById(R.id.answer_tv_asker);
             tv_price = (TextView) itemView.findViewById(R.id.answer_tv_ask_price);
             tv_content = (TextView) itemView.findViewById(R.id.answer_tv_ask_content);
             tv_time = (TextView) itemView.findViewById(R.id.answer_tv_time);
+            answer_audio_duration= (TextView) itemView.findViewById(R.id.answer_audio_duration);
+            answer_audio_people_listened= (TextView) itemView.findViewById(R.id.answer_audio_people_listened);
         }
     }
 

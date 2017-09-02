@@ -35,10 +35,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.id.question_audit_tool_bar;
+
 
 public class QuestionDetailActivity extends BaseActivity implements View.OnClickListener, MediaPlayer.OnCompletionListener {
-    @BindView(R.id.question_audit_tool_bar)
-    Toolbar question_audit_tool_bar;
+
     @BindView(R.id.question_audit_questioner)
     TextView question_audit_questioner;
     @BindView(R.id.tv_money)
@@ -86,8 +87,6 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_audit_29);
         ButterKnife.bind(this);
-        setSupportActionBar(question_audit_tool_bar);
-        question_audit_tool_bar.setNavigationOnClickListener(this);
         initIntent();
         mOkHttpClient = new OkHttpClient();
         music = new MediaPlayer();
@@ -104,12 +103,21 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     }
 
     private void initData(QuesAnsClassify classify) {
-        question_audit_questioner.setText(classify.getUserName());
-        tv_money.setText(classify.getMoney());
+        question_audit_questioner.setText(classify.getUserId());
+//        tv_money.setText(classify.getMoney());
         question_audit_content.setText(classify.getQuestionWord());
-        question_audit_listen_count.setText(classify.getListenNumber());
-        question_audit_time.setText(classify.getAnsterTime());
-        question_audit_duration.setText(classify.getVedioTimes());
+        question_audit_listen_count.setText(classify.getListenNumber()+"人听过");
+        if(classify.getAnsterTime()==null||classify.getAnsterTime().equals("null")){
+            question_audit_time.setText("回答时间："+"无");
+        }else {
+            question_audit_time.setText("回答时间："+classify.getAnsterTime());
+        }
+        if(classify.getVedioTimes()==null||classify.getVedioTimes().equals("null")){
+            question_audit_duration.setText("答案时长："+"无");
+        }else {
+            question_audit_duration.setText("答案时长："+classify.getVedioTimes());
+        }
+
         Glide.with(this).load(classify.getCraftsImage()).into(question_audit_photo);
         question_audit_crafts_name.setText(classify.getCraftsmanName());
         question_audit_crafts_info.setText(classify.getIntroduction());
@@ -120,7 +128,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.question_audit_tool_bar:
+            case question_audit_tool_bar:
                 finish();
                 break;
             case R.id.question_audit_read_answer:

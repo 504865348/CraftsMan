@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.entity.CraftsMyAns;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,8 @@ import java.util.List;
 public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.MyViewHolder> implements View.OnClickListener{
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<CraftsMyAns> data = new ArrayList<>();
-    public AnsAdapter(Context context,List<CraftsMyAns> data) {
+    private List<QuesAnsClassify> data = new ArrayList<>();
+    public AnsAdapter(Context context,List<QuesAnsClassify> data) {
         mInflater = LayoutInflater.from(context);
         this.data = data;
         this.mContext = context;
@@ -36,12 +37,13 @@ public class AnsAdapter extends RecyclerView.Adapter<AnsAdapter.MyViewHolder> im
 
     @Override
     public void onBindViewHolder(AnsAdapter.MyViewHolder holder, int position) {
-        holder.tv_asker.setText(data.get(position).getAskName());
-        holder.tv_price.setText(data.get(position).getPrice());
-        holder.tv_content.setText(data.get(position).getContent());
-        holder.tv_timeLength.setText(data.get(position).getTimeLength());
-        holder.tv_listenrNumber.setText(data.get(position).getListenrNumber());
-        holder.tv_time.setText(data.get(position).getTime());
+        holder.tv_asker.setText(data.get(position).getUserId());
+//        holder.tv_price.setText(data.get(position).getPrice());
+        holder.tv_price.setText("￥1");
+        holder.tv_content.setText(data.get(position).getQuestionWord());
+        holder.tv_timeLength.setText(data.get(position).getVedioTimes());
+        holder.tv_listenrNumber.setText(data.get(position).getListenNumber());
+        holder.tv_time.setText(data.get(position).getAnsterTime());
         holder.itemView.setTag(position+"");
     }
     @Override

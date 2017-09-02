@@ -217,7 +217,7 @@ public class HomeRecommendPager extends BaseFragment {
                         }
                     });
                     mDialog.show();
-                    getSoundFromServer(id,url,title);
+                    getSoundFromServer(id,url,title,pos);
                 }
 
 
@@ -237,7 +237,7 @@ public class HomeRecommendPager extends BaseFragment {
 
 
     //访问网络，获取音频流，下载，准备播放
-    private void getSoundFromServer(final String id,final String url,final String title) {
+    private void getSoundFromServer(final String id,final String url,final String title,final int pos) {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -298,6 +298,7 @@ public class HomeRecommendPager extends BaseFragment {
                             Intent intent=new Intent(mContext,PlayerFrameActivity.class);
                             intent.putExtra("url",mFile.getAbsolutePath());
                             intent.putExtra("title",title);
+                            intent.putExtra("entity",list_TJ.get(pos));
                             startActivity(intent);
                         }
                     });

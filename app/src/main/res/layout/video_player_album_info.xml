@@ -15,8 +15,9 @@
 
         <ImageView
             android:id="@+id/video_player_album_cover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/album_cover"/>
 
         <TextView
@@ -71,7 +72,7 @@
         <TextView
             style="@style/video_player_info_text"
             android:layout_marginLeft="30dp"
-            android:text="发布时间: "/>
+            android:text="订阅量: "/>
 
         <TextView
             android:id="@+id/video_player_publish_time"

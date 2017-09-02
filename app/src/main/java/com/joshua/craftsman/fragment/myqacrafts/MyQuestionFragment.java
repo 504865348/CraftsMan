@@ -16,6 +16,7 @@ import com.joshua.craftsman.adapter.qacrafts.QuesAdapter;
 import com.joshua.craftsman.entity.CraftsMyQues;
 import com.joshua.craftsman.entity.CraftsUnDealAns;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -37,7 +38,7 @@ public class MyQuestionFragment extends BaseFragment {
     RecyclerView craftsQuesRv;
 
     private View mView;
-    private List<CraftsMyQues> list_TW;
+    private List<QuesAnsClassify> list_TW;
 
     public MyQuestionFragment() {
 
@@ -100,9 +101,9 @@ public class MyQuestionFragment extends BaseFragment {
 
     private void parseTW(String result) {
         Gson gson = new Gson();
-        list_TW = gson.fromJson(result, new TypeToken<List<CraftsMyQues>>() {
+        list_TW = gson.fromJson(result, new TypeToken<List<QuesAnsClassify>>() {
         }.getType());
-        if(list_TW.get(0).getQuesId().equals("null")){
+        if(list_TW.get(0).getId()==null||list_TW.get(0).getId().equals("null")){
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

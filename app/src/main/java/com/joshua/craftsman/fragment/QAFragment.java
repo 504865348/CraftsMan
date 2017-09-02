@@ -271,10 +271,10 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         q_a_list_view_examples.setHasFixedSize(true);
         q_a_list_view_examples.setNestedScrollingEnabled(false);
         if (list_ques_ans.get(0).getId() == null || list_ques_ans.get(0).getId().equals("null")) {
-            view.findViewById(R.id.empty).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.tv_empty).setVisibility(View.VISIBLE);
             q_a_list_view_examples.setVisibility(View.GONE);
         } else {
-            view.findViewById(R.id.empty).setVisibility(View.GONE);
+            view.findViewById(R.id.tv_empty).setVisibility(View.GONE);
             q_a_list_view_examples.setVisibility(View.VISIBLE);
             q_a_list_view_examples.setAdapter(new QuesAnsClassifyAdapter(getActivity(), list_ques_ans));
         }

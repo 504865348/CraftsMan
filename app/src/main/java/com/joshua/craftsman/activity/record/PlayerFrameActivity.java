@@ -31,8 +31,10 @@ public class PlayerFrameActivity extends BaseActivity {
     ImageView video_player_album_cover;
     @BindView(R.id. video_player_album_name)
     TextView  video_player_album_name;
-    @BindView(R.id. video_player_album_subname)
+    @BindView(R.id.video_player_album_subname)
     TextView  video_player_album_subname;
+    @BindView(R.id.video_player_publish_time)
+    TextView  video_player_publish_time;
     @BindView(R.id. video_player_times)
     TextView  video_player_times;
 
@@ -71,6 +73,7 @@ public class PlayerFrameActivity extends BaseActivity {
         video_player_album_name.setText(mVideoDetail.getTitle());
         video_player_album_subname.setText(mVideoDetail.getClassifyName());
         video_player_times.setText(mVideoDetail.getPlayTimes());
+        video_player_publish_time.setText(mVideoDetail.getSubscribeTimes());
     }
 
 

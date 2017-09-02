@@ -88,7 +88,7 @@ public class CraftQAFragment extends BaseFragment {
         Gson gson = new Gson();
         list_qa = gson.fromJson(result, new TypeToken<List<CraftHomeAns>>() {
         }.getType());
-        if(list_qa.get(0).getContent().equals("null")) {
+        if(list_qa.get(0).getContent()==null||list_qa.get(0).getContent().equals("null")) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

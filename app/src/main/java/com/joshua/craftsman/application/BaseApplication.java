@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.StrictMode;
 
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
+
 
 /**
  * ============================================================
@@ -34,6 +37,11 @@ public class BaseApplication extends Application {
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+        //友盟集成
+        UMShareAPI.get(this);
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+
     }
     public static Context getApplication() {
         return application;
