@@ -44,8 +44,8 @@ public class Server {
     public static final String CRAFTS_UNDEAL_ANS= "CraftsmanUnDealAns"; //工匠-我的问答-未处理回答
     public static final String CRAFTS_MY_ANS= "CraftsmanMyAns"; //工匠-我的问答-我的回答
     public static final String CRAFTS_MY_QUES= "CraftsmanMyQues"; //工匠-我的问答-我的提问
-    public static final String COMMON_UNDEAL_ANS= "NormalMyQues"; //我的问答-未处理回答
-    public static final String COMMON_MY_ANS= "NormalUnDealQues"; //我的问答-已处理回答
+    public static final String COMMON_MY_ANS= "NormalDealQues"; //我的问答-未处理回答
+    public static final String COMMON_UNDEAL_ANS= "NormalUnDealQues"; //我的问答-已处理回答
 
 
     public static final String SERVER_SMS = "sendCode"; //注册验证码
@@ -74,7 +74,7 @@ public class Server {
     public static final String MY_BILLBOARD_PAY= "MyBillboardPay"; //我的榜单-付费精品飙升榜
     public static final String MY_BILLBOARD_CRAFTSMAN = "MyBillboardCraftsman"; //我的榜单-最大国工匠榜
 
-    public static final String SERVER_SEND_ORDER = "sendOrder"; //向服务器发送订单
+    public static final String SERVER_SEND_ORDER = "AliPay"; //向服务器发送订单
     public static final String SERVER_SEND_ORDER_RESULT = "verifyResult"; //向服务器发送订单结果
 
 

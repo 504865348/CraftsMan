@@ -26,10 +26,12 @@ import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.entity.joshua.VideoDetail;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 
 import java.io.File;
@@ -197,28 +199,31 @@ public class HomeRecommendPager extends BaseFragment {
                 String id = list_TJ.get(pos).getId();
                 String url=list_TJ.get(pos).getDownloadUrl();
                 String title = list_TJ.get(pos).getRecordTitle();
-                //首先判断是否已经下载
-                if (checkLocal(id)) {
-                    //录音的播放与暂停
-                    mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-                    Intent intent=new Intent(mContext,PlayerFrameActivity.class);
-                    intent.putExtra("url",mFile.getAbsolutePath());
-                    intent.putExtra("title",title);
-                    intent.putExtra("entity",list_TJ.get(pos));
-                    startActivity(intent);
-                } else {
+                PayUtils.payUtils.payV2(getActivity(), OrderType.TYPE_BYE_VIDEO,list_TJ.get(pos).getId(),0.1f);
 
-                    mDialog.setMessage("视频下载中，请稍后");
-                    mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            mFile.delete();
-                            mCall.cancel();
-                        }
-                    });
-                    mDialog.show();
-                    getSoundFromServer(id,url,title,pos);
-                }
+
+//                //首先判断是否已经下载
+//                if (checkLocal(id)) {
+//                    //录音的播放与暂停
+//                    mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
+//                    Intent intent=new Intent(mContext,PlayerFrameActivity.class);
+//                    intent.putExtra("url",mFile.getAbsolutePath());
+//                    intent.putExtra("title",title);
+//                    intent.putExtra("entity",list_TJ.get(pos));
+//                    startActivity(intent);
+//                } else {
+//
+//                    mDialog.setMessage("视频下载中，请稍后");
+//                    mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                        @Override
+//                        public void onCancel(DialogInterface dialog) {
+//                            mFile.delete();
+//                            mCall.cancel();
+//                        }
+//                    });
+//                    mDialog.show();
+//                    getSoundFromServer(id,url,title,pos);
+//                }
 
 
 

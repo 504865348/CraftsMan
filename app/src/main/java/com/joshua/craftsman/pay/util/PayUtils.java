@@ -10,6 +10,7 @@ import com.alipay.sdk.app.PayTask;
 import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.application.BaseApplication;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.utils.PrefUtils;
 
@@ -29,6 +30,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.id.money;
+import static com.joshua.craftsman.entity.Server.SERVER_SEND_ORDER;
+
 /**
  * class description here
  *
@@ -39,6 +43,8 @@ import okhttp3.Response;
 public class PayUtils {
     private String TAG = "PayUtils";
     public final String APPID = "2017062307555030";
+//    public static final String RSA2_PRIVATE = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj4shSKLjJwHQY6FO7skXIIAh9b3jEcEAROTuxKZ9r3/6poZnMLIsECUbQhHErtUWAu2aplzGtGPXhDXT6zE2T35LZxmUNLfq27uin1ZqT0HqUgrVh9oQdAz0lB16nSX9U3h5/Cfh8GLnJKDPuKcDwOwQPlbvqI8VHsvyX4+Fj84eKuu057qDvo8ye6NHiJjV8Y4TnaqMnI9HEiOtLxiG25OG+/RvAkhZ89ahafCn8M+1teFkpVbFIBBnQeMP+lg1CeqL+tfSYZET6KdTtuU4O//mVPL3M9n2bqi3F3rMhtUU5ejmf2Z3dILG1QIXQUZNXkGUTjAk/KmhXs7eNN7FCQIDAQAB";
+
     private PaySuccess paySuccess;
     public static PayUtils payUtils = new PayUtils();
     private OkHttpClient mClient;
@@ -60,7 +66,7 @@ public class PayUtils {
     /**
      * 支付宝支付业务
      */
-    public void payV2(final Activity activity, float money) {
+    public void payV2(final Activity activity,String type,String id, float money) {
 
         Log.i(TAG, "payV2: ");
         /**
@@ -81,16 +87,14 @@ public class PayUtils {
         //这里有个method的问题需要解决
         //两个都传了
         //在结尾加上&key并返回
-        //String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
+//        String sign = OrderInfoUtil2_0.getSign(params, RSA2_PRIVATE, true);
+//        final String orderInfo = orderParam + "&" + sign;
         RequestBody payParams = new FormBody.Builder()
-                .add("app_id", params.get("app_id"))
-                .add("biz_content", params.get("biz_content"))
-                .add("charset", params.get("charset"))
-                .add("method", params.get("method"))
-                .add("sign_type", params.get("sign_type"))
-                .add("timestamp", params.get("timestamp"))
-                .add("version", params.get("version"))
-                .add("orderParam", orderParam)
+                .add("method",Server.SERVER_SEND_ORDER)
+                .add("type", type)
+                .add("id",id)
+                .add("count", money+"")
+//                .add("orderParam",orderParam)
                 .build();
 
         final Request request = new Request.Builder()
