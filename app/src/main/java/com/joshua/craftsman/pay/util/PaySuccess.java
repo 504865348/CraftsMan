@@ -7,5 +7,5 @@ package com.joshua.craftsman.pay.util;
  */
 
 public interface PaySuccess {
-    void onSccess();
+    void onSuccess(String orderNo);
 }

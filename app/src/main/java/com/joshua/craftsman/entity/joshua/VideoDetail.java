@@ -35,8 +35,9 @@ public class VideoDetail implements Serializable{
     private String classifyName; //分类名
     private String introduction; //简介
     private String model; //所属模块(匠心独运 讲政策 听专题 看利器)
+    private String isPay; //是否购买
 
-    public VideoDetail(String id, String recordImage, String recordTitle, String name, String downloadUrl, String albumID, String idClassify, String albumImage, String title, String craftsmanName, String playTimes, String subscribeTimes, String classifyName, String introduction, String model) {
+    public VideoDetail(String id, String recordImage, String recordTitle, String name, String downloadUrl, String albumID, String idClassify, String albumImage, String title, String craftsmanName, String playTimes, String subscribeTimes, String classifyName, String introduction, String model, String isPay) {
         this.id = id;
         this.recordImage = recordImage;
         this.recordTitle = recordTitle;
@@ -52,6 +53,7 @@ public class VideoDetail implements Serializable{
         this.classifyName = classifyName;
         this.introduction = introduction;
         this.model = model;
+        this.isPay = isPay;
     }
 
     public String getId() {
@@ -174,24 +176,11 @@ public class VideoDetail implements Serializable{
         this.model = model;
     }
 
-    @Override
-    public String toString() {
-        return "VideoDetail{" +
-                "id='" + id + '\'' +
-                ", recordImage='" + recordImage + '\'' +
-                ", recordTitle='" + recordTitle + '\'' +
-                ", name='" + name + '\'' +
-                ", downloadUrl='" + downloadUrl + '\'' +
-                ", albumID='" + albumID + '\'' +
-                ", idClassify='" + idClassify + '\'' +
-                ", albumImage='" + albumImage + '\'' +
-                ", title='" + title + '\'' +
-                ", craftsmanName='" + craftsmanName + '\'' +
-                ", playTimes='" + playTimes + '\'' +
-                ", subscribeTimes='" + subscribeTimes + '\'' +
-                ", classifyName='" + classifyName + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", model='" + model + '\'' +
-                '}';
+    public String getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(String isPay) {
+        this.isPay = isPay;
     }
 }

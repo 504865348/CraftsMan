@@ -25,12 +25,14 @@ import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
+import com.joshua.craftsman.application.BaseApplication;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.entity.joshua.VideoDetail;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.pay.util.PaySuccess;
 import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 
@@ -67,11 +69,11 @@ public class HomeRecommendPager extends BaseFragment {
 
 
     private ProgressDialog mDialog;
-    private Handler mHandler=new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            int progress=msg.arg1;
+            int progress = msg.arg1;
             mDialog.setProgress(progress);
         }
     };
@@ -80,10 +82,11 @@ public class HomeRecommendPager extends BaseFragment {
 
     public HomeRecommendPager() {
     }
+
     @Override
     public View initView() {
         View view = View.inflate(getActivity(), R.layout.home_page_recommend, null);
-        mOkHttpClient=new OkHttpClient();
+        mOkHttpClient = new OkHttpClient();
         mDialog = new ProgressDialog(mContext);
         mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDialog.setMax(100);
@@ -113,6 +116,7 @@ public class HomeRecommendPager extends BaseFragment {
         ButterKnife.bind(this, rootView);
         return rootView;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -141,7 +145,7 @@ public class HomeRecommendPager extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(mSwipeRefreshLayout.isRefreshing()){
+                        if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
@@ -155,7 +159,7 @@ public class HomeRecommendPager extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(mSwipeRefreshLayout.isRefreshing()){
+                        if (mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
                     }
@@ -195,35 +199,71 @@ public class HomeRecommendPager extends BaseFragment {
         adapter.setOnRecyclerViewItemClickListener(new HomeRecommendAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, String position) {
-                int pos = Integer.parseInt(position);
-                String id = list_TJ.get(pos).getId();
-                String url=list_TJ.get(pos).getDownloadUrl();
-                String title = list_TJ.get(pos).getRecordTitle();
-                PayUtils.payUtils.payV2(getActivity(), OrderType.TYPE_BYE_VIDEO,list_TJ.get(pos).getId(),0.1f);
+                final int pos = Integer.parseInt(position);
+                final String id = list_TJ.get(pos).getId();
+                final String url = list_TJ.get(pos).getDownloadUrl();
+                final String title = list_TJ.get(pos).getRecordTitle();
+                String isPay = list_TJ.get(pos).getIsPay();
+                PayUtils utils = new PayUtils(getActivity());
+                utils.setPaySuccess(new PaySuccess() {
+                    @Override
+                    public void onSuccess(String o) {
+                        getDataFromServer();
+                        Log.d(TAG, "onSuccess: pay success");
+                        //首先判断是否已经下载
+                        Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
+                        if (checkLocal(id)) {
+                            //录音的播放与暂停
+                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
+                            Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                            intent.putExtra("url", mFile.getAbsolutePath());
+                            intent.putExtra("title", title);
+                            intent.putExtra("entity", list_TJ.get(pos));
+                            startActivity(intent);
+                        } else {
+                            mDialog.setMessage("视频下载中，请稍后");
+                            mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    mFile.delete();
+                                    mCall.cancel();
+                                }
+                            });
+                            mDialog.show();
+                            getSoundFromServer(id, url, title, pos);
+                        }
+                    }
+                });
+
+                if(isPay.equals("true")){
+                    //首先判断是否已经下载
+                    if (checkLocal(id)) {
+                        //录音的播放与暂停
+                        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
+                        Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                        intent.putExtra("url", mFile.getAbsolutePath());
+                        intent.putExtra("title", title);
+                        intent.putExtra("entity", list_TJ.get(pos));
+                        startActivity(intent);
+                    } else {
+
+                        mDialog.setMessage("视频下载中，请稍后");
+                        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                mFile.delete();
+                                mCall.cancel();
+                            }
+                        });
+                        mDialog.show();
+                        getSoundFromServer(id, url, title, pos);
+                    }
+                }else{
+                    //没有支付跳转支付
+                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(), 0.01f);
+                }
 
 
-//                //首先判断是否已经下载
-//                if (checkLocal(id)) {
-//                    //录音的播放与暂停
-//                    mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-//                    Intent intent=new Intent(mContext,PlayerFrameActivity.class);
-//                    intent.putExtra("url",mFile.getAbsolutePath());
-//                    intent.putExtra("title",title);
-//                    intent.putExtra("entity",list_TJ.get(pos));
-//                    startActivity(intent);
-//                } else {
-//
-//                    mDialog.setMessage("视频下载中，请稍后");
-//                    mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                        @Override
-//                        public void onCancel(DialogInterface dialog) {
-//                            mFile.delete();
-//                            mCall.cancel();
-//                        }
-//                    });
-//                    mDialog.show();
-//                    getSoundFromServer(id,url,title,pos);
-//                }
 
 
 
@@ -236,13 +276,13 @@ public class HomeRecommendPager extends BaseFragment {
      * 判断音频文件是否存在
      */
     private boolean checkLocal(String id) {
-        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
+        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
         return mFile.exists();
     }
 
 
     //访问网络，获取音频流，下载，准备播放
-    private void getSoundFromServer(final String id,final String url,final String title,final int pos) {
+    private void getSoundFromServer(final String id, final String url, final String title, final int pos) {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -252,14 +292,13 @@ public class HomeRecommendPager extends BaseFragment {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d(TAG, "onFailure: "+e.getMessage());
+                Log.d(TAG, "onFailure: " + e.getMessage());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(mContext, "下载失败", Toast.LENGTH_SHORT).show();
                         mDialog.dismiss();
                         mFile.delete();
-
                     }
                 });
 
@@ -278,7 +317,7 @@ public class HomeRecommendPager extends BaseFragment {
                     File path = new File(AudioRecoderUtils.VIDEO_PATH);
                     if (!path.exists())
                         path.mkdirs();
-                    File file = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
+                    File file = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
                     fos = new FileOutputStream(file);
                     long sum = 0;
                     while ((len = is.read(buf)) != -1) {
@@ -299,17 +338,17 @@ public class HomeRecommendPager extends BaseFragment {
                             Toast.makeText(mContext, "下载成功", Toast.LENGTH_SHORT).show();
                             mDialog.dismiss();
                             //录音的播放与暂停
-                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_"+id + ".mp4");
-                            Intent intent=new Intent(mContext,PlayerFrameActivity.class);
-                            intent.putExtra("url",mFile.getAbsolutePath());
-                            intent.putExtra("title",title);
-                            intent.putExtra("entity",list_TJ.get(pos));
+                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
+                            Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                            intent.putExtra("url", mFile.getAbsolutePath());
+                            intent.putExtra("title", title);
+                            intent.putExtra("entity", list_TJ.get(pos));
                             startActivity(intent);
                         }
                     });
 
                 } catch (Exception e) {
-                    Log.d(TAG, "onFailure: "+e.getMessage());
+                    Log.d(TAG, "onFailure: " + e.getMessage());
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -331,10 +370,10 @@ public class HomeRecommendPager extends BaseFragment {
     }
 
     private void setEmptyView(Boolean isEmpty) {
-        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_layout);
-        if(isEmpty){
+        FrameLayout empty = (FrameLayout) getActivity().findViewById(R.id.empty_layout);
+        if (isEmpty) {
             empty.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             empty.setVisibility(View.GONE);
         }
     }

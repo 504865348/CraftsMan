@@ -19,7 +19,10 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
+import com.joshua.craftsman.pay.util.PaySuccess;
+import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 
 import java.io.File;
@@ -35,6 +38,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.id.cancel_action;
 import static com.joshua.craftsman.R.id.question_audit_tool_bar;
 
 
@@ -74,14 +78,15 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     private static MediaPlayer music;
     private File mFile;
     private boolean isFinishPlaying = true;
-    private Handler mHandler=new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            int progress=msg.arg1;
+            int progress = msg.arg1;
             mDialog.setProgress(progress);
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,40 +111,48 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
         question_audit_questioner.setText(classify.getUserId());
 //        tv_money.setText(classify.getMoney());
         question_audit_content.setText(classify.getQuestionWord());
-        question_audit_listen_count.setText(classify.getListenNumber()+"人听过");
-        if(classify.getAnsterTime()==null||classify.getAnsterTime().equals("null")){
-            question_audit_time.setText("回答时间："+"无");
-        }else {
-            question_audit_time.setText("回答时间："+classify.getAnsterTime());
+        question_audit_listen_count.setText(classify.getListenNumber() + "人听过");
+        if (classify.getAnsterTime() == null || classify.getAnsterTime().equals("null")) {
+            question_audit_time.setText("回答时间：" + "无");
+        } else {
+            question_audit_time.setText("回答时间：" + classify.getAnsterTime());
         }
-        if(classify.getVedioTimes()==null||classify.getVedioTimes().equals("null")){
-            question_audit_duration.setText("答案时长："+"无");
-        }else {
-            question_audit_duration.setText("答案时长："+classify.getVedioTimes());
+        if (classify.getVedioTimes() == null || classify.getVedioTimes().equals("null")) {
+            question_audit_duration.setText("答案时长：" + "无");
+        } else {
+            question_audit_duration.setText("答案时长：" + classify.getVedioTimes());
         }
-
+        if (classify.getIsPay().equals("true")) {
+            question_audit_read_answer.setVisibility(View.VISIBLE);
+            question_audit_pay.setVisibility(View.GONE);
+        } else {
+            question_audit_read_answer.setVisibility(View.GONE);
+            question_audit_pay.setVisibility(View.VISIBLE);
+        }
         Glide.with(this).load(classify.getCraftsImage()).into(question_audit_photo);
         question_audit_crafts_name.setText(classify.getCraftsmanName());
         question_audit_crafts_info.setText(classify.getIntroduction());
-        question_audit_read_answer.setOnClickListener(this);
         question_audit_ask.setOnClickListener(this);
+        question_audit_read_answer.setOnClickListener(this);//已支付
+        question_audit_pay.setOnClickListener(this);//未支付
+
+
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case question_audit_tool_bar:
                 finish();
                 break;
             case R.id.question_audit_read_answer:
                 String id = mClassify.getId();
-                String url=mClassify.getAnswerAmr();
+                String url = mClassify.getAnswerAmr();
                 //首先判断是否已经下载
                 if (checkLocal(id)) {
                     //录音的播放与暂停
                     playRecord();
                 } else {
-
                     mDialog.setMessage("音频下载中，请稍后");
                     mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                         @Override
@@ -149,7 +162,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                         }
                     });
                     mDialog.show();
-                    getSoundFromServer(id,url);
+                    getSoundFromServer(id, url);
                 }
                 break;
             case R.id.question_audit_ask:
@@ -158,6 +171,19 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("craftsAccount", mClassify.getCraftsmanId());
                 startActivity(intent);
                 break;
+            case R.id.question_audit_pay:
+                PayUtils payUtils = new PayUtils(mBaseActivity);
+                payUtils.setPaySuccess(new PaySuccess() {
+                    @Override
+                    public void onSuccess(String orderNo) {
+                        question_audit_read_answer.setVisibility(View.VISIBLE);
+                        question_audit_pay.setVisibility(View.GONE);
+                    }
+                });
+                payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), 0.01f);
+                break;
+
+
         }
 
     }
@@ -197,7 +223,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     }
 
     //访问网络，获取音频流，下载，准备播放
-    private void getSoundFromServer(final String id,final String url) {
+    private void getSoundFromServer(final String id, final String url) {
 //        RequestBody params = new FormBody.Builder()
 //                .add("method", Server.QUERY_QUESTION)
 //                .add("Id", id)

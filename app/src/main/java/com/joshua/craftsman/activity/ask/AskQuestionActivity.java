@@ -25,7 +25,10 @@ import android.widget.Toast;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.pay.util.PaySuccess;
+import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.MyUtils;
 import com.joshua.craftsman.utils.PrefUtils;
 
@@ -95,6 +98,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private void initView() {
         mAnswer = getIntent().getStringExtra("answer");
         mCraftsAccount = getIntent().getStringExtra("craftsAccount");
+
         tv_middle.setText(mAnswer);
         tv_answer.setText("向" + mAnswer + "提问");
         //加载父布局
@@ -121,21 +125,36 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 onBackPressed();
                 break;
             case R.id.btn_commit:
-                postToServer();
+                //支付逻辑
+                payQuestion();
                 break;
 
 
         }
     }
 
-    private void postToServer() {
+    private void payQuestion() {
+        PayUtils utils = new PayUtils(mBaseActivity);
+        utils.setPaySuccess(new PaySuccess() {
+            @Override
+            public void onSuccess(String orderNo) {
+                postToServer(orderNo);
+            }
+        });
+        //没有支付跳转支付
+        utils.payV2(OrderType.TYPE_ASK_QUE, "null", 0.01f);
+
+
+    }
+
+    private void postToServer(String orderNo) {
         String user = PrefUtils.getString(mBaseActivity, "phone", "");
         String question = et_question.getText().toString();
         if (question.trim().isEmpty()) {
             Toast.makeText(this, "请输入问题内容", Toast.LENGTH_SHORT).show();
             return;
         }
-        String cost = 0 + "";
+        String cost = 1 + "";
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         mFile = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
         if (!mFile.exists()) {
@@ -152,6 +171,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 .addFormDataPart("questionWord", question)
                 .addFormDataPart("money", cost)
                 .addFormDataPart("user", user)
+                .addFormDataPart("orderNumber", orderNo)
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_UPLOAD)

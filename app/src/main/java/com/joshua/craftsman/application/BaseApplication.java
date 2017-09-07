@@ -39,7 +39,7 @@ public class BaseApplication extends Application {
         StrictMode.setVmPolicy(builder.build());
         //友盟集成
         UMShareAPI.get(this);
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setWeixin("wxb254d74dda664d63", "40fca872a5babc3d29e419a35c17a89f");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 
     }

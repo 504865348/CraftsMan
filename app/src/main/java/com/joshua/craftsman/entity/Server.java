@@ -75,7 +75,9 @@ public class Server {
     public static final String MY_BILLBOARD_CRAFTSMAN = "MyBillboardCraftsman"; //我的榜单-最大国工匠榜
 
     public static final String SERVER_SEND_ORDER = "AliPay"; //向服务器发送订单
-    public static final String SERVER_SEND_ORDER_RESULT = "verifyResult"; //向服务器发送订单结果
+    public static final String SERVER_SEND_ORDER_RESULT = "orderResult"; //向服务器发送订单结果
+    public static final String SERVER_QUERY_ORDER = "queryMyOrder"; //查询订单
+
 
 
 }

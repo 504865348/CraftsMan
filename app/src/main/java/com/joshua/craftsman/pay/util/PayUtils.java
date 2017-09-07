@@ -11,6 +11,7 @@ import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.application.BaseApplication;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.entity.joshua.OrderType;
+import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.utils.PrefUtils;
 
@@ -30,6 +31,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.id.main;
 import static com.joshua.craftsman.R.id.money;
 import static com.joshua.craftsman.entity.Server.SERVER_SEND_ORDER;
 
@@ -42,59 +44,35 @@ import static com.joshua.craftsman.entity.Server.SERVER_SEND_ORDER;
  */
 public class PayUtils {
     private String TAG = "PayUtils";
-    public final String APPID = "2017062307555030";
-//    public static final String RSA2_PRIVATE = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj4shSKLjJwHQY6FO7skXIIAh9b3jEcEAROTuxKZ9r3/6poZnMLIsECUbQhHErtUWAu2aplzGtGPXhDXT6zE2T35LZxmUNLfq27uin1ZqT0HqUgrVh9oQdAz0lB16nSX9U3h5/Cfh8GLnJKDPuKcDwOwQPlbvqI8VHsvyX4+Fj84eKuu057qDvo8ye6NHiJjV8Y4TnaqMnI9HEiOtLxiG25OG+/RvAkhZ89ahafCn8M+1teFkpVbFIBBnQeMP+lg1CeqL+tfSYZET6KdTtuU4O//mVPL3M9n2bqi3F3rMhtUU5ejmf2Z3dILG1QIXQUZNXkGUTjAk/KmhXs7eNN7FCQIDAQAB";
-
     private PaySuccess paySuccess;
-    public static PayUtils payUtils = new PayUtils();
     private OkHttpClient mClient;
+    private Activity mActivity;
 
-    public PayUtils() {
+    public PayUtils(Activity activity) {
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(BaseApplication.getApplication()))
                 .build();
+        mActivity=activity;
     }
 
     public void setPaySuccess(PaySuccess paySuccess) {
         this.paySuccess = paySuccess;
     }
 
-    public static PayUtils getPayUtils() {
-        return payUtils;
-    }
 
     /**
-     * 支付宝支付业务
+     * 视频支付
      */
-    public void payV2(final Activity activity,String type,String id, float money) {
-
-        Log.i(TAG, "payV2: ");
-        /**
-         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-         *
-         * orderInfo的获取必须来自服务端；
-         */
-        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, money, true);
-        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-        Log.i("msp", ">>>>>>>>>>>>>>>>>>>>>>>>>>orderParam:" + params.toString());
+    public void  payV2(String type, String id, float money) {
         /**
          * 访问服务器
          * 上传订单信息
          */
-
-        //这里有个method的问题需要解决
-        //两个都传了
-        //在结尾加上&key并返回
-//        String sign = OrderInfoUtil2_0.getSign(params, RSA2_PRIVATE, true);
-//        final String orderInfo = orderParam + "&" + sign;
         RequestBody payParams = new FormBody.Builder()
-                .add("method",Server.SERVER_SEND_ORDER)
+                .add("method", Server.SERVER_SEND_ORDER)
+                .add("id", id)
+                .add("count", money + "")
                 .add("type", type)
-                .add("id",id)
-                .add("count", money+"")
-//                .add("orderParam",orderParam)
                 .build();
 
         final Request request = new Request.Builder()
@@ -105,26 +83,32 @@ public class PayUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(BaseApplication.getApplication(), "支付失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseJson = response.body().string();
-                Log.d(TAG, "onResponse: " + responseJson);
+                Log.d(TAG, "responseJson: " + responseJson);
                 try {
                     JSONObject jo = new JSONObject(responseJson);
                     final String orderInfo = jo.getString("result");
+                    final String orderNumber = jo.getString("orderNumber");
+                    Log.d(TAG, "result: " + orderInfo);
+                    Log.d(TAG, "orderNumber: " + orderNumber);
                     Runnable payRunnable = new Runnable() {
                         @Override
                         public void run() {
-                            PayTask alipay = new PayTask(activity);
+                            PayTask alipay = new PayTask(mActivity);
                             Map<String, String> result = alipay.payV2(orderInfo, true);
-                            Log.d("msp", "<<<<<<<<<<<<payResult>>>>>>>>>>: " + result.toString());
-                            postPayResult(result);
+                            postPayResult(result,orderNumber);
                         }
                     };
-
                     Thread payThread = new Thread(payRunnable);
                     payThread.start();
                 } catch (JSONException e) {
@@ -134,22 +118,28 @@ public class PayUtils {
         });
     }
 
-
     /**
      * 将支付结果发送给服务器
      */
-    private void postPayResult(Map<String, String> result) {
+    private void postPayResult(final Map<String, String> result, final String orderNo) {
         if (result.get("resultStatus").equals("6001")) {
-            Toast.makeText(BaseApplication.getApplication(), "操作已经取消", Toast.LENGTH_SHORT).show();
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(BaseApplication.getApplication(), "操作已经取消", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-        Log.i(TAG, "postPayResult: ");
-
         RequestBody resultParams = new FormBody.Builder()
+                .add("method", Server.SERVER_SEND_ORDER_RESULT)
                 .add("resultStatus", result.get("resultStatus"))
-                .add("result", result.get("result"))
-                .add("memo", result.get("memo"))
+                .add("result", "null")
+                .add("memo", "null")
+//                .add("result", result.get("result"))
+//                .add("memo", result.get("memo"))
+                .add("orderNo",orderNo)
                 .build();
-
+        Log.d(TAG, "postPayResult: \n"+result.get("resultStatus")+"\n"+result.get("result")+"\n"+result.get("memo"));
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(resultParams)
@@ -158,21 +148,47 @@ public class PayUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                postPayResult(result,orderNo);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                if (TextUtils.equals(result, "9000")) {
-                    paySuccess.onSccess();
-                } else {
-                    Toast.makeText(BaseApplication.getApplication(), "支付失败", Toast.LENGTH_SHORT).show();
+                String responseJson = response.body().string();
+                Log.d(TAG, "responseJson: "+responseJson);
+                try {
+                    JSONObject jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    Log.d(TAG, "onResponse: "+result);
+                    if (TextUtils.equals(result, "true")) {
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        paySuccess.onSuccess(orderNo);
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d(TAG, "支付失败");
+                                Toast.makeText(BaseApplication.getApplication(), "支付失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
 
 
     }
+
+
 
 }

@@ -35,9 +35,9 @@ public class QuesAnsClassify implements Serializable{
     private String answerAmr; //音频答案 amr格式
     private String queTime;//提问时间
     private String isDeal;//是否处理
+    private String isPay;//是否支付
 
-
-    public QuesAnsClassify(String id, String userId, String userName, String craftsmanId, String craftsmanName, String listenNumber, String ansterTime, String vedioTimes, String money, String craftsImage, String introduction, String questionWord, String questionPic, String answerAmr, String queTime, String isDeal) {
+    public QuesAnsClassify(String id, String userId, String userName, String craftsmanId, String craftsmanName, String listenNumber, String ansterTime, String vedioTimes, String money, String craftsImage, String introduction, String questionWord, String questionPic, String answerAmr, String queTime, String isDeal, String isPay) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
@@ -54,6 +54,7 @@ public class QuesAnsClassify implements Serializable{
         this.answerAmr = answerAmr;
         this.queTime = queTime;
         this.isDeal = isDeal;
+        this.isPay = isPay;
     }
 
     public String getId() {
@@ -184,6 +185,14 @@ public class QuesAnsClassify implements Serializable{
         this.isDeal = isDeal;
     }
 
+    public String getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(String isPay) {
+        this.isPay = isPay;
+    }
+
     @Override
     public String toString() {
         return "QuesAnsClassify{" +
@@ -203,6 +212,7 @@ public class QuesAnsClassify implements Serializable{
                 ", answerAmr='" + answerAmr + '\'' +
                 ", queTime='" + queTime + '\'' +
                 ", isDeal='" + isDeal + '\'' +
+                ", isPay='" + isPay + '\'' +
                 '}';
     }
 }
