@@ -7,7 +7,13 @@
     android:layout_marginBottom="10dp">
 
     <View style="@style/horizontal_split"/>
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="敬请期待"
+    android:textSize="18sp"
+    android:layout_margin="16dp"/>
     <!--<RelativeLayout-->
         <!--android:id="@+id/find_friends_phone"-->
         <!--style="@style/friend_linear">-->
@@ -42,7 +48,8 @@
 
     <RelativeLayout
         android:id="@+id/find_friends_wechat"
-        style="@style/friend_linear">
+        style="@style/friend_linear"
+        android:visibility="gone">
         <ImageView
             android:id="@+id/find_friends_wechat_img"
             android:layout_width="40dp"
@@ -74,7 +81,8 @@
 
     <RelativeLayout
         android:id="@+id/find_friends_qq"
-        style="@style/friend_linear">
+        style="@style/friend_linear"
+        android:visibility="gone">
         <ImageView
             android:id="@+id/find_friends_qq_img"
             android:layout_width="40dp"

@@ -17,6 +17,7 @@ import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.findfriendpage.AttentionPager;
 import com.joshua.craftsman.fragment.findfriendpage.FriendPager;
 import com.joshua.craftsman.fragment.homepage.PagerAdapter;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,5 +120,11 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
                 mViewPager.setCurrentItem(1);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

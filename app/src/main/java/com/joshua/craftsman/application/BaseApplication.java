@@ -28,30 +28,36 @@ public class BaseApplication extends Application {
     private static BaseApplication application;
     private static int mainTid;
     private static Handler handler;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        application=this;
+        application = this;
         mainTid = android.os.Process.myTid();
-        handler=new Handler();
+        handler = new Handler();
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         //友盟集成
         UMShareAPI.get(this);
-        PlatformConfig.setWeixin("wxb254d74dda664d63", "40fca872a5babc3d29e419a35c17a89f");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+
 
     }
+
     public static Context getApplication() {
         return application;
     }
+
     public static int getMainTid() {
         return mainTid;
     }
+
     public static Handler getHandler() {
         return handler;
     }
 
-
+    {
+        PlatformConfig.setWeixin("wxb254d74dda664d63", "40fca872a5babc3d29e419a35c17a89f");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+    }
 }

@@ -45,10 +45,10 @@ public class FriendPager extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         new ShareAction(getActivity())
+                .setPlatform(SHARE_MEDIA.WEIXIN)
                 .withText("hello")
-                .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setCallback(shareListener)
-                .open();
+                .share();
     }
 
     private UMShareListener shareListener = new UMShareListener() {
