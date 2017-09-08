@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,6 +19,7 @@ import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerCommonActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
 import com.joshua.craftsman.activity.info.EditInfoActivity;
+import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 
 import java.io.File;
@@ -90,6 +90,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
     public void clickLinearLayout(LinearLayout linearLayout) {
         switch (linearLayout.getId()) {
             case R.id.my_info_public_my_orders:
+                mContext.startActivity(new Intent(getActivity(), MyOrderActivity.class));
                 break;
             case R.id.my_info_public_my_coins:
                 break;

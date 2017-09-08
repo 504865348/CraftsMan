@@ -1,142 +1,88 @@
 package com.joshua.craftsman.activity.order;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
-import com.joshua.craftsman.fragment.BaseFragment;
-import com.joshua.craftsman.fragment.myorder.MyOrderAlbumFragment;
-import com.joshua.craftsman.fragment.myorder.MyOrderProgramFragment;
+import com.joshua.craftsman.adapter.info.OrderAdapter;
+import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.Order;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class MyOrderActivity extends BaseActivity {
-
-    @BindView(R.id.myrecorder_toolbar) Toolbar mToolbar;
-    @BindView(R.id.my_order_ll_album) LinearLayout mMyOrderLlAlbum;
-    @BindView(R.id.my_order_ll_program) LinearLayout mMyOrderLlProgram;
-    @BindView(R.id.home_tab_line) ImageView mTabLine;
-    @BindView(R.id.my_order_page_pager) ViewPager mViewPager;
-    @BindView(R.id.my_order_tv_album) TextView mMyOrderTvAlbum;
-    @BindView(R.id.my_order_tv_program) TextView mMyOrderTvProgram;
-
-    private List<BaseFragment> mFragmentList = new ArrayList<>();
-    private PagerAdapter adapter;
-    private int screenWidth;
-    private MyOrderAlbumFragment mMyOrderAlbumFragment;
-    private MyOrderProgramFragment mMyOrderProgramFragment;
+    @BindView(R.id.rv_order)
+    RecyclerView rv_order;
+    private OkHttpClient mClient;
+    private List<Order> list_order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_order);
         ButterKnife.bind(this);
-
-        mToolbar.setTitle("");
-        setSupportActionBar(mToolbar);
-
-        initPager();
-        initTabLineWidth();
+        getDataFromServer();
     }
 
 
-    /**
-     * 初始化滑动 Pager 数据
-     */
-    private void initPager() {
-        mMyOrderAlbumFragment = new MyOrderAlbumFragment();
-        mMyOrderProgramFragment = new MyOrderProgramFragment();
-        mFragmentList.add(mMyOrderAlbumFragment);
-        mFragmentList.add(mMyOrderProgramFragment);
-        /**
-         * 设置适配器和初始选中项
-         */
-        adapter = new com.joshua.craftsman.fragment.homepage
-                .PagerAdapter(getSupportFragmentManager(), mFragmentList);
-        mViewPager.setAdapter(adapter);
-        mViewPager.setCurrentItem(0);
-        mMyOrderTvAlbum.setTextColor(Color.RED);
-        /**
-         * 添加滑动监听器
-         */
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            /**
-             * position :当前页面，及点击滑动的页面
-             * offset:当前页面偏移的百分比
-             * positionOffsetPixels:当前页面偏移的像素位置
-             */
+    private void getDataFromServer() {
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(mBaseActivity))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.SERVER_QUERY_ORDER)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(mBaseActivity) {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-                lp.leftMargin = screenWidth / 2 * position + positionOffsetPixels / 2;
-                mTabLine.setLayoutParams(lp);
+            protected void success(String result) {
+                parseOrder(result);
             }
 
             @Override
-            public void onPageSelected(int position) {
-                resetTextView();
-                switch (position) {
-                    case 0:
-                        mMyOrderTvAlbum.setTextColor(Color.RED);
-                        break;
-                    case 1:
-                        mMyOrderTvProgram.setTextColor(Color.RED);
-                        break;
-                }
-            }
+            protected void error() {
 
-            /**
-             * 滑动中的状态 1: 正在滑动  2: 滑动完毕  3: 无操作
-             */
+            }
+        });
+
+    }
+
+    private void parseOrder(String result) {
+        Gson gson = new Gson();
+        list_order = gson.fromJson(result, new TypeToken<List<Order>>() {
+        }.getType());
+        runOnUiThread(new Runnable() {
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void run() {
+                initRecycle();
             }
         });
     }
 
-
-    private void resetTextView() {
-        mMyOrderTvAlbum.setTextColor(Color.BLACK);
-        mMyOrderTvProgram.setTextColor(Color.BLACK);
+    private void initRecycle() {
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv_order.setLayoutManager(linearLayoutManager);
+        rv_order.setAdapter(new OrderAdapter(mBaseActivity, list_order));
     }
-
-    /**
-     * 设置滑动条的宽度为屏幕的 1/2 (根据Tab的个数而定)
-     */
-    private void initTabLineWidth() {
-        DisplayMetrics dpMetrics = new DisplayMetrics();
-        getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
-        screenWidth = dpMetrics.widthPixels;
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-        lp.width = screenWidth / 2;
-        mTabLine.setLayoutParams(lp);
-    }
-
-
-    /**
-     * 监听返回按钮
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
 }

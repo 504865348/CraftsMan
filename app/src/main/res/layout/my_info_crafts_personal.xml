@@ -38,7 +38,8 @@
 
         <LinearLayout
             android:id="@+id/my_info_my_coins"
-            style="@style/my_info_linear">
+            style="@style/my_info_linear"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
