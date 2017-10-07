@@ -97,8 +97,15 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         InitPopWindow();
         editMyInfoToolBar.setTitle("");
         setSupportActionBar(editMyInfoToolBar);
-        showInfo();
+
         parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
+    }
+
+
+    @Override
+    protected void onResume() {
+        showInfo();
+        super.onResume();
     }
 
     private void initListener() {
@@ -261,22 +268,24 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     private void saveInfo() {
         nickName = et_Nickname.getText().toString();
         introduce = et_Introduce.getText().toString();
-        sp = getSharedPreferences(userClass+".txt", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("nickName", nickName);
-        editor.putString("introduce", introduce);
-        editor.putString("sex", sex);
-        editor.putString("birthday", birthday);
-        editor.putString("address", address);
-        editor.commit();
+
         if (nickName == null || introduce == null
                 || sex == null || birthday == null || address == null)
             showErrorMsg("请将信息填写完整");
-        else
-            putDataToServer();
+        else{
+            sp = getSharedPreferences(userClass, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("nickName", nickName);
+            editor.putString("introduce", introduce);
+            editor.putString("sex", sex);
+            editor.putString("birthday", birthday);
+            editor.putString("address", address);
+            editor.apply();
+            postDataToServer();
+        }
     }
 
-    private void putDataToServer() {
+    private void postDataToServer() {
         String userAccount = PrefUtils.getString(mBaseActivity, "phone", "");
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         File file = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
@@ -305,7 +314,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseJson = response.body().string();
-                Log.d(TAG, "onResponse: " + responseJson);
+                Log.d(TAG, "onResponse  info: " + responseJson);
                 JSONObject jo = null;
                 try {
                     jo = new JSONObject(responseJson);
@@ -334,7 +343,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void showInfo() {
-        sp = getSharedPreferences(userClass+".txt", Context.MODE_PRIVATE);
+        sp = getSharedPreferences(userClass, Context.MODE_PRIVATE);
         et_Nickname.setText(sp.getString("nickName", ""));
         et_Introduce.setText(sp.getString("introduce", ""));
         tvSex.setText(sp.getString("sex", ""));

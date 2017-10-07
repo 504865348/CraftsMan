@@ -3,11 +3,13 @@ package com.joshua.craftsman.activity.order;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.adapter.QuesAnsClassifyAdapter;
 import com.joshua.craftsman.adapter.info.OrderAdapter;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.entity.joshua.Order;
@@ -23,6 +25,9 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+
+import static com.joshua.craftsman.R.id.q_a_list_view_examples;
+import static com.joshua.craftsman.R.id.rv_order;
 
 public class MyOrderActivity extends BaseActivity {
     @BindView(R.id.rv_order)
@@ -83,6 +88,14 @@ public class MyOrderActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mBaseActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_order.setLayoutManager(linearLayoutManager);
-        rv_order.setAdapter(new OrderAdapter(mBaseActivity, list_order));
+        if (list_order.get(0).getId() == null || list_order.get(0).getId().equals("null")) {
+            findViewById(R.id.tv_empty).setVisibility(View.VISIBLE);
+            rv_order.setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.tv_empty).setVisibility(View.GONE);
+            rv_order.setVisibility(View.VISIBLE);
+            rv_order.setAdapter(new OrderAdapter(mBaseActivity, list_order));
+        }
+
     }
 }

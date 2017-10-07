@@ -128,6 +128,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                             .add("username", username)
                             .add("password", password)
                             .add("type", "normal")
+                            .add("classify","null")
                             .build();
 
                     final Request request = new Request.Builder()
