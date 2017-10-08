@@ -23,7 +23,7 @@ public class Server {
 //    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
 //    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
 //    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
-//    public static final String SERVER_MY_INFO = "http://139.224.35.126:8080/GJ_AND/MyInfoServlet";
+    public static final String SERVER_MY_INFO = "http://139.224.35.126:8080/GJ_AND/MyInfoServlet";
 
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String CAROUSEL_PIC = "CarouselPic"; //获取轮播图片

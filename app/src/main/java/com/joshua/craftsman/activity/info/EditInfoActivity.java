@@ -301,7 +301,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
                 .addFormDataPart("userAccount", userAccount)
                 .build();
         Request request = new Request.Builder()
-//                .url(Server.SERVER_MY_INFO)
+                .url(Server.SERVER_MY_INFO)
                 .post(requestBody)
                 .build();
         Call call = new OkHttpClient().newCall(request);
