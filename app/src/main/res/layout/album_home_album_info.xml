@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="325dp"
         android:src="@drawable/video_player_share"
+        android:visibility="invisible"
         />
 
     <RelativeLayout
@@ -89,6 +90,7 @@
                     android:textSize="12sp"
                     android:textColor="@color/black" />
                 <TextView
+                    android:visibility="invisible"
                     style="@style/album_detail_intro_small"
                     android:layout_marginLeft="20dp"
                     android:text="播放量："/>
@@ -113,6 +115,7 @@
             android:textSize="12sp"
             android:text="订阅" />
         <Button
+            android:visibility="invisible"
             android:id="@+id/album_buy"
             android:layout_width="124dp"
             android:layout_height="25dp"

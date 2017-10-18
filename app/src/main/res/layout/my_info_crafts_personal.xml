@@ -87,6 +87,7 @@
                 android:text="我的问答"/>
 
             <ImageView
+                android:visibility="invisible"
                 android:id="@+id/my_info_q_a_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

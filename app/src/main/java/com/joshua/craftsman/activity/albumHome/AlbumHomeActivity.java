@@ -159,7 +159,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         albumDetailCraftsName.setText(itemAlbumCrafts);
         albumDetailClassification.setText(itemAlbumClassify);
         albumDetailModel.setText(itemAlbumModel);
-        albumDetailPlayNum.setText(getItemAlbumPlay);
+//        albumDetailPlayNum.setText(getItemAlbumPlay);
         Glide.with(this).load(itemAlbumPic).into(albumDetailCover);
         albumPic = itemAlbumPic;
     }

@@ -93,10 +93,10 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
     private List<HotListen> list_TZT;
     private List<HotLook> list_KLQ;
     private OkHttpClient mClient;
-    FrameLayout empty_DGGJ,empty_JXDY,empty_JZC,empty_TZT,empty_KLQ;
+    FrameLayout empty_DGGJ, empty_JXDY, empty_JZC, empty_TZT, empty_KLQ;
 
     public HomeHotPager() {
-    
+
     }
 
     @Override
@@ -329,14 +329,14 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(true,empty_DGGJ);
+                    setEmptyView(true, empty_DGGJ);
                 }
             });
         } else {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(false,empty_DGGJ);
+                    setEmptyView(false, empty_DGGJ);
                     initRecycleDGGJ();
                 }
             });
@@ -351,14 +351,14 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(true,empty_JXDY);
+                    setEmptyView(true, empty_JXDY);
                 }
             });
         } else {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(false,empty_JXDY);
+                    setEmptyView(false, empty_JXDY);
                     initRecycleJXDY();
                 }
             });
@@ -373,14 +373,14 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(true,empty_JZC);
+                    setEmptyView(true, empty_JZC);
                 }
             });
         } else {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(false,empty_JZC);
+                    setEmptyView(false, empty_JZC);
                     initRecycleJZC();
                 }
             });
@@ -395,14 +395,14 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(true,empty_TZT);
+                    setEmptyView(true, empty_TZT);
                 }
             });
         } else {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(false,empty_TZT);
+                    setEmptyView(false, empty_TZT);
                     initRecycleTZT();
                 }
             });
@@ -417,14 +417,14 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(true,empty_KLQ);
+                    setEmptyView(true, empty_KLQ);
                 }
             });
         } else {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setEmptyView(false,empty_KLQ);
+                    setEmptyView(false, empty_KLQ);
                     initRecycleKLQ();
                 }
             });
@@ -513,7 +513,10 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         List<String> imageNames = new ArrayList<>();
         for (CarouselPic carouselPic : list_pic) {
             imageUrls.add(carouselPic.getImgUrl());
-            imageNames.add(carouselPic.getImgName());
+            //2017-10-18 不需要轮播图文字
+            imageNames.add("");
+//            imageNames.add(carouselPic.getImgName());
+
         }
         initBanner(imageUrls, imageNames);
 
@@ -538,11 +541,12 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         });
 
     }
+
     /**
      * 设置空视图
      */
-    private void setEmptyView(Boolean isEmpty,FrameLayout empty) {
-        if(isEmpty) {
+    private void setEmptyView(Boolean isEmpty, FrameLayout empty) {
+        if (isEmpty) {
             empty.setVisibility(View.VISIBLE);
         } else {
             empty.setVisibility(View.GONE);

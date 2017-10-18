@@ -17,9 +17,11 @@ import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.activity.record.AlbumAdapter;
 import com.joshua.craftsman.adapter.HotCraftsAdapter;
+import com.joshua.craftsman.adapter.HotSkillsAdapter;
 import com.joshua.craftsman.adapter.QuesAnsClassifyAdapter;
 import com.joshua.craftsman.entity.Album;
 import com.joshua.craftsman.entity.HotCraftsman;
+import com.joshua.craftsman.entity.HotSkills;
 import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCommonCallback;
@@ -38,7 +40,6 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-
 
 
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
@@ -64,9 +65,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     //访问网络
     private OkHttpClient mClient;
-    private List<QuesAnsClassify> list_question=new ArrayList<>();
-    private List<Album> list_album=new ArrayList<>();
-    private List<HotCraftsman> list_craftsman=new ArrayList<>();
+    private List<QuesAnsClassify> list_question = new ArrayList<>();
+    private List<HotSkills> list_album = new ArrayList<>();
+    private List<HotCraftsman> list_craftsman = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +94,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             case R.id.search_interface_search:
                 // 保存关键字
                 String keyWord = mSearchHistoryEdit.getText().toString();
-                if (keyWord.length() <= 10) {
-                        searchFromServer(keyWord);
+                if (keyWord.length() <= 10 && keyWord.length() > 0) {
+                    searchFromServer(keyWord);
                 } else {
-                    Toast.makeText(this, "关键字过长", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "关键字需要在1-10之间", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -106,12 +108,14 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
      */
     public static final MediaType MEDIA_TYPE_MARKDOWN
             = MediaType.parse("text/x-markdown; charset=utf-8");
+
     private void searchFromServer(String keyWord) {
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
-        String requestStr="method="+Server.SERVER_SEARCH+"&keyWord="+keyWord;
-        RequestBody params =RequestBody.create(MEDIA_TYPE_MARKDOWN, requestStr);
+        String requestStr = "method=" + Server.SERVER_SEARCH + "&keyWord=" + keyWord;
+
+        RequestBody params = RequestBody.create(MEDIA_TYPE_MARKDOWN, requestStr);
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
@@ -122,6 +126,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             protected void success(String result) {
                 parseData(result);
             }
+
             @Override
             protected void error() {
                 runOnUiThread(new Runnable() {
@@ -136,14 +141,14 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     private void parseData(String result) {
         try {
-            JSONObject jsonObject=new JSONObject(result);
-            Log.d(TAG, "parseData: "+jsonObject);
-            String question=jsonObject.getString("question");
-            Log.d(TAG, "question: "+question);
-            String album=jsonObject.getString("album");
-            Log.d(TAG, "album: "+album);
-            String craftsman=jsonObject.getString("craftsman");
-            Log.d(TAG, "craftsman: "+craftsman);
+            JSONObject jsonObject = new JSONObject(result);
+            Log.d(TAG, "parseData: " + jsonObject);
+            String question = jsonObject.getString("question");
+            Log.d(TAG, "question: " + question);
+            String album = jsonObject.getString("album");
+            Log.d(TAG, "album: " + album);
+            String craftsman = jsonObject.getString("craftsman");
+            Log.d(TAG, "craftsman: " + craftsman);
             Gson gson = new Gson();
             //解析question
             list_question = gson.fromJson(question, new TypeToken<List<QuesAnsClassify>>() {
@@ -152,23 +157,23 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     initRecycleQuestion();
-                    if(list_question.size()>0){
+                    if (list_question.size() > 0) {
                         tv_question.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         tv_question.setVisibility(View.VISIBLE);
                     }
                 }
             });
             //解析album
-            list_album = gson.fromJson(album, new TypeToken<List<Album>>() {
+            list_album = gson.fromJson(album, new TypeToken<List<HotSkills>>() {
             }.getType());
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     initRecycleAlbum();
-                    if(list_album.size()>0){
+                    if (list_album.size() > 0) {
                         tv_album.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         tv_album.setVisibility(View.VISIBLE);
                     }
                 }
@@ -180,9 +185,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 @Override
                 public void run() {
                     initRecycleCraftsman();
-                    if(list_craftsman.size()>0){
+                    if (list_craftsman.size() > 0) {
                         tv_craftsman.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         tv_craftsman.setVisibility(View.VISIBLE);
                     }
                 }
@@ -207,7 +212,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         rv_album.setLayoutManager(linearLayoutManager);
         rv_album.setHasFixedSize(true);
         rv_album.setNestedScrollingEnabled(false);
-        AlbumAdapter albumAdapter = new AlbumAdapter(this, list_album);
+        HotSkillsAdapter albumAdapter = new HotSkillsAdapter(this, list_album);
         rv_album.setAdapter(albumAdapter);
     }
 
