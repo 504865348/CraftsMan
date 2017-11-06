@@ -96,11 +96,19 @@
 
         <View style="@style/vertical_split_black"/>
 
-        <EditText
+        <!--<EditText-->
+            <!--android:id="@+id/record_info_price"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@null"/>-->
+
+
+        <Spinner
             android:id="@+id/record_info_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"/>
+            android:entries="@array/cost"
+            />
 
     </LinearLayout>
 

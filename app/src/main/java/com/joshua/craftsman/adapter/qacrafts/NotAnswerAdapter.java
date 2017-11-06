@@ -38,8 +38,8 @@ public class NotAnswerAdapter extends RecyclerView.Adapter<NotAnswerAdapter.MyVi
 
     @Override
     public void onBindViewHolder(NotAnswerAdapter.MyViewHolder holder, int position) {
-        holder.tv_asker.setText(data.get(position).getUserId());
-        holder.tv_price.setText("￥1");
+        holder.tv_asker.setText(data.get(position).getCraftsmanName());
+        holder.tv_price.setText(data.get(position).getMoney()+"元");
         holder.tv_content.setText(data.get(position).getQuestionWord());
         holder.tv_time.setText(data.get(position).getQueTime());
         holder.itemView.setTag(position+"");

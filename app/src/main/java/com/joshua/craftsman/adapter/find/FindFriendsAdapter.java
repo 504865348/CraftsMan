@@ -39,7 +39,12 @@ public class FindFriendsAdapter extends android.support.v7.widget.RecyclerView.A
     public void onBindViewHolder(FindFriendsAdapter.MyViewHolder holder, final int position) {
         holder.tv_name.setText(data.get(position).getCraftsmanName());
         holder.tv_introduction.setText(data.get(position).getIntroduction());
-        holder.tv_classify.setText(data.get(position).getClassifyCrafts());
+        if(data.get(position).getClassifyCrafts()==null||data.get(position).getClassifyCrafts().equals("null")){
+            holder.tv_classify.setText("普通用户");
+        }else {
+            holder.tv_classify.setText(data.get(position).getClassifyCrafts());
+        }
+
         holder.tv_hot_degree.setText(data.get(position).getHotDegree());
         Glide.with(mContext).load(data.get(position).getImageUrl()).placeholder(R.drawable.load_error).into(holder.iv_pic);
         holder.btn_attention.setOnClickListener(new View.OnClickListener() {

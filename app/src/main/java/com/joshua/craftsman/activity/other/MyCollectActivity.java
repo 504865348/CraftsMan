@@ -206,7 +206,7 @@ public class MyCollectActivity extends BaseActivity {
                     }
                 }else{
                     //没有支付跳转支付
-                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(), 0.01f);
+                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(),  Float.parseFloat(list_collect.get(pos).getMoney()));
                 }
 
 

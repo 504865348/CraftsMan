@@ -109,7 +109,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
 
     private void initData(QuesAnsClassify classify) {
         question_audit_questioner.setText(classify.getUserId());
-//        tv_money.setText(classify.getMoney());
+        tv_money.setText(classify.getMoney()+"元");
         question_audit_content.setText(classify.getQuestionWord());
         question_audit_listen_count.setText(classify.getListenNumber() + "人听过");
         if (classify.getAnsterTime() == null || classify.getAnsterTime().equals("null")) {
@@ -180,7 +180,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                         question_audit_pay.setVisibility(View.GONE);
                     }
                 });
-                payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), 0.01f);
+                payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), 1);
                 break;
 
 

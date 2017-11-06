@@ -36,8 +36,9 @@ public class VideoDetail implements Serializable{
     private String introduction; //简介
     private String model; //所属模块(匠心独运 讲政策 听专题 看利器)
     private String isPay; //是否购买
+    private String money; //是否购买
 
-    public VideoDetail(String id, String recordImage, String recordTitle, String name, String downloadUrl, String albumID, String idClassify, String albumImage, String title, String craftsmanName, String playTimes, String subscribeTimes, String classifyName, String introduction, String model, String isPay) {
+    public VideoDetail(String id, String recordImage, String recordTitle, String name, String downloadUrl, String albumID, String idClassify, String albumImage, String title, String craftsmanName, String playTimes, String subscribeTimes, String classifyName, String introduction, String model, String isPay, String money) {
         this.id = id;
         this.recordImage = recordImage;
         this.recordTitle = recordTitle;
@@ -54,6 +55,7 @@ public class VideoDetail implements Serializable{
         this.introduction = introduction;
         this.model = model;
         this.isPay = isPay;
+        this.money = money;
     }
 
     public String getId() {
@@ -182,5 +184,13 @@ public class VideoDetail implements Serializable{
 
     public void setIsPay(String isPay) {
         this.isPay = isPay;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
     }
 }

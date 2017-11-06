@@ -61,7 +61,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.tv_answer)
     TextView tv_answer;
     @BindView(R.id.tv_cost)
-    TextView tv_cost;
+    EditText tv_cost;
     @BindView(R.id.et_question)
     EditText et_question;
     @BindView(R.id.iv_add_pic)
@@ -77,6 +77,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private String mAnswer,mCraftsAccount;
     private ProgressDialog mDialog;
     private File mFile;
+    private String mCost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +127,13 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_commit:
                 //支付逻辑
-                payQuestion();
+                mCost = tv_cost.getText().toString();
+                if(!mCost.equals("")||!mCost.isEmpty()){
+                    payQuestion();
+                }else {
+                    Toast.makeText(this, "请填写问题价格", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
 
@@ -142,9 +149,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
             }
         });
         //没有支付跳转支付
-        utils.payV2(OrderType.TYPE_ASK_QUE, "null", 0.01f);
-
-
+        utils.payV2(OrderType.TYPE_ASK_QUE, "null", Float.parseFloat(mCost));
     }
 
     private void postToServer(String orderNo) {
@@ -154,7 +159,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
             Toast.makeText(this, "请输入问题内容", Toast.LENGTH_SHORT).show();
             return;
         }
-        String cost = 1 + "";
+
         String absPath = Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "");
         mFile = new File(absPath, IMAGE_FILE_NAME + ".JPEG");
         if (!mFile.exists()) {
@@ -169,7 +174,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 .addFormDataPart("image", "question.JPEG", fileBody)
                 .addFormDataPart("craftsman", mCraftsAccount)
                 .addFormDataPart("questionWord", question)
-                .addFormDataPart("money", cost)
+                .addFormDataPart("money", mCost+"")
                 .addFormDataPart("user", user)
                 .addFormDataPart("orderNumber", orderNo)
                 .build();

@@ -261,7 +261,7 @@ public class HomeRecommendPager extends BaseFragment {
                     }
                 }else{
                     //没有支付跳转支付
-                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(), 0.01f);
+                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(),  Float.parseFloat(list_TJ.get(pos).getMoney()));
                 }
 
 

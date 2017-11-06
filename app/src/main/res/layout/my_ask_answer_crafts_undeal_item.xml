@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
-                android:text="提问者："/>
+                android:text="向谁提问："/>
             <TextView
                 android:id="@+id/not_answer_tv_asker"
                 android:layout_width="wrap_content"

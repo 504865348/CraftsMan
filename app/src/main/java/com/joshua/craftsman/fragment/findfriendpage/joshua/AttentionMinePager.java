@@ -88,7 +88,7 @@ public class AttentionMinePager extends BaseFragment {
             @Override
             protected void success(String result) {
                 Log.d("关注", "关注我的: "+result);
-//                parseFF(result);
+                parseFF(result);
             }
 
             @Override
@@ -125,20 +125,20 @@ public class AttentionMinePager extends BaseFragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         findFriendsRecommendRv.setLayoutManager(linearLayoutManager);
         FindFriendsAdapter adapter = new FindFriendsAdapter(getActivity(),list_FF);
-        adapter.setOnRecyclerViewItemClickListener(new FindFriendsAdapter.onRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, String position) {
-                int pos = Integer.parseInt(position);
-                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
-                intent.putExtra("craftsName", list_FF.get(pos).getCraftsmanName());
-                intent.putExtra("craftsAccount", list_FF.get(pos).getCraftsAccount());
-                intent.putExtra("craftsIntro", list_FF.get(pos).getIntroduction());
-                intent.putExtra("craftsClassify", list_FF.get(pos).getClassifyCrafts());
-                intent.putExtra("craftsHotDegree", list_FF.get(pos).getHotDegree());
-                intent.putExtra("craftsPic", list_FF.get(pos).getImageUrl());
-                mContext.startActivity(intent);
-            }
-        });
+//        adapter.setOnRecyclerViewItemClickListener(new FindFriendsAdapter.onRecyclerViewItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, String position) {
+//                int pos = Integer.parseInt(position);
+//                Intent intent = new Intent(mContext, CraftsHomeActivity.class);
+//                intent.putExtra("craftsName", list_FF.get(pos).getCraftsmanName());
+//                intent.putExtra("craftsAccount", list_FF.get(pos).getCraftsAccount());
+//                intent.putExtra("craftsIntro", list_FF.get(pos).getIntroduction());
+//                intent.putExtra("craftsClassify", list_FF.get(pos).getClassifyCrafts());
+//                intent.putExtra("craftsHotDegree", list_FF.get(pos).getHotDegree());
+//                intent.putExtra("craftsPic", list_FF.get(pos).getImageUrl());
+//                mContext.startActivity(intent);
+//            }
+//        });
         findFriendsRecommendRv.setAdapter(adapter);
     }
 

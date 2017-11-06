@@ -8,8 +8,10 @@ import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +37,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.array.cost;
+
 public class PostRecordActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.record_info_title)
     EditText record_info_title;
     @BindView(R.id.record_info_choose_album)
     TextView record_info_choose_album;
     @BindView(R.id.record_info_price)
-    EditText record_info_price;
+    Spinner record_info_price;
     @BindView(R.id.record_info_intro)
     EditText record_info_intro;
     @BindView(R.id.record_info_tool_bar)
@@ -51,6 +55,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     private String name;
     private ProgressDialog mDialog;
     private long mDuration;
+    private String mCost="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,19 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         Button btn_post = (Button) findViewById(R.id.btn_post);
         btn_post.setOnClickListener(this);
         recordInfoToolBar.setOnClickListener(this);
+        record_info_price.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] costs = getResources().getStringArray(cost);
+                mCost=costs[position];
+                Log.d("cost", "onItemSelected: "+mCost);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
@@ -92,6 +110,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 .addFormDataPart("Special", idAlbum)
                 .addFormDataPart("Introduction", intro)
                 .addFormDataPart("Duration", mDuration + "")
+                .addFormDataPart("money", mCost)
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_RECORD)

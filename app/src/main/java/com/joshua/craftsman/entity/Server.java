@@ -44,8 +44,8 @@ public class Server {
     public static final String CRAFTS_UNDEAL_ANS= "CraftsmanUnDealAns"; //工匠-我的问答-未处理回答
     public static final String CRAFTS_MY_ANS= "CraftsmanMyAns"; //工匠-我的问答-我的回答
     public static final String CRAFTS_MY_QUES= "CraftsmanMyQues"; //工匠-我的问答-我的提问
-    public static final String COMMON_MY_ANS= "NormalDealQues"; //我的问答-未处理回答
-    public static final String COMMON_UNDEAL_ANS= "NormalUnDealQues"; //我的问答-已处理回答
+    public static final String COMMON_MY_ANS= "NormalDealQues"; //我的问答-已处理回答
+    public static final String COMMON_UNDEAL_ANS= "NormalUnDealQues"; //我的问答-未处理回答
 
 
     public static final String SERVER_SMS = "sendCode"; //注册验证码
