@@ -10,7 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/my_info_my_buys"
+            style="@style/my_info_linear">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/my_buy"/>
+
+            <TextView
+                style="@style/my_info_personal"
+                android:text="我的购买"/>
+
+            <ImageButton
+                android:id="@+id/buyform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/next_more"/>
+        </LinearLayout>
+
+        <View style="@style/horizontal_split"/>
         <LinearLayout
             android:id="@+id/my_info_my_orders"
             style="@style/my_info_linear">

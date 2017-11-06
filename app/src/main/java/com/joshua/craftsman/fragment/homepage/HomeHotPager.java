@@ -531,8 +531,7 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
             public void run() {
                 home_page_hot_banner
                         .setImages(imageUrls)
-                        .setBannerTitles(imageNames)
-                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
+                        .setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
                         .setBannerAnimation(Transformer.Tablet)
                         .setImageLoader(new GlideImageLoader())
                         .setDelayTime(5000)

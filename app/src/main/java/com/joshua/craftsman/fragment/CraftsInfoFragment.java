@@ -30,6 +30,9 @@ import com.joshua.craftsman.activity.info.SubscribeActivity;
 import com.joshua.craftsman.activity.my.MyAlbumActivity;
 import com.joshua.craftsman.activity.my.MyBillboardActivity;
 import com.joshua.craftsman.activity.order.MyOrderActivity;
+import com.joshua.craftsman.activity.other.MyBuyActivity;
+import com.joshua.craftsman.activity.other.MyCollectActivity;
+import com.joshua.craftsman.activity.other.MySubscribeActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 
@@ -41,6 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.R.attr.data;
+import static com.joshua.craftsman.R.id.my_info_my_buys;
 import static com.joshua.craftsman.R.id.my_info_my_coins;
 
 public class CraftsInfoFragment extends BaseFragment implements View.OnClickListener {
@@ -103,7 +107,8 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     LinearLayout mMyInfoSets;
     @BindView(R.id.my_info_user_account)
     TextView myInfoUserAccount;
-
+    @BindView(my_info_my_buys)
+    LinearLayout mMyInfoBuy;
     private View view;
     private Uri fileUri;
     private int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 1;
@@ -127,6 +132,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoFeedback.setOnClickListener(this);
         mMyInfoSets.setOnClickListener(this);
         mMyInfoCraftsUpload.setOnClickListener(this);
+        mMyInfoBuy.setOnClickListener(this);
         showUserInfo();
     }
 
@@ -212,12 +218,10 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.my_info_subscribe:
-                //startActivity(new Intent(getActivity(), SubscribeActivity.class));
-                Toast.makeText(getActivity(), "暂未开放专辑订阅功能", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), MySubscribeActivity.class));
                 break;
             case R.id.my_info_collection:
-                //startActivity(new Intent(getActivity(), CollectActivity.class));
-                Toast.makeText(getActivity(), "暂未开放节目收藏功能", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), MyCollectActivity.class));
                 break;
             case R.id.my_info_my_albums:
                 startActivity(new Intent(getActivity(), MyAlbumActivity.class));
@@ -237,6 +241,11 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
             case R.id.my_info_crafts_upload:
                 startActivity(new Intent(getActivity(), MyRecordActivity.class));
                 break;
+            case R.id.my_info_my_buys:
+                startActivity(new Intent(getActivity(), MyBuyActivity.class));
+                break;
+
+
         }
     }
 

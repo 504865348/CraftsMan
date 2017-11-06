@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/set_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/back">
         <!-- app:navigationIcon="@drawable/back" -->
 
         <TextView
@@ -25,6 +27,7 @@
         android:background="@color/gray"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/set_ll_bind"
         style="@style/set_linear"
         android:weightSum="1">
@@ -84,6 +87,7 @@
         android:background="@color/gray"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/set_ll_continue"
         style="@style/set_linear">
         <TextView
@@ -148,6 +152,7 @@
         android:background="@color/gray"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/set_ll_recommend"
         style="@style/set_linear">
 

@@ -13,6 +13,8 @@ import com.joshua.craftsman.activity.billboard.BillboardCraftsmanActivity;
 import com.joshua.craftsman.activity.billboard.BillboardHotActivity;
 import com.joshua.craftsman.activity.billboard.BillboardMoreActivity;
 import com.joshua.craftsman.activity.billboard.BillboardPayActivity;
+import com.joshua.craftsman.activity.billboard.joshua.HotActivity;
+import com.joshua.craftsman.activity.billboard.joshua.PayActivity;
 import com.joshua.craftsman.entity.Billboard;
 
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class BillBoardAdapter extends RecyclerView.Adapter<BillBoardAdapter.MyVi
         holder.rl_hot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, BillboardHotActivity.class));
+                mContext.startActivity(new Intent(mContext, HotActivity.class));
             }
         });
         holder.rl_more.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,7 @@ public class BillBoardAdapter extends RecyclerView.Adapter<BillBoardAdapter.MyVi
         holder.rl_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, BillboardPayActivity.class));
+                mContext.startActivity(new Intent(mContext, PayActivity.class));
             }
         });
         holder.rl_craftsman.setOnClickListener(new View.OnClickListener() {

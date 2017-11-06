@@ -1,12 +1,8 @@
-package com.joshua.craftsman.fragment.homepage;
+package com.joshua.craftsman.activity.other;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +19,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
 import com.joshua.craftsman.application.BaseApplication;
@@ -53,14 +50,19 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
-public class HomeRecommendPager extends BaseFragment {
+/**
+ * “匠心独运”、“讲政策”“听专题”“看利器”点击进入后，点击节目时没有出现付款页面，直接闪退
+ * 原因，接口返回值不规范
+ * 所以直接复制了首页-热门的代码
+ * 换了个接口名字
+ */
+public class ProgrameFragment extends BaseFragment {
 
 
     @BindView(R.id.home_recommend_rv)
 
     RecyclerView home_recommend_rv;
-
+    private String albumId = AlbumHomeActivity.homeAlbumId;
     private List<VideoDetail> list_TJ;
 
     private Call mCall;
@@ -80,7 +82,7 @@ public class HomeRecommendPager extends BaseFragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
-    public HomeRecommendPager() {
+    public ProgrameFragment() {
     }
 
     @Override
@@ -132,7 +134,8 @@ public class HomeRecommendPager extends BaseFragment {
                 .cookieJar(new HttpCookieJar(getActivity()))
                 .build();
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.BILLBOARD_HOT)
+                .add("method", Server.PRO_LIST_BY_NAME)
+                .add("albumId", albumId)
                 .build();
 
         final Request request = new Request.Builder()
@@ -170,6 +173,7 @@ public class HomeRecommendPager extends BaseFragment {
     }
 
     private void parseTJ(String result) {
+        Log.d("pro", "parseTJ: "+result);
         Gson gson = new Gson();
         list_TJ = gson.fromJson(result, new TypeToken<List<VideoDetail>>() {
         }.getType());

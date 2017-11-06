@@ -1,35 +1,29 @@
-package com.joshua.craftsman.fragment.homepage;
+package com.joshua.craftsman.activity.other;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.albumHome.AlbumHomeActivity;
+import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
 import com.joshua.craftsman.application.BaseApplication;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.entity.joshua.VideoDetail;
-import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.pay.util.PaySuccess;
@@ -53,21 +47,17 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.joshua.craftsman.R.id.list;
+import static com.joshua.craftsman.R.id.rv_collect;
 
-public class HomeRecommendPager extends BaseFragment {
+public class MyCollectActivity extends BaseActivity {
 
-
-    @BindView(R.id.home_recommend_rv)
-
-    RecyclerView home_recommend_rv;
-
-    private List<VideoDetail> list_TJ;
-
+    @BindView(R.id.rv_collect)
+    RecyclerView rv_collect;
     private Call mCall;
+    private List<VideoDetail> list_collect;
+    private OkHttpClient mClient;
     private File mFile;
-    private OkHttpClient mOkHttpClient;
-
-
     private ProgressDialog mDialog;
     private Handler mHandler = new Handler() {
         @Override
@@ -77,135 +67,90 @@ public class HomeRecommendPager extends BaseFragment {
             mDialog.setProgress(progress);
         }
     };
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-
-
-    public HomeRecommendPager() {
-    }
+    private OkHttpClient mOkHttpClient;
 
     @Override
-    public View initView() {
-        View view = View.inflate(getActivity(), R.layout.home_page_recommend, null);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_collect);
+        ButterKnife.bind(this);
+        init();
+    }
+
+    private void init() {
         mOkHttpClient = new OkHttpClient();
-        mDialog = new ProgressDialog(mContext);
+        list_collect=new ArrayList<>();
+        mDialog = new ProgressDialog(this);
         mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDialog.setMax(100);
-        initRefreshRecycleView(view);
-        return view;
-    }
-
-    private void initRefreshRecycleView(View view) {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getDataFromServer();
-            }
-        });
-    }
-
-    @Override
-    public void initData() {
-        Log.d(TAG, "initData: ");
-        list_TJ = new ArrayList<>();
         getDataFromServer();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 
     private void getDataFromServer() {
-        getTJ();//推荐
-    }
-
-    private void getTJ() {
-        OkHttpClient mClient = new OkHttpClient.Builder()
-                .cookieJar(new HttpCookieJar(getActivity()))
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
-        RequestBody params = new FormBody.Builder()
-                .add("method", Server.BILLBOARD_HOT)
+        RequestBody params=new FormBody.Builder()
+                .add("method", Server.SERVER_MY_COLLECT)
                 .build();
-
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(params)
                 .build();
         Call call = mClient.newCall(request);
-        call.enqueue(new HttpCommonCallback(getActivity()) {
+        call.enqueue(new HttpCommonCallback(this) {
             @Override
             protected void success(String result) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mSwipeRefreshLayout.isRefreshing()) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
-                });
-
-                parseTJ(result);
+                Log.d("collect", "success: "+result);
+                parseData(result);
             }
 
             @Override
             protected void error() {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mSwipeRefreshLayout.isRefreshing()) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
-                });
+
             }
         });
     }
 
-    private void parseTJ(String result) {
+    private void parseData(String result) {
         Gson gson = new Gson();
-        list_TJ = gson.fromJson(result, new TypeToken<List<VideoDetail>>() {
+        list_collect = gson.fromJson(result, new TypeToken<List<VideoDetail>>() {
         }.getType());
-        if (list_TJ.get(0).getRecordTitle().equals("null")) {
-            getActivity().runOnUiThread(new Runnable() {
+        if (list_collect.get(0).getRecordTitle().equals("null")) {
+            runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     setEmptyView(true);
                 }
             });
         } else {
-            getActivity().runOnUiThread(new Runnable() {
+            runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     setEmptyView(false);
-                    initRecycleTJ();
+                    initRecycle();
                 }
             });
         }
     }
 
-    private void initRecycleTJ() {
+    private void initRecycle() {
         //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        home_recommend_rv.setLayoutManager(linearLayoutManager);
-        HomeRecommendAdapter adapter = new HomeRecommendAdapter(getActivity(), list_TJ);
+        rv_collect.setLayoutManager(linearLayoutManager);
+        HomeRecommendAdapter adapter = new HomeRecommendAdapter(this, list_collect);
         adapter.setOnRecyclerViewItemClickListener(new HomeRecommendAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, String position) {
                 final int pos = Integer.parseInt(position);
-                final String id = list_TJ.get(pos).getId();
-                final String url = list_TJ.get(pos).getDownloadUrl();
-                final String title = list_TJ.get(pos).getRecordTitle();
-                String isPay = list_TJ.get(pos).getIsPay();
-                PayUtils utils = new PayUtils(getActivity());
+                final String id = list_collect.get(pos).getId();
+                final String url = list_collect.get(pos).getDownloadUrl();
+                final String title = list_collect.get(pos).getRecordTitle();
+                String isPay = list_collect.get(pos).getIsPay();
+                PayUtils utils = new PayUtils(mBaseActivity);
                 utils.setPaySuccess(new PaySuccess() {
                     @Override
                     public void onSuccess(String o) {
@@ -216,10 +161,10 @@ public class HomeRecommendPager extends BaseFragment {
                         if (checkLocal(id)) {
                             //录音的播放与暂停
                             mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-                            Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                            Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
                             intent.putExtra("url", mFile.getAbsolutePath());
                             intent.putExtra("title", title);
-                            intent.putExtra("entity", list_TJ.get(pos));
+                            intent.putExtra("entity", list_collect.get(pos));
                             startActivity(intent);
                         } else {
                             mDialog.setMessage("视频下载中，请稍后");
@@ -241,10 +186,10 @@ public class HomeRecommendPager extends BaseFragment {
                     if (checkLocal(id)) {
                         //录音的播放与暂停
                         mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-                        Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                        Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
                         intent.putExtra("url", mFile.getAbsolutePath());
                         intent.putExtra("title", title);
-                        intent.putExtra("entity", list_TJ.get(pos));
+                        intent.putExtra("entity", list_collect.get(pos));
                         startActivity(intent);
                     } else {
 
@@ -261,7 +206,7 @@ public class HomeRecommendPager extends BaseFragment {
                     }
                 }else{
                     //没有支付跳转支付
-                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(), 0.01f);
+                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(), 0.01f);
                 }
 
 
@@ -270,7 +215,18 @@ public class HomeRecommendPager extends BaseFragment {
 
             }
         });
-        home_recommend_rv.setAdapter(adapter);
+        rv_collect.setAdapter(adapter);
+    }
+
+
+
+    private void setEmptyView(Boolean isEmpty) {
+        FrameLayout empty= (FrameLayout) findViewById(R.id.empty_layout);
+        if(isEmpty){
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -294,10 +250,10 @@ public class HomeRecommendPager extends BaseFragment {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d(TAG, "onFailure: " + e.getMessage());
-                getActivity().runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(mContext, "下载失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mBaseActivity, "下载失败", Toast.LENGTH_SHORT).show();
                         mDialog.dismiss();
                         mFile.delete();
                     }
@@ -333,27 +289,27 @@ public class HomeRecommendPager extends BaseFragment {
                         mHandler.sendMessage(msg);
                     }
                     fos.flush();
-                    getActivity().runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mContext, "下载成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mBaseActivity, "下载成功", Toast.LENGTH_SHORT).show();
                             mDialog.dismiss();
                             //录音的播放与暂停
                             mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-                            Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                            Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
                             intent.putExtra("url", mFile.getAbsolutePath());
                             intent.putExtra("title", title);
-                            intent.putExtra("entity", list_TJ.get(pos));
+                            intent.putExtra("entity", list_collect.get(pos));
                             startActivity(intent);
                         }
                     });
 
                 } catch (Exception e) {
                     Log.d(TAG, "onFailure: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mContext, "下载失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mBaseActivity, "下载失败", Toast.LENGTH_SHORT).show();
                             mFile.delete();
                             mDialog.dismiss();
                         }
@@ -368,20 +324,5 @@ public class HomeRecommendPager extends BaseFragment {
             }
         });
 
-    }
-
-    private void setEmptyView(Boolean isEmpty) {
-        FrameLayout empty = (FrameLayout) getActivity().findViewById(R.id.empty_layout);
-        if (isEmpty) {
-            empty.setVisibility(View.VISIBLE);
-        } else {
-            empty.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getDataFromServer();
     }
 }

@@ -72,24 +72,30 @@ public class MyRecordAdapter extends BaseAdapter {
         final MyRecording myRecording = mMyRecordings.get(position);
         record_item_name.setText(myRecording.getName());
         record_item_time.setText(myRecording.getTime());
+//2017-11-01新增逻辑，发布/已发布
+        String videoName = PrefUtils.getString(mContext, mMyRecordings.get(position).getName(), "");
+        if (videoName.equals(mMyRecordings.get(position).getName())) {
+            record_item_release.setBackgroundResource(R.drawable.btn_my_record_published);
+        }
+
         record_item_cover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url=mMyRecordings.get(position).getStorageUrl();
-                String title=mMyRecordings.get(position).getName();
-                Intent intent=new Intent(mContext,PlayerFrameActivity.class);
-                intent.putExtra("url",url);
-                intent.putExtra("title",title);
+                String url = mMyRecordings.get(position).getStorageUrl();
+                String title = mMyRecordings.get(position).getName();
+                Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+                intent.putExtra("url", url);
+                intent.putExtra("title", title);
                 mContext.startActivity(intent);
             }
         });
         record_item_release.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String videoName=PrefUtils.getString(mContext,mMyRecordings.get(position).getName(),"");
-                if(videoName.equals(mMyRecordings.get(position).getName())){
+                String videoName = PrefUtils.getString(mContext, mMyRecordings.get(position).getName(), "");
+                if (videoName.equals(mMyRecordings.get(position).getName())) {
                     Toast.makeText(mContext, "节目已经上传！", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Intent intent = new Intent(mContext, PostRecordActivity.class);
                     intent.putExtra("name", mMyRecordings.get(position).getName());
                     mContext.startActivity(intent);
@@ -100,7 +106,7 @@ public class MyRecordAdapter extends BaseAdapter {
         record_item_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("确认")
                         .setMessage("是否删除该视频")
                         .setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -132,9 +138,9 @@ public class MyRecordAdapter extends BaseAdapter {
     /**
      * 获取文件列表
      */
-    public void GetVideoFiles(){
+    public void GetVideoFiles() {
         mMyRecordings.clear();
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             /**
              * 获取该文件夹下的所有文件
              */
@@ -142,7 +148,7 @@ public class MyRecordAdapter extends BaseAdapter {
             File mediaStorageDir = new File(path + "/crafts_videos");
             File[] files = mediaStorageDir.listFiles();
 
-            for(int i = 0; i < files.length; i++){
+            for (int i = 0; i < files.length; i++) {
                 Log.e("TAG", files[i].getName());
                 MyRecording myRecording = new MyRecording();
                 myRecording.setName(files[i].getName());

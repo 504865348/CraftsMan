@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="10dp"
-            android:text="匠友圈"
+            android:text="找匠友"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
@@ -36,7 +36,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/recommend_attention"
+                android:id="@+id/my_care"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -54,7 +54,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/my_friend"
+                android:id="@+id/care_my"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"

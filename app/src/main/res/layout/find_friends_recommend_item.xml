@@ -78,6 +78,7 @@
         </LinearLayout>
 
         <Button
+            android:visibility="gone"
             android:id="@+id/friends_recommend_plus"
             android:layout_width="70dp"
             android:layout_height="25dp"

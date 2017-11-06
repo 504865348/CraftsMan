@@ -19,15 +19,25 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftAlbumFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftQAFragment;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+
+import static com.joshua.craftsman.R.id.crafts_ll_album;
 
 public class CraftsHomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -41,7 +51,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     TextView mCraftsTextIntroduction;
     @BindView(R.id.crafts_tv_album)
     TextView mCraftsTvAlbum;
-    @BindView(R.id.crafts_ll_album)
+    @BindView(crafts_ll_album)
     LinearLayout mCraftsLlAlbum;
     @BindView(R.id.crafts_tv_q_a)
     TextView mCraftsTvQA;
@@ -69,7 +79,8 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     private CraftQAFragment mCraftQAFragment;
     private String itemCraftsName, itemCraftsIntro, itemCraftsClassify,
             itemCraftsHotDegree, itemCraftsPic, itemCraftsAccount;
-    public static String homeCraftsName,homeCraftsAccount;
+    public static String homeCraftsName, homeCraftsAccount;
+    private OkHttpClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +186,8 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     private void initListener() {
         mCraftsImageFollow.setOnClickListener(this);
         mCraftsImageAsk.setOnClickListener(this);
+        mCraftsLlAlbum.setOnClickListener(this);
+        mCraftsLlQA.setOnClickListener(this);
 
     }
 
@@ -190,11 +203,58 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
             case R.id.crafts_image_follow:
                 getAttention();
                 break;
+            case R.id.crafts_ll_q_a:
+                mViewPager.setCurrentItem(1);
+                break;
+            case crafts_ll_album:
+                mViewPager.setCurrentItem(0);
+
+                break;
         }
     }
 
     private void getAttention() {
-        Toast.makeText(mBaseActivity, "暂未开放关注功能", Toast.LENGTH_SHORT).show();
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(mBaseActivity))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.SERVER_GET_ATTENTION)
+                .add("craftsmanNameId", itemCraftsAccount)
+                .add("flag", "1")//    关注/取消关注 值 1/0
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(mBaseActivity) {
+            @Override
+            protected void success(String result) {
+                if (result.equals("true")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "关注成功", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "关注失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            protected void error() {
+
+            }
+        });
+
     }
 
     @Override

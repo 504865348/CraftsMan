@@ -18,12 +18,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.error.DataErrorActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.BillBoardFragment;
 import com.joshua.craftsman.fragment.CraftsInfoFragment;
@@ -31,6 +36,10 @@ import com.joshua.craftsman.fragment.FindFragment;
 import com.joshua.craftsman.fragment.HomeFragment;
 import com.joshua.craftsman.fragment.PublicInfoFragment;
 import com.joshua.craftsman.fragment.QAFragment;
+import com.joshua.craftsman.fragment.homepage.HomeRecommendPager;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.http.ResponseInfo;
 import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
@@ -46,6 +55,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
@@ -70,6 +86,59 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        checkCookie();
+        permissionRequest();
+    }
+
+
+    private void checkCookie() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(this))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.BILLBOARD_HOT)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                Gson gson = new Gson();
+                ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
+                if (!responseInfo.isAlive()) {
+                    Log.d(TAG, "onResponse: cookie过期");
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
+                else if (responseInfo.isError()) {
+                    Log.d(TAG, "onResponse: 出现异常");
+                    startActivity(new Intent(MainActivity.this, DataErrorActivity.class));
+                } else {
+                    String result = responseInfo.getResult();
+                    Log.d(TAG, "onResponseAgain: " + result);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initData();
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
+    private void initData() {
         mFragments = new ArrayList<>();
         mFragments.add(new HomeFragment());
         mFragments.add(new BillBoardFragment());
@@ -83,9 +152,8 @@ public class MainActivity extends BaseActivity {
         }
         setRadioGroupListener();
         //mFilter = new IntentFilter();
-       // mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        // mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         //registerReceiver(myNetReceiver, mFilter);
-        permissionRequest();
     }
 
     /**
@@ -202,6 +270,7 @@ public class MainActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 2;
+
     public void permissionRequest() {
         if (Build.VERSION.SDK_INT >= 23) {
             //读取SD卡
@@ -229,14 +298,14 @@ public class MainActivity extends BaseActivity {
 
         if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this,"授权开启失败去，请到设置中手动授权",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "授权开启失败去，请到设置中手动授权", Toast.LENGTH_SHORT).show();
             }
         }
 
 
         if (requestCode == MY_PERMISSIONS_REQUEST_RECORD_AUDIO) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this,"授权开启失败去，请到设置中手动授权",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "授权开启失败去，请到设置中手动授权", Toast.LENGTH_SHORT).show();
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

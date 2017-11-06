@@ -19,15 +19,24 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.other.ProgrameFragment;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class AlbumHomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -59,12 +68,16 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     TextView albumDetailModel;
     @BindView(R.id.album_share)
     ImageView albumShare;
+    @BindView(R.id.album_detail_ll_particulars)
+    LinearLayout album_detail_ll_particulars;
+    @BindView(R.id.album_detail_ll_program)
+    LinearLayout album_detail_ll_program;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
     private int screenWidth;
     private AlbumDetailsFragment mAlbumDetailsFragment;
-    private AlbumProgramFragment mAlbumProgramFragment;
+    private ProgrameFragment mAlbumProgramFragment;
 
     private String itemAlbumId, itemAlbumName, itemAlbumPic, itemAlbumCrafts,
             itemAlbumModel, itemAlbumClassify, getItemAlbumPlay, itemAlbumSubscribe;
@@ -76,6 +89,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     private SharedPreferences sp;
     private String subscribeFlag, subscribeUser;
     private String userName = LoginActivity.appUserName;
+    private OkHttpClient mClient;
 
 
     @Override
@@ -97,7 +111,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         homeAlbumId = getIntent().getStringExtra("albumId");
         homeAlbumIntroduction = getIntent().getStringExtra("albumIntroduction");
         mAlbumDetailsFragment = new AlbumDetailsFragment();
-        mAlbumProgramFragment = new AlbumProgramFragment();
+        mAlbumProgramFragment = new ProgrameFragment();
         mFragmentList.add(mAlbumDetailsFragment);
         mFragmentList.add(mAlbumProgramFragment);
         adapter = new com.joshua.craftsman.fragment.homepage
@@ -168,6 +182,8 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         albumShare.setOnClickListener(this);
         albumSubscribe.setOnClickListener(this);
         albumBuy.setOnClickListener(this);
+        album_detail_ll_particulars.setOnClickListener(this);
+        album_detail_ll_program.setOnClickListener(this);
     }
 
 
@@ -178,15 +194,65 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                 Toast.makeText(mBaseActivity, "暂未开放专辑分享功能", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.album_subscribe:
-                //saveInfo(isSubscribe);
-                //albumIsSubscribe(String.valueOf(isSubscribe));
-                //isSubscribe = !isSubscribe;
-                Toast.makeText(mBaseActivity, "暂未开放专辑订阅功能", Toast.LENGTH_SHORT).show();
+                subscribe();
                 break;
             case R.id.album_buy:
                 Toast.makeText(mBaseActivity, "暂未开放专辑购买功能", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.album_detail_ll_particulars:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.album_detail_ll_program:
+                mViewPager.setCurrentItem(1);
+                break;
         }
+    }
+
+    /**
+     * 订阅
+     */
+    private void subscribe() {
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(mBaseActivity))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.SERVER_SUBSCRIBE)
+                .add("albumId", homeAlbumId)
+                .add("flag", "1")//    订阅/取消订阅 值 1/0
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(mBaseActivity) {
+            @Override
+            protected void success(String result) {
+                if (result.equals("true")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "订阅成功", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "订阅失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            protected void error() {
+
+            }
+        });
+
     }
 /*
     private void albumIsSubscribe(String strIsSubscribe) {

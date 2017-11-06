@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.utils.CacheDataManager;
@@ -29,6 +31,8 @@ import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.joshua.craftsman.R.id.set_tool_bar;
 
 public class SetActivity extends BaseActivity implements View.OnClickListener {
 
@@ -52,9 +56,11 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     SwitchCompat scMobile;
     @BindView(R.id.tv_cache)
     TextView tvCache;
+    @BindView(R.id.set_tool_bar)
+    Toolbar set_tool_bar;
 
     private SharedPreferences sp;
-    private boolean isListen,isMobile;
+    private boolean isListen, isMobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initListener() {
+        set_tool_bar.setOnClickListener(this);
         setLlBind.setOnClickListener(this);
         setLlChangePwd.setOnClickListener(this);
         setLlClear.setOnClickListener(this);
@@ -101,6 +108,9 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.set_btn_exit:
                 startActivity(new Intent(mBaseActivity, LoginActivity.class));
+                break;
+            case R.id.set_tool_bar:
+                finish();
                 break;
         }
     }
@@ -166,7 +176,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-                    Toast.makeText(mBaseActivity,"清理完成",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mBaseActivity, "清理完成", Toast.LENGTH_SHORT).show();
                     try {
                         //tvCache.setText(CacheDataManager.getTotalCacheSize(mBaseActivity));
                         tvCache.setText("0KB");
@@ -192,17 +202,17 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private void settingSave(){
+    private void settingSave() {
         isListen = scListen.isChecked();
         isMobile = scMobile.isChecked();
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean("listen",isListen);
-        editor.putBoolean("mobile",isMobile);
+        editor.putBoolean("listen", isListen);
+        editor.putBoolean("mobile", isMobile);
         editor.commit();
     }
 
-    private void settingStart(){
-        scListen.setChecked(sp.getBoolean("listen",false));
-        scMobile.setChecked(sp.getBoolean("mobile",false));
+    private void settingStart() {
+        scListen.setChecked(sp.getBoolean("listen", false));
+        scMobile.setChecked(sp.getBoolean("mobile", false));
     }
 }

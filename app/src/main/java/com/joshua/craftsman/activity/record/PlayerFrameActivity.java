@@ -1,19 +1,36 @@
 package com.joshua.craftsman.activity.record;
 
+import android.Manifest;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.entity.joshua.VideoDetail;
+import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.http.HttpCookieJar;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.media.UMusic;
+import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,22 +40,31 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
-public class PlayerFrameActivity extends BaseActivity {
+public class PlayerFrameActivity extends BaseActivity implements View.OnClickListener {
 
     JCVideoPlayerStandard mJcVideoPlayerStandard;
     @BindView(R.id.video_player_album_cover)
     ImageView video_player_album_cover;
-    @BindView(R.id. video_player_album_name)
-    TextView  video_player_album_name;
+    @BindView(R.id.video_player_album_name)
+    TextView video_player_album_name;
     @BindView(R.id.video_player_album_subname)
-    TextView  video_player_album_subname;
+    TextView video_player_album_subname;
     @BindView(R.id.video_player_publish_time)
-    TextView  video_player_publish_time;
-    @BindView(R.id. video_player_times)
-    TextView  video_player_times;
-
+    TextView video_player_publish_time;
+    @BindView(R.id.video_player_times)
+    TextView video_player_times;
+    @BindView(R.id.btn_collect)
+    Button btn_collect;
+    @BindView(R.id.tv_share)
+    TextView tv_share;
     private VideoDetail mVideoDetail;
+    private OkHttpClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +100,8 @@ public class PlayerFrameActivity extends BaseActivity {
         video_player_album_subname.setText(mVideoDetail.getClassifyName());
         video_player_times.setText(mVideoDetail.getPlayTimes());
         video_player_publish_time.setText(mVideoDetail.getSubscribeTimes());
+        btn_collect.setOnClickListener(this);
+        tv_share.setOnClickListener(this);
     }
 
 
@@ -101,4 +129,135 @@ public class PlayerFrameActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_collect:
+                collect();
+                break;
+            case R.id.tv_share:
+//                if(Build.VERSION.SDK_INT>=23){
+//                    String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
+//                    ActivityCompat.requestPermissions(this,mPermissionList,123);
+//                }
+
+                share();
+                break;
+        }
+    }
+
+
+    private void collect() {
+        mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(mBaseActivity))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.SERVER_COLLECT)
+                .add("ProgrammeId", mVideoDetail.getId())
+                .add("flag", "1")//    收藏/取消收藏 值 1/0
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(mBaseActivity) {
+            @Override
+            protected void success(String result) {
+                if (result.equals("true")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "收藏成功", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "收藏失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            protected void error() {
+
+            }
+        });
+
+
+    }
+
+    private UMWeb web;
+    private SHARE_MEDIA share_media;
+
+    /**
+     * 友盟分享
+     */
+    private void share() {
+        share_media=SHARE_MEDIA.WEIXIN.toSnsPlatform().mPlatform;
+        web = new UMWeb("http://139.224.35.126:8080/linlin/Gongjiang.apk");
+        web.setTitle("必得工匠");
+        web.setThumb(new UMImage(this, R.drawable.share_icon));
+        web.setDescription("匠者-传技授得解惑——技，技能；得，心得；惑，疑问。颠覆传统技艺传播方式，提供创新的技艺传播交流平台。");
+
+        new ShareAction(this)
+                .withText("匠者-传技授得解惑——技，技能；得，心得；惑，疑问。颠覆传统技艺传播方式，提供创新的技艺传播交流平台。")
+                .withMedia(web)
+                .setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN)
+                .setCallback(shareListener).open();
+    }
+
+    private UMShareListener shareListener = new UMShareListener() {
+        /**
+         * @descrption 分享开始的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+//            SocializeUtils.safeShowDialog(dialog);
+        }
+
+        /**
+         * @descrption 分享成功的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(mBaseActivity,"成功了",Toast.LENGTH_LONG).show();
+//            SocializeUtils.safeCloseDialog(dialog);
+        }
+
+        /**
+         * @descrption 分享失败的回调
+         * @param platform 平台类型
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+//            SocializeUtils.safeCloseDialog(dialog);
+            Toast.makeText(mBaseActivity,"失败"+t.getMessage(),Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @descrption 分享取消的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+//            SocializeUtils.safeCloseDialog(dialog);
+            Toast.makeText(mBaseActivity,"取消了",Toast.LENGTH_LONG).show();
+
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
 }

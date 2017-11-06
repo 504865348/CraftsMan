@@ -17,30 +17,30 @@ package com.joshua.craftsman.http;
  **/
 
 public class ResponseInfo {
-    private boolean isAlive;
-    private boolean isError;
+    private boolean alive;
+    private boolean error;
     private String result;
 
     public ResponseInfo(boolean isAlive, boolean isError, String result) {
-        this.isAlive = isAlive;
-        this.isError = isError;
+        this.alive = isAlive;
+        this.error = isError;
         this.result = result;
     }
 
     public boolean isAlive() {
-        return !isAlive;
+        return alive;
     }
 
     public void setAlive(boolean alive) {
-        isAlive = alive;
+        alive = alive;
     }
 
     public boolean isError() {
-        return isError;
+        return !error;
     }
 
     public void setError(boolean error) {
-        isError = error;
+        error = error;
     }
 
     public String getResult() {

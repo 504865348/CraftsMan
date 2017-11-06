@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.find.FindActivityActivity;
+import com.joshua.craftsman.activity.find.FindFriendsActivity;
 import com.joshua.craftsman.activity.find.FriendCircleActivity;
 
 import butterknife.BindView;
@@ -54,7 +55,7 @@ public class FindFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.find_ll_friend_circle:
-                startActivity(new Intent(getActivity(), FriendCircleActivity.class));
+                startActivity(new Intent(getActivity(), FindFriendsActivity.class));
                 break;
             case R.id.find_ll_activity:
                 //startActivity(new Intent(getActivity(), FindActivityActivity.class));

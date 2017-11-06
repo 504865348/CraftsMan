@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.StrictMode;
 
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -29,17 +30,24 @@ public class BaseApplication extends Application {
     private static int mainTid;
     private static Handler handler;
 
+    {
+        Config.DEBUG = true;
+        PlatformConfig.setWeixin("wxb254d74dda664d63", "9c29cc8bc30f5edc087bde312ef083a1");
+//        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        //友盟集成
+        UMShareAPI.get(this);
+
         application = this;
         mainTid = android.os.Process.myTid();
         handler = new Handler();
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        //友盟集成
-        UMShareAPI.get(this);
 
 
     }
@@ -56,8 +64,5 @@ public class BaseApplication extends Application {
         return handler;
     }
 
-    {
-        PlatformConfig.setWeixin("wxb254d74dda664d63", "40fca872a5babc3d29e419a35c17a89f");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-    }
+
 }

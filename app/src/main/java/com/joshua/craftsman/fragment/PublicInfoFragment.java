@@ -19,8 +19,14 @@ import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerCommonActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
 import com.joshua.craftsman.activity.info.EditInfoActivity;
+import com.joshua.craftsman.activity.info.SubscribeActivity;
 import com.joshua.craftsman.activity.order.MyOrderActivity;
+import com.joshua.craftsman.activity.other.MyBuyActivity;
+import com.joshua.craftsman.activity.other.MyCollectActivity;
+import com.joshua.craftsman.activity.other.MySubscribeActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
+import com.joshua.craftsman.entity.MySubscribe;
+import com.joshua.craftsman.utils.PrefUtils;
 
 import java.io.File;
 
@@ -28,6 +34,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static com.joshua.craftsman.R.id.my_info_my_buys;
 
 public class PublicInfoFragment extends BaseFragment implements View.OnClickListener {
 
@@ -57,11 +65,13 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
     TextView myInfoPublicUserName;
     @BindView(R.id.my_info_public_user_account)
     TextView myInfoPublicUserAccount;
+    @BindView(R.id.my_info_my_buys)
+    LinearLayout mMyInfoBuy;
 
     private View view;
     private Unbinder unbinder;
     private SharedPreferences sp;
-    private String userClass = LoginActivity.appUserName;
+    private String userClass = PrefUtils.getString(getActivity(),"phone",null);
 
     @Override
     public View initView() {
@@ -75,6 +85,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoPublicMore.setOnClickListener(this);
         mMyInfoPublicSubscribe.setOnClickListener(this);
         mMyInfoPublicCollection.setOnClickListener(this);
+        mMyInfoBuy.setOnClickListener(this);
         showUserInfo();
     }
 
@@ -113,17 +124,19 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
                 startActivity(new Intent(getActivity(), EditInfoActivity.class));
                 break;
             case R.id.my_info_public_subscribe:
-                //startActivity(new Intent(getActivity(), SubscribeActivity.class));
-                Toast.makeText(getActivity(), "暂未开放专辑订阅功能", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), MySubscribeActivity.class));
                 break;
             case R.id.my_info_public_collection:
-                //startActivity(new Intent(getActivity(), CollectActivity.class));
-                Toast.makeText(getActivity(), "暂未开放节目收藏功能", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), MyCollectActivity.class));
+                break;
+            case my_info_my_buys:
+                startActivity(new Intent(getActivity(), MyBuyActivity.class));
                 break;
         }
     }
 
     private void showUserInfo() {
+
         sp = getActivity().getSharedPreferences(userClass+".txt", Context.MODE_PRIVATE);
         if (sp.getString("nickName", "").equals(""))
             myInfoPublicUserName.setText(userClass);

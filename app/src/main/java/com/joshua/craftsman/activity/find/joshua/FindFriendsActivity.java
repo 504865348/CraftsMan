@@ -1,10 +1,9 @@
-package com.joshua.craftsman.activity.find;
+package com.joshua.craftsman.activity.find.joshua;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,8 +15,6 @@ import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.findfriendpage.AttentionPager;
 import com.joshua.craftsman.fragment.findfriendpage.FriendPager;
-import com.joshua.craftsman.fragment.findfriendpage.joshua.AttentionMinePager;
-import com.joshua.craftsman.fragment.findfriendpage.joshua.MyAttentionPager;
 import com.joshua.craftsman.fragment.homepage.PagerAdapter;
 import com.umeng.socialize.UMShareAPI;
 
@@ -27,11 +24,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 2017.11.03
- * 推荐关注改为我的关注
- * 我的朋友改为关注我的
- */
 public class FindFriendsActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.recommend_attention)
@@ -46,17 +38,15 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     ViewPager mViewPager;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
-//    private AttentionPager mAttentionPager;
-//    private FriendPager mFriendPager;
+    private AttentionPager mAttentionPager;
+    private FriendPager mFriendPager;
     private PagerAdapter mPagerAdapter;
-    private AttentionMinePager mAttentionMinePager;
-    private MyAttentionPager mMyAttentionPager;
     private int screenWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.find_friends);
+        setContentView(R.layout.find_care);
         ButterKnife.bind(this);
         initPager();
         initTabLineWidth();
@@ -64,10 +54,10 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initPager() {
-        mAttentionMinePager=new AttentionMinePager();
-        mMyAttentionPager=new MyAttentionPager();
-        mFragmentList.add(mMyAttentionPager);
-        mFragmentList.add(mAttentionMinePager);
+        mAttentionPager = new AttentionPager();
+        mFriendPager = new FriendPager();
+        mFragmentList.add(mAttentionPager);
+        mFragmentList.add(mFriendPager);
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setCurrentItem(0);

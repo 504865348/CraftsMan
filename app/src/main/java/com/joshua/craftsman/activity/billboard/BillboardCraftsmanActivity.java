@@ -124,7 +124,6 @@ public class BillboardCraftsmanActivity extends BaseActivity {
                 intent.putExtra("craftsClassify", list_craftsman.get(pos).getClassifyCrafts());
                 intent.putExtra("craftsHotDegree", list_craftsman.get(pos).getHotDegree());
                 intent.putExtra("craftsPic", list_craftsman.get(pos).getImageUrl());
-                Toast.makeText(mBaseActivity,list_craftsman.get(pos).getCraftsAccount(),Toast.LENGTH_SHORT).show();
                 mBaseActivity.startActivity(intent);
             }
         });

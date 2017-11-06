@@ -78,6 +78,18 @@ public class Server {
     public static final String SERVER_SEND_ORDER_RESULT = "orderResult"; //向服务器发送订单结果
     public static final String SERVER_QUERY_ORDER = "queryMyOrder"; //查询订单
 
+    public static final String SERVER_GET_ATTENTION = "concernCraftsman"; //关注
+    public static final String SERVER_MY_ATTENTION = "MyConcern"; //我的关注
+    public static final String SERVER_ATTENTION_MINE = "Concerned"; //关注我的
+    public static final String SERVER_SUBSCRIBE = "albumSubscribe"; //订阅
+    public static final String SERVER_MY_SUBSCRIBE = "MySubscribe"; //我的订阅
+    public static final String SERVER_COLLECT = "collectProgramme"; //收藏
+    public static final String SERVER_MY_COLLECT = "MyCollect"; //我的收藏
+    public static final String SERVER_MY_BUY_VIDEO = "alreadyVideoPurchase"; //我的购买-节目
+    public static final String SERVER_MY_BUY_QUES= "alreadyQuesPurchase"; //我的购买-问答
+
+
+
 
 
 }
