@@ -13,6 +13,18 @@ public class BillboardCraftsman {
     private String introduction;//工匠简介
     private String classifyCrafts;//工匠分类
     private String hotDegree; //热度(回答问题的个数)
+    private String isFocus;
+
+    public BillboardCraftsman(String id, String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree, String isFocus) {
+        this.id = id;
+        this.craftsAccount = craftsAccount;
+        this.imageUrl = imageUrl;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
+        this.classifyCrafts = classifyCrafts;
+        this.hotDegree = hotDegree;
+        this.isFocus = isFocus;
+    }
 
     public String getId() {
         return id;
@@ -70,26 +82,11 @@ public class BillboardCraftsman {
         this.hotDegree = hotDegree;
     }
 
-    public BillboardCraftsman(String id, String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree) {
-        this.id = id;
-        this.craftsAccount = craftsAccount;
-        this.imageUrl = imageUrl;
-        this.craftsmanName = craftsmanName;
-        this.introduction = introduction;
-        this.classifyCrafts = classifyCrafts;
-        this.hotDegree = hotDegree;
+    public String getIsFocus() {
+        return isFocus;
     }
 
-    @Override
-    public String toString() {
-        return "BillboardCraftsman{" +
-                "id='" + id + '\'' +
-                ", craftsAccount='" + craftsAccount + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", craftsmanName='" + craftsmanName + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", classifyCrafts='" + classifyCrafts + '\'' +
-                ", hotDegree='" + hotDegree + '\'' +
-                '}';
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
     }
 }

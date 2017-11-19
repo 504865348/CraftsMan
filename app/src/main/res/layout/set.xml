@@ -211,6 +211,7 @@
         android:layout_height="1dp"
         android:background="@color/gray"/>
 
+
     <Button
         android:id="@+id/set_btn_exit"
         android:layout_width="match_parent"

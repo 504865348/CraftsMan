@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+
 import com.joshua.craftsman.R;
-import com.joshua.craftsman.entity.BillboardHot;
 import com.joshua.craftsman.entity.joshua.VideoDetail;
 
 import java.util.ArrayList;
@@ -43,6 +42,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_title.setText(data.get(position).getRecordTitle());
         holder.tv_author.setText(data.get(position).getName());
+        holder.tv_price.setText("价格："+data.get(position).getMoney()+"元");
 //        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
     }
@@ -64,12 +64,15 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
         TextView tv_title;
         TextView tv_author;
         ImageView iv_pic;
+        TextView tv_price;
 
         MyViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.recommend_program_name);
             tv_author = (TextView) itemView.findViewById(R.id.recommend_program_author_name);
             iv_pic= (ImageView) itemView.findViewById(R.id.recommend_program_img);
+            tv_price = (TextView) itemView.findViewById(R.id.tv_price);
+
         }
     }
 

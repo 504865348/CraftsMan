@@ -22,24 +22,36 @@
 
         <TextView
             android:id="@+id/tv_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="向XXX提问"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="12dp"
+            android:textSize="18sp"/>
+
+        <!--<EditText-->
+        <!--android:background="@null"-->
+        <!--android:id="@+id/tv_cost"-->
+        <!--android:layout_width="68dp"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="24dp"-->
+        <!--android:hint="价格(元)"-->
+        <!--android:textColor="@color/red"-->
+        <!--android:textSize="18sp"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格（元）"/>
+
+        <Spinner
+            android:id="@+id/tv_cost"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginLeft="12dp"
-            android:text="向XXX提问"
-            android:textSize="18sp"/>
-
-        <EditText
-            android:background="@null"
-            android:id="@+id/tv_cost"
-            android:layout_width="68dp"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
-            android:hint="价格(元)"
-            android:textColor="@color/red"
-            android:textSize="18sp"/>
+            android:entries="@array/cost"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -64,9 +76,9 @@
             android:id="@+id/iv_add_pic"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:scaleType="centerCrop"
             android:layout_margin="6dp"
-            android:background="@drawable/ask_btn"/>
+            android:background="@drawable/ask_btn"
+            android:scaleType="centerCrop"/>
     </LinearLayout>
 
     <LinearLayout
@@ -81,9 +93,9 @@
             android:layout_marginLeft="24dp"
             android:background="@null"
             android:gravity="start"
-            android:textSize="16sp"
             android:text="取消"
             android:textColor="@color/red"
+            android:textSize="16sp"
             />
 
         <Button
@@ -94,9 +106,9 @@
             android:layout_weight="1"
             android:background="@null"
             android:gravity="end"
-            android:textSize="16sp"
             android:text="提交问题"
             android:textColor="@color/red"
+            android:textSize="16sp"
             />
 
     </LinearLayout>

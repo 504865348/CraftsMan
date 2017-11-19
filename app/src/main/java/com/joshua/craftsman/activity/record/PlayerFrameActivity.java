@@ -65,6 +65,7 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
     TextView tv_share;
     private VideoDetail mVideoDetail;
     private OkHttpClient mClient;
+    private String isFocus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,10 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
         video_player_album_subname.setText(mVideoDetail.getClassifyName());
         video_player_times.setText(mVideoDetail.getPlayTimes());
         video_player_publish_time.setText(mVideoDetail.getSubscribeTimes());
+        isFocus=mVideoDetail.getIsFocus();
+        if (isFocus.equals("1")) {
+            btn_collect.setText("取消收藏");
+        }
         btn_collect.setOnClickListener(this);
         tv_share.setOnClickListener(this);
     }
@@ -133,7 +138,7 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_collect:
-                collect();
+                collect(isFocus);
                 break;
             case R.id.tv_share:
 //                if(Build.VERSION.SDK_INT>=23){
@@ -145,16 +150,25 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+    private void changeFocus() {
+        if (isFocus.equals("1")) {
+            btn_collect.setText("收藏");
+            isFocus = "0";
+        } else {
+            btn_collect.setText("取消收藏");
+            isFocus = "1";
+        }
+    }
 
-
-    private void collect() {
+    private void collect(String type) {
+        type = type.equals("1") ? "0" : "1";
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.SERVER_COLLECT)
                 .add("ProgrammeId", mVideoDetail.getId())
-                .add("flag", "1")//    收藏/取消收藏 值 1/0
+                .add("flag", type)//    收藏/取消收藏 值 1/0
                 .build();
 
         final Request request = new Request.Builder()
@@ -169,15 +183,15 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "收藏成功", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(mBaseActivity, "操作成功", Toast.LENGTH_SHORT).show();
+                            changeFocus();
                         }
                     });
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "收藏失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mBaseActivity, "操作失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -26,6 +26,7 @@ import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+
+import static com.joshua.craftsman.R.id.btn_collect;
 
 public class AlbumHomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -87,7 +90,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     public static String albumPic = "";
     private boolean isSubscribe = true;
     private SharedPreferences sp;
-    private String subscribeFlag, subscribeUser;
+    private String subscribeFlag, subscribeUser, isFocus;
     private String userName = LoginActivity.appUserName;
     private OkHttpClient mClient;
 
@@ -106,10 +109,18 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         //showInfo();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
+
     private void initPager() {
         homeAlbumCraftName = getIntent().getStringExtra("albumCrafts");
         homeAlbumId = getIntent().getStringExtra("albumId");
         homeAlbumIntroduction = getIntent().getStringExtra("albumIntroduction");
+
+
         mAlbumDetailsFragment = new AlbumDetailsFragment();
         mAlbumProgramFragment = new ProgrameFragment();
         mFragmentList.add(mAlbumDetailsFragment);
@@ -169,6 +180,10 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         itemAlbumModel = getIntent().getStringExtra("albumModel");
         getItemAlbumPlay = getIntent().getStringExtra("albumPlay");
         itemAlbumSubscribe = getIntent().getStringExtra("albumSubscribe");
+        isFocus = PrefUtils.getString(this, itemAlbumId, "0");
+        if (isFocus.equals("1")) {
+            albumSubscribe.setText("取消订阅");
+        }
         albumDetailName.setText(itemAlbumName);
         albumDetailCraftsName.setText(itemAlbumCrafts);
         albumDetailClassification.setText(itemAlbumClassify);
@@ -194,7 +209,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                 Toast.makeText(mBaseActivity, "暂未开放专辑分享功能", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.album_subscribe:
-                subscribe();
+                subscribe(isFocus);
                 break;
             case R.id.album_buy:
                 Toast.makeText(mBaseActivity, "暂未开放专辑购买功能", Toast.LENGTH_SHORT).show();
@@ -208,17 +223,29 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private void changeFocus() {
+        if (isFocus.equals("1")) {
+            albumSubscribe.setText("订阅");
+            isFocus = "0";
+        } else {
+            albumSubscribe.setText("取消订阅");
+            isFocus = "1";
+        }
+        PrefUtils.setString(this, itemAlbumId, isFocus);
+    }
+
     /**
      * 订阅
      */
-    private void subscribe() {
+    private void subscribe(String type) {
+        type = type.equals("1") ? "0" : "1";
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.SERVER_SUBSCRIBE)
                 .add("albumId", homeAlbumId)
-                .add("flag", "1")//    订阅/取消订阅 值 1/0
+                .add("flag", type)//    订阅/取消订阅 值 1/0
                 .build();
 
         final Request request = new Request.Builder()
@@ -233,15 +260,15 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "订阅成功", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(mBaseActivity, "操作成功", Toast.LENGTH_SHORT).show();
+                            changeFocus();
                         }
                     });
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "订阅失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mBaseActivity, "操作失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

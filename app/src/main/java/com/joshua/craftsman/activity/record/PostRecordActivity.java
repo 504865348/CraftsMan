@@ -37,6 +37,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.path;
 import static com.joshua.craftsman.R.array.cost;
 
 public class PostRecordActivity extends BaseActivity implements View.OnClickListener {
@@ -55,7 +56,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     private String name;
     private ProgressDialog mDialog;
     private long mDuration;
-    private String mCost="0";
+    private String mCost = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         ButterKnife.bind(this);
         record_info_choose_album.setOnClickListener(this);
         name = getIntent().getStringExtra("name");
+
         Button btn_post = (Button) findViewById(R.id.btn_post);
         btn_post.setOnClickListener(this);
         recordInfoToolBar.setOnClickListener(this);
@@ -71,8 +73,8 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] costs = getResources().getStringArray(cost);
-                mCost=costs[position];
-                Log.d("cost", "onItemSelected: "+mCost);
+                mCost = costs[position];
+                Log.d("cost", "onItemSelected: " + mCost);
             }
 
             @Override
@@ -91,7 +93,12 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         String idAlbum = mAlbumId;
         String creater = PrefUtils.getString(mBaseActivity, "phone", "");
         String intro = record_info_intro.getText().toString();
-        String path = Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + name;
+        String path;
+        if (name == null) {
+            path = getIntent().getStringExtra("videoPath");
+        } else {
+            path = Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + name;
+        }
         File file = new File(path);
         MediaPlayer mediaPlayer = new MediaPlayer();
         try {
@@ -136,7 +143,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                PrefUtils.setString(mBaseActivity,name,name);
+                                PrefUtils.setString(mBaseActivity, name, name);
                                 Toast.makeText(mBaseActivity, "节目添加成功", Toast.LENGTH_SHORT).show();
                             }
                         });

@@ -136,6 +136,7 @@ public class MyAttentionPager extends BaseFragment {
                 intent.putExtra("craftsClassify", list_FF.get(pos).getClassifyCrafts());
                 intent.putExtra("craftsHotDegree", list_FF.get(pos).getHotDegree());
                 intent.putExtra("craftsPic", list_FF.get(pos).getImageUrl());
+                intent.putExtra("isFocus", "1");
                 mContext.startActivity(intent);
             }
         });

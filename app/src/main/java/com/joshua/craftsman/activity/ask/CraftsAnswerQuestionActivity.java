@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
@@ -64,12 +65,14 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     TextView message;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.iv_ques)
+    ImageView iv_ques;
 
     private String mFilePath = "";
     private static MediaPlayer music;
     private long mRecordTime;
     private String mId;
-    private String mQuestion;
+    private String mQuestion,mPic;
     private Call mCall;
 
     @Override
@@ -106,7 +109,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
             }
         });
         StartListener();
-
+        Glide.with(this).load(mPic).error(R.drawable.load_error).into(iv_ques);
         //6.0以上需要权限申请
 //        requestPermissions();
     }
@@ -115,6 +118,8 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
         mId = getIntent().getStringExtra("Id");
         mQuestion = getIntent().getStringExtra("question");
         tv_question.setText("问题内容：" + mQuestion);
+        mPic=getIntent().getStringExtra("pic");
+        Log.d(TAG, "initData: "+mPic);
     }
 
     private boolean isFinishRecording = false;
@@ -208,7 +213,10 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     @Override
     protected void onPause() {
         super.onPause();
-        mCall.cancel();
+        if(mCall!=null){
+            mCall.cancel();
+        }
+
     }
 
     /**

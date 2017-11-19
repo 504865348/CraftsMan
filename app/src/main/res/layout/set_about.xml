@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/logo" />
         </LinearLayout>
     </LinearLayout>
 
@@ -45,10 +45,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="工匠"
+        android:text="必得工匠"
         android:textColor="@color/black"
         android:textSize="18dp" />
     <TextView
+        android:id="@+id/tv_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="142dp"
@@ -90,5 +91,14 @@
         android:text="江苏必得网络有限公司 版权所有"
         android:textColor="@color/black"
         android:textSize="14dp" />
-
+    <Button
+        android:id="@+id/set_btn_update"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_light_red_shape"
+        android:text="检查更新"
+        android:textColor="#FFF"/>
 </LinearLayout>

@@ -13,12 +13,14 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,8 @@ import okhttp3.Response;
 
 import static android.R.attr.layout_gravity;
 import static android.R.attr.path;
+import static com.joshua.craftsman.R.array.cost;
+import static com.joshua.craftsman.R.id.record_info_price;
 
 public class AskQuestionActivity extends BaseActivity implements View.OnClickListener {
 
@@ -61,7 +65,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.tv_answer)
     TextView tv_answer;
     @BindView(R.id.tv_cost)
-    EditText tv_cost;
+    Spinner tv_cost;
     @BindView(R.id.et_question)
     EditText et_question;
     @BindView(R.id.iv_add_pic)
@@ -74,10 +78,10 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     private PopupWindow pop = null;
     private View parentView;
     private LinearLayout ll_popup;
-    private String mAnswer,mCraftsAccount;
+    private String mAnswer, mCraftsAccount;
     private ProgressDialog mDialog;
     private File mFile;
-    private String mCost;
+    private String mCost = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,19 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         iv_add_pic.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
         btn_commit.setOnClickListener(this);
+        tv_cost.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] costs = getResources().getStringArray(cost);
+                mCost = costs[position];
+                Log.d("cost", "onItemSelected: " + mCost);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -127,10 +144,9 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_commit:
                 //支付逻辑
-                mCost = tv_cost.getText().toString();
-                if(!mCost.equals("")||!mCost.isEmpty()){
+                if (!mCost.equals("") || !mCost.isEmpty()) {
                     payQuestion();
-                }else {
+                } else {
                     Toast.makeText(this, "请填写问题价格", Toast.LENGTH_SHORT).show();
                 }
 
@@ -174,7 +190,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 .addFormDataPart("image", "question.JPEG", fileBody)
                 .addFormDataPart("craftsman", mCraftsAccount)
                 .addFormDataPart("questionWord", question)
-                .addFormDataPart("money", mCost+"")
+                .addFormDataPart("money", mCost + "")
                 .addFormDataPart("user", user)
                 .addFormDataPart("orderNumber", orderNo)
                 .build();
@@ -186,14 +202,14 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d(TAG, "run: "+e.getMessage());
+                Log.d(TAG, "run: " + e.getMessage());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
                         Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
                         mDialog.cancel();
-                        if(mFile.exists()){
+                        if (mFile.exists()) {
                             mFile.delete();
                         }
                     }
@@ -214,7 +230,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                             public void run() {
 
                                 Toast.makeText(mBaseActivity, "提问成功", Toast.LENGTH_SHORT).show();
-                                if(mFile.exists()){
+                                if (mFile.exists()) {
                                     mFile.delete();
                                 }
                             }
@@ -225,7 +241,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                             @Override
                             public void run() {
                                 Toast.makeText(mBaseActivity, "提问失败", Toast.LENGTH_SHORT).show();
-                                if(mFile.exists()){
+                                if (mFile.exists()) {
                                     mFile.delete();
                                 }
                             }
@@ -233,7 +249,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    if(mFile.exists()){
+                    if (mFile.exists()) {
                         mFile.delete();
                     }
                 }

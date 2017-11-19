@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -31,6 +32,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.os.Build.VERSION_CODES.M;
 import static com.joshua.craftsman.R.id.main;
 import static com.joshua.craftsman.R.id.money;
 import static com.joshua.craftsman.entity.Server.SERVER_SEND_ORDER;
@@ -52,7 +54,7 @@ public class PayUtils {
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(BaseApplication.getApplication()))
                 .build();
-        mActivity=activity;
+        mActivity = activity;
     }
 
     public void setPaySuccess(PaySuccess paySuccess) {
@@ -63,11 +65,12 @@ public class PayUtils {
     /**
      * 视频支付
      */
-    public void  payV2(String type, String id, float money) {
+    public void payV2(String type, String id, final float money) {
         /**
          * 访问服务器
          * 上传订单信息
          */
+
         RequestBody payParams = new FormBody.Builder()
                 .add("method", Server.SERVER_SEND_ORDER)
                 .add("id", id)
@@ -101,16 +104,30 @@ public class PayUtils {
                     final String orderNumber = jo.getString("orderNumber");
                     Log.d(TAG, "result: " + orderInfo);
                     Log.d(TAG, "orderNumber: " + orderNumber);
-                    Runnable payRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            PayTask alipay = new PayTask(mActivity);
-                            Map<String, String> result = alipay.payV2(orderInfo, true);
-                            postPayResult(result,orderNumber);
-                        }
-                    };
-                    Thread payThread = new Thread(payRunnable);
-                    payThread.start();
+
+
+                    //0元，则不需要付款
+                    if (money == 0) {
+                        Map<String, String> result = new HashMap<>();
+                        result.put("resultStatus", 9000 + "");
+                        postPayResult(result, orderNumber);
+                        Log.d(TAG, "money:  free" );
+                    } else {
+                        Runnable payRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                PayTask alipay = new PayTask(mActivity);
+                                Map<String, String> result = alipay.payV2(orderInfo, true);
+                                postPayResult(result, orderNumber);
+                            }
+                        };
+
+
+                        Thread payThread = new Thread(payRunnable);
+                        payThread.start();
+                    }
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -137,9 +154,9 @@ public class PayUtils {
                 .add("memo", "null")
 //                .add("result", result.get("result"))
 //                .add("memo", result.get("memo"))
-                .add("orderNo",orderNo)
+                .add("orderNo", orderNo)
                 .build();
-        Log.d(TAG, "postPayResult: \n"+result.get("resultStatus")+"\n"+result.get("result")+"\n"+result.get("memo"));
+        Log.d(TAG, "postPayResult: \n" + result.get("resultStatus") + "\n" + result.get("result") + "\n" + result.get("memo"));
         final Request request = new Request.Builder()
                 .url(Server.SERVER_REMOTE)
                 .post(resultParams)
@@ -148,17 +165,17 @@ public class PayUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                postPayResult(result,orderNo);
+                postPayResult(result, orderNo);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseJson = response.body().string();
-                Log.d(TAG, "responseJson: "+responseJson);
+                Log.d(TAG, "responseJson: " + responseJson);
                 try {
                     JSONObject jo = new JSONObject(responseJson);
                     String result = jo.getString("result");
-                    Log.d(TAG, "onResponse: "+result);
+                    Log.d(TAG, "onResponse: " + result);
                     if (TextUtils.equals(result, "true")) {
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
@@ -188,7 +205,6 @@ public class PayUtils {
 
 
     }
-
 
 
 }

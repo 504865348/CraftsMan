@@ -16,6 +16,20 @@ public class Classify {
     private String classify;//专辑所属分类
     private String play; //专辑下的节目播放量
     private String subscribe; //专辑订阅量
+    private String isFocus;
+
+    public Classify(String id, String albumImage, String title, String craftsmanName, String introduction, String model, String classify, String play, String subscribe, String isFocus) {
+        Id = id;
+        this.albumImage = albumImage;
+        this.title = title;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
+        this.model = model;
+        this.classify = classify;
+        this.play = play;
+        this.subscribe = subscribe;
+        this.isFocus = isFocus;
+    }
 
     public String getId() {
         return Id;
@@ -89,30 +103,11 @@ public class Classify {
         this.subscribe = subscribe;
     }
 
-    public Classify(String id, String albumImage, String title, String craftsmanName, String introduction, String model, String classify, String play, String subscribe) {
-        Id = id;
-        this.albumImage = albumImage;
-        this.title = title;
-        this.craftsmanName = craftsmanName;
-        this.introduction = introduction;
-        this.model = model;
-        this.classify = classify;
-        this.play = play;
-        this.subscribe = subscribe;
+    public String getIsFocus() {
+        return isFocus;
     }
 
-    @Override
-    public String toString() {
-        return "Classify{" +
-                "Id='" + Id + '\'' +
-                ", albumImage='" + albumImage + '\'' +
-                ", title='" + title + '\'' +
-                ", craftsmanName='" + craftsmanName + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", model='" + model + '\'' +
-                ", classify='" + classify + '\'' +
-                ", play='" + play + '\'' +
-                ", subscribe='" + subscribe + '\'' +
-                '}';
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
     }
 }

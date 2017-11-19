@@ -24,8 +24,8 @@ public class HotSkillsAdapter extends RecyclerView.Adapter<HotSkillsAdapter.MyVi
 
     public HotSkillsAdapter(Context context, List<HotSkills> data) {
         mInflater = LayoutInflater.from(context);
-        this.data=data;
-        this.mContext=context;
+        this.data = data;
+        this.mContext = context;
     }
 
     @Override
@@ -52,10 +52,11 @@ public class HotSkillsAdapter extends RecyclerView.Adapter<HotSkillsAdapter.MyVi
                 intent.putExtra("albumModel", data.get(position).getModel());
                 intent.putExtra("albumPlay", data.get(position).getPlay());
                 intent.putExtra("albumSubscribe", data.get(position).getSubscribe());
+                intent.putExtra("isFocus", data.get(position).getIsFocus());
                 mContext.startActivity(intent);
             }
         });
-        holder.itemView.setTag(position+"");
+        holder.itemView.setTag(position + "");
     }
 
 
@@ -78,7 +79,7 @@ public class HotSkillsAdapter extends RecyclerView.Adapter<HotSkillsAdapter.MyVi
         MyViewHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.hot_item_text);
-            iv_pic= (ImageView) itemView.findViewById(R.id.hot_item_image);
+            iv_pic = (ImageView) itemView.findViewById(R.id.hot_item_image);
         }
     }
 

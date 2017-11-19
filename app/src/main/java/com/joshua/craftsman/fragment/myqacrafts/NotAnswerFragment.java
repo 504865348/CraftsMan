@@ -140,6 +140,8 @@ public class NotAnswerFragment extends BaseFragment {
                 Intent intent=new Intent(getActivity(),CraftsAnswerQuestionActivity.class);
                 intent.putExtra("Id",list_WCL.get(Integer.parseInt(position)).getId());
                 intent.putExtra("question",list_WCL.get(Integer.parseInt(position)).getQuestionWord());
+                intent.putExtra("pic",list_WCL.get(Integer.parseInt(position)).getQuestionPic());
+
                 Log.d(TAG, "onItemClick: "+position);
                 Log.d(TAG, "onItemClick: "+list_WCL.get(Integer.parseInt(position)).getId());
                 startActivity(intent);

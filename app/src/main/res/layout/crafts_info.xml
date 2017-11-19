@@ -78,6 +78,7 @@
     </RelativeLayout>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/crafts_text_introduction"
         android:layout_width="match_parent"
         android:layout_height="80dp"

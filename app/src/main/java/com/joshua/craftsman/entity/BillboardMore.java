@@ -16,6 +16,21 @@ public class BillboardMore {
     private String model; //模块名
     private String play; //播放量
     private String subscribe; //订阅量
+    private String isFocus;
+
+    public BillboardMore(String albumID, String albumRank, String albumImage, String title, String author, String classifyName, String intro, String model, String play, String subscribe, String isFocus) {
+        this.albumID = albumID;
+        this.albumRank = albumRank;
+        this.albumImage = albumImage;
+        this.title = title;
+        this.author = author;
+        this.classifyName = classifyName;
+        this.intro = intro;
+        this.model = model;
+        this.play = play;
+        this.subscribe = subscribe;
+        this.isFocus = isFocus;
+    }
 
     public String getAlbumID() {
         return albumID;
@@ -97,32 +112,11 @@ public class BillboardMore {
         this.subscribe = subscribe;
     }
 
-    public BillboardMore(String albumID, String albumRank, String albumImage, String title, String author, String classifyName, String intro, String model, String play, String subscribe) {
-        this.albumID = albumID;
-        this.albumRank = albumRank;
-        this.albumImage = albumImage;
-        this.title = title;
-        this.author = author;
-        this.classifyName = classifyName;
-        this.intro = intro;
-        this.model = model;
-        this.play = play;
-        this.subscribe = subscribe;
+    public String getIsFocus() {
+        return isFocus;
     }
 
-    @Override
-    public String toString() {
-        return "BillboardMore{" +
-                "albumID='" + albumID + '\'' +
-                ", albumRank='" + albumRank + '\'' +
-                ", albumImage='" + albumImage + '\'' +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", classifyName='" + classifyName + '\'' +
-                ", intro='" + intro + '\'' +
-                ", model='" + model + '\'' +
-                ", play='" + play + '\'' +
-                ", subscribe='" + subscribe + '\'' +
-                '}';
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
     }
 }

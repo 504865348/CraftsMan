@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void initView() {
         btn_register.setOnClickListener(this);
-         tv_forget_pwd.setOnClickListener(this);
+        tv_forget_pwd.setOnClickListener(this);
     }
 
 
@@ -67,10 +67,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void login() {
         showLoadingProgress();
         Log.d(TAG, "login: " + "connecting");
-//        final String username = et_username.getText().toString();
-//        String pwd = et_pwd.getText().toString();
-          final String username = "18761996926";
-          String pwd = "654321";
+        final String username = et_username.getText().toString();
+        String pwd = et_pwd.getText().toString();
+//        final String username = "18761996926";
+//        String pwd = "654321";
 
 //        final String username = "15706106292";
 //        String pwd = "123456";

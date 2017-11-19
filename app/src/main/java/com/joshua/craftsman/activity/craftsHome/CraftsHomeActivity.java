@@ -7,6 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftAlbumFragment;
+import com.joshua.craftsman.fragment.craftHome.CraftDetailFragment;
 import com.joshua.craftsman.fragment.craftHome.CraftQAFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
@@ -51,6 +53,8 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     TextView mCraftsTextIntroduction;
     @BindView(R.id.crafts_tv_album)
     TextView mCraftsTvAlbum;
+    @BindView(R.id.crafts_tv_detail)
+    TextView crafts_tv_detail;
     @BindView(crafts_ll_album)
     LinearLayout mCraftsLlAlbum;
     @BindView(R.id.crafts_tv_q_a)
@@ -77,8 +81,9 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     private int screenWidth;
     private CraftAlbumFragment mCraftAlbumFragment;
     private CraftQAFragment mCraftQAFragment;
+    private CraftDetailFragment mCraftDetailFragment;
     private String itemCraftsName, itemCraftsIntro, itemCraftsClassify,
-            itemCraftsHotDegree, itemCraftsPic, itemCraftsAccount;
+            itemCraftsHotDegree, itemCraftsPic, itemCraftsAccount, isFocus;
     public static String homeCraftsName, homeCraftsAccount;
     private OkHttpClient mClient;
 
@@ -101,8 +106,10 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     private void initPager() {
         homeCraftsAccount = getIntent().getStringExtra("craftsAccount");
         homeCraftsName = getIntent().getStringExtra("craftsName");
+        mCraftDetailFragment=new CraftDetailFragment();
         mCraftAlbumFragment = new CraftAlbumFragment();
         mCraftQAFragment = new CraftQAFragment();
+        mFragmentList.add(mCraftDetailFragment);
         mFragmentList.add(mCraftAlbumFragment);
         mFragmentList.add(mCraftQAFragment);
         /**
@@ -112,7 +119,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
                 .PagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(0);
-        mCraftsTvAlbum.setTextColor(Color.RED);
+        crafts_tv_detail.setTextColor(Color.RED);
         /**
          * 添加滑动监听器
          */
@@ -126,7 +133,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-                lp.leftMargin = screenWidth / 2 * position + positionOffsetPixels / 2;
+                lp.leftMargin = screenWidth / 3 * position + positionOffsetPixels / 3;
                 mTabLine.setLayoutParams(lp);
             }
 
@@ -135,9 +142,12 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
                 resetTextView();
                 switch (position) {
                     case 0:
-                        mCraftsTvAlbum.setTextColor(Color.RED);
+                        crafts_tv_detail.setTextColor(Color.RED);
                         break;
                     case 1:
+                        mCraftsTvAlbum.setTextColor(Color.RED);
+                        break;
+                    case 2:
                         mCraftsTvQA.setTextColor(Color.RED);
                         break;
                 }
@@ -153,6 +163,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     }
 
     private void resetTextView() {
+        crafts_tv_detail.setTextColor(Color.BLACK);
         mCraftsTvAlbum.setTextColor(Color.BLACK);
         mCraftsTvQA.setTextColor(Color.BLACK);
     }
@@ -165,7 +176,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(dpMetrics);
         screenWidth = dpMetrics.widthPixels;
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLine.getLayoutParams();
-        lp.width = screenWidth / 2;
+        lp.width = screenWidth / 3;
         mTabLine.setLayoutParams(lp);
     }
 
@@ -176,11 +187,27 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         itemCraftsClassify = getIntent().getStringExtra("craftsClassify");
         itemCraftsHotDegree = getIntent().getStringExtra("craftsHotDegree");
         itemCraftsIntro = getIntent().getStringExtra("craftsIntro");
+        isFocus = getIntent().getStringExtra("isFocus");
         mCraftsTextName.setText(itemCraftsName);
         craftsTextClassify.setText(itemCraftsClassify);
         craftsTextHotGreed.setText(itemCraftsHotDegree);
-        mCraftsTextIntroduction.setText(itemCraftsIntro);
+//        mCraftsTextIntroduction.setText(itemCraftsIntro);
+        Log.d(TAG, "initView: "+isFocus);
+        if (isFocus.equals("1")) {
+            mCraftsImageFollow.setText("取消关注");
+        }
         Glide.with(this).load(itemCraftsPic).into(mCraftsImageIcon);
+    }
+
+
+    private void changeFocus() {
+        if (isFocus.equals("1")) {
+            mCraftsImageFollow.setText("关注");
+            isFocus = "0";
+        } else {
+            mCraftsImageFollow.setText("取消关注");
+            isFocus = "1";
+        }
     }
 
     private void initListener() {
@@ -201,7 +228,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
                 mBaseActivity.startActivity(intent);
                 break;
             case R.id.crafts_image_follow:
-                getAttention();
+                getAttention(isFocus);
                 break;
             case R.id.crafts_ll_q_a:
                 mViewPager.setCurrentItem(1);
@@ -213,14 +240,15 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private void getAttention() {
+    private void getAttention(String type) {
+        type = type.equals("1") ? "0" : "1";
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.SERVER_GET_ATTENTION)
                 .add("craftsmanNameId", itemCraftsAccount)
-                .add("flag", "1")//    关注/取消关注 值 1/0
+                .add("flag", type)//    关注/取消关注 值 1/0
                 .build();
 
         final Request request = new Request.Builder()
@@ -235,15 +263,15 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "关注成功", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(mBaseActivity, "操作成功", Toast.LENGTH_SHORT).show();
+                            changeFocus();
                         }
                     });
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mBaseActivity, "关注失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mBaseActivity, "操作失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -124,6 +124,7 @@ public class BillboardCraftsmanActivity extends BaseActivity {
                 intent.putExtra("craftsClassify", list_craftsman.get(pos).getClassifyCrafts());
                 intent.putExtra("craftsHotDegree", list_craftsman.get(pos).getHotDegree());
                 intent.putExtra("craftsPic", list_craftsman.get(pos).getImageUrl());
+                intent.putExtra("isFocus",list_craftsman.get(pos).getIsFocus());
                 mBaseActivity.startActivity(intent);
             }
         });

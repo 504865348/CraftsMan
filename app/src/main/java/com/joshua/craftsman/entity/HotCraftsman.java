@@ -12,6 +12,17 @@ public class HotCraftsman {
     private String introduction;//简介
     private String classifyCrafts;//工匠分类
     private String hotDegree; //热度(回答问题的个数)
+    private String isFocus;
+
+    public HotCraftsman(String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree, String isFocus) {
+        this.craftsAccount = craftsAccount;
+        this.imageUrl = imageUrl;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
+        this.classifyCrafts = classifyCrafts;
+        this.hotDegree = hotDegree;
+        this.isFocus = isFocus;
+    }
 
     public String getCraftsAccount() {
         return craftsAccount;
@@ -61,13 +72,12 @@ public class HotCraftsman {
         this.hotDegree = hotDegree;
     }
 
-    public HotCraftsman(String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree) {
-        this.craftsAccount = craftsAccount;
-        this.imageUrl = imageUrl;
-        this.craftsmanName = craftsmanName;
-        this.introduction = introduction;
-        this.classifyCrafts = classifyCrafts;
-        this.hotDegree = hotDegree;
+    public String getIsFocus() {
+        return isFocus;
+    }
+
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
     }
 
     @Override
@@ -79,6 +89,7 @@ public class HotCraftsman {
                 ", introduction='" + introduction + '\'' +
                 ", classifyCrafts='" + classifyCrafts + '\'' +
                 ", hotDegree='" + hotDegree + '\'' +
+                ", isFocus='" + isFocus + '\'' +
                 '}';
     }
 }

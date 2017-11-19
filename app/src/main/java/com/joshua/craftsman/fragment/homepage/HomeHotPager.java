@@ -552,4 +552,10 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
         }
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+    }
 }

@@ -67,6 +67,7 @@ public class HotCraftsAdapter extends android.support.v7.widget.RecyclerView.Ada
                 intent.putExtra("craftsHotDegree", data.get(position).getHotDegree());
                 intent.putExtra("craftsIntro", data.get(position).getIntroduction());
                 intent.putExtra("craftsPic", data.get(position).getImageUrl());
+                intent.putExtra("isFocus", data.get(position).getIsFocus());
                 mContext.startActivity(intent);
             }
         });

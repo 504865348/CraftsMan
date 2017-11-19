@@ -38,6 +38,22 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/crafts_ll_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/crafts_tv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="详情"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/crafts_ll_album"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -15,6 +15,20 @@ public class HotSkills {
     private String play; //专辑下的节目播放量
     private String model; //专辑所属模块
     private String subscribe; //专辑订阅量
+    private String isFocus;
+
+    public HotSkills(String id, String imageUrl, String programName, String author, String introduction, String classify, String play, String model, String subscribe, String isFocus) {
+        this.id = id;
+        this.imageUrl = imageUrl;
+        this.programName = programName;
+        this.author = author;
+        this.introduction = introduction;
+        this.classify = classify;
+        this.play = play;
+        this.model = model;
+        this.subscribe = subscribe;
+        this.isFocus = isFocus;
+    }
 
     public String getId() {
         return id;
@@ -88,30 +102,11 @@ public class HotSkills {
         this.subscribe = subscribe;
     }
 
-    public HotSkills(String id, String imageUrl, String programName, String author, String introduction, String classify, String play, String model, String subscribe) {
-        this.id = id;
-        this.imageUrl = imageUrl;
-        this.programName = programName;
-        this.author = author;
-        this.introduction = introduction;
-        this.classify = classify;
-        this.play = play;
-        this.model = model;
-        this.subscribe = subscribe;
+    public String getIsFocus() {
+        return isFocus;
     }
 
-    @Override
-    public String toString() {
-        return "HotSkills{" +
-                "id='" + id + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", programName='" + programName + '\'' +
-                ", author='" + author + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", classify='" + classify + '\'' +
-                ", play='" + play + '\'' +
-                ", model='" + model + '\'' +
-                ", subscribe='" + subscribe + '\'' +
-                '}';
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
     }
 }

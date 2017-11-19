@@ -11,103 +11,126 @@
         android:layout_gravity="center"
         android:visibility="invisible"
         />
-<LinearLayout
-    android:orientation="vertical"
-    android:id="@+id/ll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/answer_question_tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:id="@+id/crafts_text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="18dp"
-            android:textColor="@android:color/black"
-            android:text="回答问题"/>
-
-        <!-- 代码中添加 answer_question_menu -->
-
-    </android.support.v7.widget.Toolbar>
-
-    <View style="@style/horizontal_split"/>
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/light_gray"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/answer_question_tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/tv_question"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:text="问题内容：你好啊"
-            android:background="@color/blue"
-            android:layout_weight="2"/>
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/crafts_text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="回答问题"
+                android:textColor="@android:color/black"
+                android:textSize="18dp"/>
+
+            <!-- 代码中添加 answer_question_menu -->
+
+        </android.support.v7.widget.Toolbar>
+
+        <View style="@style/horizontal_split"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
+            android:background="@color/light_gray"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/answer_question_recording"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/img_answer_question_record"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="2"
+                android:background="@color/blue"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/message"
-                android:layout_width="wrap_content"
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_question"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="问题内容：你好啊"
+                        android:textSize="18sp"
+                        />
+                </ScrollView>
+
+
+                <ImageView
+                    android:id="@+id/iv_ques"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                   />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/answer_question_recording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/img_answer_question_record"/>
+
+                <TextView
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="最长两分钟录制"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/answer_question_listen"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="最长两分钟录制"
-                android:layout_marginTop="5dp"
-                android:textSize="12sp"
-                android:textColor="@color/black"/>
+                android:layout_weight="1"
+                android:src="@drawable/img_answer_question_listen"/>
+
+            <ImageView
+                android:id="@+id/answer_question_rerecord"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_answer_question_rerecord"/>
+
+            <ImageView
+                android:id="@+id/answer_question_send"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/img_answer_question_send"/>
 
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/answer_question_listen"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/img_answer_question_listen"/>
-
-        <ImageView
-            android:id="@+id/answer_question_rerecord"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/img_answer_question_rerecord"/>
-
-        <ImageView
-            android:id="@+id/answer_question_send"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/img_answer_question_send"/>
 
     </LinearLayout>
-
-</LinearLayout>
-    </FrameLayout>
+</FrameLayout>
