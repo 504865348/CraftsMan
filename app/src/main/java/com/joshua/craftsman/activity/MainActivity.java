@@ -270,6 +270,7 @@ public class MainActivity extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
     private static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 2;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
 
     public void permissionRequest() {
         if (Build.VERSION.SDK_INT >= 23) {
@@ -289,6 +290,13 @@ public class MainActivity extends BaseActivity {
                         new String[]{Manifest.permission.RECORD_AUDIO},
                         MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
             }
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA);
+            }
         }
 
     }
@@ -304,6 +312,12 @@ public class MainActivity extends BaseActivity {
 
 
         if (requestCode == MY_PERMISSIONS_REQUEST_RECORD_AUDIO) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "授权开启失败去，请到设置中手动授权", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "授权开启失败去，请到设置中手动授权", Toast.LENGTH_SHORT).show();
             }

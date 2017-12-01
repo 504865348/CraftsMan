@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ShareCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ import com.joshua.craftsman.activity.other.MyCollectActivity;
 import com.joshua.craftsman.activity.other.MySubscribeActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.record.PostRecordActivity;
+import com.joshua.craftsman.activity.record.RecordActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.utils.PrefUtils;
@@ -171,20 +173,26 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
 
     @OnClick(R.id.my_info_crafts_record)
     public void startRecord() {
-        try {
-            fileUri = Uri.fromFile(createMediaFile());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            fileUri = Uri.fromFile(createMediaFile());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+//        Intent intent = new Intent();
+//        intent.setAction("android.media.action.VIDEO_CAPTURE");
+//        intent.addCategory("android.intent.category.DEFAULT");
+//
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);  // 设置视频文件的名字
+//        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // 设置视频质量为高
+//        startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
 
-        // Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        Intent intent = new Intent();
-        intent.setAction("android.media.action.VIDEO_CAPTURE");
-        intent.addCategory("android.intent.category.DEFAULT");
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);  // 设置视频文件的名字
-        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // 设置视频质量为高
-        startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
+        Intent intent1=new Intent(getActivity(), RecordActivity.class);
+        startActivity(intent1);
+
+
     }
 
     @OnClick(R.id.my_info_my_orders)

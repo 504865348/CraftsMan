@@ -81,12 +81,12 @@ public class MyRecordAdapter extends BaseAdapter {
         record_item_cover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = mMyRecordings.get(position).getStorageUrl();
-                String title = mMyRecordings.get(position).getName();
-                Intent intent = new Intent(mContext, PlayerFrameActivity.class);
-                intent.putExtra("url", url);
-                intent.putExtra("title", title);
-                mContext.startActivity(intent);
+//                String url = mMyRecordings.get(position).getStorageUrl();
+//                String title = mMyRecordings.get(position).getName();
+//                Intent intent = new Intent(mContext, PlayerFrameActivity.class);
+//                intent.putExtra("url", url);
+//                intent.putExtra("title", title);
+//                mContext.startActivity(intent);
             }
         });
         record_item_release.setOnClickListener(new View.OnClickListener() {

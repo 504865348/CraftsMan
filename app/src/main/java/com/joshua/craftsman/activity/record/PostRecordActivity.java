@@ -18,7 +18,16 @@ import android.widget.Toast;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.utils.PrefUtils;
+import com.qiniu.android.common.AutoZone;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
+import com.qiniu.util.Auth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -86,8 +96,11 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     }
 
     /**
-     * 上传至
+     * 上传
+     * 2017-11-28修改
+     * 上传至原服务器，改为上传至七牛云，方法废弃
      */
+    @Deprecated
     public void postToServer() {
         String title = record_info_title.getText().toString();
         String idAlbum = mAlbumId;
@@ -181,8 +194,53 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 mDialog.setCancelable(false);
                 mDialog.setMessage("视频上传中，请稍后...");
                 mDialog.show();
-                postToServer();
+                //将视频上传至七牛云并且返回服务器地址
+                postToQNY();
         }
+    }
+
+    private void postToQNY() {
+        String accessKey = "q6OOt03fP_CJS6nSXW3OZeNSSoDiNRpLXYthiN5c";
+        String secretKey = "HJQO2BjtP3dRM1k90e0YTlhkzogxRcbiQII0vmZN";
+        String bucket = "buildoneqncloud";
+        Auth auth = Auth.create(accessKey, secretKey);
+        String upToken = auth.uploadToken(bucket);
+        Configuration config = new Configuration.Builder()
+                .zone(AutoZone.autoZone)
+                .build();
+        UploadManager uploadManager = new UploadManager(config);
+        String path;
+        if (name == null) {
+            path = getIntent().getStringExtra("videoPath");
+        } else {
+            path = Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + name;
+        }
+        File mediaStorageDir = new File(path);
+        String key = name;
+        uploadManager.put(mediaStorageDir, key, upToken,
+                new UpCompletionHandler() {
+                    @Override
+                    public void complete(String key, ResponseInfo info, JSONObject res) {
+                        if (info.isOK()) {
+                            Log.d("qiniu", "Upload Success");
+                            postInfoToServer();
+                        } else {
+                            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+                            mDialog.dismiss();
+                            Toast.makeText(mBaseActivity,"节目添加失败",Toast.LENGTH_SHORT).show();
+
+                        }
+                        Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
+                    }
+                },
+                //上传进度
+                new UploadOptions(null, null, false,
+                        new UpProgressHandler() {
+                            public void progress(String key, double percent) {
+                                Log.i("qiniu", key + ": " + percent);
+                            }
+                        }, null));
+
     }
 
     @Override
@@ -200,5 +258,91 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
 
 
     }
+
+    /**
+     * 2017-11-28新增
+     * 将七牛云上传结果发送给服务器
+     */
+    public void postInfoToServer() {
+        String title = record_info_title.getText().toString();
+        String idAlbum = mAlbumId;
+        String creater = PrefUtils.getString(mBaseActivity, "phone", "");
+        String intro = record_info_intro.getText().toString();
+        String path;
+        if (name == null) {
+            path = getIntent().getStringExtra("videoPath");
+        } else {
+            path = Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + name;
+        }
+        File file = new File(path);
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(file.getAbsolutePath());
+            mDuration = mediaPlayer.getDuration();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getApplicationContext()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.SERVER_POST_RECORD)
+                .add("RecordTitle", title)
+                .add("Name", creater)
+                .add("Special", idAlbum)
+                .add("Introduction", intro)
+                .add("Duration", mDuration + "")
+                .add("money", mCost)
+                .add("name", name)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "createAlbum:fail" + e.getMessage());
+                mDialog.dismiss();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                JSONObject jo = null;
+                try {
+                    jo = new JSONObject(responseJson);
+                    String result = jo.getString("result");
+                    if (result.equals("true")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                PrefUtils.setString(mBaseActivity, name, name);
+                                Toast.makeText(mBaseActivity, "节目添加成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(mBaseActivity, "节目添加失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } finally {
+                    mDialog.dismiss();
+                }
+
+            }
+        });
+    }
+
+
 }
 

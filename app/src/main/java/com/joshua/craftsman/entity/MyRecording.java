@@ -1,11 +1,14 @@
 package com.joshua.craftsman.entity;
 
+import java.io.Serializable;
+import java.util.Set;
+
 /**
  * Created by nzz on 2017/5/1.
  * 工匠用户--我的录制
  */
 
-public class MyRecording {
+public class MyRecording implements Serializable{
     private String myRecordingID; //我的录制ID
     private String recordingImage; //录制视频的图片
     private String name; //录制人名字

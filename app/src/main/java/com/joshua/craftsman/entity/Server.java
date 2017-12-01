@@ -89,7 +89,7 @@ public class Server {
     public static final String SERVER_MY_BUY_QUES= "alreadyQuesPurchase"; //我的购买-问答
 
     public static final String SERVER_UPDATE= "checkUpdate"; //检查更新
-
+    public static final String SERVER_POST_RECORD= "addMyRecording"; //上传视频信息到服务器
 
 
 }

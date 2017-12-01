@@ -158,52 +158,64 @@ public class MyCollectActivity extends BaseActivity {
                         Log.d(TAG, "onSuccess: pay success");
                         //首先判断是否已经下载
                         Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
-                        if (checkLocal(id)) {
-                            //录音的播放与暂停
-                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-                            Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
-                            intent.putExtra("url", mFile.getAbsolutePath());
-                            intent.putExtra("title", title);
-                            intent.putExtra("entity", list_collect.get(pos));
-                            startActivity(intent);
-                        } else {
-                            mDialog.setMessage("视频下载中，请稍后");
-                            mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    mFile.delete();
-                                    mCall.cancel();
-                                }
-                            });
-                            mDialog.show();
-                            getSoundFromServer(id, url, title, pos);
-                        }
+//                        if (checkLocal(id)) {
+//                            //录音的播放与暂停
+//                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
+//                            Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
+//                            intent.putExtra("url", mFile.getAbsolutePath());
+//                            intent.putExtra("title", title);
+//                            intent.putExtra("entity", list_collect.get(pos));
+//                            startActivity(intent);
+//                        } else {
+//                            mDialog.setMessage("视频下载中，请稍后");
+//                            mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                @Override
+//                                public void onCancel(DialogInterface dialog) {
+//                                    mFile.delete();
+//                                    mCall.cancel();
+//                                }
+//                            });
+//                            mDialog.show();
+//                            getSoundFromServer(id, url, title, pos);
+//                        }
+                        //取消下载功能，直接在线播放
+                        Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
+                        intent.putExtra("url",url);
+                        intent.putExtra("title", title);
+                        intent.putExtra("entity", list_collect.get(pos));
+                        startActivity(intent);
                     }
                 });
 
                 if(isPay.equals("true")){
-                    //首先判断是否已经下载
-                    if (checkLocal(id)) {
-                        //录音的播放与暂停
-                        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-                        Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
-                        intent.putExtra("url", mFile.getAbsolutePath());
-                        intent.putExtra("title", title);
-                        intent.putExtra("entity", list_collect.get(pos));
-                        startActivity(intent);
-                    } else {
-
-                        mDialog.setMessage("视频下载中，请稍后");
-                        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialog) {
-                                mFile.delete();
-                                mCall.cancel();
-                            }
-                        });
-                        mDialog.show();
-                        getSoundFromServer(id, url, title, pos);
-                    }
+//                    //首先判断是否已经下载
+//                    if (checkLocal(id)) {
+//                        //录音的播放与暂停
+//                        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
+//                        Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
+//                        intent.putExtra("url", mFile.getAbsolutePath());
+//                        intent.putExtra("title", title);
+//                        intent.putExtra("entity", list_collect.get(pos));
+//                        startActivity(intent);
+//                    } else {
+//
+//                        mDialog.setMessage("视频下载中，请稍后");
+//                        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                            @Override
+//                            public void onCancel(DialogInterface dialog) {
+//                                mFile.delete();
+//                                mCall.cancel();
+//                            }
+//                        });
+//                        mDialog.show();
+//                        getSoundFromServer(id, url, title, pos);
+//                    }
+                    //取消下载功能，直接在线播放
+                    Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
+                    intent.putExtra("url",url);
+                    intent.putExtra("title", title);
+                    intent.putExtra("entity", list_collect.get(pos));
+                    startActivity(intent);
                 }else{
                     //没有支付跳转支付
                     utils.payV2(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(),  Float.parseFloat(list_collect.get(pos).getMoney()));
