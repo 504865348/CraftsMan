@@ -64,7 +64,7 @@ public class WaterConservancyFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getWaterConservancy("水利水电");
+        getWaterConservancy("给水排水");
     }
 
     private void getWaterConservancy(String keyWord) {

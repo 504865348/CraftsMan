@@ -63,7 +63,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.about_tool_bar:
-                startActivity(new Intent(mBaseActivity, SetActivity.class));
+                finish();
                 break;
             case R.id.set_btn_update:
                 checkUpdate();

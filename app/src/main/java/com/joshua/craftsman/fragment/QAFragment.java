@@ -105,36 +105,40 @@ public class QAFragment extends BaseFragment implements View.OnClickListener {
         qACommunication.setOnClickListener(this);
         main_text_search.setOnClickListener(this);
     }
+    private String classiyFlag[] = new String[]{
+            "房屋建筑", "市政道路", "城市桥梁",
+            "轨道交通", "给水排水", "城市管道",
+            "园林绿化与附属工程", "农艺", "艺术及其它"};
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.q_a_construction:
-                putExtraClassify("房屋建筑");
+                putExtraClassify(classiyFlag[0]);
                 break;
             case R.id.q_a_civilization:
-                putExtraClassify("市政公用");
+                putExtraClassify(classiyFlag[1]);
                 break;
             case R.id.q_a_electric:
-                putExtraClassify("机电工程");
+                putExtraClassify(classiyFlag[2]);
                 break;
             case R.id.q_a_road:
-                putExtraClassify("公路");
+                putExtraClassify(classiyFlag[3]);
                 break;
             case R.id.q_a_water_cons:
-                putExtraClassify("水利水电");
+                putExtraClassify(classiyFlag[4]);
                 break;
             case R.id.q_a_railway:
-                putExtraClassify("铁路工程");
+                putExtraClassify(classiyFlag[5]);
                 break;
             case R.id.q_a_mining:
-                putExtraClassify("矿业工程");
+                putExtraClassify(classiyFlag[6]);
                 break;
             case R.id.q_a_airport:
-                putExtraClassify("民航机场");
+                putExtraClassify(classiyFlag[7]);
                 break;
             case R.id.q_a_communication:
-                putExtraClassify("通信广电");
+                putExtraClassify(classiyFlag[8]);
                 break;
             case R.id.main_text_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));

@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="最长两分钟录制"
+                    android:text="长按进行录制，最长两分钟录制"
                     android:textColor="@color/black"
                     android:textSize="12sp"/>
 

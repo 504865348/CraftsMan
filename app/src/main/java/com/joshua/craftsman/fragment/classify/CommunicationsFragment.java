@@ -64,7 +64,7 @@ public class CommunicationsFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getCommunications("通信广电工程");
+        getCommunications("艺术及其它");
     }
 
     private void getCommunications(String keyWord) {

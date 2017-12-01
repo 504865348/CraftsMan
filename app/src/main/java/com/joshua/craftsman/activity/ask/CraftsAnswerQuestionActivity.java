@@ -1,6 +1,7 @@
 package com.joshua.craftsman.activity.ask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.other.ShowPhotoActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 import com.joshua.craftsman.utils.PopupWindowFactory;
@@ -112,6 +114,16 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
         Glide.with(this).load(mPic).error(R.drawable.load_error).into(iv_ques);
         //6.0以上需要权限申请
 //        requestPermissions();
+
+
+        iv_ques.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mBaseActivity, ShowPhotoActivity.class);
+                intent.putExtra("pic",mPic);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initData() {
@@ -170,12 +182,13 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
                 music.pause();
             } else {
                 try {
-                    if (isFinishPlaying) {
+//                    if (isFinishPlaying) {
                         music = new MediaPlayer();
                         music.setDataSource(mFilePath);
+                        Log.d(TAG, "<<<<<<<<<<<<listener>>>>>>>>>>>>: "+mFilePath);
                         music.prepare();
                         isFinishPlaying = false;
-                    }
+//                    }
                     music.start();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -203,7 +216,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
             File file = new File(mFilePath);
             file.delete();
             message.setTextColor(Color.BLACK);
-            message.setText("最长两分钟录制");
+            message.setText("长按进行录制，最长两分钟录制");
             makeText(mBaseActivity, "音频删除成功，请重新录制", Toast.LENGTH_SHORT).show();
             mFilePath = "";
             isFinishRecording = false;

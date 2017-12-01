@@ -64,7 +64,7 @@ public class MechanicalFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getMechanical("机电工程");
+        getMechanical("城市桥梁");
     }
 
     private void getMechanical(String keyWord) {

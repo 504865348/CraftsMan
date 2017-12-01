@@ -64,7 +64,7 @@ public class AirportFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getAirport("民航机场工程");
+        getAirport("农艺");
     }
 
     private void getAirport(String keyWord) {

@@ -64,7 +64,7 @@ public class HighWaysFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getHighWays("公路");
+        getHighWays("轨道交通");
     }
 
     private void getHighWays(String keyWord) {

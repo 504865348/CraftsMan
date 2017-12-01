@@ -2,14 +2,14 @@
 <resources>
     <string-array name="albumTypes">
         <item>房屋建筑</item>
-        <item>市政公用</item>
-        <item>机电工程</item>
-        <item>公路</item>
-        <item>水利水电</item>
-        <item>铁路工程</item>
-        <item>矿业工程</item>
-        <item>民航机场工程</item>
-        <item>通信广电工程</item>
+        <item>市政道路</item>
+        <item>城市桥梁</item>
+        <item>轨道交通</item>
+        <item>给水排水</item>
+        <item>城市管道</item>
+        <item>园林绿化与附属工程</item>
+        <item>农艺</item>
+        <item>艺术及其它</item>
     </string-array>
     <string-array name="albumModels">
         <item>匠心独运</item>

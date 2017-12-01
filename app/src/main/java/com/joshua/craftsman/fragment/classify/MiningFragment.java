@@ -64,7 +64,7 @@ public class MiningFragment extends BaseFragment {
     }
 
     private void getDataFromServer() {
-        getMining("矿业工程");
+        getMining("园林绿化与附属工程");
     }
 
     private void getMining(String keyWord) {

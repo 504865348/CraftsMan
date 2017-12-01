@@ -35,10 +35,14 @@ public class HomeClassifyPager extends BaseFragment implements View.OnClickListe
     @BindView(R.id.home_page_classify_communication)
     LinearLayout homePageClassifyCommunication;
 
+//    private String classiyFlag[] = new String[]{
+//            "房屋建筑", "市政公用", "机电工程",
+//            "公路", "水利水电", "铁路工程",
+//            "矿业工程", "民航机场工程", "通信广电工程"};
     private String classiyFlag[] = new String[]{
-            "房屋建筑", "市政公用", "机电工程",
-            "公路", "水利水电", "铁路工程",
-            "矿业工程", "民航机场工程", "通信广电工程"};
+            "房屋建筑", "市政道路", "城市桥梁",
+            "轨道交通", "给水排水", "城市管道",
+            "园林绿化与附属工程", "农艺", "艺术及其它"};
 
     public HomeClassifyPager( ) {
 
