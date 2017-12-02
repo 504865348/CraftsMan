@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -52,6 +54,8 @@ public class MyBuyActivity extends BaseActivity {
 
     @BindView(R.id.rv_collect)
     RecyclerView rv_collect;
+    @BindView(R.id. myrecorder_toolbar)
+    Toolbar myrecorder_toolbar;
     private Call mCall;
     private List<VideoDetail> list_collect;
     private OkHttpClient mClient;
@@ -73,6 +77,8 @@ public class MyBuyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_buy);
         ButterKnife.bind(this);
+        myrecorder_toolbar.setTitle("");
+        setSupportActionBar(myrecorder_toolbar);
         init();
     }
 
@@ -331,5 +337,15 @@ public class MyBuyActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -63,6 +63,9 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
     Button btn_collect;
     @BindView(R.id.tv_share)
     TextView tv_share;
+    @BindView(R.id. btn_back)
+    Button  btn_back;
+
     private VideoDetail mVideoDetail;
     private OkHttpClient mClient;
     private String isFocus;
@@ -107,6 +110,7 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
         }
         btn_collect.setOnClickListener(this);
         tv_share.setOnClickListener(this);
+        btn_back.setOnClickListener(this);
     }
 
 
@@ -147,6 +151,9 @@ public class PlayerFrameActivity extends BaseActivity implements View.OnClickLis
 //                }
 
                 share();
+                break;
+            case R.id.btn_back:
+              finish();
                 break;
         }
     }

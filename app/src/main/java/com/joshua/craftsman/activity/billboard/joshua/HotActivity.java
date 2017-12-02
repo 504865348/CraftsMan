@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -53,6 +55,9 @@ public class HotActivity extends BaseActivity {
 
     @BindView(R.id.billboard_hot_program_rv)
     RecyclerView billboard_hot_program_rv;
+
+    @BindView(R.id. billboard_hot_tool_bar)
+    Toolbar billboard_hot_tool_bar;
     private Call mCall;
     private List<VideoDetail> list_collect;
     private OkHttpClient mClient;
@@ -73,6 +78,8 @@ public class HotActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.billboard_hot_program);
         ButterKnife.bind(this);
+        billboard_hot_tool_bar.setTitle("");
+        setSupportActionBar(billboard_hot_tool_bar);
         init();
     }
 
@@ -335,5 +342,14 @@ public class HotActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

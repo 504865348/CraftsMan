@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -40,7 +42,8 @@ public class AlbumListActivity extends BaseActivity implements View.OnClickListe
     LinearLayout select_album_create;
     @BindView(R.id.album_list_lv)
     RecyclerView album_list_lv;
-
+    @BindView(R.id. myrecorder_toolbar)
+    Toolbar myrecorder_toolbar;
     private OkHttpClient mClient;
     private List<Album> list_album;
     @Override
@@ -49,10 +52,19 @@ public class AlbumListActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.select_album_window);
         ButterKnife.bind(this);
         select_album_create.setOnClickListener(this);
+        myrecorder_toolbar.setTitle("");
+        setSupportActionBar(myrecorder_toolbar);
         getDataFromServer();
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     //获取专辑列表
     private void getDataFromServer() {
 

@@ -86,7 +86,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     private static final int CHOOSE_PICTURE = 0x000001;
     private static final int TAKE_PICTURE = 0x000002;
     private static final String IMAGE_FILE_NAME = "headImage";
-    private String userClass = LoginActivity.appUserName;
+    private String userClass = PrefUtils.getString(mBaseActivity, "phone", "");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -349,7 +349,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         tvSex.setText(sp.getString("sex", ""));
         tvBirthday.setText(sp.getString("birthday", ""));
         tvAddress.setText(sp.getString("address", ""));
-        ivMyImage.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/"+userClass+"/headImage.JPEG")));
+        ivMyImage.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+PrefUtils.getString(mBaseActivity, "phone", "")+"/headImage.JPEG")));
     }
 
     private void showErrorMsg(String value) {

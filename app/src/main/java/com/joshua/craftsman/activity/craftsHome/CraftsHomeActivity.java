@@ -53,8 +53,6 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     TextView mCraftsTextIntroduction;
     @BindView(R.id.crafts_tv_album)
     TextView mCraftsTvAlbum;
-    @BindView(R.id.crafts_tv_detail)
-    TextView crafts_tv_detail;
     @BindView(crafts_ll_album)
     LinearLayout mCraftsLlAlbum;
     @BindView(R.id.crafts_tv_q_a)
@@ -75,7 +73,8 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
     TextView craftsTextClassify;
     @BindView(R.id.crafts_text_hot_greed)
     TextView craftsTextHotGreed;
-
+    @BindView(R.id.crafts_tv_detail)
+    TextView crafts_tv_detail;
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
     private int screenWidth;
@@ -215,6 +214,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         mCraftsImageAsk.setOnClickListener(this);
         mCraftsLlAlbum.setOnClickListener(this);
         mCraftsLlQA.setOnClickListener(this);
+        crafts_tv_detail.setOnClickListener(this);
 
     }
 
@@ -231,11 +231,13 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
                 getAttention(isFocus);
                 break;
             case R.id.crafts_ll_q_a:
-                mViewPager.setCurrentItem(1);
+                mViewPager.setCurrentItem(2);
                 break;
-            case crafts_ll_album:
+            case R.id.crafts_tv_detail:
                 mViewPager.setCurrentItem(0);
-
+                break;
+            case R.id.crafts_ll_album:
+                mViewPager.setCurrentItem(1);
                 break;
         }
     }

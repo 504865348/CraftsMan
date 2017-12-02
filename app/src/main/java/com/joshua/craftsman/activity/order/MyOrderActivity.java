@@ -3,6 +3,8 @@ package com.joshua.craftsman.activity.order;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -26,12 +28,15 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+import static com.joshua.craftsman.R.id.myrecorder_toolbar;
 import static com.joshua.craftsman.R.id.q_a_list_view_examples;
 import static com.joshua.craftsman.R.id.rv_order;
 
 public class MyOrderActivity extends BaseActivity {
     @BindView(R.id.rv_order)
     RecyclerView rv_order;
+    @BindView(R.id. myrecorder_toolbar)
+    Toolbar myrecorder_toolbar;
     private OkHttpClient mClient;
     private List<Order> list_order;
 
@@ -40,10 +45,19 @@ public class MyOrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_order);
         ButterKnife.bind(this);
+        myrecorder_toolbar.setTitle("");
+        setSupportActionBar(myrecorder_toolbar);
         getDataFromServer();
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void getDataFromServer() {
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))

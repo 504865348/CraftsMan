@@ -9,8 +9,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/find_circle_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <!-- app:navigationIcon="@drawable/back" -->
+        android:layout_height="50dp"
+        app:navigationIcon="@drawable/back">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

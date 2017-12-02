@@ -140,7 +140,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     private Uri fileUri;
     private int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 1;
     private SharedPreferences sp;
-    private String userClass = LoginActivity.appUserName;
+    private String userClass;
 
     @Override
     public View initView() {
@@ -162,6 +162,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoBuy.setOnClickListener(this);
         my_info_crafts_upload_local.setOnClickListener(this);
         showUserInfo();
+        userClass = PrefUtils.getString(getActivity(),"phone","");
     }
 
     @Override
@@ -288,13 +289,14 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
 
 
     private void showUserInfo() {
-        sp = getActivity().getSharedPreferences("CraftsmanUserInfo.txt", Context.MODE_PRIVATE);
+        sp = getActivity().getSharedPreferences(LoginActivity.appUserName, Context.MODE_PRIVATE);
         if (sp.getString("nickName", "").equals(""))
             mMyInfoUserName.setText(userClass);
         else
             mMyInfoUserName.setText(sp.getString("nickName", ""));
         myInfoUserAccount.setText(userClass);
-        mMyInfoPicture.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/headImage.JPEG")));
+        mMyInfoPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+userClass+"/headImage.JPEG")));
+
 
     }
 

@@ -183,7 +183,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.record_info_tool_bar:
-                startActivity(new Intent(mBaseActivity, MyRecordActivity.class));
+                finish();
                 break;
             case R.id.record_info_choose_album:
                 Intent intent = new Intent(this, AlbumListActivity.class);

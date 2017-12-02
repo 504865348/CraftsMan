@@ -33,7 +33,7 @@ public class HelpActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.help_tool_bar:
-                startActivity(new Intent(mBaseActivity, SetActivity.class));
+                finish();
                 break;
         }
     }

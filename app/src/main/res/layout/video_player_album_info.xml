@@ -91,15 +91,32 @@
             style="@style/video_player_info_text"
             tools:text="XXX"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_collect"
-        android:layout_width="124dp"
-        android:layout_height="25dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/check_border"
-        android:textColor="@color/red"
-        android:textSize="12sp"
-        android:text="收藏" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_collect"
+            android:layout_width="124dp"
+            android:layout_height="25dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/check_border"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:text="收藏" />
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="124dp"
+            android:layout_height="25dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/check_border"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:text="返回" />
+
+    </LinearLayout>
+
     <!--<FrameLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="20dp"-->

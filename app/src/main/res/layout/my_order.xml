@@ -6,18 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <LinearLayout
-       android:id="@+id/myrecorder_toolbar"
-       android:layout_width="match_parent"
-       android:layout_height="50dp"
-       android:gravity="center">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="我的订单"
-           android:textColor="@color/black"
-           android:textSize="18sp"/>
-   </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/myrecorder_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        app:navigationIcon="@drawable/back">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="我的订单"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"

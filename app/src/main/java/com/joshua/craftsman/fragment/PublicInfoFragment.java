@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
     private View view;
     private Unbinder unbinder;
     private SharedPreferences sp;
-    private String userClass = PrefUtils.getString(getActivity(),"phone",null);
+    private String userClass;
 
     @Override
     public View initView() {
@@ -87,6 +88,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoPublicCollection.setOnClickListener(this);
         mMyInfoBuy.setOnClickListener(this);
         showUserInfo();
+        userClass = PrefUtils.getString(getActivity(),"phone",null);
     }
 
     @Override
@@ -143,7 +145,8 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         else
             myInfoPublicUserName.setText(sp.getString("nickName", ""));
         myInfoPublicUserAccount.setText(userClass);
-        mMyInfoPublicPicture.setImageURI(Uri.fromFile(new File("/sdcard/craftsman/"+userClass+"/headImage.JPEG")));
+        mMyInfoPublicPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+userClass+"/headImage.JPEG")));
+
 
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,6 +46,9 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.find_friends_page_pager)
     ViewPager mViewPager;
 
+    @BindView(R.id.   find_friend_tool_bar)
+    Toolbar   find_friend_tool_bar;
+
     private List<BaseFragment> mFragmentList = new ArrayList<>();
 //    private AttentionPager mAttentionPager;
 //    private FriendPager mFriendPager;
@@ -58,6 +62,8 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_friends);
         ButterKnife.bind(this);
+        find_friend_tool_bar.setTitle("");
+        setSupportActionBar(find_friend_tool_bar);
         initPager();
         initTabLineWidth();
         initListener();
@@ -135,5 +141,14 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
