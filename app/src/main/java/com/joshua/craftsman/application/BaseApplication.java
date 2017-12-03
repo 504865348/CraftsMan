@@ -32,7 +32,7 @@ public class BaseApplication extends Application {
 
     {
         Config.DEBUG = true;
-        PlatformConfig.setWeixin("wxb254d74dda664d63", "9c29cc8bc30f5edc087bde312ef083a1");
+        PlatformConfig.setWeixin("wxb254d74dda664d63", "b1761920a55dbc9c25aa8e97a8b7e07d");
 //        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
     }
 

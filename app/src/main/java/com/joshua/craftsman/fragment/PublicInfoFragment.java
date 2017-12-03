@@ -88,7 +88,13 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoPublicCollection.setOnClickListener(this);
         mMyInfoBuy.setOnClickListener(this);
         showUserInfo();
-        userClass = PrefUtils.getString(getActivity(),"phone",null);
+        userClass = PrefUtils.getString(getActivity(), "phone", null);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        showUserInfo();
     }
 
     @Override
@@ -120,6 +126,12 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        showUserInfo();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.my_info_public_more:
@@ -139,13 +151,13 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
 
     private void showUserInfo() {
 
-        sp = getActivity().getSharedPreferences(userClass+".txt", Context.MODE_PRIVATE);
-        if (sp.getString("nickName", "").equals(""))
+        sp = getActivity().getSharedPreferences(userClass, Context.MODE_PRIVATE);
+        if (sp.getString("nickName", "").isEmpty())
             myInfoPublicUserName.setText(userClass);
         else
             myInfoPublicUserName.setText(sp.getString("nickName", ""));
         myInfoPublicUserAccount.setText(userClass);
-        mMyInfoPublicPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+userClass+"/headImage.JPEG")));
+        mMyInfoPublicPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/" + userClass + "/headImage.JPEG")));
 
 
     }

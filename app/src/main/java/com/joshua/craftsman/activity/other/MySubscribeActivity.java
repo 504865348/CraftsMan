@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -38,7 +40,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class MySubscribeActivity extends BaseActivity {
-
+    @BindView(R.id. billboard_hot_tool_bar)
+    Toolbar billboard_hot_tool_bar;
     @BindView(R.id.rv_subscribe)
     RecyclerView rv_subscribe;
 
@@ -51,6 +54,8 @@ public class MySubscribeActivity extends BaseActivity {
         setContentView(R.layout.activity_my_subscribe);
         ButterKnife.bind(this);
         init();
+        billboard_hot_tool_bar.setTitle("");
+        setSupportActionBar(billboard_hot_tool_bar);
     }
 
     private void init() {
@@ -58,7 +63,14 @@ public class MySubscribeActivity extends BaseActivity {
         getDataFromServer();
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void getDataFromServer() {
         mClient = new OkHttpClient.Builder()

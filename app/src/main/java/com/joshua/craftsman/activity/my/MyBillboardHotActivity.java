@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -58,6 +59,8 @@ public class MyBillboardHotActivity extends BaseActivity {
 
     @BindView(R.id. billboard_hot_tool_bar)
     Toolbar billboard_hot_tool_bar;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     private Call mCall;
     private List<VideoDetail> list_collect;
     private OkHttpClient mClient;
@@ -81,6 +84,7 @@ public class MyBillboardHotActivity extends BaseActivity {
         billboard_hot_tool_bar.setTitle("");
         setSupportActionBar(billboard_hot_tool_bar);
         init();
+        tv_title.setText("我的榜单");
     }
 
     private void init() {

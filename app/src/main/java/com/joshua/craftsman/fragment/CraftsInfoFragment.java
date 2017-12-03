@@ -34,6 +34,7 @@ import com.joshua.craftsman.activity.info.EditInfoActivity;
 import com.joshua.craftsman.activity.info.SubscribeActivity;
 import com.joshua.craftsman.activity.my.MyAlbumActivity;
 import com.joshua.craftsman.activity.my.MyBillboardActivity;
+import com.joshua.craftsman.activity.my.MyBillboardHotActivity;
 import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.other.MyBuyActivity;
 import com.joshua.craftsman.activity.other.MyCollectActivity;
@@ -146,6 +147,18 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     public View initView() {
         view = View.inflate(mContext, R.layout.my_info_crafts, null);
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        showUserInfo();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showUserInfo();
     }
 
     @Override
@@ -262,7 +275,8 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
                 startActivity(new Intent(getActivity(), MyAlbumActivity.class));
                 break;
             case R.id.my_info_my_billboard:
-                startActivity(new Intent(getActivity(), MyBillboardActivity.class));
+//                startActivity(new Intent(getActivity(), MyBillboardActivity.class));
+                startActivity(new Intent(getActivity(), MyBillboardHotActivity.class));
                 break;
             case R.id.my_info_more:
                 startActivity(new Intent(getActivity(), EditInfoActivity.class));
@@ -289,8 +303,8 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
 
 
     private void showUserInfo() {
-        sp = getActivity().getSharedPreferences(LoginActivity.appUserName, Context.MODE_PRIVATE);
-        if (sp.getString("nickName", "").equals(""))
+        sp = getActivity().getSharedPreferences(userClass, Context.MODE_PRIVATE);
+        if (sp.getString("nickName", "").isEmpty())
             mMyInfoUserName.setText(userClass);
         else
             mMyInfoUserName.setText(sp.getString("nickName", ""));
@@ -298,12 +312,6 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+userClass+"/headImage.JPEG")));
 
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        showUserInfo();
     }
 
     @Override

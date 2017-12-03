@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyAskAnswerCommonActivity extends AppCompatActivity {
+public class MyAskAnswerCommonActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.my_qa_common_tool_bar) Toolbar mMyQaCommonToolBar;
     @BindView(R.id.not_handle_tv) TextView mNotHandleTv;
@@ -55,8 +56,22 @@ public class MyAskAnswerCommonActivity extends AppCompatActivity {
          */
         initPager();
         initTabLineWidth();
+        mNotHandleLl.setOnClickListener(this);
+        mMyQuestionLl.setOnClickListener(this);
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.not_handle_ll:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.my_question_ll:
+                mViewPager.setCurrentItem(1);
+                break;
+        }
+    }
     private void initPager() {
         mNotHandleFragment = new NotHandleFragment();
         mMyQuestionFragment = new MyQuestionFragment();

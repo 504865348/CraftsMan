@@ -12,6 +12,17 @@ public class AlbumHomeDetails {
     private String introduction;//简介
     private String classifyCrafts;//工匠分类
     private String hotDegree; //热度(回答问题的个数)
+    private String isFocus;
+
+    public AlbumHomeDetails(String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree, String isFocus) {
+        this.craftsAccount = craftsAccount;
+        this.imageUrl = imageUrl;
+        this.craftsmanName = craftsmanName;
+        this.introduction = introduction;
+        this.classifyCrafts = classifyCrafts;
+        this.hotDegree = hotDegree;
+        this.isFocus = isFocus;
+    }
 
     public String getCraftsAccount() {
         return craftsAccount;
@@ -61,24 +72,11 @@ public class AlbumHomeDetails {
         this.hotDegree = hotDegree;
     }
 
-    public AlbumHomeDetails(String craftsAccount, String imageUrl, String craftsmanName, String introduction, String classifyCrafts, String hotDegree) {
-        this.craftsAccount = craftsAccount;
-        this.imageUrl = imageUrl;
-        this.craftsmanName = craftsmanName;
-        this.introduction = introduction;
-        this.classifyCrafts = classifyCrafts;
-        this.hotDegree = hotDegree;
+    public String getIsFocus() {
+        return isFocus;
     }
 
-    @Override
-    public String toString() {
-        return "AlbumHomeDetails{" +
-                "craftsAccount='" + craftsAccount + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", craftsmanName='" + craftsmanName + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", classifyCrafts='" + classifyCrafts + '\'' +
-                ", hotDegree='" + hotDegree + '\'' +
-                '}';
+    public void setIsFocus(String isFocus) {
+        this.isFocus = isFocus;
     }
 }

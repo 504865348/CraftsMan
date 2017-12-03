@@ -49,6 +49,12 @@ public class MyAttentionPager extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
+    }
+
+    @Override
     public void initData() {
         super.initData();
         list_FF = new ArrayList<>();

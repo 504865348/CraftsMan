@@ -86,7 +86,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     private static final int CHOOSE_PICTURE = 0x000001;
     private static final int TAKE_PICTURE = 0x000002;
     private static final String IMAGE_FILE_NAME = "headImage";
-    private String userClass = PrefUtils.getString(mBaseActivity, "phone", "");
+    private String userClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +99,15 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         setSupportActionBar(editMyInfoToolBar);
 
         parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
+
+        userClass = PrefUtils.getString(mBaseActivity, "phone", "");
+        sp = getSharedPreferences(userClass, Context.MODE_PRIVATE);
+        nickName = sp.getString("nickName", "");
+        introduce = sp.getString("introduce", "");
+        sex = sp.getString("sex", "");
+        birthday = sp.getString("birthday", "");
+        address = sp.getString("address", "");
+
     }
 
 
@@ -266,15 +275,19 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void saveInfo() {
+
         nickName = et_Nickname.getText().toString();
         introduce = et_Introduce.getText().toString();
 
-        if (nickName == null || introduce == null
-                || sex == null || birthday == null || address == null)
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        if (nickName.isEmpty() || introduce.isEmpty()
+                || sex.isEmpty() || birthday.isEmpty() || address.isEmpty()) {
+
             showErrorMsg("请将信息填写完整");
-        else{
-            sp = getSharedPreferences(userClass, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sp.edit();
+        } else {
+
             editor.putString("nickName", nickName);
             editor.putString("introduce", introduce);
             editor.putString("sex", sex);
@@ -349,7 +362,7 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         tvSex.setText(sp.getString("sex", ""));
         tvBirthday.setText(sp.getString("birthday", ""));
         tvAddress.setText(sp.getString("address", ""));
-        ivMyImage.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+PrefUtils.getString(mBaseActivity, "phone", "")+"/headImage.JPEG")));
+        ivMyImage.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(mBaseActivity, "phone", "") + "/headImage.JPEG")));
     }
 
     private void showErrorMsg(String value) {

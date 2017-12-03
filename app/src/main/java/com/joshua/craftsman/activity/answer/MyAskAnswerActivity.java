@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,18 +26,33 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MyAskAnswerActivity extends AppCompatActivity {
+import static com.joshua.craftsman.R.id.not_answer_tv;
 
-    @BindView(R.id.my_records_tool_bar) Toolbar mMyRecordsToolBar;
-    @BindView(R.id.not_answer_tv) TextView mNotAnswerTv;
-    @BindView(R.id.not_answer_ll) LinearLayout mNotAnswerLl;
-    @BindView(R.id.my_answer_tv) TextView mMyAnswerTv;
-    @BindView(R.id.my_answer_ll) LinearLayout mMyAnswerLl;
-    @BindView(R.id.my_question_tv) TextView mMyQuestionTv;
-    @BindView(R.id.my_question_ll) LinearLayout mMyQuestionLl;
-    @BindView(R.id.id_switch_tab_ll) LinearLayout mIdSwitchTabLl;
-    @BindView(R.id.tab_line_iv) ImageView mTabLineIv;
-    @BindView(R.id.my_q_a_page_pager) ViewPager mViewPager;
+public class MyAskAnswerActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @BindView(R.id.my_records_tool_bar)
+    Toolbar mMyRecordsToolBar;
+
+    @BindView(R.id.not_answer_ll)
+    LinearLayout mNotAnswerLl;
+    @BindView(R.id.my_answer_ll)
+    LinearLayout mMyAnswerLl;
+    @BindView(R.id.my_question_ll)
+    LinearLayout mMyQuestionLl;
+
+    @BindView(not_answer_tv)
+    TextView mNotAnswerTv;
+    @BindView(R.id.my_answer_tv)
+    TextView mMyAnswerTv;
+    @BindView(R.id.my_question_tv)
+    TextView mMyQuestionTv;
+
+    @BindView(R.id.id_switch_tab_ll)
+    LinearLayout mIdSwitchTabLl;
+    @BindView(R.id.tab_line_iv)
+    ImageView mTabLineIv;
+    @BindView(R.id.my_q_a_page_pager)
+    ViewPager mViewPager;
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private NotAnswerFragment mNotAnswerFragment;
@@ -60,6 +76,9 @@ public class MyAskAnswerActivity extends AppCompatActivity {
          */
         initPager();
         initTabLineWidth();
+        mNotAnswerLl.setOnClickListener(this);
+        mMyAnswerLl.setOnClickListener(this);
+        mMyQuestionLl.setOnClickListener(this);
     }
 
     /**
@@ -84,7 +103,7 @@ public class MyAskAnswerActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv.getLayoutParams();
-                lp.leftMargin = screenWidth/3*position + positionOffsetPixels/3;
+                lp.leftMargin = screenWidth / 3 * position + positionOffsetPixels / 3;
                 mTabLineIv.setLayoutParams(lp);
             }
 
@@ -105,7 +124,8 @@ public class MyAskAnswerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) { }
+            public void onPageScrollStateChanged(int state) {
+            }
         });
     }
 
@@ -118,7 +138,7 @@ public class MyAskAnswerActivity extends AppCompatActivity {
         mMyQuestionTv.setTextColor(Color.BLACK);
     }
 
-    @OnClick({ R.id.not_answer_ll, R.id.my_answer_ll, R.id.my_question_ll })
+    @OnClick({R.id.not_answer_ll, R.id.my_answer_ll, R.id.my_question_ll})
     public void clickLinear(LinearLayout linearLayout) {
         switch (linearLayout.getId()) {
             case R.id.not_answer_ll:
@@ -157,5 +177,18 @@ public class MyAskAnswerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.not_answer_ll:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.my_answer_ll:
+                mViewPager.setCurrentItem(1);
+                break;
+            case R.id.my_question_ll:
+                mViewPager.setCurrentItem(2);
+                break;
+        }
+    }
 }

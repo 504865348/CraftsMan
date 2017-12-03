@@ -39,12 +39,13 @@ public class AttentionMinePager extends BaseFragment {
 
     @BindView(R.id.find_friends_recommend_rv)
     RecyclerView findFriendsRecommendRv;
-
+    @BindView(R.id.empty_layout)
+    FrameLayout empty_layout;
     private List<FindFriendsAttention> list_FF;
 
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.find_friends_recommend, null);
+        View view = View.inflate(mContext, R.layout.find_friends_recommend_am, null);
         return view;
     }
 
@@ -60,6 +61,12 @@ public class AttentionMinePager extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromServer();
     }
 
     @Override
@@ -106,6 +113,7 @@ public class AttentionMinePager extends BaseFragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.d("关注", "关注我的: +empty");
                     setEmptyView(true);
                 }
             });
@@ -143,11 +151,10 @@ public class AttentionMinePager extends BaseFragment {
     }
 
     private void setEmptyView(Boolean isEmpty) {
-        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_layout);
         if(isEmpty){
-            empty.setVisibility(View.VISIBLE);
+            empty_layout.setVisibility(View.VISIBLE);
         }else {
-            empty.setVisibility(View.GONE);
+            empty_layout.setVisibility(View.GONE);
         }
     }
 }

@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -51,7 +53,8 @@ import static com.joshua.craftsman.R.id.list;
 import static com.joshua.craftsman.R.id.rv_collect;
 
 public class MyCollectActivity extends BaseActivity {
-
+    @BindView(R.id.billboard_hot_tool_bar)
+    Toolbar billboard_hot_tool_bar;
     @BindView(R.id.rv_collect)
     RecyclerView rv_collect;
     private Call mCall;
@@ -75,11 +78,22 @@ public class MyCollectActivity extends BaseActivity {
         setContentView(R.layout.activity_my_collect);
         ButterKnife.bind(this);
         init();
+        billboard_hot_tool_bar.setTitle("");
+        setSupportActionBar(billboard_hot_tool_bar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {
         mOkHttpClient = new OkHttpClient();
-        list_collect=new ArrayList<>();
+        list_collect = new ArrayList<>();
         mDialog = new ProgressDialog(this);
         mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDialog.setMax(100);
@@ -87,12 +101,11 @@ public class MyCollectActivity extends BaseActivity {
     }
 
 
-
     private void getDataFromServer() {
         mClient = new OkHttpClient.Builder()
                 .cookieJar(new HttpCookieJar(mBaseActivity))
                 .build();
-        RequestBody params=new FormBody.Builder()
+        RequestBody params = new FormBody.Builder()
                 .add("method", Server.SERVER_MY_COLLECT)
                 .build();
         final Request request = new Request.Builder()
@@ -103,7 +116,7 @@ public class MyCollectActivity extends BaseActivity {
         call.enqueue(new HttpCommonCallback(this) {
             @Override
             protected void success(String result) {
-                Log.d("collect", "success: "+result);
+                Log.d("collect", "success: " + result);
                 parseData(result);
             }
 
@@ -180,14 +193,14 @@ public class MyCollectActivity extends BaseActivity {
 //                        }
                         //取消下载功能，直接在线播放
                         Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
-                        intent.putExtra("url",url);
+                        intent.putExtra("url", url);
                         intent.putExtra("title", title);
                         intent.putExtra("entity", list_collect.get(pos));
                         startActivity(intent);
                     }
                 });
 
-                if(isPay.equals("true")){
+                if (isPay.equals("true")) {
 //                    //首先判断是否已经下载
 //                    if (checkLocal(id)) {
 //                        //录音的播放与暂停
@@ -212,17 +225,14 @@ public class MyCollectActivity extends BaseActivity {
 //                    }
                     //取消下载功能，直接在线播放
                     Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
-                    intent.putExtra("url",url);
+                    intent.putExtra("url", url);
                     intent.putExtra("title", title);
                     intent.putExtra("entity", list_collect.get(pos));
                     startActivity(intent);
-                }else{
+                } else {
                     //没有支付跳转支付
-                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(),  Float.parseFloat(list_collect.get(pos).getMoney()));
+                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(), Float.parseFloat(list_collect.get(pos).getMoney()));
                 }
-
-
-
 
 
             }
@@ -231,12 +241,11 @@ public class MyCollectActivity extends BaseActivity {
     }
 
 
-
     private void setEmptyView(Boolean isEmpty) {
-        FrameLayout empty= (FrameLayout) findViewById(R.id.empty_layout);
-        if(isEmpty){
+        FrameLayout empty = (FrameLayout) findViewById(R.id.empty_layout);
+        if (isEmpty) {
             empty.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             empty.setVisibility(View.GONE);
         }
     }

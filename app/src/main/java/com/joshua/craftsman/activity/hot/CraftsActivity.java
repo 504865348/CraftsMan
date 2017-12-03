@@ -124,6 +124,7 @@ public class CraftsActivity extends BaseActivity {
                 intent.putExtra("craftsClassify", list_DGGJ.get(pos).getClassifyCrafts());
                 intent.putExtra("craftsHotDegree", list_DGGJ.get(pos).getHotDegree());
                 intent.putExtra("craftsPic", list_DGGJ.get(pos).getImageUrl());
+                intent.putExtra("isFocus",list_DGGJ.get(pos).getIsFocus());
                 mBaseActivity.startActivity(intent);
             }
         });

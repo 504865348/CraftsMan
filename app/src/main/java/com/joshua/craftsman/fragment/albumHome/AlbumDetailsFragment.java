@@ -141,6 +141,7 @@ public class AlbumDetailsFragment extends BaseFragment {
                 intent.putExtra("craftsClassify", list_albumCraft.get(pos).getClassifyCrafts());
                 intent.putExtra("craftsHotDegree", list_albumCraft.get(pos).getHotDegree());
                 intent.putExtra("craftsPic", list_albumCraft.get(pos).getImageUrl());
+                intent.putExtra("isFocus", list_albumCraft.get(pos).getIsFocus());
                 mContext.startActivity(intent);
             }
         });

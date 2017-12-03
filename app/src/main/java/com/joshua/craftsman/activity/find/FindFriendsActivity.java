@@ -69,6 +69,7 @@ public class FindFriendsActivity extends BaseActivity implements View.OnClickLis
         initListener();
     }
 
+
     private void initPager() {
         mAttentionMinePager=new AttentionMinePager();
         mMyAttentionPager=new MyAttentionPager();
