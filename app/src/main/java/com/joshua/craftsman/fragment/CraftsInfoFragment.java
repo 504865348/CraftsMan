@@ -174,8 +174,8 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoCraftsUpload.setOnClickListener(this);
         mMyInfoBuy.setOnClickListener(this);
         my_info_crafts_upload_local.setOnClickListener(this);
-        showUserInfo();
         userClass = PrefUtils.getString(getActivity(),"phone","");
+        showUserInfo();
     }
 
     @Override

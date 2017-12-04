@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import static com.joshua.craftsman.R.id.recorder;
+import static com.joshua.craftsman.R.id.tv_craftsman;
 
 public class RecordActivity extends BaseActivity implements SurfaceHolder.Callback {
 
@@ -52,6 +53,8 @@ public class RecordActivity extends BaseActivity implements SurfaceHolder.Callba
     private String path;
     private TextView textView;
     private int text = 0;
+    private TextView tv_change;
+    private boolean isFront=true;
 
     private android.os.Handler handler = new android.os.Handler();
     private Runnable runnable = new Runnable() {
@@ -75,9 +78,25 @@ public class RecordActivity extends BaseActivity implements SurfaceHolder.Callba
         mBtnPlay = (Button) findViewById(R.id.btnPlayVideo);
         mSaveVideo= (Button) findViewById(R.id.btnDone);
         textView = (TextView) findViewById(R.id.text);
+        tv_change= (TextView) findViewById(R.id.tv_change);
+        tv_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isFront=!isFront;
+                if(isFront){
+                    tv_change.setText("点击改变：当前使用前置摄像头");
+                }else{
+                    tv_change.setText("点击改变：当前使用后置摄像头");
+                }
+
+            }
+        });
         mBtnStartStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                tv_change.setVisibility(View.GONE);
+
                 if (mIsPlay) {
                     if (mediaPlayer != null) {
                         mIsPlay = false;
@@ -100,12 +119,22 @@ public class RecordActivity extends BaseActivity implements SurfaceHolder.Callba
                         mRecorder = new MediaRecorder();
                     }
 
-                    camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-                    if (camera != null) {
-                        camera.setDisplayOrientation(90);
-                        camera.unlock();
-                        mRecorder.setCamera(camera);
+                    if(isFront){
+                        camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+                        if (camera != null) {
+                            camera.setDisplayOrientation(90);
+                            camera.unlock();
+                            mRecorder.setCamera(camera);
+                        }
+                    }else {
+                        camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
+                        if (camera != null) {
+                            camera.setDisplayOrientation(90);
+                            camera.unlock();
+                            mRecorder.setCamera(camera);
+                        }
                     }
+
 
                     try {
                         // 这两项需要放在setOutputFormat之前

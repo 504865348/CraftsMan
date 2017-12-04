@@ -107,15 +107,9 @@ public class EditInfoActivity extends BaseActivity implements View.OnClickListen
         sex = sp.getString("sex", "");
         birthday = sp.getString("birthday", "");
         address = sp.getString("address", "");
-
+showInfo();
     }
 
-
-    @Override
-    protected void onResume() {
-        showInfo();
-        super.onResume();
-    }
 
     private void initListener() {
         ivMyImage.setOnClickListener(this);

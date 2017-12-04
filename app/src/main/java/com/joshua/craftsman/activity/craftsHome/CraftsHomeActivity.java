@@ -261,6 +261,7 @@ public class CraftsHomeActivity extends BaseActivity implements View.OnClickList
         call.enqueue(new HttpCommonCallback(mBaseActivity) {
             @Override
             protected void success(String result) {
+                Log.d(TAG, "guanzhu: "+result);
                 if (result.equals("true")) {
                     runOnUiThread(new Runnable() {
                         @Override

@@ -41,6 +41,7 @@ public class MyAttentionPager extends BaseFragment {
     RecyclerView findFriendsRecommendRv;
 
     private List<FindFriendsAttention> list_FF;
+    private FrameLayout mEmpty;
 
     @Override
     public View initView() {
@@ -150,11 +151,11 @@ public class MyAttentionPager extends BaseFragment {
     }
 
     private void setEmptyView(Boolean isEmpty) {
-        FrameLayout empty= (FrameLayout) getActivity().findViewById(R.id.empty_layout);
+        mEmpty = (FrameLayout) getActivity().findViewById(R.id.empty_layout);
         if(isEmpty){
-            empty.setVisibility(View.VISIBLE);
+            mEmpty.setVisibility(View.VISIBLE);
         }else {
-            empty.setVisibility(View.GONE);
+            mEmpty.setVisibility(View.GONE);
         }
     }
 }

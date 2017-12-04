@@ -73,7 +73,7 @@ public class AudioRecoderUtils {
              * ②设置输出文件的格式：THREE_GPP/MPEG-4/RAW_AMR/Default THREE_GPP(3gp格式
              * ，H263视频/ARM音频编码)、MPEG-4、RAW_AMR(只支持音频且音频编码要求为AMR_NB)
              */
-            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 
             filePath = FolderPath + TimeUtils.getCurrentTime() + ".amr";
             /* ③准备 */

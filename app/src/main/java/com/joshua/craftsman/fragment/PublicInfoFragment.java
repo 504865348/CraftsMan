@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerCommonActivity;
@@ -87,14 +89,15 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoPublicSubscribe.setOnClickListener(this);
         mMyInfoPublicCollection.setOnClickListener(this);
         mMyInfoBuy.setOnClickListener(this);
-        showUserInfo();
         userClass = PrefUtils.getString(getActivity(), "phone", null);
+        showUserInfo();
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         showUserInfo();
+        Log.d(TAG, "setUserVisibleHint: "+"load image");
     }
 
     @Override
@@ -129,13 +132,14 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
     public void onResume() {
         super.onResume();
         showUserInfo();
+        Log.d(TAG, "onResume: "+"load image");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.my_info_public_more:
-                startActivity(new Intent(getActivity(), EditInfoActivity.class));
+                startActivityForResult(new Intent(getActivity(), EditInfoActivity.class),1);
                 break;
             case R.id.my_info_public_subscribe:
                 startActivity(new Intent(getActivity(), MySubscribeActivity.class));
@@ -149,6 +153,12 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        showUserInfo();
+    }
+
     private void showUserInfo() {
 
         sp = getActivity().getSharedPreferences(userClass, Context.MODE_PRIVATE);
@@ -157,8 +167,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         else
             myInfoPublicUserName.setText(sp.getString("nickName", ""));
         myInfoPublicUserAccount.setText(userClass);
-        mMyInfoPublicPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/" + userClass + "/headImage.JPEG")));
-
+        mMyInfoPublicPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/" + PrefUtils.getString(getActivity(), "phone", "") + "/headImage.JPEG")));
 
     }
 

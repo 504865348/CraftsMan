@@ -48,6 +48,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.R.attr.path;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.joshua.craftsman.R.array.cost;
 
 public class PostRecordActivity extends BaseActivity implements View.OnClickListener {
@@ -190,12 +191,18 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, 1);
                 break;
             case R.id.btn_post:
+                if(record_info_title.getText().toString().isEmpty()||
+                        mAlbumId==null|| mAlbumId.isEmpty()|| record_info_intro.getText().toString().isEmpty()){
+                    Toast.makeText(mBaseActivity,"请填写完整信息",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mDialog = new ProgressDialog(this);
                 mDialog.setCancelable(false);
                 mDialog.setMessage("视频上传中，请稍后...");
                 mDialog.show();
                 //将视频上传至七牛云并且返回服务器地址
                 postToQNY();
+                break;
         }
     }
 

@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -70,6 +71,9 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     TextView question_audit_crafts_info;
     @BindView(R.id.question_audit_ask)
     ImageButton question_audit_ask;
+    @BindView(R.id.question_audit_tool_bar)
+    Toolbar question_audit_tool_bar;
+
     private QuesAnsClassify mClassify;
 
     private OkHttpClient mOkHttpClient;
@@ -88,6 +92,15 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     };
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_audit_29);
@@ -99,6 +112,9 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
         mDialog = new ProgressDialog(this);
         mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mDialog.setMax(100);
+
+        question_audit_tool_bar.setTitle("");
+        setSupportActionBar(question_audit_tool_bar);
     }
 
     private void initIntent() {
@@ -109,7 +125,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
 
     private void initData(QuesAnsClassify classify) {
         question_audit_questioner.setText(classify.getUserId());
-        tv_money.setText(classify.getMoney()+"元");
+        tv_money.setText(classify.getMoney() + "元");
         question_audit_content.setText(classify.getQuestionWord());
         question_audit_listen_count.setText(classify.getListenNumber() + "人听过");
         if (classify.getAnsterTime() == null || classify.getAnsterTime().equals("null")) {
@@ -142,9 +158,6 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case question_audit_tool_bar:
-                finish();
-                break;
             case R.id.question_audit_read_answer:
                 String id = mClassify.getId();
                 String url = mClassify.getAnswerAmr();

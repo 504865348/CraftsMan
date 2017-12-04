@@ -32,6 +32,7 @@
         android:textColor="@color/black"
         android:textSize="16sp" />
     <EditText
+        android:padding="5dp"
         android:id="@+id/feedback_edit_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

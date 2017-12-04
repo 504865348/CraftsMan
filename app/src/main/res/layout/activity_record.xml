@@ -9,6 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:layout_marginTop="22dp"
+        android:id="@+id/tv_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击改变：当前使用前置摄像头"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="match_parent"
@@ -33,36 +42,36 @@
         <Button
             android:id="@+id/btnStartStop"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginBottom="12dp"
+            android:layout_weight="1"
             android:background="@drawable/button_light_red_shape"
             android:text="录制"
-            android:layout_margin="16dp"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
         <Button
             android:id="@+id/btnPlayVideo"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginBottom="12dp"
+            android:layout_weight="1"
             android:background="@drawable/button_light_red_shape"
             android:text="播放"
-            android:layout_margin="16dp"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 
         <Button
             android:id="@+id/btnDone"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginBottom="12dp"
+            android:layout_weight="1"
             android:background="@drawable/button_light_red_shape"
             android:text="确认"
-            android:layout_margin="16dp"
             android:textColor="@color/white"
             android:textSize="18sp"/>
 

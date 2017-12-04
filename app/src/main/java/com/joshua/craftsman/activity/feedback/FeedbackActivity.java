@@ -92,13 +92,25 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
                     });
                     finish();
                 } else {
-                    Toast.makeText(mBaseActivity, "意见反馈失败,请检查网络连接", Toast.LENGTH_SHORT).show();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mBaseActivity, "意见反馈失败,请检查网络连接", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                 }
             }
 
             @Override
             protected void error() {
-                Toast.makeText(mBaseActivity, "意见反馈失败,请检查网络连接", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mBaseActivity, "意见反馈失败,请检查网络连接", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
     }
