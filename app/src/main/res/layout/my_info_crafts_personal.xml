@@ -192,7 +192,7 @@
 
             <TextView
                 style="@style/my_info_personal"
-                android:text="我的录制"/>
+                android:text="我的视频"/>
 
             <ImageButton
                 android:id="@+id/recorder"

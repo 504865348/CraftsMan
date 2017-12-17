@@ -75,7 +75,7 @@ public class AudioRecoderUtils {
              */
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 
-            filePath = FolderPath + TimeUtils.getCurrentTime() + ".amr";
+            filePath = FolderPath + TimeUtils.getCurrentTime() + ".aac";
             /* ③准备 */
             mMediaRecorder.setOutputFile(filePath);
             mMediaRecorder.setMaxDuration(MAX_LENGTH);

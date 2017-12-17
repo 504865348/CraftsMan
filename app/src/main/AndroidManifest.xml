@@ -39,9 +39,9 @@
     <application
         android:name=".application.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
@@ -169,6 +169,8 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activity.other.ShowPhotoActivity">
+        </activity>
+        <activity android:name=".activity.other.VideoBuyTimesActivity">
         </activity>
     </application>
 

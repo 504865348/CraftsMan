@@ -1,5 +1,6 @@
 package com.joshua.craftsman.activity.record;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -33,7 +34,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.R.attr.path;
+import static android.app.ProgressDialog.STYLE_HORIZONTAL;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.joshua.craftsman.R.array.cost;
 
@@ -198,6 +203,9 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 }
                 mDialog = new ProgressDialog(this);
                 mDialog.setCancelable(false);
+                mDialog.setMax(100);
+                mDialog.setProgress(0);
+                mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 mDialog.setMessage("视频上传中，请稍后...");
                 mDialog.show();
                 //将视频上传至七牛云并且返回服务器地址
@@ -205,6 +213,7 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
+
 
     private void postToQNY() {
         String accessKey = "q6OOt03fP_CJS6nSXW3OZeNSSoDiNRpLXYthiN5c";
@@ -219,11 +228,20 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
         String path;
         if (name == null) {
             path = getIntent().getStringExtra("videoPath");
+            String fileName=new File(path).getName();
+
+            path=Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + fileName;
         } else {
             path = Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + name;
         }
+
+
         File mediaStorageDir = new File(path);
-        String key = name;
+
+        String key = name==null?mediaStorageDir.getName():name;
+        Log.i("qiniu", "mediaStorageDir:"+mediaStorageDir.getAbsolutePath()+"\n"
+        +"key:"+key+"\n"
+                +"upTpken:"+upToken);
         uploadManager.put(mediaStorageDir, key, upToken,
                 new UpCompletionHandler() {
                     @Override
@@ -244,7 +262,8 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 new UploadOptions(null, null, false,
                         new UpProgressHandler() {
                             public void progress(String key, double percent) {
-                                Log.i("qiniu", key + ": " + percent);
+                                mDialog.setProgress((int)(percent*100));
+                                Log.i("qiniu", key + ": " + (int)(percent*100));
                             }
                         }, null));
 
@@ -312,13 +331,19 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d(TAG, "createAlbum:fail" + e.getMessage());
-                mDialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDialog.dismiss();
+                    }
+                });
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseJson = response.body().string();
-                Log.d(TAG, "onResponse: " + responseJson);
+                Log.d(TAG, "onResponse:wtf? " + responseJson);
                 JSONObject jo = null;
                 try {
                     jo = new JSONObject(responseJson);
@@ -343,7 +368,12 @@ public class PostRecordActivity extends BaseActivity implements View.OnClickList
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } finally {
-                    mDialog.dismiss();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDialog.dismiss();
+                        }
+                    });
                 }
 
             }

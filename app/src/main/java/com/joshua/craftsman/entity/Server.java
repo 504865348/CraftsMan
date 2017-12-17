@@ -90,6 +90,8 @@ public class Server {
 
     public static final String SERVER_UPDATE= "checkUpdate"; //检查更新
     public static final String SERVER_POST_RECORD= "addMyRecording"; //上传视频信息到服务器
+    public static final String SERVER_BUY_TIMES= "queryRecordingBuyTimes"; //查询视频购买次数
+
 
 
 }

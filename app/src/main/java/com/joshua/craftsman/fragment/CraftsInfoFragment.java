@@ -39,6 +39,7 @@ import com.joshua.craftsman.activity.order.MyOrderActivity;
 import com.joshua.craftsman.activity.other.MyBuyActivity;
 import com.joshua.craftsman.activity.other.MyCollectActivity;
 import com.joshua.craftsman.activity.other.MySubscribeActivity;
+import com.joshua.craftsman.activity.other.VideoBuyTimesActivity;
 import com.joshua.craftsman.activity.record.MyRecordActivity;
 import com.joshua.craftsman.activity.record.PostRecordActivity;
 import com.joshua.craftsman.activity.record.RecordActivity;
@@ -50,27 +51,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
-import static android.R.attr.data;
-import static android.R.attr.name;
 import static android.app.Activity.RESULT_OK;
-import static com.joshua.craftsman.R.id.my_info_my_buys;
 import static com.joshua.craftsman.R.id.my_info_my_coins;
-import static com.joshua.craftsman.R.id.record_info_intro;
-import static com.joshua.craftsman.R.id.record_info_title;
 
 public class CraftsInfoFragment extends BaseFragment implements View.OnClickListener {
 
@@ -174,7 +165,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoCraftsUpload.setOnClickListener(this);
         mMyInfoBuy.setOnClickListener(this);
         my_info_crafts_upload_local.setOnClickListener(this);
-        userClass = PrefUtils.getString(getActivity(),"phone","");
+        userClass = PrefUtils.getString(getActivity(), "phone", "");
         showUserInfo();
     }
 
@@ -185,26 +176,35 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         return rootView;
     }
 
+    /**
+     * 如果是小米或者OPPO，则打开自定义摄像头
+     * 否则打开原生摄像头
+     */
     @OnClick(R.id.my_info_crafts_record)
     public void startRecord() {
-//        try {
-//            fileUri = Uri.fromFile(createMediaFile());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        // Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-//        Intent intent = new Intent();
-//        intent.setAction("android.media.action.VIDEO_CAPTURE");
-//        intent.addCategory("android.intent.category.DEFAULT");
-//
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);  // 设置视频文件的名字
-//        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // 设置视频质量为高
-//        startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
+        String model = android.os.Build.MODEL;
+        String type = model.substring(0, 2);
+        Log.d("手机类型", "startRecord: " + model);
+        if (type.equals("OP") || type.equals("MI")) {
+            Intent intent1 = new Intent(getActivity(), RecordActivity.class);
+            startActivity(intent1);
+        } else {
+            try {
+                fileUri = Uri.fromFile(createMediaFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
+            // Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            Intent intent = new Intent();
+            intent.setAction("android.media.action.VIDEO_CAPTURE");
+            intent.addCategory("android.intent.category.DEFAULT");
 
-        Intent intent1=new Intent(getActivity(), RecordActivity.class);
-        startActivity(intent1);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);  // 设置视频文件的名字
+            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0); // 设置视频质量为高
+            startActivityForResult(intent, CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE);
+
+        }
 
 
     }
@@ -216,7 +216,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
 
     @OnClick(R.id.my_info_my_records)
     public void myRecord() {
-        startActivity(new Intent(getActivity(), MyRecordActivity.class));
+        startActivity(new Intent(getActivity(), VideoBuyTimesActivity.class));
     }
 
     @OnClick(R.id.my_info_my_q_a)
@@ -309,7 +309,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         else
             mMyInfoUserName.setText(sp.getString("nickName", ""));
         myInfoUserAccount.setText(userClass);
-        mMyInfoPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/"+userClass+"/headImage.JPEG")));
+        mMyInfoPicture.setImageURI(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/craftsman/" + userClass + "/headImage.JPEG")));
 
 
     }
@@ -363,9 +363,10 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
                         // 如果追求更好的话可以利用 ThumbnailUtils.extractThumbnail 把缩略图转化为的制定大小
 //                        ThumbnailUtils.extractThumbnail(bitmap, width,height ,ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 
+                        copyFile(imagePath,Environment.getExternalStorageDirectory().getPath() + "/crafts_videos/" + title);
 
-                        Intent intent=new Intent(this.getActivity(), PostRecordActivity.class);
-                        intent.putExtra("videoPath",videoPath);
+                        Intent intent = new Intent(this.getActivity(), PostRecordActivity.class);
+                        intent.putExtra("videoPath", videoPath);
                         startActivity(intent);
 
                     }
@@ -377,6 +378,32 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
 
     }
 
+
+    public void copyFile(String oldPath, String newPath) {
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件存在时
+                InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                FileOutputStream fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ( (byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+                    System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+
+        }
+
+    }
 
 
 

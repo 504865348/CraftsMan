@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -118,7 +119,6 @@ public class RecordActivity extends BaseActivity implements SurfaceHolder.Callba
                     if (mRecorder == null) {
                         mRecorder = new MediaRecorder();
                     }
-
                     if(isFront){
                         camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
                         if (camera != null) {
@@ -150,7 +150,7 @@ public class RecordActivity extends BaseActivity implements SurfaceHolder.Callba
                         //设置图像的编码格式
                         mRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
 
-                        mRecorder.setVideoSize(800, 480);
+                        mRecorder.setVideoSize(640, 480);
                         mRecorder.setVideoFrameRate(128);
                         mRecorder.setVideoEncodingBitRate(1024 * 1024);
                         mRecorder.setOrientationHint(270);

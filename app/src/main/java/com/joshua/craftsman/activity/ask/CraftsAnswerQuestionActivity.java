@@ -253,7 +253,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", "answer.amr", fileBody)
+                .addFormDataPart("file", "answer.aac", fileBody)
                 .addFormDataPart("id", mId)
                 .addFormDataPart("user", user)
                 .addFormDataPart("time", mRecordTime + "")

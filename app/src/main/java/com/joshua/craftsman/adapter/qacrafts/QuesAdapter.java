@@ -178,7 +178,7 @@ public class QuesAdapter extends RecyclerView.Adapter<QuesAdapter.MyViewHolder> 
      * 判断音频文件是否存在
      */
     private boolean checkLocal(String id) {
-        mFile = new File(AudioRecoderUtils.RECODE_PATH, id + ".amr");
+        mFile = new File(AudioRecoderUtils.RECODE_PATH, id + ".acc");
         return mFile.exists();
     }
 
@@ -239,7 +239,7 @@ public class QuesAdapter extends RecyclerView.Adapter<QuesAdapter.MyViewHolder> 
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
-                    File file = new File(AudioRecoderUtils.RECODE_PATH, id + ".amr");
+                    File file = new File(AudioRecoderUtils.RECODE_PATH, id + ".acc");
                     fos = new FileOutputStream(file);
                     long sum = 0;
                     while ((len = is.read(buf)) != -1) {
