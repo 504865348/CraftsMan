@@ -323,6 +323,7 @@ public class HomeHotPager extends BaseFragment implements View.OnClickListener {
      */
     private void parseDGGJ(String result) {
         Gson gson = new Gson();
+        Log.d(TAG, "parseDGGJ: "+result);
         list_DGGJ = gson.fromJson(result, new TypeToken<List<HotCraftsman>>() {
         }.getType());
         if (list_DGGJ.get(0).getCraftsmanName().equals("null")) {

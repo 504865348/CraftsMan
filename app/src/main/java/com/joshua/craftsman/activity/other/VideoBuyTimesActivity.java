@@ -67,7 +67,7 @@ public class VideoBuyTimesActivity extends BaseActivity {
         billboard_hot_tool_bar.setTitle("");
         setSupportActionBar(billboard_hot_tool_bar);
         init();
-        tv_title.setText("我的录制");
+        tv_title.setText("我的视频");
     }
 
     private void init() {

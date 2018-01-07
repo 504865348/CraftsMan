@@ -15,11 +15,13 @@ import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.utils.AudioRecoderUtils;
 import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -67,13 +69,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void login() {
         showLoadingProgress();
         Log.d(TAG, "login: " + "connecting");
-//        final String username = et_username.getText().toString();
-//        String pwd = et_pwd.getText().toString();
+        final String username = et_username.getText().toString();
+        String pwd = et_pwd.getText().toString();
 //        final String username = "18761996926";
 //        String pwd = "654321";
 
-        final String username = "15706106292";
-        String pwd = "123456";
+//        final String username = "15706106292";
+//        String pwd = "123456";
 
         if (username.isEmpty()) {
             Toast.makeText(mBaseActivity, "用户名不能为空", Toast.LENGTH_SHORT).show();
@@ -133,6 +135,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     PrefUtils.setString(mBaseActivity, "type", "normal");
                                     PrefUtils.setString(mBaseActivity, "phone", username);
                                     Toast.makeText(mBaseActivity, "登录成功", Toast.LENGTH_SHORT).show();
+                                    //创建目录
+                                    File dir = new File(AudioRecoderUtils.RECODE_PATH);
+                                    if (!dir.exists()) {
+                                        dir.mkdirs();
+                                    }
+                                    dir = new File(AudioRecoderUtils.VIDEO_PATH);
+                                    if (!dir.exists()) {
+                                        dir.mkdirs();
+                                    }
+                                    dir = null;
+//跳转界面
+
                                     startActivity(new Intent(mBaseActivity, MainActivity.class));
                                     appUserName = username;
                                     finish();

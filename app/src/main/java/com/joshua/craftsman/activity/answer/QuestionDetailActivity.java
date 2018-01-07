@@ -250,11 +250,11 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
         mCall.enqueue(new Callback() {
 
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getBaseContext(), "下载失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "下载失败了1"+e.getMessage(), Toast.LENGTH_SHORT).show();
                         mDialog.dismiss();
                         mFile.delete();
                     }
@@ -271,7 +271,12 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
+                    File dir = new File(AudioRecoderUtils.RECODE_PATH);
+                    if(!dir.exists()){
+                        dir.mkdirs();
+                    }
                     File file = new File(AudioRecoderUtils.RECODE_PATH, id + ".acc");
+
                     fos = new FileOutputStream(file);
                     long sum = 0;
                     while ((len = is.read(buf)) != -1) {
@@ -293,11 +298,11 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                         }
                     });
 
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "下载失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "下载失败了2"+e.getMessage(), Toast.LENGTH_SHORT).show();
                             mFile.delete();
                             mDialog.dismiss();
                         }
