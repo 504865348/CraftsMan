@@ -36,8 +36,9 @@ public class QuesAnsClassify implements Serializable{
     private String queTime;//提问时间
     private String isDeal;//是否处理
     private String isPay;//是否支付
+    private String answerWord;//回答文字
 
-    public QuesAnsClassify(String id, String userId, String userName, String craftsmanId, String craftsmanName, String listenNumber, String ansterTime, String vedioTimes, String money, String craftsImage, String introduction, String questionWord, String questionPic, String answerAmr, String queTime, String isDeal, String isPay) {
+    public QuesAnsClassify(String id, String userId, String userName, String craftsmanId, String craftsmanName, String listenNumber, String ansterTime, String vedioTimes, String money, String craftsImage, String introduction, String questionWord, String questionPic, String answerAmr, String queTime, String isDeal, String isPay, String answerWord) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
@@ -55,6 +56,7 @@ public class QuesAnsClassify implements Serializable{
         this.queTime = queTime;
         this.isDeal = isDeal;
         this.isPay = isPay;
+        this.answerWord = answerWord;
     }
 
     public String getId() {
@@ -193,26 +195,11 @@ public class QuesAnsClassify implements Serializable{
         this.isPay = isPay;
     }
 
-    @Override
-    public String toString() {
-        return "QuesAnsClassify{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", craftsmanId='" + craftsmanId + '\'' +
-                ", craftsmanName='" + craftsmanName + '\'' +
-                ", listenNumber='" + listenNumber + '\'' +
-                ", ansterTime='" + ansterTime + '\'' +
-                ", vedioTimes='" + vedioTimes + '\'' +
-                ", money='" + money + '\'' +
-                ", craftsImage='" + craftsImage + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", questionWord='" + questionWord + '\'' +
-                ", questionPic='" + questionPic + '\'' +
-                ", answerAmr='" + answerAmr + '\'' +
-                ", queTime='" + queTime + '\'' +
-                ", isDeal='" + isDeal + '\'' +
-                ", isPay='" + isPay + '\'' +
-                '}';
+    public String getAnswerWord() {
+        return answerWord;
+    }
+
+    public void setAnswerWord(String answerWord) {
+        this.answerWord = answerWord;
     }
 }

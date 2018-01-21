@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.entity.joshua.VideoDetail;
+import com.joshua.craftsman.entity.joshua.VideoDetailPlus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,11 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
         holder.tv_title.setText(data.get(position).getRecordTitle());
         holder.tv_author.setText(data.get(position).getName());
         holder.tv_price.setText("价格："+data.get(position).getMoney()+"元");
+//        holder.tv_times.setText("购买次数："+data.get(position).getbu()+"元");
+
 //        Glide.with(mContext).load(data.get(position).getRecordImage()).into(holder.iv_pic);
         holder.itemView.setTag(position+"");
+
     }
 
 
@@ -65,6 +69,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
         TextView tv_author;
         ImageView iv_pic;
         TextView tv_price;
+        TextView tv_times;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -72,7 +77,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<HomeRecommendAdap
             tv_author = (TextView) itemView.findViewById(R.id.recommend_program_author_name);
             iv_pic= (ImageView) itemView.findViewById(R.id.recommend_program_img);
             tv_price = (TextView) itemView.findViewById(R.id.tv_price);
-
+            tv_times=(TextView) itemView.findViewById(R.id.tv_times);
         }
     }
 

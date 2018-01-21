@@ -125,7 +125,7 @@
                 android:src="@drawable/icon_communication"/>
             <TextView
                 style="@style/q_a_classify_text"
-                android:text="艺术及其它"/>
+                android:text="艺术及其他"/>
         </LinearLayout>
 
         <LinearLayout

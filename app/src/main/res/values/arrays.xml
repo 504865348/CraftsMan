@@ -9,7 +9,7 @@
         <item>城市管道</item>
         <item>园林绿化与附属工程</item>
         <item>农艺</item>
-        <item>艺术及其它</item>
+        <item>艺术及其他</item>
     </string-array>
     <string-array name="albumModels">
         <item>匠心独运</item>
@@ -21,7 +21,6 @@
 
     <string-array name="cost">
         <item>0</item>
-        <item>0.01</item>
         <item>1</item>
         <item>3</item>
         <item>8</item>

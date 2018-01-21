@@ -198,7 +198,7 @@
 
                 <TextView
                     style="@style/home_page_classify_text"
-                    android:text="艺术及其它" />
+                    android:text="艺术及其他" />
             </LinearLayout>
 
             <LinearLayout

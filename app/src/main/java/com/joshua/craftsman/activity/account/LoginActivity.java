@@ -72,7 +72,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         final String username = et_username.getText().toString();
         String pwd = et_pwd.getText().toString();
 //        final String username = "18761996926";
-//        String pwd = "654321";
+//        String pwd = "123456";
 
 //        final String username = "15706106292";
 //        String pwd = "123456";

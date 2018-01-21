@@ -161,6 +161,7 @@ public class QuesAnsClassifyAdapter extends android.support.v7.widget.RecyclerVi
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, QuestionDetailActivity.class);
                 intent.putExtra("content", data.get(position));
+                Log.d("word", "onClick: "+data.get(position).getAnswerWord());
                 mContext.startActivity(intent);
             }
         });

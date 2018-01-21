@@ -44,7 +44,7 @@ public class ClassifyActivity extends BaseActivity implements View.OnClickListen
     private String strTitle[] = new String[]{
             "房屋建筑", "市政道路", "城市桥梁",
             "轨道交通", "给水排水", "城市管道",
-            "园林绿化与附属工程", "农艺", "艺术及其它"};
+            "园林绿化与附属工程", "农艺", "艺术及其他"};
     private String itemClassifyFlag;
     private Fragment[] mFragmentArrays = new Fragment[9];
 

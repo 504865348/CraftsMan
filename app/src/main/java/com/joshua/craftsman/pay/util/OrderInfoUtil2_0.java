@@ -75,8 +75,8 @@ public class OrderInfoUtil2_0 {
 		keyValues.put("biz_content", "{\"timeout_express\":\"30m\"" +
 				",\"product_code\":\"QUICK_MSECURITY_PAY\"" +
 				",\"total_amount\":\"" + money+ "\"" +
-				",\"subject\":\"必得工匠\"" +
-				",\"body\":\"必得工匠\"" +
+				",\"subject\":\"必得匠心\"" +
+				",\"body\":\"必得匠心\"" +
 				",\"out_trade_no\":\"" + getOutTradeNo() +  "\"}");
 		
 		keyValues.put("charset", "utf-8");

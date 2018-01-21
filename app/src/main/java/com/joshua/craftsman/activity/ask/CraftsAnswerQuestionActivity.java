@@ -3,6 +3,7 @@ package com.joshua.craftsman.activity.ask;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -69,13 +71,17 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     ProgressBar progressBar;
     @BindView(R.id.iv_ques)
     ImageView iv_ques;
+    @BindView(R.id.et_answer_word)
+    EditText et_answer_word;
+
 
     private String mFilePath = "";
     private static MediaPlayer music;
     private long mRecordTime;
     private String mId;
-    private String mQuestion,mPic;
+    private String mQuestion, mPic;
     private Call mCall;
+    private AudioManager mAudioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +125,8 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
         iv_ques.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mBaseActivity, ShowPhotoActivity.class);
-                intent.putExtra("pic",mPic);
+                Intent intent = new Intent(mBaseActivity, ShowPhotoActivity.class);
+                intent.putExtra("pic", mPic);
                 startActivity(intent);
             }
         });
@@ -130,8 +136,8 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
         mId = getIntent().getStringExtra("Id");
         mQuestion = getIntent().getStringExtra("question");
         tv_question.setText("问题内容：" + mQuestion);
-        mPic=getIntent().getStringExtra("pic");
-        Log.d(TAG, "initData: "+mPic);
+        mPic = getIntent().getStringExtra("pic");
+        Log.d(TAG, "initData: " + mPic);
     }
 
     private boolean isFinishRecording = false;
@@ -177,17 +183,21 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
      */
     @OnClick(R.id.answer_question_listen)
     public void listener() {
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setSpeakerphoneOn(true);
+
         if (!mFilePath.isEmpty()) {
             if (music.isPlaying()) {
                 music.pause();
             } else {
                 try {
 //                    if (isFinishPlaying) {
-                        music = new MediaPlayer();
-                        music.setDataSource(mFilePath);
-                        Log.d(TAG, "<<<<<<<<<<<<listener>>>>>>>>>>>>: "+mFilePath);
-                        music.prepare();
-                        isFinishPlaying = false;
+                    music = new MediaPlayer();
+                    music.setDataSource(mFilePath);
+                    Log.d(TAG, "<<<<<<<<<<<<listener>>>>>>>>>>>>: " + mFilePath);
+                    music.prepare();
+                    isFinishPlaying = false;
 //                    }
                     music.start();
                 } catch (IOException e) {
@@ -226,7 +236,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     @Override
     protected void onPause() {
         super.onPause();
-        if(mCall!=null){
+        if (mCall != null) {
             mCall.cancel();
         }
 
@@ -249,7 +259,10 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
     private void postToServer() {
         String user = PrefUtils.getString(mBaseActivity, "phone", "");
         File file = new File(mFilePath);
-
+        String word = et_answer_word.getText().toString().trim();
+        if(word.isEmpty()){
+            word="null";
+        }
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream;charset=utf-8"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -257,6 +270,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
                 .addFormDataPart("id", mId)
                 .addFormDataPart("user", user)
                 .addFormDataPart("time", mRecordTime + "")
+                .addFormDataPart("content", word)
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_VIDEO)
@@ -336,7 +350,7 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
 //
 //    }
 
-//    /**
+    //    /**
 //     * 请求权限回调
 //     */
 //    @Override
@@ -351,11 +365,11 @@ public class CraftsAnswerQuestionActivity extends BaseActivity implements MediaP
 //            }
 //        }
 //    }
-public void showLoadingProgress() {
-    progressBar.setVisibility(View.VISIBLE);
-    ll.setVisibility(View.INVISIBLE);
+    public void showLoadingProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        ll.setVisibility(View.INVISIBLE);
 
-}
+    }
 
     public void dismissLoadingProgress() {
         progressBar.setVisibility(View.INVISIBLE);

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ import okhttp3.Response;
 
 import static com.joshua.craftsman.R.id.cancel_action;
 import static com.joshua.craftsman.R.id.question_audit_tool_bar;
+import static com.joshua.craftsman.R.layout.classify;
 
 
 public class QuestionDetailActivity extends BaseActivity implements View.OnClickListener, MediaPlayer.OnCompletionListener {
@@ -73,6 +75,12 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     ImageButton question_audit_ask;
     @BindView(R.id.question_audit_tool_bar)
     Toolbar question_audit_tool_bar;
+    @BindView(R.id.sv_word)
+    ScrollView sv_word;
+    @BindView(R.id.tv_content)
+    TextView tv_content;
+
+
 
     private QuesAnsClassify mClassify;
 
@@ -141,9 +149,12 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
         if (classify.getIsPay().equals("true")) {
             question_audit_read_answer.setVisibility(View.VISIBLE);
             question_audit_pay.setVisibility(View.GONE);
+            sv_word.setVisibility(View.VISIBLE);
+            tv_content.setText(classify.getAnswerWord());
         } else {
             question_audit_read_answer.setVisibility(View.GONE);
             question_audit_pay.setVisibility(View.VISIBLE);
+            sv_word.setVisibility(View.GONE);
         }
         Glide.with(this).load(classify.getCraftsImage()).into(question_audit_photo);
         question_audit_crafts_name.setText(classify.getCraftsmanName());
@@ -191,9 +202,11 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                     public void onSuccess(String orderNo) {
                         question_audit_read_answer.setVisibility(View.VISIBLE);
                         question_audit_pay.setVisibility(View.GONE);
+                        sv_word.setVisibility(View.VISIBLE);
+                        tv_content.setText(mClassify.getAnswerWord());
                     }
                 });
-                payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), 1);
+                payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("1"));
                 break;
 
 
