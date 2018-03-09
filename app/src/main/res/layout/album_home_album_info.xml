@@ -115,7 +115,6 @@
             android:textSize="12sp"
             android:text="订阅" />
         <Button
-            android:visibility="invisible"
             android:id="@+id/album_buy"
             android:layout_width="124dp"
             android:layout_height="25dp"
@@ -124,7 +123,7 @@
             android:background="@drawable/check_border"
             android:textColor="@color/red"
             android:textSize="12sp"
-            android:text="点击购买" />
+            android:text="购买" />
 
     </RelativeLayout>
 </RelativeLayout>

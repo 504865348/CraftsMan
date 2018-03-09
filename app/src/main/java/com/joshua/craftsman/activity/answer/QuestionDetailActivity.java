@@ -43,6 +43,7 @@ import okhttp3.Response;
 import static com.joshua.craftsman.R.id.cancel_action;
 import static com.joshua.craftsman.R.id.question_audit_tool_bar;
 import static com.joshua.craftsman.R.layout.classify;
+import static java.lang.Integer.parseInt;
 
 
 public class QuestionDetailActivity extends BaseActivity implements View.OnClickListener, MediaPlayer.OnCompletionListener {
@@ -79,7 +80,6 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     ScrollView sv_word;
     @BindView(R.id.tv_content)
     TextView tv_content;
-
 
 
     private QuesAnsClassify mClassify;
@@ -206,7 +206,15 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                         tv_content.setText(mClassify.getAnswerWord());
                     }
                 });
-                payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("1"));
+
+                int pangting = Integer.parseInt(mClassify.getMoney());
+                Log.d(TAG, "pangting: "+mClassify.getMoney()+":"+pangting);
+                if (pangting == 0) {
+                    payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("0"));
+                } else {
+                    payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("1"));
+                }
+
                 break;
 
 
@@ -267,7 +275,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getBaseContext(), "下载失败了1"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "下载失败了1" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         mDialog.dismiss();
                         mFile.delete();
                     }
@@ -285,7 +293,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
                     File dir = new File(AudioRecoderUtils.RECODE_PATH);
-                    if(!dir.exists()){
+                    if (!dir.exists()) {
                         dir.mkdirs();
                     }
                     File file = new File(AudioRecoderUtils.RECODE_PATH, id + ".acc");
@@ -315,7 +323,7 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "下载失败了2"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "下载失败了2" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             mFile.delete();
                             mDialog.dismiss();
                         }

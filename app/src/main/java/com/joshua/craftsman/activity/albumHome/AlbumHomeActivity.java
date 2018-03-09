@@ -120,7 +120,6 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         homeAlbumId = getIntent().getStringExtra("albumId");
         homeAlbumIntroduction = getIntent().getStringExtra("albumIntroduction");
 
-
         mAlbumDetailsFragment = new AlbumDetailsFragment();
         mAlbumProgramFragment = new ProgrameFragment();
         mFragmentList.add(mAlbumDetailsFragment);

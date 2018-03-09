@@ -32,7 +32,9 @@
             android:orientation="vertical">
 
             <!-- 大国工匠标题栏 -->
-            <include layout="@layout/home_page_hot_crafts" />
+
+            <include layout="@layout/home_page_hot_crafts"
+                android:visibility="gone"/>
 
             <!-- 匠心独运标题栏 -->
             <include layout="@layout/home_page_hot_skills" />

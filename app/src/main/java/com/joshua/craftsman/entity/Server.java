@@ -93,5 +93,5 @@ public class Server {
     public static final String SERVER_BUY_TIMES= "queryRecordingBuyTimes"; //查询视频购买次数
     public static final String SERVER_ACTIVITY= "queryHuoDong"; //活动
 
-
+    public static final String FRONT_BILLBOARD_HOT= "BillboardHot"; //榜单-最火节目飙升榜
 }
