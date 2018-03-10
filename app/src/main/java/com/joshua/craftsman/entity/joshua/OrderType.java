@@ -20,4 +20,5 @@ public class OrderType {
     public static final String TYPE_ASK_QUE="0";//提问
     public static final String TYPE_BYE_VIDEO="1";//收看节目
     public static final String TYPE_BYE_MEDIA="2";//旁听
+    public static final String TYPE_BYE_ALBUM="3";//专辑
 }

@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -84,10 +85,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String from=getIntent().getStringExtra("from");
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         checkCookie();
         permissionRequest();
+
+
     }
 
 
@@ -97,6 +101,56 @@ public class MainActivity extends BaseActivity {
                 .build();
         RequestBody params = new FormBody.Builder()
                 .add("method", Server.BILLBOARD_HOT)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                Gson gson = new Gson();
+                ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
+                if (!responseInfo.isAlive()) {
+                    Log.d(TAG, "onResponse: cookie过期");
+                    useDefaultCookie();
+                }
+                else if (responseInfo.isError()) {
+                    Log.d(TAG, "onResponse: 出现异常");
+                    startActivity(new Intent(MainActivity.this, DataErrorActivity.class));
+                } else {
+                    String result = responseInfo.getResult();
+                    Log.d(TAG, "onResponseAgain: " + result);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            initData();
+                        }
+                    });
+
+                }
+            }
+
+
+        });
+    }
+
+
+    private void useDefaultCookie() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(this))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.GUEST)
                 .build();
 
         final Request request = new Request.Builder()
@@ -135,6 +189,8 @@ public class MainActivity extends BaseActivity {
 
                 }
             }
+
+
         });
     }
 

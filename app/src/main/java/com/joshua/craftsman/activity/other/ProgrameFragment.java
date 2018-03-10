@@ -85,6 +85,7 @@ public class ProgrameFragment extends BaseFragment {
     public ProgrameFragment() {
     }
 
+
     @Override
     public View initView() {
         View view = View.inflate(getActivity(), R.layout.home_page_recommend, null);

@@ -1,12 +1,15 @@
 package com.joshua.craftsman.activity.albumHome;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -17,29 +20,44 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.activity.other.ProgrameFragment;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.pay.util.PaySuccess;
+import com.joshua.craftsman.pay.util.PayUtils;
+import com.joshua.craftsman.utils.AudioRecoderUtils;
 import com.joshua.craftsman.utils.PrefUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static com.joshua.craftsman.R.id.btn_collect;
+import static com.joshua.craftsman.R.id.et_question;
 
 public class AlbumHomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -93,6 +111,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     private String subscribeFlag, subscribeUser, isFocus;
     private String userName = LoginActivity.appUserName;
     private OkHttpClient mClient;
+    public String homeAlbumPrice = "";
 
 
     @Override
@@ -107,6 +126,57 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         initView();
         initListener();
         //showInfo();
+
+    }
+
+    /**
+     * 查看是否被购买
+     */
+    private void isBuy() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getApplicationContext()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.ALBUM_IS_BUY)
+                .add("albumId", homeAlbumId)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+
+        Call call = mClient.newCall(request);
+        call.enqueue(new HttpCommonCallback(mBaseActivity) {
+            @Override
+            protected void success(final String result) {
+                Log.d("jiage", "run: "+result);
+                if (result.equals("true")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            albumBuy.setText("已购买");
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            homeAlbumPrice=result;
+                            homeAlbumPrice="0.01";
+                            albumBuy.setText("购买");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            protected void error() {
+
+            }
+        });
+
+
     }
 
     @Override
@@ -154,6 +224,8 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
             public void onPageScrollStateChanged(int state) {
             }
         });
+
+        isBuy();
     }
 
     private void resetTextView() {
@@ -211,7 +283,11 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                 subscribe(isFocus);
                 break;
             case R.id.album_buy:
-                Toast.makeText(mBaseActivity, "暂未开放专辑购买功能", Toast.LENGTH_SHORT).show();
+                if (albumBuy.getText().equals("已购买")) {
+                    Toast.makeText(mBaseActivity, "已购买该专辑", Toast.LENGTH_SHORT).show();
+                } else {
+                    buyAlbum();
+                }
                 break;
             case R.id.album_detail_ll_particulars:
                 mViewPager.setCurrentItem(0);
@@ -221,6 +297,29 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
+
+    /**
+     * 购买专辑
+     */
+    private void buyAlbum() {
+        PayUtils utils = new PayUtils(mBaseActivity);
+        utils.setPaySuccess(new PaySuccess() {
+            @Override
+            public void onSuccess(final String orderNo) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAlbumProgramFragment.initData();
+                        Toast.makeText(mBaseActivity,"专辑购买成功",Toast.LENGTH_SHORT).show();
+                        albumBuy.setText("已购买");
+                    }
+                });
+
+            }
+        });
+        utils.payV2(OrderType.TYPE_BYE_ALBUM, homeAlbumId, Float.parseFloat(homeAlbumPrice));
+    }
+
 
     private void changeFocus() {
         if (isFocus.equals("1")) {

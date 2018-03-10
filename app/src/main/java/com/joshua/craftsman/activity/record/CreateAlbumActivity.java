@@ -54,10 +54,12 @@ public class CreateAlbumActivity extends BaseActivity {
     Spinner spinner;
     @BindView(R.id.Spinner02)
     Spinner spinnerModels;
+    @BindView(R.id.record_info_price)
+    Spinner record_info_price;
     @BindView(R.id.et_introduction)
     EditText etIntroduction;
-    private String[] mTypes, mModels;
-    private String mType, mModel;
+    private String[] mTypes, mModels,mPrices;
+    private String mType, mModel,mPrice;
 
     private PopupWindow pop = null;
     private View parentView;
@@ -100,6 +102,20 @@ public class CreateAlbumActivity extends BaseActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        record_info_price.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                mPrice = mPrices[pos];
+                Log.d(TAG, "onItemModelSelected: " + mModel);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         //加载父布局
         parentView = getLayoutInflater().inflate(R.layout.activity_ask_question, null);
         InitPopWindow();
@@ -120,6 +136,8 @@ public class CreateAlbumActivity extends BaseActivity {
         mType = mTypes[0];
         mModels = getResources().getStringArray(R.array.albumModels);
         mModel = mModels[0];
+        mPrices=getResources().getStringArray(R.array.cost);
+        mPrice=mPrices[0];
     }
 
 
@@ -238,6 +256,7 @@ public class CreateAlbumActivity extends BaseActivity {
                 .addFormDataPart("creater", creater)
                 .addFormDataPart("introduction", introduction)
                 .addFormDataPart("modelName", modelName)
+                .addFormDataPart("price", mPrice)
                 .build();
         Request request = new Request.Builder()
                 .url(Server.SERVER_ALBUM)
