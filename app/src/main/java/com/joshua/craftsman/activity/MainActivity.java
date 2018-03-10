@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity {
                 .cookieJar(new HttpCookieJar(this))
                 .build();
         RequestBody params = new FormBody.Builder()
-                .add("method", Server.BILLBOARD_HOT)
+                .add("method", Server.COMMON_UNDEAL_ANS)
                 .build();
 
         final Request request = new Request.Builder()

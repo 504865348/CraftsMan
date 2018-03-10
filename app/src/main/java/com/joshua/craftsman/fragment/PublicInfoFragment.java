@@ -17,9 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.MainActivity;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerCommonActivity;
+import com.joshua.craftsman.activity.error.DataErrorActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
 import com.joshua.craftsman.activity.info.EditInfoActivity;
 import com.joshua.craftsman.activity.info.SubscribeActivity;
@@ -29,14 +32,25 @@ import com.joshua.craftsman.activity.other.MyCollectActivity;
 import com.joshua.craftsman.activity.other.MySubscribeActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 import com.joshua.craftsman.entity.MySubscribe;
+import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.http.ResponseInfo;
 import com.joshua.craftsman.utils.PrefUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static com.joshua.craftsman.R.id.my_info_my_buys;
 
@@ -91,6 +105,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         mMyInfoBuy.setOnClickListener(this);
         userClass = PrefUtils.getString(getActivity(), "phone", null);
         showUserInfo();
+        checkCookie();
     }
 
     @Override
@@ -100,6 +115,48 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
         Log.d(TAG, "setUserVisibleHint: "+"load image");
     }
 
+
+    private void checkCookie() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getActivity()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.COMMON_UNDEAL_ANS)
+                .build();
+
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                Gson gson = new Gson();
+                ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
+                if (!responseInfo.isAlive()) {
+                    Log.d(TAG, "onResponse: cookie过期");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                else if (responseInfo.isError()) {
+                    Log.d(TAG, "onResponse: 出现异常");
+                    startActivity(new Intent(getActivity(), DataErrorActivity.class));
+                } else {
+                    String result = responseInfo.getResult();
+                    Log.d(TAG, "onResponseAgain: " + result);
+                }
+            }
+
+
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
@@ -132,6 +189,7 @@ public class PublicInfoFragment extends BaseFragment implements View.OnClickList
     public void onResume() {
         super.onResume();
         showUserInfo();
+        checkCookie();
         Log.d(TAG, "onResume: "+"load image");
     }
 

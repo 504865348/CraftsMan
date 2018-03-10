@@ -93,6 +93,11 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     LinearLayout album_detail_ll_particulars;
     @BindView(R.id.album_detail_ll_program)
     LinearLayout album_detail_ll_program;
+    @BindView(R.id.price)
+    TextView price;
+    @BindView(R.id.ll_price)
+    LinearLayout ll_price;
+
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
     private PagerAdapter adapter;
@@ -155,6 +160,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            ll_price.setVisibility(View.GONE);
                             albumBuy.setText("已购买");
                         }
                     });
@@ -162,9 +168,10 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            homeAlbumPrice=result;
-                            homeAlbumPrice="0.01";
+                            ll_price.setVisibility(View.VISIBLE);
+                            homeAlbumPrice=result;
                             albumBuy.setText("购买");
+                            price.setText(result);
                         }
                     });
                 }

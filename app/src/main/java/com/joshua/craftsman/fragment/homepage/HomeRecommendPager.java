@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.joshua.craftsman.R;
+import com.joshua.craftsman.activity.account.LoginActivity;
+import com.joshua.craftsman.activity.error.DataErrorActivity;
 import com.joshua.craftsman.activity.record.PlayerFrameActivity;
 import com.joshua.craftsman.adapter.HomeRecommendAdapter;
 import com.joshua.craftsman.application.BaseApplication;
@@ -32,6 +34,7 @@ import com.joshua.craftsman.entity.joshua.VideoDetail;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.http.ResponseInfo;
 import com.joshua.craftsman.pay.util.PaySuccess;
 import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
@@ -191,7 +194,47 @@ public class HomeRecommendPager extends BaseFragment {
             });
         }
     }
+    private void checkCookie() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getActivity()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.COMMON_UNDEAL_ANS)
+                .build();
 
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                Gson gson = new Gson();
+                ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
+                if (!responseInfo.isAlive()) {
+                    Log.d(TAG, "onResponse: cookie过期");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                else if (responseInfo.isError()) {
+                    Log.d(TAG, "onResponse: 出现异常");
+                    startActivity(new Intent(getActivity(), DataErrorActivity.class));
+                } else {
+                    String result = responseInfo.getResult();
+                    Log.d(TAG, "onResponseAgain: " + result);
+                }
+            }
+
+
+        });
+    }
     private void initRecycleTJ() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -201,6 +244,9 @@ public class HomeRecommendPager extends BaseFragment {
         adapter.setOnRecyclerViewItemClickListener(new HomeRecommendAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, String position) {
+                checkCookie();
+
+
                 final int pos = Integer.parseInt(position);
                 final String id = list_TJ.get(pos).getId();
                 final String url = list_TJ.get(pos).getDownloadUrl();

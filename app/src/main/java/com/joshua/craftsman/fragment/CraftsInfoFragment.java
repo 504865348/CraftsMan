@@ -24,10 +24,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.account.LoginActivity;
 import com.joshua.craftsman.activity.account.MoneyActivity;
 import com.joshua.craftsman.activity.answer.MyAskAnswerActivity;
+import com.joshua.craftsman.activity.error.DataErrorActivity;
 import com.joshua.craftsman.activity.feedback.FeedbackActivity;
 import com.joshua.craftsman.activity.info.CollectActivity;
 import com.joshua.craftsman.activity.info.EditInfoActivity;
@@ -45,6 +47,8 @@ import com.joshua.craftsman.activity.record.PostRecordActivity;
 import com.joshua.craftsman.activity.record.RecordActivity;
 import com.joshua.craftsman.activity.set.SetActivity;
 import com.joshua.craftsman.entity.Server;
+import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.http.ResponseInfo;
 import com.joshua.craftsman.utils.PrefUtils;
 
 import org.json.JSONException;
@@ -59,6 +63,13 @@ import java.io.InputStream;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
 import static com.joshua.craftsman.R.id.my_info_my_coins;
@@ -144,14 +155,56 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         showUserInfo();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         showUserInfo();
+        checkCookie();
     }
+    private void checkCookie() {
+        OkHttpClient mClient = new OkHttpClient.Builder()
+                .cookieJar(new HttpCookieJar(getActivity()))
+                .build();
+        RequestBody params = new FormBody.Builder()
+                .add("method", Server.COMMON_UNDEAL_ANS)
+                .build();
 
+        final Request request = new Request.Builder()
+                .url(Server.SERVER_REMOTE)
+                .post(params)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseJson = response.body().string();
+                Log.d(TAG, "onResponse: " + responseJson);
+                Gson gson = new Gson();
+                ResponseInfo responseInfo = gson.fromJson(responseJson, ResponseInfo.class);
+                if (!responseInfo.isAlive()) {
+                    Log.d(TAG, "onResponse: cookie过期");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                else if (responseInfo.isError()) {
+                    Log.d(TAG, "onResponse: 出现异常");
+                    startActivity(new Intent(getActivity(), DataErrorActivity.class));
+                } else {
+                    String result = responseInfo.getResult();
+                    Log.d(TAG, "onResponseAgain: " + result);
+                }
+            }
+
+
+        });
+    }
     @Override
     public void initData() {
         super.initData();
@@ -167,6 +220,7 @@ public class CraftsInfoFragment extends BaseFragment implements View.OnClickList
         my_info_crafts_upload_local.setOnClickListener(this);
         userClass = PrefUtils.getString(getActivity(), "phone", "");
         showUserInfo();
+        checkCookie();
     }
 
     @Override
