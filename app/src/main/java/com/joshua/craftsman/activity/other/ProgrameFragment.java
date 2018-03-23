@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -29,9 +31,16 @@ import com.joshua.craftsman.entity.joshua.VideoDetail;
 import com.joshua.craftsman.fragment.BaseFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.pay.event.MessageEvent;
+import com.joshua.craftsman.pay.global.PayAction;
+import com.joshua.craftsman.pay.global.PopWindowUtils;
 import com.joshua.craftsman.pay.util.PaySuccess;
 import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,8 +69,10 @@ public class ProgrameFragment extends BaseFragment {
 
 
     @BindView(R.id.home_recommend_rv)
-
     RecyclerView home_recommend_rv;
+
+    @BindView(R.id.ll_content)
+    LinearLayout ll_content;
     private String albumId = AlbumHomeActivity.homeAlbumId;
     private List<VideoDetail> list_TJ;
 
@@ -85,6 +96,17 @@ public class ProgrameFragment extends BaseFragment {
     public ProgrameFragment() {
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public View initView() {
@@ -195,7 +217,9 @@ public class ProgrameFragment extends BaseFragment {
             });
         }
     }
-
+    private String murl;
+    private String mtitle;
+    private String mpos;
     private void initRecycleTJ() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -209,85 +233,77 @@ public class ProgrameFragment extends BaseFragment {
                 final String id = list_TJ.get(pos).getId();
                 final String url = list_TJ.get(pos).getDownloadUrl();
                 final String title = list_TJ.get(pos).getRecordTitle();
-                String isPay = list_TJ.get(pos).getIsPay();
-                PayUtils utils = new PayUtils(getActivity());
-                utils.setPaySuccess(new PaySuccess() {
+                final String isPay = list_TJ.get(pos).getIsPay();
+
+                murl=url;
+                mtitle=title;
+                mpos=position;
+                PopWindowUtils.showPop(getActivity(), ll_content, new PayAction() {
                     @Override
-                    public void onSuccess(String o) {
-                        getDataFromServer();
-                        Log.d(TAG, "onSuccess: pay success");
-                        //首先判断是否已经下载
-                        Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
-//                        if (checkLocal(id)) {
-//                            //录音的播放与暂停
-//                            mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-//                            Intent intent = new Intent(mContext, PlayerFrameActivity.class);
-//                            intent.putExtra("url", mFile.getAbsolutePath());
-//                            intent.putExtra("title", title);
-//                            intent.putExtra("entity", list_TJ.get(pos));
-//                            startActivity(intent);
-//                        } else {
-//                            mDialog.setMessage("视频下载中，请稍后");
-//                            mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                @Override
-//                                public void onCancel(DialogInterface dialog) {
-//                                    mFile.delete();
-//                                    mCall.cancel();
-//                                }
-//                            });
-//                            mDialog.show();
-//                            getSoundFromServer(id, url, title, pos);
-//                        }
-                        //取消下载功能，直接在线播放
-                        Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
-                        intent.putExtra("url",url);
-                        intent.putExtra("title", title);
-                        intent.putExtra("entity", list_TJ.get(pos));
-                        startActivity(intent);
+                    public void aliPay() {
+                        PayUtils utils = new PayUtils(getActivity());
+                        utils.setPaySuccess(new PaySuccess() {
+                            @Override
+                            public void onSuccess(String o) {
+                                getDataFromServer();
+                                Log.d(TAG, "onSuccess: pay success");
+                                //首先判断是否已经下载
+                                Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
+                                //取消下载功能，直接在线播放
+                                Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
+                                intent.putExtra("url",url);
+                                intent.putExtra("title", title);
+                                intent.putExtra("entity", list_TJ.get(pos));
+                                startActivity(intent);
+                            }
+                        });
+
+                        if(isPay.equals("true")){
+                            //取消下载功能，直接在线播放
+                            Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
+                            intent.putExtra("url",url);
+                            intent.putExtra("title", title);
+                            intent.putExtra("entity", list_TJ.get(pos));
+                            startActivity(intent);
+                        }else{
+                            //没有支付跳转支付
+                            utils.payV2(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(),  Float.parseFloat(list_TJ.get(pos).getMoney()));
+                        }
+                    }
+
+                    @Override
+                    public void wxPay() {
+                        if(isPay.equals("true")){
+                            //取消下载功能，直接在线播放
+                            Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
+                            intent.putExtra("url",url);
+                            intent.putExtra("title", title);
+                            intent.putExtra("entity", list_TJ.get(pos));
+                            startActivity(intent);
+                        }else {
+                            PayUtils utils = new PayUtils(getActivity());
+                            utils.payWx(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(), Float.parseFloat(list_TJ.get(pos).getMoney()));
+                        }
+
                     }
                 });
-
-                if(isPay.equals("true")){
-//                    //首先判断是否已经下载
-//                    if (checkLocal(id)) {
-//                        //录音的播放与暂停
-//                        mFile = new File(AudioRecoderUtils.VIDEO_PATH, "video_" + id + ".mp4");
-//                        Intent intent = new Intent(mContext, PlayerFrameActivity.class);
-//                        intent.putExtra("url", mFile.getAbsolutePath());
-//                        intent.putExtra("title", title);
-//                        intent.putExtra("entity", list_TJ.get(pos));
-//                        startActivity(intent);
-//                    } else {
-//
-//                        mDialog.setMessage("视频下载中，请稍后");
-//                        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                            @Override
-//                            public void onCancel(DialogInterface dialog) {
-//                                mFile.delete();
-//                                mCall.cancel();
-//                            }
-//                        });
-//                        mDialog.show();
-//                        getSoundFromServer(id, url, title, pos);
-//                    }
-                    //取消下载功能，直接在线播放
-                    Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
-                    intent.putExtra("url",url);
-                    intent.putExtra("title", title);
-                    intent.putExtra("entity", list_TJ.get(pos));
-                    startActivity(intent);
-                }else{
-                    //没有支付跳转支付
-                    utils.payV2(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(),  Float.parseFloat(list_TJ.get(pos).getMoney()));
-                }
-
-
-
-
-
             }
         });
         home_recommend_rv.setAdapter(adapter);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
+        getDataFromServer();
+        Log.d(TAG, "onSuccess: pay success");
+        //首先判断是否已经下载
+        Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
+        //取消下载功能，直接在线播放
+        Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
+        intent.putExtra("url",murl);
+        intent.putExtra("title", mtitle);
+        intent.putExtra("entity", list_TJ.get(Integer.parseInt(mpos)));
+        startActivity(intent);
     }
 
     /**
@@ -401,4 +417,5 @@ public class ProgrameFragment extends BaseFragment {
         super.onResume();
         getDataFromServer();
     }
+
 }

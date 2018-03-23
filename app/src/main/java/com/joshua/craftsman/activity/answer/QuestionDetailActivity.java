@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +22,20 @@ import com.bumptech.glide.Glide;
 import com.joshua.craftsman.R;
 import com.joshua.craftsman.activity.ask.AskQuestionActivity;
 import com.joshua.craftsman.activity.core.BaseActivity;
+import com.joshua.craftsman.activity.record.PlayerFrameActivity;
+import com.joshua.craftsman.application.BaseApplication;
 import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.entity.joshua.QuesAnsClassify;
+import com.joshua.craftsman.pay.event.MessageEvent;
+import com.joshua.craftsman.pay.global.PayAction;
+import com.joshua.craftsman.pay.global.PopWindowUtils;
 import com.joshua.craftsman.pay.util.PaySuccess;
 import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -80,7 +90,8 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
     ScrollView sv_word;
     @BindView(R.id.tv_content)
     TextView tv_content;
-
+    @BindView(R.id.ll_content)
+    LinearLayout ll_content;
 
     private QuesAnsClassify mClassify;
 
@@ -123,6 +134,13 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
 
         question_audit_tool_bar.setTitle("");
         setSupportActionBar(question_audit_tool_bar);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initIntent() {
@@ -196,30 +214,52 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.question_audit_pay:
-                PayUtils payUtils = new PayUtils(mBaseActivity);
-                payUtils.setPaySuccess(new PaySuccess() {
+                PopWindowUtils.showPop(mBaseActivity, ll_content, new PayAction() {
                     @Override
-                    public void onSuccess(String orderNo) {
-                        question_audit_read_answer.setVisibility(View.VISIBLE);
-                        question_audit_pay.setVisibility(View.GONE);
-                        sv_word.setVisibility(View.VISIBLE);
-                        tv_content.setText(mClassify.getAnswerWord());
+                    public void aliPay() {
+                        PayUtils payUtils = new PayUtils(mBaseActivity);
+                        payUtils.setPaySuccess(new PaySuccess() {
+                            @Override
+                            public void onSuccess(String orderNo) {
+                                question_audit_read_answer.setVisibility(View.VISIBLE);
+                                question_audit_pay.setVisibility(View.GONE);
+                                sv_word.setVisibility(View.VISIBLE);
+                                tv_content.setText(mClassify.getAnswerWord());
+                            }
+                        });
+
+                        int pangting = Integer.parseInt(mClassify.getMoney());
+                        Log.d(TAG, "pangting: "+mClassify.getMoney()+":"+pangting);
+                        if (pangting == 0) {
+                            payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("0"));
+                        } else {
+                            payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("1"));
+                        }
+                    }
+
+                    @Override
+                    public void wxPay() {
+                        PayUtils payUtils = new PayUtils(mBaseActivity);
+                        int pangting = Integer.parseInt(mClassify.getMoney());
+                        Log.d(TAG, "pangting: "+mClassify.getMoney()+":"+pangting);
+                        if (pangting == 0) {
+                            payUtils.payWx(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("0"));
+                        } else {
+                            payUtils.payWx(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("1"));
+                        }
                     }
                 });
-
-                int pangting = Integer.parseInt(mClassify.getMoney());
-                Log.d(TAG, "pangting: "+mClassify.getMoney()+":"+pangting);
-                if (pangting == 0) {
-                    payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("0"));
-                } else {
-                    payUtils.payV2(OrderType.TYPE_BYE_MEDIA, mClassify.getId(), Float.valueOf("1"));
-                }
-
                 break;
-
-
         }
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
+        question_audit_read_answer.setVisibility(View.VISIBLE);
+        question_audit_pay.setVisibility(View.GONE);
+        sv_word.setVisibility(View.VISIBLE);
+        tv_content.setText(mClassify.getAnswerWord());
     }
 
     /**

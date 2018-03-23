@@ -31,11 +31,17 @@ import com.joshua.craftsman.fragment.albumHome.AlbumDetailsFragment;
 import com.joshua.craftsman.fragment.albumHome.AlbumProgramFragment;
 import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
+import com.joshua.craftsman.pay.event.MessageEvent;
+import com.joshua.craftsman.pay.global.PayAction;
+import com.joshua.craftsman.pay.global.PopWindowUtils;
 import com.joshua.craftsman.pay.util.PaySuccess;
 import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.AudioRecoderUtils;
 import com.joshua.craftsman.utils.PrefUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,6 +103,8 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     TextView price;
     @BindView(R.id.ll_price)
     LinearLayout ll_price;
+    @BindView(R.id.ll_content)
+    LinearLayout ll_content;
 
 
     private List<BaseFragment> mFragmentList = new ArrayList<>();
@@ -130,6 +138,7 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         initTabLineWidth();
         initView();
         initListener();
+        EventBus.getDefault().register(this);
         //showInfo();
 
     }
@@ -309,24 +318,42 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
      * 购买专辑
      */
     private void buyAlbum() {
-        PayUtils utils = new PayUtils(mBaseActivity);
-        utils.setPaySuccess(new PaySuccess() {
+        PopWindowUtils.showPop(this, ll_content, new PayAction() {
             @Override
-            public void onSuccess(final String orderNo) {
-                runOnUiThread(new Runnable() {
+            public void aliPay() {
+                PayUtils utils = new PayUtils(mBaseActivity);
+                utils.setPaySuccess(new PaySuccess() {
                     @Override
-                    public void run() {
-                        mAlbumProgramFragment.initData();
-                        Toast.makeText(mBaseActivity,"专辑购买成功",Toast.LENGTH_SHORT).show();
-                        albumBuy.setText("已购买");
+                    public void onSuccess(final String orderNo) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mAlbumProgramFragment.initData();
+                                Toast.makeText(mBaseActivity,"专辑购买成功",Toast.LENGTH_SHORT).show();
+                                albumBuy.setText("已购买");
+                            }
+                        });
+
                     }
                 });
+                utils.payV2(OrderType.TYPE_BYE_ALBUM, homeAlbumId, Float.parseFloat(homeAlbumPrice));
+            }
 
+            @Override
+            public void wxPay() {
+                PayUtils utils = new PayUtils(mBaseActivity);
+                utils.payWx(OrderType.TYPE_BYE_ALBUM, homeAlbumId, Float.parseFloat(homeAlbumPrice));
             }
         });
-        utils.payV2(OrderType.TYPE_BYE_ALBUM, homeAlbumId, Float.parseFloat(homeAlbumPrice));
+
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
+        mAlbumProgramFragment.initData();
+        Toast.makeText(mBaseActivity,"专辑购买成功",Toast.LENGTH_SHORT).show();
+        albumBuy.setText("已购买");
+    }
 
     private void changeFocus() {
         if (isFocus.equals("1")) {
@@ -467,6 +494,12 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         });
     }
 */
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

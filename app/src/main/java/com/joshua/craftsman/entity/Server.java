@@ -10,17 +10,18 @@ import okhttp3.MediaType;
 
 public class Server {
 
-//    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
+    //    public static final String SERVER_REMOTE = "http://10.10.98.148:8080/MainServlet";
 //    public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ/MainServlet";
     public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
     public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
     public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
     public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
     public static final String SERVER_VISITOR = "http://139.224.35.126:8080/GJ_AND/VisitorServlet";
+    public static final String SERVER_PAY = "http://139.224.35.126:8080/GJ_AND/PayServlet";
 
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown;charset=utf-8");
     public static final String SERVER_REMOTE = "http://139.224.35.126:8080/GJ_AND/MainServlet";
-//    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
+    //    public static final String SERVER_UPLOAD = "http://139.224.35.126:8080/GJ_AND/UploadServlet";
 //    public static final String SERVER_VIDEO = "http://139.224.35.126:8080/GJ_AND/VedioServlet";
 //    public static final String SERVER_ALBUM = "http://139.224.35.126:8080/GJ_AND/AlbumServlet";
 //    public static final String SERVER_RECORD = "http://139.224.35.126:8080/GJ_AND/MyRecordingServlet";
@@ -39,19 +40,18 @@ public class Server {
     public static final String BILLBOARD = "Billboard"; //榜单--节目榜单排名(每个具体榜单的前2名),工匠榜单排名(前2名)
     public static final String BILLBOARD_HOT = "BillboardHot"; //榜单-最火节目飙升榜
     public static final String BILLBOARD_MORE = "BillboardMore"; //榜单-最多订阅经典榜
-    public static final String BILLBOARD_PAY= "BillboardPay"; //榜单-付费精品飙升榜
+    public static final String BILLBOARD_PAY = "BillboardPay"; //榜单-付费精品飙升榜
     public static final String BILLBOARD_CRAFTSMAN = "BillboardCraftsman"; //榜单-最大国工匠榜
-
 
 
     //非白名单
     public static final String SERVER_LOGIN = "Login"; //登录
     public static final String QUESANS_CLASSIFY = "QuesAnsClassify"; //问答-分类
-    public static final String CRAFTS_UNDEAL_ANS= "CraftsmanUnDealAns"; //工匠-我的问答-未处理回答
-    public static final String CRAFTS_MY_ANS= "CraftsmanMyAns"; //工匠-我的问答-我的回答
-    public static final String CRAFTS_MY_QUES= "CraftsmanMyQues"; //工匠-我的问答-我的提问
-    public static final String COMMON_MY_ANS= "NormalDealQues"; //我的问答-已处理回答
-    public static final String COMMON_UNDEAL_ANS= "NormalUnDealQues"; //我的问答-未处理回答
+    public static final String CRAFTS_UNDEAL_ANS = "CraftsmanUnDealAns"; //工匠-我的问答-未处理回答
+    public static final String CRAFTS_MY_ANS = "CraftsmanMyAns"; //工匠-我的问答-我的回答
+    public static final String CRAFTS_MY_QUES = "CraftsmanMyQues"; //工匠-我的问答-我的提问
+    public static final String COMMON_MY_ANS = "NormalDealQues"; //我的问答-已处理回答
+    public static final String COMMON_UNDEAL_ANS = "NormalUnDealQues"; //我的问答-未处理回答
 
     public static final String SERVER_SMS = "sendCode"; //注册验证码
     public static final String SERVER_REGISTER = "Sign"; //注册
@@ -76,10 +76,11 @@ public class Server {
     public static final String MY_SUBSCRIBE = "MySubscribe"; //我的订阅
     public static final String MY_BILLBOARD_HOT = "MyBillboardHot"; //我的榜单-最火节目飙升榜
     public static final String MY_BILLBOARD_MORE = "MyBillboardMore"; //我的榜单-最多订阅经典榜
-    public static final String MY_BILLBOARD_PAY= "MyBillboardPay"; //我的榜单-付费精品飙升榜
+    public static final String MY_BILLBOARD_PAY = "MyBillboardPay"; //我的榜单-付费精品飙升榜
     public static final String MY_BILLBOARD_CRAFTSMAN = "MyBillboardCraftsman"; //我的榜单-最大国工匠榜
 
     public static final String SERVER_SEND_ORDER = "AliPay"; //向服务器发送订单
+    public static final String SERVER_SEND_ORDER_WX = "WxPay"; //向服务器发送订单
     public static final String SERVER_SEND_ORDER_RESULT = "orderResult"; //向服务器发送订单结果
     public static final String SERVER_QUERY_ORDER = "queryMyOrder"; //查询订单
 
@@ -91,15 +92,15 @@ public class Server {
     public static final String SERVER_COLLECT = "collectProgramme"; //收藏
     public static final String SERVER_MY_COLLECT = "MyCollect"; //我的收藏
     public static final String SERVER_MY_BUY_VIDEO = "alreadyVideoPurchase"; //我的购买-节目
-    public static final String SERVER_MY_BUY_QUES= "alreadyQuesPurchase"; //我的购买-问答
+    public static final String SERVER_MY_BUY_QUES = "alreadyQuesPurchase"; //我的购买-问答
 
-    public static final String SERVER_UPDATE= "checkUpdate"; //检查更新
-    public static final String SERVER_POST_RECORD= "addMyRecording"; //上传视频信息到服务器
-    public static final String SERVER_BUY_TIMES= "queryRecordingBuyTimes"; //查询视频购买次数
-    public static final String SERVER_ACTIVITY= "queryHuoDong"; //活动
+    public static final String SERVER_UPDATE = "checkUpdate"; //检查更新
+    public static final String SERVER_POST_RECORD = "addMyRecording"; //上传视频信息到服务器
+    public static final String SERVER_BUY_TIMES = "queryRecordingBuyTimes"; //查询视频购买次数
+    public static final String SERVER_ACTIVITY = "queryHuoDong"; //活动
 
-    public static final String ALBUM_IS_BUY="queryAlbumIsPay";
-    public static final String ALBUM_BUY_SUCCESS="queryAlbumIsPay";
-    public static final String GUEST= "guest"; //访客登录
-    public static final String FRONT_BILLBOARD_HOT= "BillboardHot"; //榜单-最火节目飙升榜
+    public static final String ALBUM_IS_BUY = "queryAlbumIsPay";
+    public static final String ALBUM_BUY_SUCCESS = "queryAlbumIsPay";
+    public static final String GUEST = "guest"; //访客登录
+    public static final String FRONT_BILLBOARD_HOT = "BillboardHot"; //榜单-最火节目飙升榜
 }

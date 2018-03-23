@@ -29,11 +29,17 @@ import com.joshua.craftsman.activity.core.BaseActivity;
 import com.joshua.craftsman.entity.Server;
 import com.joshua.craftsman.entity.joshua.OrderType;
 import com.joshua.craftsman.http.HttpCommonCallback;
+import com.joshua.craftsman.pay.event.MessageEvent;
+import com.joshua.craftsman.pay.global.PayAction;
+import com.joshua.craftsman.pay.global.PopWindowUtils;
 import com.joshua.craftsman.pay.util.PaySuccess;
 import com.joshua.craftsman.pay.util.PayUtils;
 import com.joshua.craftsman.utils.MyUtils;
 import com.joshua.craftsman.utils.PrefUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -91,6 +97,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         initToolBar();
         initView();
         initListener();
+        EventBus.getDefault().register(this);
     }
 
     private void initListener() {
@@ -134,7 +141,7 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_right:
-                //// TODO: 2017/6/1
+
                 break;
             case R.id.iv_add_pic:
                 pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
@@ -151,21 +158,29 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
                 }
 
                 break;
-
-
         }
     }
 
     private void payQuestion() {
-        PayUtils utils = new PayUtils(mBaseActivity);
-        utils.setPaySuccess(new PaySuccess() {
+        PopWindowUtils.showPop(this, parentView, new PayAction() {
             @Override
-            public void onSuccess(String orderNo) {
-                postToServer(orderNo);
+            public void aliPay() {
+                PayUtils utils = new PayUtils(mBaseActivity);
+                utils.setPaySuccess(new PaySuccess() {
+                    @Override
+                    public void onSuccess(String orderNo) {
+                        postToServer(orderNo);
+                    }
+                });
+                utils.payV2(OrderType.TYPE_ASK_QUE, "null", Float.parseFloat(mCost));
+            }
+
+            @Override
+            public void wxPay() {
+                PayUtils utils = new PayUtils(mBaseActivity);
+                utils.payWx(OrderType.TYPE_ASK_QUE, "null", Float.parseFloat(mCost));
             }
         });
-        //没有支付跳转支付
-        utils.payV2(OrderType.TYPE_ASK_QUE, "null", Float.parseFloat(mCost));
     }
 
     private void postToServer(String orderNo) {
@@ -356,5 +371,15 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
+        postToServer(messageEvent.getMessage());
+    }
 
 }

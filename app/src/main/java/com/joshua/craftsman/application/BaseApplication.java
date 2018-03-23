@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.StrictMode;
 
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -29,10 +31,12 @@ public class BaseApplication extends Application {
     private static BaseApplication application;
     private static int mainTid;
     private static Handler handler;
+    private static final String WX_APP_ID = "wxb254d74dda664d63";
+    public static IWXAPI api;
 
     {
         Config.DEBUG = true;
-        PlatformConfig.setWeixin("wxb254d74dda664d63", "b1761920a55dbc9c25aa8e97a8b7e07d");
+        PlatformConfig.setWeixin(WX_APP_ID, "b1761920a55dbc9c25aa8e97a8b7e07d");
 //        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
     }
 
@@ -48,6 +52,9 @@ public class BaseApplication extends Application {
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+        api = WXAPIFactory.createWXAPI(this, WX_APP_ID, true);
+        api.registerApp(WX_APP_ID);
 
 
     }
