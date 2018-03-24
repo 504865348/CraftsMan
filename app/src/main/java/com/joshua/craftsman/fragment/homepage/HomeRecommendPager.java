@@ -110,11 +110,6 @@ public class HomeRecommendPager extends BaseFragment {
         return mView;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
 
     private void initRefreshRecycleView(View view) {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
@@ -255,10 +250,6 @@ public class HomeRecommendPager extends BaseFragment {
         });
     }
 
-    private String murl;
-    private String mtitle;
-    private String mpos;
-
     private void initRecycleTJ() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -276,9 +267,6 @@ public class HomeRecommendPager extends BaseFragment {
                 final String url = list_TJ.get(pos).getDownloadUrl();
                 final String title = list_TJ.get(pos).getRecordTitle();
                 final String isPay = list_TJ.get(pos).getIsPay();
-                murl = url;
-                mtitle = title;
-                mpos = position;
                 PopWindowUtils.showPop(getActivity(), mView, new PayAction() {
                     @Override
                     public void aliPay() {
@@ -323,6 +311,21 @@ public class HomeRecommendPager extends BaseFragment {
                             startActivity(intent);
                         } else {
                             PayUtils utils = new PayUtils(getActivity());
+                            utils.setPaySuccess(new PaySuccess() {
+                                @Override
+                                public void onSuccess(String o) {
+                                    getDataFromServer();
+                                    Log.d(TAG, "onSuccess: pay success");
+                                    //首先判断是否已经下载
+                                    Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
+                                    //取消下载功能，直接在线播放
+                                    Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
+                                    intent.putExtra("url", url);
+                                    intent.putExtra("title", title);
+                                    intent.putExtra("entity", list_TJ.get(pos));
+                                    startActivity(intent);
+                                }
+                            });
                             utils.payWx(OrderType.TYPE_BYE_VIDEO, list_TJ.get(pos).getId(), Float.parseFloat(list_TJ.get(pos).getMoney()));
                         }
                     }
@@ -334,19 +337,6 @@ public class HomeRecommendPager extends BaseFragment {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(MessageEvent messageEvent) {
-        getDataFromServer();
-        Log.d(TAG, "onSuccess: pay success");
-        //首先判断是否已经下载
-        Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
-        //取消下载功能，直接在线播放
-        Intent intent = new Intent(getActivity(), PlayerFrameActivity.class);
-        intent.putExtra("url", murl);
-        intent.putExtra("title", mtitle);
-        intent.putExtra("entity", list_TJ.get(Integer.parseInt(mpos)));
-        startActivity(intent);
-    }
 
     /**
      * 判断音频文件是否存在
@@ -460,9 +450,4 @@ public class HomeRecommendPager extends BaseFragment {
         getDataFromServer();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 }

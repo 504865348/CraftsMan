@@ -97,7 +97,6 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         initToolBar();
         initView();
         initListener();
-        EventBus.getDefault().register(this);
     }
 
     private void initListener() {
@@ -178,6 +177,12 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void wxPay() {
                 PayUtils utils = new PayUtils(mBaseActivity);
+                utils.setPaySuccess(new PaySuccess() {
+                    @Override
+                    public void onSuccess(String orderNo) {
+                        postToServer(orderNo);
+                    }
+                });
                 utils.payWx(OrderType.TYPE_ASK_QUE, "null", Float.parseFloat(mCost));
             }
         });
@@ -371,15 +376,5 @@ public class AskQuestionActivity extends BaseActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(MessageEvent messageEvent) {
-        postToServer(messageEvent.getMessage());
-    }
 
 }

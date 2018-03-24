@@ -17,12 +17,15 @@ import com.joshua.craftsman.http.HttpCommonCallback;
 import com.joshua.craftsman.http.HttpCookieJar;
 import com.joshua.craftsman.pay.event.MessageEvent;
 import com.joshua.craftsman.pay.event.OrderNumber;
+import com.joshua.craftsman.pay.event.PayResultEvent;
 import com.joshua.craftsman.utils.PrefUtils;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,6 +65,7 @@ public class PayUtils {
                 .cookieJar(new HttpCookieJar(BaseApplication.getApplication()))
                 .build();
         mActivity = activity;
+        EventBus.getDefault().register(this);
     }
 
     public void setPaySuccess(PaySuccess paySuccess) {
@@ -213,6 +217,7 @@ public class PayUtils {
     /**
      * 微信支付
      */
+    private String WxOrder;
     public void payWx(String type, String id, final float money) {
         /**
          * 访问服务器
@@ -257,19 +262,18 @@ public class PayUtils {
                     req.packageValue	= json.getString("package");
                     req.sign			= json.getString("sign");
                     req.extData			= "app data"; // optional
-                    final String orderNo		= json.getString("orderNo");
+                    WxOrder		= json.getString("orderNo");
 
                     //0元，则不需要付款
                     if (money == 0) {
                         Map<String, String> result = new HashMap<>();
                         result.put("resultStatus", 9000 + "");
-                        postPayResultWx(result, orderNo);
+                        postPayResultWx(result, WxOrder);
                     } else {
                         Runnable payRunnable = new Runnable() {
                             @Override
                             public void run() {
                                 BaseApplication.api.sendReq(req);
-                                EventBus.getDefault().post(new OrderNumber(orderNo));
                             }
                         };
                         Thread payThread = new Thread(payRunnable);
@@ -284,6 +288,13 @@ public class PayUtils {
         });
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(PayResultEvent messageEvent) {
+        Map<String, String> result = new HashMap<>();
+        result.put("resultStatus", messageEvent.getMessage());
+        postPayResultWx(result,WxOrder);
+    }
     /**
      * 将支付结果发送给服务器
      */
@@ -292,6 +303,7 @@ public class PayUtils {
                 .add("method", Server.SERVER_SEND_ORDER_RESULT)
                 .add("resultStatus", result.get("resultStatus"))
                 .add("result", "null")
+                .add("memo", "null")
                 .add("orderNo", orderNo)
                 .build();
         Log.d(TAG, "postPayResult: \n" + result.get("resultStatus") + "\n" + result.get("result") + "\n" + result.get("memo"));
@@ -321,7 +333,7 @@ public class PayUtils {
                                 mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        EventBus.getDefault().post(new MessageEvent(orderNo));
+                                        paySuccess.onSuccess(orderNo);
                                     }
                                 });
                             }

@@ -138,7 +138,6 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
         initTabLineWidth();
         initView();
         initListener();
-        EventBus.getDefault().register(this);
         //showInfo();
 
     }
@@ -342,17 +341,25 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void wxPay() {
                 PayUtils utils = new PayUtils(mBaseActivity);
+                utils.setPaySuccess(new PaySuccess() {
+                    @Override
+                    public void onSuccess(final String orderNo) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mAlbumProgramFragment.initData();
+                                Toast.makeText(mBaseActivity,"专辑购买成功",Toast.LENGTH_SHORT).show();
+                                albumBuy.setText("已购买");
+                            }
+                        });
+
+                    }
+                });
                 utils.payWx(OrderType.TYPE_BYE_ALBUM, homeAlbumId, Float.parseFloat(homeAlbumPrice));
+
             }
         });
 
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(MessageEvent messageEvent) {
-        mAlbumProgramFragment.initData();
-        Toast.makeText(mBaseActivity,"专辑购买成功",Toast.LENGTH_SHORT).show();
-        albumBuy.setText("已购买");
     }
 
     private void changeFocus() {
@@ -495,11 +502,6 @@ public class AlbumHomeActivity extends BaseActivity implements View.OnClickListe
     }
 */
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

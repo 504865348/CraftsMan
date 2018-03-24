@@ -89,7 +89,6 @@ public class PayActivity extends BaseActivity {
         billboard_pay_tool_bar.setTitle("");
         setSupportActionBar(billboard_pay_tool_bar);
         init();
-        EventBus.getDefault().register(this);
     }
 
     private void init() {
@@ -150,9 +149,7 @@ public class PayActivity extends BaseActivity {
             });
         }
     }
-    private String murl;
-    private String mtitle;
-    private String mpos;
+
     private void initRecycle() {
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -167,9 +164,6 @@ public class PayActivity extends BaseActivity {
                 final String url = list_collect.get(pos).getDownloadUrl();
                 final String title = list_collect.get(pos).getRecordTitle();
                 final String isPay = list_collect.get(pos).getIsPay();
-                murl=url;
-                mtitle=title;
-                mpos=position;
                 PopWindowUtils.showPop(mBaseActivity, ll_content, new PayAction() {
                     @Override
                     public void aliPay() {
@@ -214,6 +208,21 @@ public class PayActivity extends BaseActivity {
                             startActivity(intent);
                         }else {
                             PayUtils utils = new PayUtils(mBaseActivity);
+                            utils.setPaySuccess(new PaySuccess() {
+                                @Override
+                                public void onSuccess(String o) {
+                                    getDataFromServer();
+                                    Log.d(TAG, "onSuccess: pay success");
+                                    //首先判断是否已经下载
+                                    Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
+                                    //取消下载功能，直接在线播放
+                                    Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
+                                    intent.putExtra("url",url);
+                                    intent.putExtra("title", title);
+                                    intent.putExtra("entity", list_collect.get(pos));
+                                    startActivity(intent);
+                                }
+                            });
                             utils.payWx(OrderType.TYPE_BYE_VIDEO, list_collect.get(pos).getId(), Float.parseFloat(list_collect.get(pos).getMoney()));
                         }
                     }
@@ -224,19 +233,7 @@ public class PayActivity extends BaseActivity {
         billboard_pay_program_rv.setAdapter(adapter);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(MessageEvent messageEvent) {
-        getDataFromServer();
-        Log.d(TAG, "onSuccess: pay success");
-        //首先判断是否已经下载
-        Toast.makeText(BaseApplication.getApplication(), "支付成功", Toast.LENGTH_SHORT).show();
-        //取消下载功能，直接在线播放
-        Intent intent = new Intent(mBaseActivity, PlayerFrameActivity.class);
-        intent.putExtra("url",murl);
-        intent.putExtra("title", mtitle);
-        intent.putExtra("entity", list_collect.get(Integer.parseInt(mpos)));
-        startActivity(intent);
-    }
+
 
     private void setEmptyView(Boolean isEmpty) {
         FrameLayout empty= (FrameLayout) findViewById(R.id.empty);
@@ -352,9 +349,5 @@ public class PayActivity extends BaseActivity {
             }
             return super.onOptionsItemSelected(item);
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
+
 }

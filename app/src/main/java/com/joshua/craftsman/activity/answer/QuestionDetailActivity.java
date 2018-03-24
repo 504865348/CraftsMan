@@ -134,14 +134,9 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
 
         question_audit_tool_bar.setTitle("");
         setSupportActionBar(question_audit_tool_bar);
-        EventBus.getDefault().register(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
+
 
     private void initIntent() {
         mClassify = (QuesAnsClassify) getIntent().getSerializableExtra("content");
@@ -240,6 +235,15 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void wxPay() {
                         PayUtils payUtils = new PayUtils(mBaseActivity);
+                        payUtils.setPaySuccess(new PaySuccess() {
+                            @Override
+                            public void onSuccess(String orderNo) {
+                                question_audit_read_answer.setVisibility(View.VISIBLE);
+                                question_audit_pay.setVisibility(View.GONE);
+                                sv_word.setVisibility(View.VISIBLE);
+                                tv_content.setText(mClassify.getAnswerWord());
+                            }
+                        });
                         int pangting = Integer.parseInt(mClassify.getMoney());
                         Log.d(TAG, "pangting: "+mClassify.getMoney()+":"+pangting);
                         if (pangting == 0) {
@@ -254,13 +258,6 @@ public class QuestionDetailActivity extends BaseActivity implements View.OnClick
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(MessageEvent messageEvent) {
-        question_audit_read_answer.setVisibility(View.VISIBLE);
-        question_audit_pay.setVisibility(View.GONE);
-        sv_word.setVisibility(View.VISIBLE);
-        tv_content.setText(mClassify.getAnswerWord());
-    }
 
     /**
      * 判断音频文件是否存在
